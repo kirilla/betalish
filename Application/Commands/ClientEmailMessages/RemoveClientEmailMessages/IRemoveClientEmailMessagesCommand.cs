@@ -2,7 +2,7 @@
 
 public interface IRemoveClientEmailMessagesCommand
 {
-    Task Execute(IUserToken userToken, RemoveClientEmailMessagesCommandModel model, int clientId);
+    Task Execute(IUserToken userToken, RemoveClientEmailMessagesCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken, int clientId);
+    Task<bool> IsPermitted(IUserToken userToken);
 }

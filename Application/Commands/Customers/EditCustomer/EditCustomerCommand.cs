@@ -3,24 +3,25 @@
 public class EditCustomerCommand(IDatabaseService database) : IEditCustomerCommand
 {
     public async Task Execute(
-        IUserToken userToken, EditCustomerCommandModel model, int clientId)
+        IUserToken userToken, EditCustomerCommandModel model)
     {
-        if (!await IsPermitted(userToken, clientId))
+        if (!await IsPermitted(userToken))
             throw new NotPermittedException();
 
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        // TODO: Client authorization
-
         var customer = await database.Customers
-            .Where(x => x.Id == model.Id)
+            .Where(x => 
+                x.Id == model.Id &&
+                x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         if (await database.Customers
             .AnyAsync(x =>
                 x.Address == model.Address &&
+                x.ClientId == userToken.ClientId!.Value &&
                 x.Id != model.Id))
             throw new BlockedByAddressException();
 
@@ -30,10 +31,10 @@ public class EditCustomerCommand(IDatabaseService database) : IEditCustomerComma
         await database.SaveAsync(userToken);
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken, int clientId)
+    public async Task<bool> IsPermitted(IUserToken userToken)
     {
         return await database.ClientAuths.AnyAsync(x =>
-            x.ClientId == clientId &&
+            x.ClientId == userToken.ClientId!.Value &&
             x.UserId == userToken.UserId!.Value);
     }
 }

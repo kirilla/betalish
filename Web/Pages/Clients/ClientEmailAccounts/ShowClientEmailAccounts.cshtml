@@ -1,4 +1,4 @@
-﻿@page "/client/{clientId:int}/show-client-email-accounts"
+﻿@page "/show-client-email-accounts"
 @model ShowClientEmailAccountsModel
 @{
 }
@@ -28,7 +28,7 @@
                 <li>
                     📮
                     &thinsp;
-                    <a href="/client/@(Model.Client.Id)/show-client-email-account/@(account.Id)">
+                    <a href="/show-client-email-account/@(account.Id)">
                         @(account.FromAddress)
                     </a>
                     &ensp;
@@ -53,7 +53,7 @@
     @if (Model.CanAddClientEmailAccount)
     {
         <p>
-            <a class="button" href="/client/@(Model.Client.Id)/add-client-email-account">
+            <a class="button" href="/add-client-email-account">
                 Lägg till ett konto
             </a>
         </p>

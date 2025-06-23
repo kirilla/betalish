@@ -2,7 +2,7 @@
 
 public interface IAddCustomerCommand
 {
-    Task<int> Execute(IUserToken userToken, AddCustomerCommandModel model, int clientId);
+    Task<int> Execute(IUserToken userToken, AddCustomerCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken, int clientId);
+    Task<bool> IsPermitted(IUserToken userToken);
 }

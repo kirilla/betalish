@@ -4,10 +4,9 @@ public class EditClientEmailAccountCommand(IDatabaseService database) : IEditCli
 {
     public async Task Execute(
         IUserToken userToken, 
-        EditClientEmailAccountCommandModel model, 
-        int clientId)
+        EditClientEmailAccountCommandModel model)
     {
-        if (! await IsPermitted(userToken, clientId))
+        if (! await IsPermitted(userToken))
             throw new NotPermittedException();
 
         model.TrimStringProperties();
@@ -35,10 +34,10 @@ public class EditClientEmailAccountCommand(IDatabaseService database) : IEditCli
         await database.SaveAsync(userToken);
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken, int clientId)
+    public async Task<bool> IsPermitted(IUserToken userToken)
     {
         return await database.ClientAuths.AnyAsync(x =>
-            x.ClientId == clientId &&
+            x.ClientId == userToken.ClientId!.Value &&
             x.UserId == userToken.UserId!.Value);
     }
 }

@@ -1,4 +1,4 @@
-﻿@page "/client/{clientId:int}/show-client-email-account/{clientEmailAccountId:int}"
+﻿@page "/show-client-email-account/{id:int}"
 @model ShowClientEmailAccountModel
 @{
 }
@@ -46,14 +46,14 @@
     <p>
         @if (Model.CanEditClientEmailAccount)
         {
-            <a class="button" href="/client/@(Model.Client.Id)/edit-client-email-account/@(Model.ClientEmailAccount.Id)">
+            <a class="button" href="/edit-client-email-account/@(Model.ClientEmailAccount.Id)">
                 Redigera
             </a>
         }
 
         @if (Model.CanRemoveClientEmailAccount)
         {
-            <a class="button" href="/client/@(Model.Client.Id)/remove-client-email-account/@(Model.ClientEmailAccount.Id)">
+            <a class="button" href="/remove-client-email-account/@(Model.ClientEmailAccount.Id)">
                 Ta bort kontot
             </a>
         }

@@ -1,4 +1,4 @@
-﻿@page "/client/{clientId:int}/edit-customer/{customerId:int}"
+﻿@page "/edit-customer/{id:int}"
 @model EditCustomerModel
 @{
 }
@@ -41,7 +41,7 @@
             Spara
         </button>
 
-        <a class="button" href="/client/@(Model.Client.Id)/show-customer/@(Model.Customer.Id)">
+        <a class="button" href="/show-customer/@(Model.Customer.Id)">
             Avbryt
         </a>
     </form>

@@ -1,4 +1,4 @@
-﻿@page "/client/{clientId:int}/remove-client-email-account/{clientEmailAccountId:int}"
+﻿@page "/remove-client-email-account/{id:int}"
 @model RemoveClientEmailAccountModel
 @{
 }
@@ -38,7 +38,7 @@
             Ta bort
         </button>
 
-        <a class="button" href="/client/@(Model.Client.Id)/show-client-email-account/@(Model.CommandModel.ClientEmailAccountId)">
+        <a class="button" href="/show-client-email-account/@(Model.CommandModel.ClientEmailAccountId)">
             Avbryt
         </a>
     </form>

@@ -10,22 +10,19 @@ public class AddCustomerModel(
     [BindProperty]
     public AddCustomerCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId)
+    public async Task<IActionResult> OnGetAsync()
     {
         try
         {
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new AddCustomerCommandModel()
-            {
-                ClientId = clientId
-            };
+            CommandModel = new AddCustomerCommandModel();
 
             return Page();
         }
@@ -35,24 +32,24 @@ public class AddCustomerModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(int clientId)
+    public async Task<IActionResult> OnPostAsync()
     {
         try
         {
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             if (!ModelState.IsValid)
                 return Page();
 
-            var id = await command.Execute(UserToken, CommandModel, CommandModel.ClientId);
+            var id = await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/client/{clientId}/show-customer/{id}");
+            return Redirect($"/show-customer/{id}");
         }
         catch (BlockedByAddressException)
         {

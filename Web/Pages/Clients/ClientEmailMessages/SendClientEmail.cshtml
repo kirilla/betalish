@@ -1,4 +1,4 @@
-﻿@page "/client/{clientId:int}/send-client-email/{id:int}"
+﻿@page "/send-client-email/{id:int}"
 @model SendClientEmailModel
 @{
 }
@@ -11,7 +11,7 @@
 }
 
 @section Header {
-    <partial name="_NavbarAdmin" model="Model.UserToken" />
+    <partial name="_ClientNavbar" model="Model.ClientNavbarViewModel" />
 }
 
 <main>

@@ -1,4 +1,4 @@
-﻿@page "/client/{clientId:int}/add-customer"
+﻿@page "/add-customer"
 @model AddCustomerModel
 @{
 }
@@ -21,8 +21,6 @@
 
     <form method="post">
 
-        <input type="hidden" asp-for="CommandModel.ClientId" />
-
         <label asp-for="CommandModel.Name">
             Namn
         </label>
@@ -39,7 +37,7 @@
             Lägg till
         </button>
 
-        <a class="button" href="/client/@(Model.Client.Id)/show-customers">
+        <a class="button" href="/show-customers">
             Avbryt
         </a>
     </form>

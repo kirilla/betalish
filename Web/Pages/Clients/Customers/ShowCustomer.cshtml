@@ -1,4 +1,4 @@
-﻿@page "/client/{clientId:int}/show-customer/{customerId:int}"
+﻿@page "/show-customer/{id:int}"
 @model ShowCustomerModel
 @{
 }
@@ -29,14 +29,14 @@
     <p>
         @if (Model.CanEditCustomer)
         {
-            <a class="button" href="/client/@(Model.Client.Id)/edit-customer/@(Model.Customer.Id)">
+            <a class="button" href="/edit-customer/@(Model.Customer.Id)">
                 Redigera
             </a>
         }
 
         @if (Model.CanRemoveCustomer)
         {
-            <a class="button" href="/client/@(Model.Client.Id)/remove-customer/@(Model.Customer.Id)">
+            <a class="button" href="/remove-customer/@(Model.Customer.Id)">
                 Ta bort
             </a>
         }

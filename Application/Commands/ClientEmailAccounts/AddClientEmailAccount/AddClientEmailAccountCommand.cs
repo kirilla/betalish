@@ -4,23 +4,22 @@ public class AddClientEmailAccountCommand(IDatabaseService database) : IAddClien
 {
     public async Task<int> Execute(
         IUserToken userToken, 
-        AddClientEmailAccountCommandModel model,
-        int clientId)
+        AddClientEmailAccountCommandModel model)
     {
-        if (!await IsPermitted(userToken, clientId))
+        if (!await IsPermitted(userToken))
             throw new NotPermittedException();
 
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
         var client = await database.Clients
-            .Where(x => x.Id == model.ClientId)
+            .Where(x => x.Id == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         if (await database.ClientEmailAccounts
             .AnyAsync(x => 
-                x.ClientId == model.ClientId &&
+                x.ClientId == userToken.ClientId!.Value &&
                 x.FromAddress == model.FromAddress))
             throw new BlockedByExistingException();
 
@@ -33,7 +32,7 @@ public class AddClientEmailAccountCommand(IDatabaseService database) : IAddClien
             Password = model.Password,
             SmtpHost = model.SmtpHost,
             SmtpPort = model.SmtpPort,
-            ClientId = model.ClientId,
+            ClientId = client.Id,
         };
 
         database.ClientEmailAccounts.Add(account);
@@ -43,10 +42,10 @@ public class AddClientEmailAccountCommand(IDatabaseService database) : IAddClien
         return account.Id;
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken, int clientId)
+    public async Task<bool> IsPermitted(IUserToken userToken)
     {
         return await database.ClientAuths.AnyAsync(x =>
-            x.ClientId == clientId &&
+            x.ClientId == userToken.ClientId!.Value &&
             x.UserId == userToken.UserId!.Value);
     }
 }

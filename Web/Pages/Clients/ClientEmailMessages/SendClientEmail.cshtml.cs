@@ -12,24 +12,24 @@ public class SendClientEmailModel(
     [BindProperty]
     public SendClientEmailCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId, int id)
+    public async Task<IActionResult> OnGetAsync(int id)
     {
         try
         {
-            await AssertClientAuthorization(database, clientId);
+            await AssertClientAuthorization(database);
 
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             ClientEmailMessage = await database.ClientEmailMessages
                 .Where(x => 
                     x.Id == id &&
-                    x.ClientId == clientId)
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
             
@@ -50,33 +50,33 @@ public class SendClientEmailModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(int clientId)
+    public async Task<IActionResult> OnPostAsync()
     {
         try
         {
-            await AssertClientAuthorization(database, clientId);
+            await AssertClientAuthorization(database);
 
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             ClientEmailMessage = await database.ClientEmailMessages
                 .Where(x => 
                     x.Id == CommandModel.Id &&
-                    x.ClientId == clientId)
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             if (!ModelState.IsValid)
                 return Page();
 
-            await command.Execute(UserToken, CommandModel, clientId);
+            await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/client/{clientId}/show-client-desktop");
+            return Redirect($"/show-client-desktop");
         }
         catch
         {

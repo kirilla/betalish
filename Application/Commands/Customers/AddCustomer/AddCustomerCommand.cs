@@ -3,25 +3,25 @@
 public class AddCustomerCommand(IDatabaseService database) : IAddCustomerCommand
 {
     public async Task<int> Execute(
-        IUserToken userToken, AddCustomerCommandModel model, int clientId)
+        IUserToken userToken, AddCustomerCommandModel model)
     {
-        if (!await IsPermitted(userToken, clientId))
+        if (!await IsPermitted(userToken))
             throw new NotPermittedException();
 
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        // TODO: Client authorization
-
         if (await database.Customers
-            .AnyAsync(x => x.Address == model.Address))
+            .AnyAsync(x => 
+                x.Address == model.Address &&
+                x.ClientId == userToken.ClientId!.Value))
             throw new BlockedByAddressException();
 
         var customer = new Customer()
         {
             Name = model.Name,
             Address = model.Address,
-            ClientId = model.ClientId,
+            ClientId = userToken.ClientId!.Value,
         };
 
         database.Customers.Add(customer);
@@ -31,10 +31,10 @@ public class AddCustomerCommand(IDatabaseService database) : IAddCustomerCommand
         return customer.Id;
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken, int clientId)
+    public async Task<bool> IsPermitted(IUserToken userToken)
     {
         return await database.ClientAuths.AnyAsync(x =>
-            x.ClientId == clientId &&
+            x.ClientId == userToken.ClientId!.Value &&
             x.UserId == userToken.UserId!.Value);
     }
 }

@@ -1,4 +1,4 @@
-﻿@page "/client/{clientId:int}/remove-client-email-messages"
+﻿@page "/remove-client-email-messages"
 @model RemoveClientEmailMessagesModel
 @{
 }
@@ -11,7 +11,7 @@
 }
 
 @section Header {
-    <partial name="_NavbarAdmin" model="Model.UserToken" />
+    <partial name="_ClientNavbar" model="Model.ClientNavbarViewModel" />
 }
 
 <main>
@@ -44,7 +44,7 @@
             Ta bort meddelanden
         </button>
 
-        <a class="button" href="/client/@(Model.Client.Id)/show-client-email-queue">
+        <a class="button" href="/show-client-email-queue">
             Avbryt
         </a>
 

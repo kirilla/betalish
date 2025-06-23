@@ -2,7 +2,7 @@
 
 public interface IAddClientEmailAccountCommand
 {
-    Task<int> Execute(IUserToken userToken, AddClientEmailAccountCommandModel model, int clientId);
+    Task<int> Execute(IUserToken userToken, AddClientEmailAccountCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken, int clientId);
+    Task<bool> IsPermitted(IUserToken userToken);
 }

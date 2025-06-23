@@ -14,29 +14,29 @@ public class ShowCustomerModel(
     public bool CanEditCustomer { get; set; }
     public bool CanRemoveCustomer { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId, int customerId)
+    public async Task<IActionResult> OnGetAsync(int id)
     {
         try
         {
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            await AssertClientAuthorization(database, clientId);
+            await AssertClientAuthorization(database);
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             Customer = await database.Customers
                 .Where(x => 
-                    x.Id == customerId &&
-                    x.ClientId == clientId)
+                    x.Id == id &&
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CanEditCustomer = await editCustomerCommand.IsPermitted(userToken, clientId);
-            CanRemoveCustomer = await removeCustomerCommand.IsPermitted(userToken, clientId);
+            CanEditCustomer = await editCustomerCommand.IsPermitted(userToken);
+            CanRemoveCustomer = await removeCustomerCommand.IsPermitted(userToken);
 
             return Page();
         }

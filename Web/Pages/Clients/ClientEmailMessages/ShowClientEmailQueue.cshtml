@@ -1,4 +1,4 @@
-﻿@page "/client/{clientId:int}/show-client-email-queue"
+﻿@page "/show-client-email-queue"
 @model ShowClientEmailQueueModel
 @{
 }
@@ -11,7 +11,7 @@
 }
 
 @section Header {
-    <partial name="_NavbarAdmin" model="Model.UserToken" />
+    <partial name="_ClientNavbar" model="Model.ClientNavbarViewModel" />
 }
 
 <main>
@@ -47,7 +47,7 @@
             {
                 <tr>
                     <td>
-                        <a href="/client/@(Model.Client.Id)/show-client-email/@(email.Id)">
+                        <a href="/show-client-email/@(email.Id)">
                             @(email.Created.ToFixedFormatDateShortTime())
                         </a>
                     </td>
@@ -77,7 +77,7 @@
     </figure>
 
     <p>
-        <a class="button" href="/client/@(Model.Client.Id)/remove-client-email-messages">
+        <a class="button" href="/remove-client-email-messages">
             Ta bort meddelanden
         </a>
     </p>

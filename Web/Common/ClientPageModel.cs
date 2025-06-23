@@ -20,10 +20,10 @@ public class ClientPageModel(IUserToken userToken) : PageModel
     // _ClientNavbar partial view.
 
     public async Task AssertClientAuthorization(
-        IDatabaseService database, int clientId)
+        IDatabaseService database)
     {
         if (!await database.ClientAuths.AnyAsync(x =>
-                x.ClientId == clientId &&
+                x.ClientId == UserToken.ClientId!.Value &&
                 x.UserId == UserToken.UserId!.Value))
             throw new NotPermittedException();
     }

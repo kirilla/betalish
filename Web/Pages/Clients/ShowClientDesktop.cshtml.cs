@@ -4,17 +4,17 @@ public class ShowClientDesktopModel(
     IUserToken userToken,
     IDatabaseService database) : ClientPageModel(userToken)
 {
-    public async Task<IActionResult> OnGetAsync(int clientId)
+    public async Task<IActionResult> OnGetAsync()
     {
         try
         {
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            await AssertClientAuthorization(database, clientId);
+            await AssertClientAuthorization(database);
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

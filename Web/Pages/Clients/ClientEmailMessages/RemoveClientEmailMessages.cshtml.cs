@@ -10,17 +10,17 @@ public class RemoveClientEmailMessagesModel(
     [BindProperty]
     public RemoveClientEmailMessagesCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId)
+    public async Task<IActionResult> OnGetAsync()
     {
         try
         {
-            await AssertClientAuthorization(database, clientId);
+            await AssertClientAuthorization(database);
 
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -38,26 +38,26 @@ public class RemoveClientEmailMessagesModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(int clientId)
+    public async Task<IActionResult> OnPostAsync()
     {
         try
         {
-            await AssertClientAuthorization(database, clientId);
+            await AssertClientAuthorization(database);
 
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             if (!ModelState.IsValid)
                 return Page();
 
-            await command.Execute(UserToken, CommandModel, clientId);
+            await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/client/{clientId}/show-client-email-queue");
+            return Redirect($"/show-client-email-queue");
         }
         catch
         {

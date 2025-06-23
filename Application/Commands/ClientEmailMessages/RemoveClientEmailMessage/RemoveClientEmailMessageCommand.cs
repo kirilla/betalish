@@ -4,10 +4,9 @@ public class RemoveClientEmailMessageCommand(IDatabaseService database) : IRemov
 {
     public async Task Execute(
         IUserToken userToken, 
-        RemoveClientEmailMessageCommandModel model,
-        int clientId)
+        RemoveClientEmailMessageCommandModel model)
     {
-        if (!await IsPermitted(userToken, clientId))
+        if (!await IsPermitted(userToken))
             throw new NotPermittedException();
 
         if (!model.Confirmed)
@@ -16,7 +15,7 @@ public class RemoveClientEmailMessageCommand(IDatabaseService database) : IRemov
         var message = await database.ClientEmailMessages
             .Where(x => 
                 x.Id == model.Id &&
-                x.ClientId == clientId)
+                x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
@@ -25,10 +24,10 @@ public class RemoveClientEmailMessageCommand(IDatabaseService database) : IRemov
         await database.SaveAsync(userToken);
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken, int clientId)
+    public async Task<bool> IsPermitted(IUserToken userToken)
     {
         return await database.ClientAuths.AnyAsync(x =>
-            x.ClientId == clientId &&
+            x.ClientId == userToken.ClientId!.Value &&
             x.UserId == userToken.UserId!.Value);
     }
 }

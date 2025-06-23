@@ -4,10 +4,9 @@ public class RemoveClientEmailAccountCommand(IDatabaseService database) : IRemov
 {
     public async Task Execute(
         IUserToken userToken, 
-        RemoveClientEmailAccountCommandModel model, 
-        int clientId)
+        RemoveClientEmailAccountCommandModel model)
     {
-        if (!await IsPermitted(userToken, clientId))
+        if (!await IsPermitted(userToken))
             throw new NotPermittedException();
 
         if (!model.Confirmed)
@@ -23,10 +22,10 @@ public class RemoveClientEmailAccountCommand(IDatabaseService database) : IRemov
         await database.SaveAsync(userToken);
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken, int clientId)
+    public async Task<bool> IsPermitted(IUserToken userToken)
     {
         return await database.ClientAuths.AnyAsync(x =>
-            x.ClientId == clientId &&
+            x.ClientId == userToken.ClientId!.Value &&
             x.UserId == userToken.UserId!.Value);
     }
 }

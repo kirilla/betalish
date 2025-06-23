@@ -12,20 +12,20 @@ public class EditClientEmailAccountModel(
     [BindProperty]
     public EditClientEmailAccountCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId, int clientEmailAccountId)
+    public async Task<IActionResult> OnGetAsync(int id)
     {
         try
         {
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             ClientEmailAccount = await database.ClientEmailAccounts
-                .Where(x => x.Id == clientEmailAccountId)
+                .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -53,37 +53,37 @@ public class EditClientEmailAccountModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(int clientId, int clientEmailAccountId)
+    public async Task<IActionResult> OnPostAsync()
     {
         try
         {
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             ClientEmailAccount = await database.ClientEmailAccounts
                 .Where(x => 
                     x.Id == CommandModel.ClientEmailAccountId &&
-                    x.ClientId == clientId)
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             if (!ModelState.IsValid)
                 return Page();
 
-            await command.Execute(UserToken, CommandModel, clientId);
+            await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/client/{clientId}/show-client-email-account/{clientEmailAccountId}");
+            return Redirect($"/show-client-email-account/{ClientEmailAccount.Id}");
         }
         catch (BlockedByNameException)
         {
             ModelState.AddModelError(
                 nameof(CommandModel.FromAddress),
-                "Det finns ett annat epostkonto med samma adress.");
+                "Det finns ett annat konto med samma adress.");
 
             return Page();
         }

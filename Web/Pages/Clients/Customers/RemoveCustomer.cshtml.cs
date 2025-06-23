@@ -12,20 +12,20 @@ public class RemoveCustomerModel(
     [BindProperty]
     public RemoveCustomerCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId, int customerId)
+    public async Task<IActionResult> OnGetAsync(int id)
     {
         try
         {
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             Customer = await database.Customers
-                .Where(x => x.Id == customerId)
+                .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -46,29 +46,29 @@ public class RemoveCustomerModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(int clientId, int customerId)
+    public async Task<IActionResult> OnPostAsync(int id)
     {
         try
         {
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             Customer = await database.Customers
-                .Where(x => x.Id == customerId)
+                .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             if (!ModelState.IsValid)
                 return Page();
 
-            await command.Execute(UserToken, CommandModel, clientId);
+            await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/client/{clientId}/show-customers");
+            return Redirect($"/show-customers");
         }
         catch (ConfirmationRequiredException)
         {

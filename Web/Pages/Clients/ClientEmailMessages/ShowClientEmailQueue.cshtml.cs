@@ -10,19 +10,19 @@ public class ShowClientEmailQueueModel(
     public int Failed { get; set; }
     public int Sent { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId)
+    public async Task<IActionResult> OnGetAsync()
     {
         try
         {
-            await AssertClientAuthorization(database, clientId);
+            await AssertClientAuthorization(database);
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             EmailHeaders = await database.ClientEmailMessages
-                .Where(x => x.ClientId == clientId)
+                .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .OrderBy(x => x.Created)
                 .Select(x => new EmailHeader()
                 {

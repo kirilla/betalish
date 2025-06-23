@@ -12,22 +12,22 @@ public class EditCustomerModel(
     [BindProperty]
     public EditCustomerCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId, int customerId)
+    public async Task<IActionResult> OnGetAsync(int id)
     {
         try
         {
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             Customer = await database.Customers
                 .Where(x =>
-                    x.Id == customerId &&
-                    x.ClientId == clientId)
+                    x.Id == id &&
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -50,31 +50,31 @@ public class EditCustomerModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(int clientId, int customerId)
+    public async Task<IActionResult> OnPostAsync(int id)
     {
         try
         {
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             Customer = await database.Customers
                 .Where(x =>
-                    x.Id == customerId &&
-                    x.ClientId == clientId)
+                    x.Id == id &&
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             if (!ModelState.IsValid)
                 return Page();
 
-            await command.Execute(UserToken, CommandModel, clientId);
+            await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/client/{clientId}/show-customer/{customerId}");
+            return Redirect($"/show-customer/{id}");
         }
         catch (BlockedByAddressException)
         {

@@ -10,9 +10,9 @@ public class SendClientEmailCommand(
     IOptions<SmtpConfiguration> smtpOptions) : ISendClientEmailCommand
 {
     public async Task Execute(
-        IUserToken userToken, SendClientEmailCommandModel model, int clientId)
+        IUserToken userToken, SendClientEmailCommandModel model)
     {
-        if (!await IsPermitted(userToken, clientId))
+        if (!await IsPermitted(userToken))
             throw new NotPermittedException();
 
         model.TrimStringProperties();
@@ -23,7 +23,7 @@ public class SendClientEmailCommand(
         var message = await database.ClientEmailMessages
             .Where(x => 
                 x.Id == model.Id &&
-                x.ClientId == clientId)
+                x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
              throw new NotFoundException();
 
@@ -44,10 +44,10 @@ public class SendClientEmailCommand(
         }
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken, int clientId)
+    public async Task<bool> IsPermitted(IUserToken userToken)
     {
         return await database.ClientAuths.AnyAsync(x =>
-            x.ClientId == clientId &&
+            x.ClientId == userToken.ClientId!.Value &&
             x.UserId == userToken.UserId!.Value);
     }
 }

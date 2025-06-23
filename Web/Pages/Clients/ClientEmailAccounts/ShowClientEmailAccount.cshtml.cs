@@ -14,29 +14,29 @@ public class ShowClientEmailAccountModel(
     public bool CanEditClientEmailAccount { get; set; }
     public bool CanRemoveClientEmailAccount { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId, int clientEmailAccountId)
+    public async Task<IActionResult> OnGetAsync(int id)
     {
         try
         {
-            await AssertClientAuthorization(database, clientId);
+            await AssertClientAuthorization(database);
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             ClientEmailAccount = await database.ClientEmailAccounts
                 .Where(x => 
-                    x.Id == clientEmailAccountId &&
-                    x.ClientId == clientId)
+                    x.Id == id &&
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             CanEditClientEmailAccount = 
-                await editClientEmailAccountCommand.IsPermitted(userToken, clientId);
+                await editClientEmailAccountCommand.IsPermitted(userToken);
 
             CanRemoveClientEmailAccount = 
-                await removeClientEmailAccountCommand.IsPermitted(userToken, clientId);
+                await removeClientEmailAccountCommand.IsPermitted(userToken);
 
             return Page();
         }

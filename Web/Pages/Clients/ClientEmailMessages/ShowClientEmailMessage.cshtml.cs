@@ -6,21 +6,21 @@ public class ShowClientEmailMessageModel(
 {
     public ClientEmailMessage ClientEmailMessage { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId, int id)
+    public async Task<IActionResult> OnGetAsync(int id)
     {
         try
         {
-            await AssertClientAuthorization(database, clientId);
+            await AssertClientAuthorization(database);
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             ClientEmailMessage = await database.ClientEmailMessages
                 .Where(x => 
                     x.Id == id &&
-                    x.ClientId == clientId)
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

@@ -4,8 +4,6 @@ namespace Betalish.Application.Commands.ClientEmailAccounts.AddClientEmailAccoun
 
 public class AddClientEmailAccountCommandModel
 {
-    public int ClientId { get; set; }
-
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange avsändare.")]
     [StringLength(

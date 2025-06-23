@@ -1,4 +1,4 @@
-﻿@page "/client/{clientId:int}/add-client-email-account"
+﻿@page "/add-client-email-account"
 @model AddClientEmailAccountModel
 @{
 }
@@ -20,8 +20,6 @@
     </h4>
 
     <form method="post">
-
-        <input type="hidden" asp-for="CommandModel.ClientId" />
 
         <label asp-for="CommandModel.FromName">
             Avsändarnamn
@@ -64,7 +62,7 @@
             Lägg till
         </button>
 
-        <a class="button" href="/client/@(Model.Client.Id)/show-client-email-accounts">
+        <a class="button" href="/show-client-email-accounts">
             Avbryt
         </a>
     </form>

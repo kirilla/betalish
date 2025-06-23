@@ -4,8 +4,6 @@ namespace Betalish.Application.Commands.Customers.AddCustomer;
 
 public class AddCustomerCommandModel
 {
-    public int ClientId { get; set; }
-
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange namn.")]
     [StringLength(

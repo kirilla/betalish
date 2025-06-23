@@ -10,22 +10,19 @@ public class AddClientEmailAccountModel(
     [BindProperty]
     public AddClientEmailAccountCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId)
+    public async Task<IActionResult> OnGetAsync()
     {
         try
         {
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new AddClientEmailAccountCommandModel()
-            {
-                ClientId = clientId,
-            };
+            CommandModel = new AddClientEmailAccountCommandModel();
 
             return Page();
         }
@@ -39,30 +36,30 @@ public class AddClientEmailAccountModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(int clientId)
+    public async Task<IActionResult> OnPostAsync()
     {
         try
         {
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             if (!ModelState.IsValid)
                 return Page();
 
-            var id = await command.Execute(UserToken, CommandModel, CommandModel.ClientId);
+            var id = await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/client/{clientId}/show-client-email-account/{id}");
+            return Redirect($"/show-client-email-account/{id}");
         }
         catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
                 nameof(CommandModel.FromAddress),
-                "Det finns ett annat epostkonto med samma adress.");
+                "Det finns ett annat konto med samma adress.");
 
             return Page();
         }

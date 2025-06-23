@@ -11,29 +11,29 @@ public class ShowCustomersModel(
 
     public bool CanAddCustomer { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId)
+    public async Task<IActionResult> OnGetAsync()
     {
         try
         {
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            await AssertClientAuthorization(database, clientId);
+            await AssertClientAuthorization(database);
 
             Client = await database.Clients
                 .AsNoTracking()
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             Customers = await database.Customers
                 .AsNoTracking()
-                .Where(x => x.ClientId == clientId)
+                .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .OrderBy(x => x.Address)
                 .ThenBy(x => x.Name)
                 .ToListAsync();
 
-            CanAddCustomer = await addCustomerCommand.IsPermitted(userToken, clientId);
+            CanAddCustomer = await addCustomerCommand.IsPermitted(userToken);
 
             return Page();
         }

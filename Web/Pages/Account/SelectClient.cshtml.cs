@@ -84,7 +84,7 @@ public class SelectClientModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/client/{Client.Id}/show-desktop");
+            return Redirect($"/show-client-desktop");
         }
         catch (NotFoundException)
         {

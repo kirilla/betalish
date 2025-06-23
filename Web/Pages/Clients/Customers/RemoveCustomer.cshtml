@@ -1,4 +1,4 @@
-﻿@page "/client/{clientId:int}/remove-customer/{customerId:int}"
+﻿@page "/remove-customer/{id:int}"
 @model RemoveCustomerModel
 @{
 }
@@ -37,7 +37,7 @@
             Ta bort
         </button>
 
-        <a class="button" href="/client/@(Model.Client.Id)/show-customer/@(Model.CommandModel.Id)">
+        <a class="button" href="/show-customer/@(Model.CommandModel.Id)">
             Avbryt
         </a>
     </form>

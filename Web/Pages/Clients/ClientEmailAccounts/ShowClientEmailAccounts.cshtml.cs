@@ -11,26 +11,26 @@ public class ShowClientEmailAccountsModel(
 
     public bool CanAddClientEmailAccount { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId)
+    public async Task<IActionResult> OnGetAsync()
     {
         try
         {
-            await AssertClientAuthorization(database, clientId);
+            await AssertClientAuthorization(database);
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             ClientEmailAccounts = await database.ClientEmailAccounts
                 .AsNoTracking()
-                .Where(x => x.ClientId == clientId)
+                .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .OrderBy(x => x.FromName)
                 .ThenBy(x => x.FromAddress)
                 .ToListAsync();
 
             CanAddClientEmailAccount = 
-                await addClientEmailAccountCommand.IsPermitted(userToken, clientId);
+                await addClientEmailAccountCommand.IsPermitted(userToken);
 
             return Page();
         }

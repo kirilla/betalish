@@ -1,4 +1,4 @@
-﻿@page "/client/{clientId:int}/show-desktop"
+﻿@page "/show-client-desktop"
 @model ShowClientDesktopModel
 @{
 }
@@ -25,7 +25,7 @@
             <li>
                 👤
                 &thinsp;
-                <a href="/client/@(Model.Client.Id)/show-customers">Kunder</a>
+                <a href="/show-customers">Kunder</a>
             </li>
         </ul>
     </div>
@@ -38,7 +38,7 @@
             <li>
                 📮
                 &thinsp;
-                <a href="/client/@(Model.Client.Id)/show-client-email-accounts">Epostkonton</a>
+                <a href="/show-client-email-accounts">Epostkonton</a>
             </li>
         </ul>
     </div>
@@ -51,7 +51,7 @@
             <li>
                 📤
                 &thinsp;
-                <a href="/client/@(Model.Client.Id)/show-client-email-queue">Skickad epost</a>
+                <a href="/show-client-email-queue">Skickad epost</a>
             </li>
         </ul>
     </div>

@@ -12,20 +12,22 @@ public class RemoveClientEmailAccountModel(
     [BindProperty]
     public RemoveClientEmailAccountCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync(int clientId, int clientEmailAccountId)
+    public async Task<IActionResult> OnGetAsync(int id)
     {
         try
         {
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             ClientEmailAccount = await database.ClientEmailAccounts
-                .Where(x => x.Id == clientEmailAccountId)
+                .Where(x => 
+                    x.Id == id &&
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -46,29 +48,31 @@ public class RemoveClientEmailAccountModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync(int clientId)
+    public async Task<IActionResult> OnPostAsync()
     {
         try
         {
-            if (!await command.IsPermitted(UserToken, clientId))
+            if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
-                .Where(x => x.Id == clientId)
+                .Where(x => x.Id == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             ClientEmailAccount = await database.ClientEmailAccounts
-                .Where(x => x.Id == CommandModel.ClientEmailAccountId)
+                .Where(x =>
+                    x.Id == CommandModel.ClientEmailAccountId &&
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             if (!ModelState.IsValid)
                 return Page();
 
-            await command.Execute(UserToken, CommandModel, clientId);
+            await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/client/{clientId}/show-client-email-accounts");
+            return Redirect($"/show-client-email-accounts");
         }
         catch (ConfirmationRequiredException)
         {

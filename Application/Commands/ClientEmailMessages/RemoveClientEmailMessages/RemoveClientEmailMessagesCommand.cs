@@ -4,23 +4,22 @@ public class RemoveClientEmailMessagesCommand(IDatabaseService database) : IRemo
 {
     public async Task Execute(
         IUserToken userToken, 
-        RemoveClientEmailMessagesCommandModel model, 
-        int clientId)
+        RemoveClientEmailMessagesCommandModel model)
     {
-        if (!await IsPermitted(userToken, clientId))
+        if (!await IsPermitted(userToken))
             throw new NotPermittedException();
 
         var query = await database.ClientEmailMessages
             .Where(x => 
-                x.ClientId == clientId &&
+                x.ClientId == userToken.ClientId!.Value &&
                 x.EmailStatus == model.EmailStatus!.Value)
             .ExecuteDeleteAsync();
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken, int clientId)
+    public async Task<bool> IsPermitted(IUserToken userToken)
     {
         return await database.ClientAuths.AnyAsync(x =>
-            x.ClientId == clientId &&
+            x.ClientId == userToken.ClientId!.Value &&
             x.UserId == userToken.UserId!.Value);
     }
 }

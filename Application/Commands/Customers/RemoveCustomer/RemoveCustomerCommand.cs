@@ -3,18 +3,18 @@
 public class RemoveCustomerCommand(IDatabaseService database) : IRemoveCustomerCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemoveCustomerCommandModel model, int clientId)
+        IUserToken userToken, RemoveCustomerCommandModel model)
     {
-        if (!await IsPermitted(userToken, clientId))
+        if (!await IsPermitted(userToken))
             throw new NotPermittedException();
 
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        // TODO: Client authorization
-
         var customer = await database.Customers
-            .Where(x => x.Id == model.Id)
+            .Where(x => 
+                x.Id == model.Id &&
+                x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
@@ -23,10 +23,10 @@ public class RemoveCustomerCommand(IDatabaseService database) : IRemoveCustomerC
         await database.SaveAsync(userToken);
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken, int clientId)
+    public async Task<bool> IsPermitted(IUserToken userToken)
     {
         return await database.ClientAuths.AnyAsync(x =>
-            x.ClientId == clientId &&
+            x.ClientId == userToken.ClientId!.Value &&
             x.UserId == userToken.UserId!.Value);
     }
 }
