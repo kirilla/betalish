@@ -8,4 +8,7 @@ public interface IUserToken
     string? Name { get; }
 
     bool IsAuthenticated { get; }
+
+    int? ClientId { get; }
+    string? ClientName { get; }
 }

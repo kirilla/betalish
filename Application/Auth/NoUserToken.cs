@@ -9,6 +9,9 @@ public class NoUserToken : IUserToken
 
     public bool IsAuthenticated { get; }
 
+    public int? ClientId { get; }
+    public string? ClientName { get; }
+
     public NoUserToken()
     {
         UserId = null;
@@ -17,5 +20,8 @@ public class NoUserToken : IUserToken
         Name = null;
 
         IsAuthenticated = false;
+
+        ClientId = null;
+        ClientName = null;
     }
 }

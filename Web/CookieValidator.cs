@@ -42,6 +42,8 @@ public class CookieValidator(
                 SessionId = x.Id,
                 x.UserId,
                 x.User.Name,
+                x.ClientId,
+                ClientName = x.Client.Name,
             })
             .SingleOrDefault();
 
@@ -64,5 +66,8 @@ public class CookieValidator(
         items!["SessionId"] = session.SessionId;
 
         items!["UserName"] = session.Name;
+
+        items!["ClientId"] = session.ClientId;
+        items!["ClientName"] = session.ClientName;
     }
 }

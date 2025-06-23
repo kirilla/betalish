@@ -11,6 +11,9 @@ public class UserToken : IUserToken
 
     public bool IsAuthenticated { get; }
 
+    public int? ClientId { get; }
+    public string? ClientName { get; }
+
     public UserToken(IHttpContextAccessor httpContext)
     {
         _httpContext = httpContext;
@@ -23,5 +26,8 @@ public class UserToken : IUserToken
         IsAuthenticated = 
             UserId.HasValue && 
             SessionId.HasValue;
+
+        ClientId = _httpContext?.HttpContext?.Items?["ClientId"] as int?;
+        ClientName = _httpContext?.HttpContext?.Items?["ClientName"] as string;
     }
 }
