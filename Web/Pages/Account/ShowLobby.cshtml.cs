@@ -1,4 +1,4 @@
-namespace Betalish.Web.Pages.Lobby;
+namespace Betalish.Web.Pages.Account;
 
 public class ShowLobbyModel(
     IUserToken userToken,

@@ -1,0 +1,35 @@
+﻿@page "/select-client/{id:int}"
+@model SelectClientModel
+@{
+}
+
+@section Meta {
+    <title>Start - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_NavbarAccount" model="Model.UserToken" />
+}
+
+<main>
+    
+    <h4>
+        Vill du logga in som @(Model.Client.Name)?
+    </h4>
+    
+    <br>
+
+    <div>
+        <form method="post">
+
+            <button type="submit">
+                Logga in
+            </button>
+
+            <a class="button" href="/lobby">
+                Avbryt
+            </a>
+        </form>
+    </div>
+    
+</main>

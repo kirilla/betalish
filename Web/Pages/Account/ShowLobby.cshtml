@@ -8,7 +8,7 @@
 }
 
 @section Header {
-    <partial name="_NavbarLobby" model="Model.UserToken" />
+    <partial name="_NavbarAccount" model="Model.UserToken" />
 }
 
 <main>
@@ -39,7 +39,7 @@
                     <li>
                         🏢
                         &thinsp;
-                        <a href="/client/@(client.Id)/show-desktop">@(client.Name)</a>
+                        <a href="/select-client/@(client.Id)">@(client.Name)</a>
                     </li>
                 }
             </ul>
