@@ -1,0 +1,130 @@
+﻿@page "/show-network-rules"
+@model ShowNetworkRulesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Brandvägg -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Brandvägg
+    </h4>
+
+    <div class="notice">
+        <ul>
+            @if (Model.IpFilterConfiguration.IsFiltering)
+            {
+                <li>✅ Aktiv</li>
+            }
+            else
+            {
+                <li>⚠️ Deaktiverad</li>
+            }
+
+            @if (Model.IpFilterConfiguration.LogBlockedRequest)
+            {
+                <li>🐵 Loggning på</li>
+            }
+            else
+            {
+                <li>🙈 Loggning av</li>
+            }
+
+            @if (Model.IpFilterConfiguration.BlockByDefault)
+            {
+                <li>🛑 Grundregel: blockerat</li>
+            }
+            else
+            {
+                <li>🛣️ Grundregel: öppet</li>
+            }
+        </ul>
+    </div>
+
+    <figure>
+        <table>
+            <tr>
+                <th>Nätverk</th>
+                @* <th>IPNetwork</th>
+                <th>Basadress</th>
+                <th>Prefix</th> *@
+                <th>Blockerat</th>
+            </tr>
+            @foreach (var range in Model.NetworkRules)
+            {
+                <tr>
+                    <td>
+                        <a href="/show-network-rule/@(range.Id)">
+                            @(range.Range)
+                        </a>
+                    </td>
+                    @* <td>
+                        @(range.IPNetwork)
+                    </td>
+                    <td>
+                        @(range.BaseAddress)
+                    </td>
+                    <td>
+                        @(range.Prefix)
+                    </td> *@
+                    <td>
+                        @if (range.Blocked)
+                        {
+                            <span>🛑 Blockerat</span>
+                        }
+                        else
+                        {
+                            <span>🛣️ Öppet</span>
+                        }
+                    </td>
+                </tr>
+            }
+            @if (!Model.NetworkRules.Any())
+            {
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            }
+        </table>
+    </figure>
+
+    <p>
+        <a class="button" href="/add-network-rule">
+            Lägg till adress
+        </a>
+    </p>
+
+    <div class="notice">
+        <ul>
+            <li>
+                🛑
+                &thinsp;
+                <a href="/show-blocked-requests">Blockerade anrop</a>
+            </li>
+            <li>
+                🛑
+                &thinsp;
+                <a href="/show-blocked-user-agents">Blockerade agenter</a>
+            </li>
+            <li>
+                🛑
+                &thinsp;
+                <a href="/show-blocked-ip-addresses">Blockerade IP-adresser</a>
+            </li>
+        </ul>
+    </div>
+
+</main>

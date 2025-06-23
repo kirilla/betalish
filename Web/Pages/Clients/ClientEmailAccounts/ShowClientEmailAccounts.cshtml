@@ -1,0 +1,62 @@
+﻿@page "/client/{clientId:int}/show-client-email-accounts"
+@model ShowClientEmailAccountsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Epostkonton -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_ClientNavbar" model="Model.ClientNavbarViewModel" />
+}
+
+<main>
+
+    <h4>
+        Epostkonton
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var account in Model.ClientEmailAccounts)
+            {
+                <li>
+                    📮
+                    &thinsp;
+                    <a href="/client/@(Model.Client.Id)/show-client-email-account/@(account.Id)">
+                        @(account.FromAddress)
+                    </a>
+                    &ensp;
+                    <span class="muted">
+                        @(account.FromName)
+                    </span>
+                </li>
+            }
+
+            @if (!Model.ClientEmailAccounts.Any())
+            {
+                <li>
+                    📮
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    @if (Model.CanAddClientEmailAccount)
+    {
+        <p>
+            <a class="button" href="/client/@(Model.Client.Id)/add-client-email-account">
+                Lägg till ett konto
+            </a>
+        </p>
+    }
+
+</main>

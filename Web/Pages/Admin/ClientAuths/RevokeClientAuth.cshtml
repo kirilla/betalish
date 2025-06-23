@@ -1,0 +1,52 @@
+﻿@page "/revoke-user-client-auth/{userId:int}"
+@model RevokeClientAuthModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort som admin för ...
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Ta bort @(Model.User.Name) som admin för ...
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.UserId" />
+
+        <label asp-for="CommandModel.ClientId">
+            Klient
+        </label>
+
+        <select asp-for="CommandModel.ClientId">
+            <option value="">–</option>
+            @foreach (var client in Model.Clients)
+            {
+                <option value="@(client.Id)">
+                    @(client.Name)
+                </option>
+            }
+        </select>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Ta bort som admin
+        </button>
+
+        <a class="button" href="/admin/show-user/@(Model.User.Id)">
+            Avbryt
+        </a>
+
+    </form>
+
+</main>

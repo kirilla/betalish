@@ -1,0 +1,50 @@
+﻿@page "/show-blocked-urls"
+@model ShowBlockedUrlsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Blockerade URL:er -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Blockerade URL:er
+    </h4>
+
+    <div class="notice">
+        <ul>
+            @if (!Model.UserAgents.Any())
+            {
+                <li>
+                    🛑
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+            @foreach (var agent in Model.UserAgents)
+            {
+                <li>
+                    🛑
+                    &thinsp;
+                    @(agent)
+                </li>
+            }
+        </ul>
+    </div>
+
+    <p>
+        <a class="button" href="/remove-blocked-requests">
+            Ta bort
+        </a>
+    </p>
+
+</main>

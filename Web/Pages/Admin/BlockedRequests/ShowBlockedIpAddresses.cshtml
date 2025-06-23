@@ -1,0 +1,48 @@
+﻿@page "/show-blocked-ip-addresses"
+@model ShowBlockedIpAddressesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Blockerade IP-adresser -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Blockerade IP-adresser
+    </h4>
+
+    <div class="notice">
+        <ul>
+            @if (!Model.IpAddresses.Any())
+            {
+                <li>
+                    🛑
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+            @foreach (var address in Model.IpAddresses)
+            {
+                <li>
+                    @(address)
+                </li>
+            }
+        </ul>
+    </div>
+
+    <p>
+        <a class="button" href="/remove-blocked-requests">
+            Ta bort
+        </a>
+    </p>
+
+</main>

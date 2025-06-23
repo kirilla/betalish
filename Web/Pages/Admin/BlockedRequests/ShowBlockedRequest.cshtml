@@ -1,0 +1,48 @@
+﻿@page "/show-blocked-request/{id:int}"
+@model ShowBlockedRequestModel
+@{
+}
+
+@section Meta {
+    <title>Webbsida - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        🛑
+        @(Model.BlockedRequest.Method)
+        @(Model.BlockedRequest.Url)
+    </h4>
+
+    <dl class="notice">
+        <dt>När</dt>
+        <dd>@(Model.BlockedRequest.Created.ToFixedFormatDateShortTime())</dd>
+
+        <dt>URL</dt>
+        <dd>@(Model.BlockedRequest.Url)</dd>
+
+        @* <dt>Metod</dt>
+        <dd>@(Model.BlockedRequest.Method)</dd> *@
+
+        <dt>UserAgent</dt>
+        <dd>@(Model.BlockedRequest.UserAgent)</dd>
+
+        <dt>Ip-nummer</dt>
+        <dd>@(Model.BlockedRequest.IpAddress)</dd>
+    </dl>
+
+    <p>
+        @if (Model.CanRemoveBlockedRequest)
+        {
+            <a class="button" href="/remove-blocked-request/@(Model.BlockedRequest.Id)">
+                Ta bort
+            </a>
+        }
+    </p>
+
+</main>

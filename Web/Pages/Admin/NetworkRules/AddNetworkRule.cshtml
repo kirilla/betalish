@@ -1,0 +1,44 @@
+﻿@page "/add-network-rule"
+@model AddNetworkRuleModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till IP-adressintervall -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till ett IP-adressintervall
+    </h4>
+
+    <form method="post">
+
+        <input asp-for="CommandModel.Range" placeholder="192.168.0.1/32" />
+
+        <p>
+            <label asp-for="CommandModel.Blocked">
+                <input asp-for="CommandModel.Blocked" type="checkbox" />
+                Blockerat
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-network-rules">
+            Avbryt
+        </a>
+    </form>
+
+</main>

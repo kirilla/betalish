@@ -1,0 +1,60 @@
+﻿@page "/show-client/{id:int}"
+@model ShowClientModel
+@{
+}
+
+@section Meta {
+    <title>Klient - @(Model.Client.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        🏢
+        @(Model.Client.Name)
+    </h4>
+
+    <div class="notice">
+        <h5>Egenskaper</h5>
+        <ul>
+            <li>
+                @(Model.Client.Address)
+            </li>
+        </ul>
+    </div>
+
+    <div class="notice">
+        <h5>Användare</h5>
+        <ul>
+            @foreach (var user in Model.Users)
+            {
+                <li>
+                    👤
+                    &thinsp;
+                    <a href="/admin/show-user/@(user.Id)">@(user.Name)</a>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <p>
+        @if (Model.CanEditClient)
+        {
+            <a class="button" href="/edit-client/@(Model.Client.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanRemoveClient)
+        {
+            <a class="button" href="/remove-client/@(Model.Client.Id)">
+                Ta bort
+            </a>
+        }
+    </p>
+
+</main>

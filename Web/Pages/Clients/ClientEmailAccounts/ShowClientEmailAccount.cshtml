@@ -1,0 +1,62 @@
+﻿@page "/client/{clientId:int}/show-client-email-account/{clientEmailAccountId:int}"
+@model ShowClientEmailAccountModel
+@{
+}
+
+@section Meta {
+    <title>Epostkonto - @(Model.ClientEmailAccount.FromName) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_ClientNavbar" model="Model.ClientNavbarViewModel" />
+}
+
+<main>
+
+    <h4>
+        📮
+        @(Model.ClientEmailAccount.FromName)
+        @(Model.ClientEmailAccount.FromAddress)
+    </h4>
+
+    <div class="notice">
+        <ul>
+            <li>
+                Från: @(Model.ClientEmailAccount.FromName),
+                @(Model.ClientEmailAccount.FromAddress)
+            </li>
+            @if (Model.ClientEmailAccount.ReplyToName.HasValue() || 
+                Model.ClientEmailAccount.ReplyToAddress.HasValue())
+            {
+                <li>
+                    Svara till:
+                    @(Model.ClientEmailAccount.ReplyToName),
+                    @(Model.ClientEmailAccount.ReplyToAddress)
+                </li>
+            }
+            <li>
+                Server: @(Model.ClientEmailAccount.SmtpHost)
+            </li>
+            <li>
+                Port: @(Model.ClientEmailAccount.SmtpPort)
+            </li>
+        </ul>
+    </div>
+
+    <p>
+        @if (Model.CanEditClientEmailAccount)
+        {
+            <a class="button" href="/client/@(Model.Client.Id)/edit-client-email-account/@(Model.ClientEmailAccount.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanRemoveClientEmailAccount)
+        {
+            <a class="button" href="/client/@(Model.Client.Id)/remove-client-email-account/@(Model.ClientEmailAccount.Id)">
+                Ta bort kontot
+            </a>
+        }
+    </p>
+
+</main>

@@ -1,0 +1,59 @@
+﻿@page "/client/{clientId:int}/show-desktop"
+@model ShowClientDesktopModel
+@{
+}
+
+@section Meta {
+    <title>@(Model.Client.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_ClientNavbar" model="Model.ClientNavbarViewModel" />
+}
+
+<main>
+    
+    <h4>
+        @(Model.Client.Name)
+    </h4>
+
+    <div class="notice">
+        <h5>
+            Kunder
+        </h5>
+        <ul>
+            <li>
+                👤
+                &thinsp;
+                <a href="/client/@(Model.Client.Id)/show-customers">Kunder</a>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="notice">
+        <h5>
+            Inställningar
+        </h5>
+        <ul>
+            <li>
+                📮
+                &thinsp;
+                <a href="/client/@(Model.Client.Id)/show-client-email-accounts">Epostkonton</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="notice">
+        <h5>
+            Epost
+        </h5>
+        <ul>
+            <li>
+                📤
+                &thinsp;
+                <a href="/client/@(Model.Client.Id)/show-client-email-queue">Skickad epost</a>
+            </li>
+        </ul>
+    </div>
+
+</main>

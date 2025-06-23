@@ -1,0 +1,49 @@
+﻿@page "/edit-client/{id:int}"
+@model EditClientModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera klient -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera klient:
+        @(Model.Client.Name)
+        @(Model.Client.Address)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.Address">
+            Epostadress
+        </label>
+        <input asp-for="CommandModel.Address" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-client/@(Model.Client.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

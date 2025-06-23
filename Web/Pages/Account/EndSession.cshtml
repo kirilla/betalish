@@ -1,0 +1,38 @@
+﻿@page "/account/session/{id:int}/end"
+@model EndSessionModel
+@{
+}
+
+@section Meta {
+    <title>
+        Avsluta session -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Avsluta sessionen
+        @(Model.Session.Created.ToFixedFormatDateShortTime())
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Avsluta
+        </button>
+
+        <a class="button" href="/sessions">
+            Avbryt
+        </a>
+    </form>
+
+</main>

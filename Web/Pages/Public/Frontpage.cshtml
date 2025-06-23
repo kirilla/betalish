@@ -1,0 +1,24 @@
+﻿@page "/frontpage"
+@model FrontpageModel
+@{
+}
+
+@section Meta {
+    <title>@(Branding.WebsiteTitle)</title>
+}
+
+@section Style {
+
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+    <h1>Betalish!</h1>
+
+    <div class="notice">
+        Vi har inte öppnat än.
+    </div>
+</main>

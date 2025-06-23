@@ -1,0 +1,47 @@
+﻿@page "/client/{clientId:int}/add-customer"
+@model AddCustomerModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till kund -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_ClientNavbar" model="Model.ClientNavbarViewModel" />
+}
+
+<main>
+    <h4>
+        Lägg till en kund
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.ClientId" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.Address">
+            Epostadress
+        </label>
+        <input asp-for="CommandModel.Address" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/client/@(Model.Client.Id)/show-customers">
+            Avbryt
+        </a>
+    </form>
+
+</main>

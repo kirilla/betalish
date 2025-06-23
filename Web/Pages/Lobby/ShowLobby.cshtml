@@ -1,0 +1,56 @@
+﻿@page "/lobby"
+@model ShowLobbyModel
+@{
+}
+
+@section Meta {
+    <title>Start - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_NavbarLobby" model="Model.UserToken" />
+}
+
+<main>
+    
+    <h4>
+        Vem vill du vara?
+    </h4>
+
+    @if (Model.IsAdmin)
+    {
+        <div class="notice">
+            <ul>
+                <li>
+                    🎓
+                    &thinsp;
+                    <a href="/admin/show-desktop">Admin</a>
+                </li>
+            </ul>
+        </div>
+    }
+    
+    @if (Model.Clients.Any())
+    {
+        <div class="notice">
+            <ul>
+                @foreach (var client in Model.Clients)
+                {
+                    <li>
+                        🏢
+                        &thinsp;
+                        <a href="/client/@(client.Id)/show-desktop">@(client.Name)</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+
+    @if (!Model.IsAdmin && !Model.Clients.Any())
+    {
+        <div class="notice">
+            Ditt konto verkar inte vara knutet till någon organisation.
+        </div>
+    }
+
+</main>

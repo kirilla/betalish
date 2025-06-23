@@ -1,0 +1,32 @@
+﻿@page "/account/sign-out"
+@model SignOutModel
+@{
+}
+
+@section Meta {
+    <title>
+        Logga ut? - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAccount" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Vill du logga ut?
+    </h4>
+
+    <form method="post">
+        <button type="submit">
+            Logga ut
+        </button>
+
+        <a class="button" href="/account/show-account">
+            Avbryt
+        </a>
+    </form>
+
+</main>

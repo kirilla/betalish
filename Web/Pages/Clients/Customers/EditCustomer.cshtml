@@ -1,0 +1,49 @@
+﻿@page "/client/{clientId:int}/edit-customer/{customerId:int}"
+@model EditCustomerModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera kund -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_ClientNavbar" model="Model.ClientNavbarViewModel" />
+}
+
+<main>
+    <h4>
+        Redigera kund:
+        @(Model.Customer.Name)
+        @(Model.Customer.Address)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.Address">
+            Epostadress
+        </label>
+        <input asp-for="CommandModel.Address" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/client/@(Model.Client.Id)/show-customer/@(Model.Customer.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

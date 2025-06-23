@@ -1,0 +1,27 @@
+﻿@page "/register-account-success"
+@model RegisterAccountSuccessModel
+@{
+}
+
+@section Meta {
+    <title>
+        Klart! - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Kontot är skapat!
+    </h4>
+
+    <p>
+        Vill du <a href="/sign-in">logga in</a>?
+    </p>
+    
+</main>

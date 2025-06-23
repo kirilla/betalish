@@ -1,0 +1,15 @@
+﻿@using Betalish.Common.Enums
+@using Betalish.Domain
+@using Betalish.Web
+@using Betalish.Web.Common
+@model ClientNavbarViewModel
+@{
+}
+<header>
+    <nav>
+        <a href="/client/@(Model.Client.Id)/show-desktop">@(Model.Client.Name)</a>
+        <a href="/account/show-account">👤</a>
+        <a href="/lobby">🧢</a>
+        <a href="/account/sign-out">❌</a>
+    </nav>
+</header>

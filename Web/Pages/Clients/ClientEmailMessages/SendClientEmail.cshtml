@@ -1,0 +1,37 @@
+﻿@page "/client/{clientId:int}/send-client-email/{id:int}"
+@model SendClientEmailModel
+@{
+}
+
+@section Meta {
+    <title>
+        Skicka meddelande -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Skicka meddelande
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Skicka
+        </button>
+
+        <a class="button" href="/show-attacks">
+            Avbryt
+        </a>
+    </form>
+
+</main>

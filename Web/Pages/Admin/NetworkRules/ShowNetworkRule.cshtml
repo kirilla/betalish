@@ -1,0 +1,44 @@
+﻿@page "/show-network-rule/{id:int}"
+@model ShowNetworkRuleModel
+@{
+}
+
+@section Meta {
+    <title>IP-adressintervall - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <p class="breadcrumbs">
+        <a href="/admin/show-desktop">Desktop</a>
+        &raquo;
+        <a href="/show-network-rules">IP-addressintervall</a>
+        &raquo;
+        @(Model.NetworkRule.Range)
+    </p>
+
+    <h4>
+        IP-adressintervall
+    </h4>
+
+    <div class="notice">
+        <b>Adress</b>
+        <br />
+        @(Model.NetworkRule.Range)
+    </div>
+
+    <p>
+        <a class="button" href="/edit-network-rule/@(Model.NetworkRule.Id)">
+            Redigera adressen
+        </a>
+
+        <a class="button" href="/remove-network-rule/@(Model.NetworkRule.Id)">
+            Ta bort adressen
+        </a>
+    </p>
+
+</main>

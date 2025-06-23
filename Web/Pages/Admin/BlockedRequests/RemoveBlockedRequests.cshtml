@@ -1,0 +1,43 @@
+﻿@page "/remove-blocked-requests"
+@model RemoveBlockedRequestsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort blockerade sidbesök -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Vill du ta bort ALLA blockerade sidbesök?
+    </h4>
+
+    <form method="post">
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Ta bort
+        </button>
+
+        <a class="button" href="/show-blocked-requests">
+            Avbryt
+        </a>
+
+    </form>
+
+</main>

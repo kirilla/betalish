@@ -1,0 +1,57 @@
+﻿@page "/admin/show-all-sessions"
+@model ShowAllSessionsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Inloggade -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Inloggade
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var session in Model.Sessions)
+            {
+                <li>
+                    👋
+                    &thinsp;
+                    <a href="/admin/show-user/@(session.UserId)">
+                        @(session.User.Name)
+                    </a>
+                    &ensp;
+                    <i>
+                        @(session.Created.ToFixedFormatDateShortTime())
+                    </i>
+                </li>
+            }
+
+            @if (!Model.Sessions.Any())
+            {
+                <li>
+                    👋
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+        <a class="button" href="/admin/end-other-sessions">
+            Avsluta alla sessioner
+        </a>
+
+    </div>
+
+</main>

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="sv-SE">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="/favicons/coin.png" />
+    @RenderSection("Meta", required: false)
+    <link rel="stylesheet" href="~/lib/simpledotcss/simple.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <environment names="Development, Local, Remote">
+        <script src="~/lib/jquery/jquery.js" asp-append-version="true" defer></script>
+        <script src="~/lib/jquery-validate/jquery.validate.js" asp-append-version="true" defer></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" asp-append-version="true" defer></script>
+        <script src="~/lib/alpinejs/dist/cdn.js" asp-append-version="true" defer></script>
+        <script src="~/js/site.js" asp-append-version="true" defer></script>
+    </environment>
+
+    <environment names="Production">
+        <script src="~/lib/jquery/jquery.min.js" asp-append-version="true" defer></script>
+        <script src="~/lib/jquery-validate/jquery.validate.min.js" asp-append-version="true" defer></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" asp-append-version="true" defer></script>
+        <script src="~/lib/alpinejs/dist/cdn.min.js" asp-append-version="true" defer></script>
+        <script src="~/js/site.js" asp-append-version="true" defer></script>
+    </environment>
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+    @RenderSection("Style", required: false)
+</head>
+<body>
+    @RenderSection("Header", required: false)
+
+    @RenderBody()
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,85 @@
+﻿@page "/admin/show-users"
+@model ShowUsersModel
+@{
+}
+
+@section Meta {
+    <title>
+        Användarkonton - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Användare
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            <li>
+                👤
+                &thinsp;
+                <a href="/admin/show-all-users">
+                    Alla
+                </a>
+                &ensp;
+                <span class="muted">
+                    @(Model.UserCount)
+                </span>
+            </li>
+            <li>
+                🎓
+                &thinsp;
+                <a href="/admin/show-admin-users">
+                    Admin
+                </a>
+                &ensp;
+                <span class="muted">
+                    @(Model.AdminUserCount)
+                </span>
+            </li>
+            <li>
+                🏢
+                &thinsp;
+                <a href="/admin/show-client-users">
+                    Klient
+                </a>
+                &ensp;
+                <span class="muted">
+                    @(Model.ClientUserCount)
+                </span>
+            </li>
+            <li>
+                👤
+                &thinsp;
+                <a href="/admin/show-orphan-users">
+                    Överblivna
+                </a>
+                &ensp;
+                <span class="muted">
+                    @(Model.OtherUserCount)
+                </span>
+            </li>
+        </ul>
+
+        <ul>
+            <li>
+                👋
+                &thinsp;
+                <a href="/admin/show-all-sessions">Inloggade</a>
+                &ensp;
+                <span class="muted">
+                    @(Model.SessionCount)
+                </span>
+            </li>
+        </ul>
+
+    </div>
+
+</main>

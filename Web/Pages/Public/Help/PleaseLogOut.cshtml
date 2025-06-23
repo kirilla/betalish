@@ -1,0 +1,31 @@
+﻿@page "/help/please-log-out"
+@model PleaseLogOutModel
+@{
+}
+
+@section Meta {
+    <title>
+        Vänligen logga ut -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Vänligen logga ut
+    </h4>
+
+    <div class="notice">
+        
+        <p>
+            Det som du försöker göra bör göras utan att vara inloggad.
+        </p>
+
+    </div>
+
+</main>

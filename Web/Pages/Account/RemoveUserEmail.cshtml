@@ -1,0 +1,56 @@
+﻿@page "/account/remove-email"
+@model RemoveUserEmailModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort epostadress -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAccount" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Vilken epostadress vill du ta bort?
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.UserEmailId">
+            Epostadress
+        </label>
+
+        <select asp-for="CommandModel.UserEmailId">
+            <option value="">–</option>
+            @foreach (var email in Model.UserEmails)
+            {
+                <option value="@(email.Id)">
+                    @(email.Address)
+                </option>
+            }
+        </select>
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Ta bort
+        </button>
+
+        <a class="button" href="/account/show-account">
+            Avbryt
+        </a>
+    </form>
+
+</main>

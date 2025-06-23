@@ -1,0 +1,15 @@
+global using Betalish.Application.Interfaces;
+global using Betalish.Common.Constants;
+global using Betalish.Common.Enums;
+global using Betalish.Common.Exceptions;
+global using Betalish.Common.Extensions;
+global using Betalish.Common.Interfaces;
+global using Betalish.Common.Settings;
+global using Betalish.Domain.Entities;
+global using Betalish.Web.Common;
+global using Betalish.Web.Middleware;
+global using Betalish.Web.Models;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.RazorPages;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Options;

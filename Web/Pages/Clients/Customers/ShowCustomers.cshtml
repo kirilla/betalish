@@ -1,0 +1,58 @@
+﻿@page "/client/{clientId:int}/show-customers"
+@model ShowCustomersModel
+@{
+}
+
+@section Meta {
+    <title>
+        Kunder -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_ClientNavbar" model="Model.ClientNavbarViewModel" />
+}
+
+<main>
+
+    <h4>
+        Kunder
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var customer in Model.Customers)
+            {
+                <li>
+                    👤
+                    &thinsp;
+                    <a href="/client/@(Model.Client.Id)/show-customer/@(customer.Id)">@(customer.Name)</a>
+                    &ensp;
+                    @(customer.Address)
+                </li>
+            }
+
+            @if (!Model.Customers.Any())
+            {
+                <li>
+                    👤
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    @if (Model.CanAddCustomer)
+    {
+        <p>
+            <a class="button" href="/client/@(Model.Client.Id)/add-customer">
+                Lägg till
+            </a>
+        </p>
+    }
+
+</main>

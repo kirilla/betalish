@@ -1,0 +1,45 @@
+﻿@page "/make-user-admin/{id:int}"
+@model MakeUserAdminModel
+@{
+}
+
+@section Meta {
+    <title>
+        Gör användare till admin -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Gör @(Model.User.Name) till admin?
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.UserId" />
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Gör till admin
+        </button>
+
+        <a class="button" href="/admin/show-user/@(Model.CommandModel.UserId)">
+            Avbryt
+        </a>
+
+    </form>
+
+</main>

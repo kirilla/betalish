@@ -1,0 +1,45 @@
+﻿@page "/client/{clientId:int}/show-customer/{customerId:int}"
+@model ShowCustomerModel
+@{
+}
+
+@section Meta {
+    <title>Kund - @(Model.Customer.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_ClientNavbar" model="Model.ClientNavbarViewModel" />
+}
+
+<main>
+
+    <h4>
+        👤
+        @(Model.Customer.Name)
+    </h4>
+
+    <div class="notice">
+        <ul>
+            <li>
+                @(Model.Customer.Address)
+            </li>
+        </ul>
+    </div>
+
+    <p>
+        @if (Model.CanEditCustomer)
+        {
+            <a class="button" href="/client/@(Model.Client.Id)/edit-customer/@(Model.Customer.Id)">
+                Redigera
+            </a>
+        }
+
+        @if (Model.CanRemoveCustomer)
+        {
+            <a class="button" href="/client/@(Model.Client.Id)/remove-customer/@(Model.Customer.Id)">
+                Ta bort
+            </a>
+        }
+    </p>
+
+</main>

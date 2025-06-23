@@ -1,0 +1,32 @@
+﻿@page "/help/logout-error"
+@model LogOutErrorModel
+@{
+}
+
+@section Meta {
+    <title>
+        Oväntat fel -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Oväntat fel
+    </h4>
+
+    <p class="notice">
+        Något gick snett vid utloggningen.
+        <br />
+        <br />
+        Om utloggningen inte har fungerat 
+        så går det att uppnå samma effekt 
+        genom att tömma webbläsarens cache och historik.
+    </p>
+
+</main>

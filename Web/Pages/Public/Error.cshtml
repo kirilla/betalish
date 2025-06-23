@@ -1,0 +1,23 @@
+﻿@page "/error"
+@model ErrorModel
+@{
+}
+
+@section Meta {
+    <title>
+        Felmeddelande - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Ett fel har inträffat.
+    </h4>
+
+</main>

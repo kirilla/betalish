@@ -1,0 +1,40 @@
+﻿@page "/sign-in"
+@model SignInModel
+@{
+}
+
+@section Meta {
+    <title>
+        Logga in? - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Logga in
+    </h4>
+
+    <form method="post">
+
+        <p>
+            <input asp-for="CommandModel.EmailAddress"
+                   placeholder="din epostadress" />
+            <br />
+            <input asp-for="CommandModel.Password"
+                   type="password" placeholder="ditt lösenord" />
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Logga in
+        </button>
+
+    </form>
+
+</main>

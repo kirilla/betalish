@@ -1,0 +1,79 @@
+﻿@page "/show-email/{id:int}"
+@model ShowEmailMessageModel
+@{
+}
+
+@section Meta {
+    <title>Epostmeddelande - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Epostmeddelande
+    </h4>
+
+    <div class="notice">
+        <span>
+            Från:
+            @(Model.EmailMessage.FromName) 
+            @(Model.EmailMessage.FromAddress)
+        </span>
+        <br />
+        <span>
+            Till: 
+            @(Model.EmailMessage.ToName) 
+            @(Model.EmailMessage.ToAddress)
+        </span>
+        <br />
+        @if (Model.EmailMessage.ReplyToAddress.HasValue())
+        {
+            <span>
+                Svara till:
+                @(Model.EmailMessage.ReplyToName)
+                @(Model.EmailMessage.ReplyToAddress)
+            </span>
+            <br />
+        }
+        <span>
+            Ämne: 
+            @(Model.EmailMessage.Subject)
+        </span>
+        <br />
+        <span>
+            När: 
+            @(Model.EmailMessage.Created.ToFixedFormatDateShortTime())
+        </span>
+        <br />
+        <span>
+            Status:
+            @(Model.EmailMessage.EmailStatus.ToString())
+        </span>
+    </div>
+
+    <h5>
+        Text-version
+    </h5>
+
+    <pre class="notice">@(Model.EmailMessage.TextBody)</pre>
+
+    <h5>
+        HTML-version
+    </h5>
+    <pre class="notice">@(Model.EmailMessage.HtmlBody)</pre>
+
+    <p class="notice">
+        (Och eventuella bilder och bilagor från epostmallen.)
+    </p>
+
+    <p>
+        <a class="button" href="/remove-email/@(Model.EmailMessage.Id)">
+            Ta bort
+        </a>
+    </p>
+
+</main>

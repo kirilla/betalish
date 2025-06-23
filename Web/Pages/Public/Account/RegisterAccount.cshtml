@@ -1,0 +1,47 @@
+﻿@page "/register-account"
+@model RegisterAccountModel
+@{
+}
+
+@section Meta {
+    <title>
+        Skapa ett konto -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Vill du skapa ett konto?
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.EmailAddress">
+            Epost
+        </label>
+        <input asp-for="CommandModel.EmailAddress" />
+
+        <label asp-for="CommandModel.Password">
+            Lösenord
+        </label>
+        <input asp-for="CommandModel.Password" type="password" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Skapa konto
+        </button>
+
+    </form>
+
+</main>

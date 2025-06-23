@@ -1,0 +1,27 @@
+﻿@page "/help/notpermitted"
+@model NotPermittedModel
+@{
+}
+
+@section Meta {
+    <title>
+        Något gick inte - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Fel fel fel fel!
+    </h4>
+
+    <div class="notice">
+        Det gick inte att göra den där grejen.
+    </div>
+
+</main>

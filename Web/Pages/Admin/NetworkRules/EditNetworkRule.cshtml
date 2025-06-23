@@ -1,0 +1,47 @@
+﻿@page "/edit-network-rule/{id:int}"
+@model EditNetworkRuleModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera IP-adressintervall -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera IP-adressintervallet:
+        @(Model.NetworkRule.Range)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <input asp-for="CommandModel.Range" placeholder="192.168.0.1/32" />
+
+        <p>
+            <label asp-for="CommandModel.Blocked">
+                <input asp-for="CommandModel.Blocked" type="checkbox" />
+                Blockerad
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-network-rule/@(Model.NetworkRule.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

@@ -1,0 +1,202 @@
+/* patch to simple css */
+body > header {
+    padding: 0 0.5rem 0 0.5rem;
+}
+
+body > header > *:only-child {
+    margin-block-start: unset;
+}
+
+body > header h1 {
+    font-size: 2rem;
+}
+
+textarea,
+select,
+input,
+button,
+.button {
+    width: 100%;
+}
+
+select,
+button,
+.button {
+    text-align: center;
+}
+
+textarea {
+    resize: vertical;
+}
+
+@media only screen and (max-width: 720px) {
+    .notice {
+        background: none;
+        border: None;
+        border-radius: unset;
+        padding: 0px;
+        margin: 0px;
+    }
+}
+
+/* custom */
+label, nav {
+    user-select: none;
+}
+
+dialog {
+    max-width: 40rem;
+    margin-top: 8rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+    dialog > h1, h2, h3, h4, h5, h6 {
+        margin-top: 0;
+        /*margin-bottom: 0;*/
+    }
+
+        h5 + ul {
+            margin-top: 0.5rem;
+        }
+
+main h1,
+main h2,
+main h3,
+main h4,
+main h5,
+main h6 {
+    margin-bottom: 0;
+    /*background-color: blue;*/
+}
+
+main > h1,
+main > h2,
+main > h3,
+main > h4,
+main > h5,
+main > h6 {
+    margin-block-start: 0.3rem;
+    margin-inline-start: 1rem;
+    /*background-color: red;*/
+}
+
+main > .notice {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.notice > ul {
+    margin-top: 0.5rem;
+}
+
+.notice > ul:first-child, p:first-child {
+    margin-top: 0;
+}
+
+.notice > ul:last-child, p:last-child {
+    margin-bottom: 0;
+}
+
+div > p {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+ul .list-item-endlink {
+    list-style: none;
+    margin-top: 0.5rem;
+}
+
+.breadcrumbs {
+    font-size: smaller;
+    padding: 0px;
+    margin: 0px;
+}
+
+    .breadcrumbs + h4 {
+        margin-top: 1rem;
+    }
+
+date {
+    font-weight: 600;
+}
+
+.nolink {
+    text-decoration: none;
+}
+
+.capitalize a {
+    text-transform: capitalize;
+}
+
+main ul, ol {
+    margin-inline: 0;
+    padding-inline: 0;
+    list-style: none;
+}
+
+.list-like {
+    list-style: initial;
+}
+
+    .list-like li {
+        margin-inline: 1.2rem;
+        padding-inline: 0;
+    }
+
+li i {
+    font-size: smaller;
+}
+
+@media only screen and (max-width: 720px) {
+    li i {
+        display: none;
+    }
+}
+
+.extra-top-margin {
+    margin-top: 2rem;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.header-suffix {
+    font-weight: normal;
+    font-size: smaller;
+}
+
+h1 + .notice,
+h2 + .notice,
+h3 + .notice,
+h4 + .notice,
+h5 + .notice,
+h6 + .notice {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.notice > h1,
+.notice > h2,
+.notice > h3,
+.notice > h4,
+.notice > h5,
+.notice > h6 {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+summary {
+    font-weight: normal;
+    font-size: smaller;
+}
+
+.muted {
+    font-weight: normal;
+    font-size: smaller;
+}
+
+.spaced-list li {
+    margin-bottom: 8px;
+}

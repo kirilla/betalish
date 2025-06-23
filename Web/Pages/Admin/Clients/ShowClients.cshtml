@@ -1,0 +1,56 @@
+﻿@page "/admin/show-clients"
+@model ShowClientsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Klienter -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Klienter
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var client in Model.Clients)
+            {
+                <li>
+                    🏢
+                    &thinsp;
+                    <a href="/show-client/@(client.Id)">@(client.Name)</a>
+                </li>
+            }
+
+            @if (!Model.Clients.Any())
+            {
+                <li>
+                    🏢
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    @if (Model.CanAddClient)
+    {
+        <p>
+            <a class="button" href="/add-client">
+                Lägg till
+            </a>
+        </p>
+    }
+
+</main>

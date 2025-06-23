@@ -1,0 +1,23 @@
+﻿@using Betalish.Common.Enums 
+@using Betalish.Domain
+@using Betalish.Web
+@using Betalish.Web.Common
+@model IUserToken
+@{
+}
+<header>
+    <nav>
+        <a href="/">Start</a>
+        @if (!Model.IsAuthenticated)
+        {
+            <a href="/register-account">Skaffa konto</a>
+            <a href="/sign-in">Logga in</a>
+        }
+        @if (Model.IsAuthenticated)
+        {
+            <a href="/account/show-account">👤</a>
+            <a href="/lobby">🧢</a>
+            <a href="/account/sign-out">❌</a>
+        }
+    </nav>
+</header>

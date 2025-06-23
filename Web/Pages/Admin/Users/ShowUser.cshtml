@@ -1,0 +1,111 @@
+﻿@page "/admin/show-user/{id:int}"
+@model ShowUserModel
+@{
+}
+
+@section Meta {
+    <title>@(Model.User.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Användare: 
+        @(Model.User.Name)
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var email in Model.UserEmails)
+            {
+                <li>
+                    📧
+                    &thinsp;
+                    @(email.Address)
+                </li>
+            }
+        </ul>
+
+        @if (Model.IsAdmin)
+        {
+            <ul>
+                <li>
+                    🎓
+                    &thinsp;
+                    Är admin
+                </li>
+            </ul>
+        }
+
+        @if (Model.Clients.Any())
+        {
+            <ul>
+                @foreach (var client in Model.Clients)
+                {
+                    <li>
+                        🏢
+                        &thinsp;
+                        <a href="/admin/show-client/@(client.Id)">@(client.Name)</a>
+                    </li>
+                }
+            </ul>
+        }
+
+        @if (!Model.IsAdmin && !Model.Clients.Any())
+        {
+            <p>
+                Kontot verkar inte vara knutet till någon klient.
+            </p>
+        }
+
+    </div>
+
+    <p>
+        <a class="button" href="/edit-user/@(Model.User.Id)">
+            Redigera
+        </a>
+    </p>
+
+    <p>
+        @if (Model.CanMakeUserAdmin && !Model.IsAdmin)
+        {
+            <a class="button" href="/make-user-admin/@(Model.User.Id)">
+                Gör till admin
+            </a>
+        }
+
+        @if (Model.CanStripUserAdmin && Model.IsAdmin)
+        {
+            <a class="button" href="/strip-user-admin/@(Model.User.Id)">
+                Ta bort som admin
+            </a>
+        }
+    </p>
+
+    <p>
+        @if (Model.CanGrantClientAuth)
+        {
+            <a class="button" href="/grant-user-client-auth/@(Model.User.Id)">
+                Gör till admin för klient ...
+            </a>
+        }
+
+        @if (Model.CanRevokeClientAuth)
+        {
+            <a class="button" href="/revoke-user-client-auth/@(Model.User.Id)">
+                Ta bort som admin för klient ...
+            </a>
+        }
+    </p>
+
+    <p>
+        <a class="button" href="/delete-user/@(Model.User.Id)">
+            Ta bort användaren
+        </a>
+    </p>
+
+</main>

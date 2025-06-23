@@ -1,0 +1,40 @@
+﻿@page "/account/add-user-email"
+@model AddUserEmailModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till epostadress - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAccount" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till epostadress till
+        <a href="/account/show-account">
+            ditt konto
+        </a>
+    </h4>
+
+    <form method="post">
+
+        <input asp-for="CommandModel.Address"
+               placeholder="din@epostadress" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/account/show-account">
+            Avbryt
+        </a>
+    </form>
+</main>

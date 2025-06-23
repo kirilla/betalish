@@ -1,0 +1,27 @@
+﻿@page "/help/notfound"
+@model NotFoundModel
+@{
+}
+
+@section Meta {
+    <title>
+        Hittar inte - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Den som söker ska finna - men inte just nu
+    </h4>
+
+    <div class="notice">
+        Din sak har försvunnit.
+    </div>
+
+</main>

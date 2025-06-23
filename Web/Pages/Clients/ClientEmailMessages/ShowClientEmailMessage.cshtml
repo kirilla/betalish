@@ -1,0 +1,79 @@
+﻿@page "/client/{clientId:int}/show-client-email/{id:int}"
+@model ShowClientEmailMessageModel
+@{
+}
+
+@section Meta {
+    <title>Epostmeddelande - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Epostmeddelande
+    </h4>
+
+    <div class="notice">
+        <span>
+            Från:
+            @(Model.ClientEmailMessage.FromName) 
+            @(Model.ClientEmailMessage.FromAddress)
+        </span>
+        <br />
+        <span>
+            Till: 
+            @(Model.ClientEmailMessage.ToName) 
+            @(Model.ClientEmailMessage.ToAddress)
+        </span>
+        <br />
+        @if (Model.ClientEmailMessage.ReplyToAddress.HasValue())
+        {
+            <span>
+                Svara till:
+                @(Model.ClientEmailMessage.ReplyToName)
+                @(Model.ClientEmailMessage.ReplyToAddress)
+            </span>
+            <br />
+        }
+        <span>
+            Ämne: 
+            @(Model.ClientEmailMessage.Subject)
+        </span>
+        <br />
+        <span>
+            När: 
+            @(Model.ClientEmailMessage.Created.ToFixedFormatDateShortTime())
+        </span>
+        <br />
+        <span>
+            Status:
+            @(Model.ClientEmailMessage.EmailStatus.ToString())
+        </span>
+    </div>
+
+    <h5>
+        Text-version
+    </h5>
+
+    <pre class="notice">@(Model.ClientEmailMessage.TextBody)</pre>
+
+    <h5>
+        HTML-version
+    </h5>
+    <pre class="notice">@(Model.ClientEmailMessage.HtmlBody)</pre>
+
+    <p class="notice">
+        (Och eventuella bilder och bilagor från epostmallen.)
+    </p>
+
+    <p>
+        <a class="button" href="/client/@(Model.Client.Id)/remove-client-email/@(Model.ClientEmailMessage.Id)">
+            Ta bort
+        </a>
+    </p>
+
+</main>

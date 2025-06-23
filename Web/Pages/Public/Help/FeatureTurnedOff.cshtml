@@ -1,0 +1,27 @@
+﻿@page "/help/featureturnedoff"
+@model FeatureTurnedOffModel
+@{
+}
+
+@section Meta {
+    <title>
+        Funktionen är avstängd - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Det går inte
+    </h4>
+
+    <div class="notice">
+        Funktionen är avstängd.
+    </div>
+
+</main>

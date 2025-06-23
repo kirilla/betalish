@@ -1,0 +1,45 @@
+﻿@page "/add-client"
+@model AddClientModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till klient -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till en klient
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.Address">
+            Epostadress
+        </label>
+        <input asp-for="CommandModel.Address" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/admin/show-clients">
+            Avbryt
+        </a>
+    </form>
+
+</main>

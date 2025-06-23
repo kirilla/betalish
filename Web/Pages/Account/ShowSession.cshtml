@@ -1,0 +1,46 @@
+﻿@page "/account/session/{id:int}/show"
+@model ShowSessionModel
+@{
+}
+
+@section Meta {
+    <title>Din inloggning - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Inloggning
+    </h4>
+
+    <div class="notice">
+        <b>Inloggad</b>
+        <br />
+        @(Model.Session?.Created?.ToFixedFormatDateShortTime() ?? "Okänt")
+        <br />
+        <br />
+        @if (Model.Session?.Id == Model.UserToken.SessionId)
+        {
+            <em class="text-danger">
+                Detta är din nuvarande session.
+            </em>
+        }
+    </div>
+
+    <p>
+        @if (Model.CanEndSession)
+        {
+            <a class="button" href="/account/session/@(Model.Session.Id)/end">
+                Avsluta sessionen
+            </a>
+        }
+
+        <a class="button" href="/sessions">
+            Avbryt
+        </a>
+    </p>
+    
+</main>
