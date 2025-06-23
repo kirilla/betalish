@@ -1,0 +1,34 @@
+﻿namespace Betalish.Application.Commands.Users.StripUserAdmin;
+
+public class StripUserAdminCommand(IDatabaseService database) : IStripUserAdminCommand
+{
+    public async Task Execute(
+        IUserToken userToken, StripUserAdminCommandModel model)
+    {
+        if (!await IsPermitted(userToken))
+            throw new NotPermittedException();
+
+        if (!model.Confirmed)
+            throw new ConfirmationRequiredException();
+
+        var user = await database.Users
+            .Where(x => x.Id == model.UserId)
+            .SingleOrDefaultAsync() ??
+            throw new NotFoundException();
+
+        var auth = await database.AdminAuths
+            .Where(x => x.UserId == model.UserId)
+            .SingleOrDefaultAsync() ??
+            throw new NotFoundException();
+
+        database.AdminAuths.Remove(auth);
+
+        await database.SaveAsync(userToken);
+    }
+
+    public async Task<bool> IsPermitted(IUserToken userToken)
+    {
+        return await database.AdminAuths.AnyAsync(x =>
+            x.UserId == userToken.UserId!.Value);
+    }
+}
