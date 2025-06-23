@@ -11,4 +11,5 @@ public class Client
     public List<ClientEmailAccount> ClientEmailAccounts { get; set; }
     public List<ClientEmailMessage> ClientEmailMessages { get; set; }
     public List<Customer> Customers { get; set; }
+    public List<Session> Sessions { get; set; }
 }
