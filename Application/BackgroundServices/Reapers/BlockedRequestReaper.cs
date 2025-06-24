@@ -1,15 +1,19 @@
 ﻿using Betalish.Application.Queues.LogItems;
+using Betalish.Common.Settings;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Options;
 
 namespace Betalish.Application.BackgroundServices.Reapers
 {
     public class BlockedRequestReaper(
         IDateService dateService,
         ILogItemList logItemList,
-        IServiceProvider serviceProvider) : BackgroundService
+        IServiceProvider serviceProvider,
+        IOptions<FirewallConfiguration> firewallOptions) : BackgroundService
     {
+        private readonly int _historySize = firewallOptions.Value.HistorySize;
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
@@ -45,7 +49,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
 
             var count = await database.BlockedRequests
                 .OrderByDescending(x => x.Created)
-                .Skip(1000)
+                .Skip(_historySize)
                 .CountAsync();
 
             if (count == 0)
@@ -53,7 +57,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
 
             await database.BlockedRequests
                 .OrderByDescending(x => x.Created)
-                .Skip(1000)
+                .Skip(_historySize)
                 .ExecuteDeleteAsync();
 
             logItemList.AddLogItem(new LogItem()
