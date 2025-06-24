@@ -31,4 +31,15 @@ public class LogItem : ICreatedDateTime, IFormatOnSave
         IpAddress = IpAddress
             .Truncate(MaxLengths.Common.Ip.Address.IPv6);
     }
+
+    public LogItem()
+    {
+    }
+
+    public LogItem(Exception ex)
+    {
+        Description = ex?.Message;
+        Exception = ex?.Message;
+        InnerException = ex?.InnerException?.Message;
+    }
 }

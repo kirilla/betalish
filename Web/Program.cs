@@ -1,4 +1,5 @@
 using Betalish.Application.BackgroundServices.Loggers;
+using Betalish.Application.BackgroundServices.Reapers;
 using Betalish.Application.Queues.LogItems;
 using Betalish.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -81,6 +82,7 @@ public class Program
         if (builder.Environment.IsProduction())
         {
             builder.Services.AddHostedService<LogItemLogger>();
+            builder.Services.AddHostedService<BlockedRequestReaper>();
         }
 
         // API controllers
