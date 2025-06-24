@@ -47,7 +47,7 @@ public class EndOtherSessionsModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/admin/show-all-sessions");
+            return Redirect("/show-all-sessions");
         }
         catch
         {

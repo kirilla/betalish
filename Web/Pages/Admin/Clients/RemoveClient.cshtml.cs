@@ -62,7 +62,7 @@ public class RemoveClientModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/admin/show-clients");
+            return Redirect($"/show-clients");
         }
         catch (ConfirmationRequiredException)
         {

@@ -62,7 +62,7 @@ public class RemoveEmailMessageModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/admin/show-desktop");
+            return Redirect($"/show-admin-desktop");
         }
         catch (ConfirmationRequiredException)
         {

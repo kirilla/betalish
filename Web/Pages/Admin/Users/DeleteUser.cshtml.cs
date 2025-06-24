@@ -62,7 +62,7 @@ public class DeleteUserModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/admin/show-users");
+            return Redirect("/show-users");
         }
         catch (ConfirmationRequiredException)
         {

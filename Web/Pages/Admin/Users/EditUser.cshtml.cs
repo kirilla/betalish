@@ -52,7 +52,7 @@ public class EditUserModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/admin/show-user/{CommandModel.Id}");
+            return Redirect($"/show-user/{CommandModel.Id}");
         }
         catch
         {

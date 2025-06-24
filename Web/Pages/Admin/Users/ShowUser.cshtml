@@ -1,4 +1,4 @@
-﻿@page "/admin/show-user/{id:int}"
+﻿@page "/show-user/{id:int}"
 @model ShowUserModel
 @{
 }
@@ -49,7 +49,7 @@
                     <li>
                         🏢
                         &thinsp;
-                        <a href="/admin/show-client/@(client.Id)">@(client.Name)</a>
+                        <a href="/show-client/@(client.Id)">@(client.Name)</a>
                     </li>
                 }
             </ul>

@@ -80,7 +80,7 @@ public class RevokeClientAuthModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/admin/show-user/{userId}");
+            return Redirect($"/show-user/{userId}");
         }
         catch (NotFoundException)
         {

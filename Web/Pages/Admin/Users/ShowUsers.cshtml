@@ -1,4 +1,4 @@
-﻿@page "/admin/show-users"
+﻿@page "/show-users"
 @model ShowUsersModel
 @{
 }
@@ -25,7 +25,7 @@
             <li>
                 👤
                 &thinsp;
-                <a href="/admin/show-all-users">
+                <a href="/show-all-users">
                     Alla
                 </a>
                 &ensp;
@@ -36,7 +36,7 @@
             <li>
                 🎓
                 &thinsp;
-                <a href="/admin/show-admin-users">
+                <a href="/show-admin-users">
                     Admin
                 </a>
                 &ensp;
@@ -47,7 +47,7 @@
             <li>
                 🏢
                 &thinsp;
-                <a href="/admin/show-client-users">
+                <a href="/show-client-users">
                     Klient
                 </a>
                 &ensp;
@@ -58,7 +58,7 @@
             <li>
                 👤
                 &thinsp;
-                <a href="/admin/show-orphan-users">
+                <a href="/show-orphan-users">
                     Överblivna
                 </a>
                 &ensp;
@@ -72,7 +72,7 @@
             <li>
                 👋
                 &thinsp;
-                <a href="/admin/show-all-sessions">Inloggade</a>
+                <a href="/show-all-sessions">Inloggade</a>
                 &ensp;
                 <span class="muted">
                     @(Model.SessionCount)

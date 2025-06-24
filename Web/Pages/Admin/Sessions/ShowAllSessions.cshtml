@@ -1,4 +1,4 @@
-﻿@page "/admin/show-all-sessions"
+﻿@page "/show-all-sessions"
 @model ShowAllSessionsModel
 @{
 }
@@ -28,7 +28,7 @@
                 <li>
                     👋
                     &thinsp;
-                    <a href="/admin/show-user/@(session.UserId)">
+                    <a href="/show-user/@(session.UserId)">
                         @(session.User.Name)
                     </a>
                     &ensp;
@@ -48,7 +48,7 @@
             }
         </ul>
 
-        <a class="button" href="/admin/end-other-sessions">
+        <a class="button" href="/end-other-sessions">
             Avsluta alla sessioner
         </a>
 

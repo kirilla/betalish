@@ -77,7 +77,7 @@ public class GrantClientAuthModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/admin/show-user/{userId}");
+            return Redirect($"/show-user/{userId}");
         }
         catch (BlockedByExistingException)
         {

@@ -62,7 +62,7 @@ public class MakeUserAdminModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/admin/show-user/{User.Id}");
+            return Redirect($"/show-user/{User.Id}");
         }
         catch (ConfirmationRequiredException)
         {
