@@ -86,8 +86,7 @@ public class SignInModel(
             logItemList.AddLogItem(new LogItem()
             {
                 IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
-                Description = $"Användaren har loggat in.",
-                Source = 485389262,
+                LogItemKind = LogItemKind.SignIn,
                 UserId = loginResult.UserId,
             });
 

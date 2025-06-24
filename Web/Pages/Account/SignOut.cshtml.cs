@@ -1,12 +1,14 @@
+using Betalish.Application.Commands.Sessions.SignOut;
+using Betalish.Application.Queues.LogItems;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Betalish.Application.Commands.Sessions.SignOut;
 
 namespace Betalish.Web.Pages.Account;
 
 public class SignOutModel(
-    ISignOutCommand command,
-    IUserToken userToken) : UserTokenPageModel(userToken)
+    IUserToken userToken,
+    ILogItemList logItemList,
+    ISignOutCommand command) : UserTokenPageModel(userToken)
 {
     public IActionResult OnGet()
     {
@@ -40,6 +42,13 @@ public class SignOutModel(
 
             await HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
+
+            logItemList.AddLogItem(new LogItem()
+            {
+                IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
+                LogItemKind = LogItemKind.SignOut,
+                UserId = UserToken.UserId,
+            });
 
             return Redirect("/sign-out-success");
         }

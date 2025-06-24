@@ -10,7 +10,7 @@ public class LogItem : ICreatedDateTime, IFormatOnSave
     public string? Exception { get; set; }
     public string? InnerException { get; set; }
 
-    public int Source { get; set; }
+    public LogItemKind? LogItemKind { get; set; }
 
     public int? UserId { get; set; }
     public string? IpAddress { get; set; }
