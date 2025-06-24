@@ -76,7 +76,7 @@ public class RemoveClientEmailMessageModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/admin/show-desktop");
+            return Redirect("/show-client-desktop");
         }
         catch (ConfirmationRequiredException)
         {
