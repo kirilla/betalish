@@ -153,11 +153,5 @@ public static class MaxLengths
             public const int TextBody = Common.DbSuperSize;
         }
 
-        //public static class EmailTemplate
-        //{
-        //    public const int Subject = 300;
-        //    public const int HtmlBody = Common.DbSuperSize;
-        //    public const int TextBody = Common.DbSuperSize;
-        //}
     }
 }
