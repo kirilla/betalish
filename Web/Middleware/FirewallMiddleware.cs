@@ -14,43 +14,60 @@ public class FirewallMiddleware(
 
     public async Task InvokeAsync(HttpContext context)
     {
-        var requestIp = context.Connection.RemoteIpAddress;
-
-        if (_config.IsFiltering &&
-            requestIp != null &&
-            await IsIpBlocked(requestIp))
+        if (!_config.IsFiltering)
         {
-            //context.Response.StatusCode = StatusCodes.Status403Forbidden;
-            //await context.Response.WriteAsync("Access Denied");
-
-            context.Response.StatusCode = StatusCodes.Status404NotFound;
-
-            if (_config.LogBlockedRequest)
-            {
-                using var scope = scopeFactory.CreateScope();
-
-                var database = scope.ServiceProvider.GetRequiredService<IDatabaseService>();
-
-                var request = new BlockedRequest()
-                {
-                    Url = context.Request.GetDisplayUrl(),
-                    Method = context.Request.Method,
-                    IpAddress = context.Connection.RemoteIpAddress?.ToString(),
-                    UserAgent = context.Request.Headers?.UserAgent,
-                };
-
-                database.BlockedRequests.Add(request);
-
-                await database.SaveAsync(new NoUserToken());
-            }
-
+            await next(context);
             return;
         }
 
-        await next(context);
+        var requestIp = context.Connection.RemoteIpAddress;
+
+        if (requestIp == null)
+        {
+            await next(context);
+            return;
+        }
+
+        var decision = await Decide(requestIp);
+
+        if (decision == FirewallDecision.AllowedByDefault ||
+            decision == FirewallDecision.AllowedByRule)
+        {
+            await next(context);
+            return;
+        }
+
+        context.Response.StatusCode = StatusCodes.Status404NotFound;
+
+        //context.Response.StatusCode = StatusCodes.Status403Forbidden;
+        //await context.Response.WriteAsync("Access Denied");
+
+        if (_config.LogBlockedRequest &&
+            decision == FirewallDecision.BlockedByDefault)
+        {
+            // NOTE: Only log the BlockedByDefault case.
+            //
+            // No logging for explicitly blocked IP ranges.
+
+            using var scope = scopeFactory.CreateScope();
+
+            var database = scope.ServiceProvider.GetRequiredService<IDatabaseService>();
+
+            var request = new BlockedRequest()
+            {
+                Url = context.Request.GetDisplayUrl(),
+                Method = context.Request.Method,
+                IpAddress = context.Connection.RemoteIpAddress?.ToString(),
+                UserAgent = context.Request.Headers?.UserAgent,
+            };
+
+            database.BlockedRequests.Add(request);
+
+            await database.SaveAsync(new NoUserToken());
+        }
     }
 
-    private async Task<bool> IsIpBlocked(IPAddress requestIp)
+    private async Task<FirewallDecision> Decide(IPAddress requestIp)
     {
         var rules = await cacheService.GetNetworkRules();
 
@@ -58,12 +75,16 @@ public class FirewallMiddleware(
         {
             if (rule.IsInRange(requestIp))
             {
-                return rule.Blocked;
+                if (rule.Blocked)
+                    return FirewallDecision.BlockedByRule;
+                else
+                    return FirewallDecision.AllowedByRule;
             }
         }
 
-        return _config.BlockByDefault;
-
-        // Or simply: return false/true;
+        if (_config.BlockByDefault)
+            return FirewallDecision.BlockedByDefault;
+        else
+            return FirewallDecision.AllowedByDefault;
     }
 }
