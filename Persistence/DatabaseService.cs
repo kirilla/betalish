@@ -19,6 +19,7 @@ public class DatabaseService(
     public DbSet<EmailAttachment> EmailAttachments { get; set; }
     public DbSet<EmailImage> EmailImages { get; set; }
     public DbSet<EmailMessage> EmailMessages { get; set; }
+    public DbSet<LogItem> LogItems { get; set; }
     public DbSet<NetworkRule> NetworkRules { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<User> Users { get; set; }
@@ -38,6 +39,7 @@ public class DatabaseService(
         new EmailAttachmentConfiguration().Configure(builder.Entity<EmailAttachment>());
         new EmailImageConfiguration().Configure(builder.Entity<EmailImage>());
         new EmailMessageConfiguration().Configure(builder.Entity<EmailMessage>());
+        new LogItemConfiguration().Configure(builder.Entity<LogItem>());
         new NetworkRuleConfiguration().Configure(builder.Entity<NetworkRule>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
         new UserConfiguration().Configure(builder.Entity<User>());

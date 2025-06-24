@@ -14,6 +14,7 @@ public interface IDatabaseService
     DbSet<EmailAttachment> EmailAttachments { get; set; }
     DbSet<EmailImage> EmailImages { get; set; }
     DbSet<EmailMessage> EmailMessages { get; set; }
+    DbSet<LogItem> LogItems { get; set; }
     DbSet<NetworkRule> NetworkRules { get; set; }
     DbSet<Session> Sessions { get; set; }
     DbSet<User> Users { get; set; }

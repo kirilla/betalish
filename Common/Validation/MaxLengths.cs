@@ -153,5 +153,11 @@ public static class MaxLengths
             public const int TextBody = Common.DbSuperSize;
         }
 
+        public static class LogItem
+        {
+            public const int Description = 200;
+            public const int Exception = 200;
+            public const int InnerException = 200;
+        }
     }
 }
