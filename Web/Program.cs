@@ -1,3 +1,5 @@
+using Betalish.Application.BackgroundServices.Loggers;
+using Betalish.Application.Queues.LogItems;
 using Betalish.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.CookiePolicy;
@@ -59,6 +61,8 @@ public class Program
                 options.EventsType = typeof(CookieValidator);
             });
 
+        builder.Services.AddSingleton<ILogItemList, LogItemList>();
+
         builder.Services.AddScoped<CookieValidator>();
         builder.Services.AddScoped<IUserToken, UserToken>();
 
@@ -73,6 +77,11 @@ public class Program
         {
             options.UseSqlServer(connectionString);
         });
+
+        if (builder.Environment.IsProduction())
+        {
+            builder.Services.AddHostedService<LogItemLogger>();
+        }
 
         // API controllers
         builder.Services.AddControllers();

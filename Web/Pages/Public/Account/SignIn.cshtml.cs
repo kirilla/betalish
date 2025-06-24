@@ -1,4 +1,5 @@
 using Betalish.Application.Commands.Sessions.SignIn;
+using Betalish.Application.Queues.LogItems;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -8,9 +9,10 @@ namespace Betalish.Web.Pages.Public.Account;
 
 [AllowAnonymous]
 public class SignInModel(
+    IUserToken userToken,
+    ILogItemList logItemList,
     ISignInCommand signInCommand,
-    IOptions<AccountConfiguration> accountOptions,
-    IUserToken userToken) : UserTokenPageModel(userToken)
+    IOptions<AccountConfiguration> accountOptions) : UserTokenPageModel(userToken)
 {
     private readonly AccountConfiguration _config = accountOptions.Value;
 
@@ -80,6 +82,14 @@ public class SignInModel(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
+
+            logItemList.AddLogItem(new LogItem()
+            {
+                IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
+                Description = $"Användaren har loggat in.",
+                Source = 485389262,
+                UserId = loginResult.UserId,
+            });
 
             return Redirect("/show-lobby");
         }
