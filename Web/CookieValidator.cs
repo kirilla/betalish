@@ -1,3 +1,4 @@
+using Betalish.Application.Queues.SessionActivities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -5,7 +6,8 @@ namespace Betalish.Web;
 
 public class CookieValidator(
     IDatabaseService database,
-    IHttpContextAccessor httpContextAccessor) : CookieAuthenticationEvents
+    IHttpContextAccessor httpContextAccessor,
+    ISessionActivityList sessionActivityList) : CookieAuthenticationEvents
 {
     public override async Task ValidatePrincipal(
         CookieValidatePrincipalContext context)
@@ -69,5 +71,7 @@ public class CookieValidator(
 
         items!["ClientId"] = session.ClientId;
         items!["ClientName"] = session.ClientName;
+
+        sessionActivityList.AddSessionId(session.SessionId);
     }
 }
