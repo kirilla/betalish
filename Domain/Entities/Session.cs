@@ -15,6 +15,8 @@ public class Session : ICreatedDateTime, IUpdatedDateTime
     public int? ClientId { get; set; }
     public Client? Client { get; set; }
 
+    public List<SessionActivity> SessionActivities { get; set; }
+
     public string DateSummary =>
         $"{Created.ToDateOnly().ToIso8601()} - " +
         $"{Updated.ToDateOnly().ToIso8601()}";

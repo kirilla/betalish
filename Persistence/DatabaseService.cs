@@ -22,6 +22,7 @@ public class DatabaseService(
     public DbSet<LogItem> LogItems { get; set; }
     public DbSet<NetworkRule> NetworkRules { get; set; }
     public DbSet<Session> Sessions { get; set; }
+    public DbSet<SessionActivity> SessionActivities { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserEmail> UserEmails { get; set; }
 
@@ -42,6 +43,7 @@ public class DatabaseService(
         new LogItemConfiguration().Configure(builder.Entity<LogItem>());
         new NetworkRuleConfiguration().Configure(builder.Entity<NetworkRule>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
+        new SessionActivityConfiguration().Configure(builder.Entity<SessionActivity>());
         new UserConfiguration().Configure(builder.Entity<User>());
         new UserEmailConfiguration().Configure(builder.Entity<UserEmail>());
     }
