@@ -81,7 +81,7 @@ public class SignInModel(
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
 
-            return Redirect("/lobby");
+            return Redirect("/show-lobby");
         }
         catch (AlreadyLoggedInException)
         {

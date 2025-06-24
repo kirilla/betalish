@@ -10,7 +10,7 @@ public class IndexModel(IUserToken userToken) : UserTokenPageModel(userToken)
         try
         {
             //if (UserToken.IsAuthenticated)
-            //    return Redirect("/lobby");
+            //    return Redirect("/show-lobby");
 
             return Redirect("/frontpage");
         }

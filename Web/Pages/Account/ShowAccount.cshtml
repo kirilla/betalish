@@ -1,4 +1,4 @@
-﻿@page "/account/show-account/"
+﻿@page "/show-account"
 @model ShowAccountModel
 @{
 }
@@ -34,7 +34,7 @@
         @if (Model.CanEditAccount)
         {
             <p>
-                <a class="button" href="/account/edit-account">
+                <a class="button" href="/edit-account">
                     Ändra
                 </a>
             </p>
@@ -70,7 +70,7 @@
         <p>
             @if (Model.CanAddUserEmail)
             {
-                <a class="button" href="/account/add-user-email">
+                <a class="button" href="/add-user-email">
                     Lägg till
                 </a>
             }
@@ -78,7 +78,7 @@
             @if (Model.CanRemoveUserEmail &&
                 Model.UserEmails.Count > 1)
             {
-                <a class="button" href="/account/remove-email">
+                <a class="button" href="/remove-email">
                     Ta bort
                 </a>
             }
@@ -89,14 +89,14 @@
     <p>
         @if (Model.CanChangePassword)
         {
-            <a class="button" href="/account/change-password">
+            <a class="button" href="/change-password">
                 Ändra lösenord
             </a>
         }
 
         @if (Model.CanDeleteAccount)
         {
-            <a class="button" href="/account/delete-account">
+            <a class="button" href="/delete-account">
                 Ta bort konto
             </a>
         }

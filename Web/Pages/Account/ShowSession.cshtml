@@ -1,4 +1,4 @@
-﻿@page "/account/session/{id:int}/show"
+﻿@page "/show-session/{id:int}"
 @model ShowSessionModel
 @{
 }
@@ -33,7 +33,7 @@
     <p>
         @if (Model.CanEndSession)
         {
-            <a class="button" href="/account/session/@(Model.Session.Id)/end">
+            <a class="button" href="/end-session/@(Model.Session.Id)">
                 Avsluta sessionen
             </a>
         }

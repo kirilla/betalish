@@ -55,7 +55,7 @@ public class Program
                 options.SlidingExpiration = true;
                 options.AccessDeniedPath = "/help/notpermitted";
                 options.LoginPath = "/sign-in";
-                options.LogoutPath = "/account/sign-out";
+                options.LogoutPath = "/sign-out";
                 options.EventsType = typeof(CookieValidator);
             });
 
