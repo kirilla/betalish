@@ -79,8 +79,6 @@ public static class MaxLengths
         {
             public const int Name = 200;
             public const int Password = 200;
-            public const int Exception = 200;
-            public const int InnerException = 200;
         }
 
         public static class Client

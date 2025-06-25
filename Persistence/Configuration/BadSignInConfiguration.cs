@@ -17,13 +17,5 @@ class BadSignInConfiguration : IEntityTypeConfiguration<BadSignIn>
         builder.Property(p => p.Password)
             .IsRequired(false)
             .HasMaxLength(MaxLengths.Domain.BadSignIn.Password);
-
-        builder.Property(p => p.Exception)
-            .IsRequired(false)
-            .HasMaxLength(MaxLengths.Domain.BadSignIn.Exception);
-
-        builder.Property(p => p.InnerException)
-            .IsRequired(false)
-            .HasMaxLength(MaxLengths.Domain.BadSignIn.InnerException);
     }
 }

@@ -12,8 +12,9 @@ public class BadSignIn : ICreatedDateTime, IFormatOnSave
     public int? NameLength { get; set; }
     public int? PasswordLength { get; set; }
 
-    public string? Exception { get; set; }
-    public string? InnerException { get; set; }
+    public bool BadUsername { get; set; }
+    public bool BadPassword { get; set; }
+    public bool OtherException { get; set; }
 
     public DateTime? Created { get; set; }
 
@@ -24,19 +25,5 @@ public class BadSignIn : ICreatedDateTime, IFormatOnSave
 
         Name = Name?.Truncate(MaxLengths.Domain.BadSignIn.Name);
         Password = Password?.Truncate(MaxLengths.Domain.BadSignIn.Password);
-
-        Exception = Exception?
-            .Truncate(MaxLengths.Domain.BadSignIn.Exception);
-
-        InnerException = InnerException?
-            .Truncate(MaxLengths.Domain.BadSignIn.InnerException);
-
-        if (Exception.HasValue() &&
-            Exception!.StartsWith("Exception of type 'Betalish.Common.Exceptions.") &&
-            Exception!.EndsWith("' was thrown."))
-        {
-            Exception = Exception?.Replace("Exception of type 'Betalish.Common.Exceptions.", "");
-            Exception = Exception?.Replace("' was thrown.", "");
-        }
     }
 }

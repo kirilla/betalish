@@ -10,8 +10,7 @@ public class BadSignInList(IDateService dateService) : IBadSignInList
         IPAddress? ipAddress,
         string? name,
         string? password,
-        string? exceptionMsg,
-        string? innerExceptionMsg)
+        Exception? exception)
     {
         var ip = ipAddress?.ToString();
 
@@ -26,8 +25,11 @@ public class BadSignInList(IDateService dateService) : IBadSignInList
                 Name = name,
                 Password = password,
                 Created = dateService.GetDateTimeNow(),
-                Exception = exceptionMsg,
-                InnerException = innerExceptionMsg,
+                BadUsername = exception is UserNotFoundException,
+                BadPassword = exception is PasswordVerificationFailedException,
+                OtherException = 
+                    exception is not UserNotFoundException &&
+                    exception is not PasswordVerificationFailedException,
             };
 
             list.Add(visit);

@@ -26,9 +26,10 @@
                 <th>När</th>
                 <th>IP-adress</th>
                 <th>Namn</th>
+                <th></th>
                 <th>Lösenord</th>
+                <th></th>
                 <th>Fel</th>
-                <th>Fel, inre</th>
             </tr>
             @foreach (var visit in Model.BadSignIns)
             {
@@ -43,13 +44,27 @@
                         @(visit.Name)
                     </td>
                     <td>
+                        [@(visit.NameLength)]
+                    </td>
+                    <td>
                         @(visit.Password)
                     </td>
                     <td>
-                        @(visit.Exception)
+                        [@(visit.PasswordLength)]
                     </td>
                     <td>
-                        @(visit.InnerException)
+                        @if (visit.BadUsername)
+                        {
+                            <span>Fel användarnamn.</span>
+                        }
+                        @if (visit.BadPassword)
+                        {
+                            <span>Fel lösenord.</span>
+                        }
+                        @if (visit.OtherException)
+                        {
+                            <span>Annat undantagsfel.</span>
+                        }
                     </td>
                 </tr>
             }

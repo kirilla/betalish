@@ -110,8 +110,7 @@ public class SignInModel(
                 HttpContext.Connection.RemoteIpAddress,
                 CommandModel.EmailAddress,
                 CommandModel.Password,
-                ex?.Message,
-                ex?.InnerException?.Message);
+                ex);
 
             if (ex is UserNotFoundException ||
                 ex is PasswordVerificationFailedException)
