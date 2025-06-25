@@ -1,0 +1,114 @@
+﻿@page "/show-config"
+@model ShowConfigModel
+@{
+}
+
+@section Meta {
+    <title>Konfiguration - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    
+    <h4>
+        Konfiguration
+    </h4>
+    
+    <div class="notice">
+        <h5>
+            Firewall
+        </h5>
+        <ul>
+            <li>
+                IsFiltering: 
+                @(Model._firewallConfig.IsFiltering ? "true" : "false")
+            </li>
+            <li>
+                BlockByDefault: 
+                @(Model._firewallConfig.BlockByDefault ? "true" : "false")
+            </li>
+            <li>
+                LogBlockedRequest: 
+                @(Model._firewallConfig.LogBlockedRequest ? "true" : "false")
+            </li>
+            <li>
+                HistorySize: 
+                @(Model._firewallConfig.HistorySize)
+            </li>
+        </ul>
+    </div>
+
+    <div class="notice">
+
+        <h5>
+            Account
+        </h5>
+
+        <ul>
+            <li>
+                RegisterAccountAllowed: 
+                @(Model._accountConfig.RegisterAccountAllowed ? "true" : "false")
+            </li>
+            <li>
+                SignInAllowed: 
+                @(Model._accountConfig.SignInAllowed ? "true" : "false")
+            </li>
+        </ul>
+    </div>
+
+    <div class="notice">
+
+        <h5>
+            Smtp
+        </h5>
+
+        <ul>
+            <li>
+                FromName: 
+                @(Model._smtpConfig.FromName)
+            </li>
+            <li>
+                FromAddress: 
+                @(Model._smtpConfig.FromAddress)
+            </li>
+            <li>
+                Password: 
+                @(Model._smtpConfig.Password)
+            </li>
+            <li>
+                SmtpHost: 
+                @(Model._smtpConfig.SmtpHost)
+            </li>
+            <li>
+                SmtpPort: 
+                @(Model._smtpConfig.SmtpPort)
+            </li>
+        </ul>
+    </div>
+
+    <div class="notice">
+
+        <h5>
+            BadSignIn
+        </h5>
+
+        <ul>
+            <li>
+                LoggingEnabled: 
+                @(Model._badSignConfig.LoggingEnabled ? "true" : "false")
+            </li>
+            <li>
+                LogUsername: 
+                @(Model._badSignConfig.LogUsername ? "true" : "false")
+            </li>
+            <li>
+                LogPassword: 
+                @(Model._badSignConfig.LogPassword ? "true" : "false")
+            </li>
+        </ul>
+    </div>
+
+</main>
