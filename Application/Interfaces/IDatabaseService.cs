@@ -5,6 +5,7 @@ namespace Betalish.Application.Interfaces;
 public interface IDatabaseService
 {
     DbSet<AdminAuth> AdminAuths { get; set; }
+    DbSet<BadSignIn> BadSignIns { get; set; }
     DbSet<BlockedRequest> BlockedRequests { get; set; }
     DbSet<Client> Clients { get; set; }
     DbSet<ClientAuth> ClientAuths { get; set; }

@@ -75,6 +75,14 @@ public static class MaxLengths
 
     public static class Domain
     {
+        public static class BadSignIn
+        {
+            public const int Name = 200;
+            public const int Password = 200;
+            public const int Exception = 200;
+            public const int InnerException = 200;
+        }
+
         public static class Client
         {
             public const int Name = Common.Person.Name;

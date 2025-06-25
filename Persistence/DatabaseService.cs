@@ -10,6 +10,7 @@ public class DatabaseService(
     IUpdatedDateTimeSetter updatedDateTimeSetter) : DbContext(options), IDatabaseService
 {
     public DbSet<AdminAuth> AdminAuths { get; set; }
+    public DbSet<BadSignIn> BadSignIns { get; set; }
     public DbSet<BlockedRequest> BlockedRequests { get; set; }
     public DbSet<Client> Clients { get; set; }
     public DbSet<ClientAuth> ClientAuths { get; set; }
@@ -32,6 +33,7 @@ public class DatabaseService(
         base.OnModelCreating(builder);
 
         new AdminAuthConfiguration().Configure(builder.Entity<AdminAuth>());
+        new BadSignInConfiguration().Configure(builder.Entity<BadSignIn>());
         new BlockedRequestConfiguration().Configure(builder.Entity<BlockedRequest>());
         new ClientConfiguration().Configure(builder.Entity<Client>());
         new ClientAuthConfiguration().Configure(builder.Entity<ClientAuth>());
