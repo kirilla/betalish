@@ -32,10 +32,10 @@ public class BadSignIn : ICreatedDateTime, IFormatOnSave
             .Truncate(MaxLengths.Domain.BadSignIn.InnerException);
 
         if (Exception.HasValue() &&
-            Exception!.StartsWith("Exception of type 'Praktikant.Common.Exceptions.") &&
+            Exception!.StartsWith("Exception of type 'Betalish.Common.Exceptions.") &&
             Exception!.EndsWith("' was thrown."))
         {
-            Exception = Exception?.Replace("Exception of type 'Praktikant.Common.Exceptions.", "");
+            Exception = Exception?.Replace("Exception of type 'Betalish.Common.Exceptions.", "");
             Exception = Exception?.Replace("' was thrown.", "");
         }
     }
