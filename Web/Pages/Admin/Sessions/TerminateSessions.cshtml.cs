@@ -1,14 +1,14 @@
-using Betalish.Application.Commands.Sessions.EndOtherSessions;
+using Betalish.Application.Commands.Sessions.TerminateSessions;
 
 namespace Betalish.Web.Pages.Admin.Sessions;
 
-public class EndOtherSessionsModel(
+public class TerminateSessionsModel(
     IUserToken userToken,
     IDatabaseService database,
-    IEndOtherSessionsCommand command) : AdminPageModel(userToken)
+    ITerminateSessionsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public EndOtherSessionsCommandModel CommandModel { get; set; }
+    public TerminateSessionsCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -19,7 +19,7 @@ public class EndOtherSessionsModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new EndOtherSessionsCommandModel();
+            CommandModel = new TerminateSessionsCommandModel();
 
             return Page();
         }

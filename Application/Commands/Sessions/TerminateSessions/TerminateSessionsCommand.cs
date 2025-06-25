@@ -1,14 +1,14 @@
 ﻿using Betalish.Application.Queues.LogItems;
 
-namespace Betalish.Application.Commands.Sessions.EndOtherSessions;
+namespace Betalish.Application.Commands.Sessions.TerminateSessions;
 
-public class EndOtherSessionsCommand(
+public class TerminateSessionsCommand(
     IDateService dateService,
     IDatabaseService database,
-    ILogItemList logItemList) : IEndOtherSessionsCommand
+    ILogItemList logItemList) : ITerminateSessionsCommand
 {
     public async Task Execute(
-        IUserToken userToken, EndOtherSessionsCommandModel model)
+        IUserToken userToken, TerminateSessionsCommandModel model)
     {
         if (!await IsPermitted(userToken))
             throw new NotPermittedException();
