@@ -1,9 +1,15 @@
-﻿using System.Net;
+﻿using Betalish.Common.Settings;
+using Microsoft.Extensions.Options;
+using System.Net;
 
 namespace Betalish.Application.Queues.BadSignIns;
 
-public class BadSignInList(IDateService dateService) : IBadSignInList
+public class BadSignInList(
+    IDateService dateService,
+    IOptions<BadSignInConfiguration> options) : IBadSignInList
 {
+    private readonly BadSignInConfiguration _config = options.Value;
+
     private List<BadSignIn> list { get; set; } = new List<BadSignIn>();
 
     public void AddSignIn(
@@ -12,6 +18,9 @@ public class BadSignInList(IDateService dateService) : IBadSignInList
         string? password,
         Exception? exception)
     {
+        if (!_config.LoggingEnabled)
+            return;
+
         var ip = ipAddress?.ToString();
 
         //if (ip == "xxx.xxx.xxx.xxx")
@@ -19,11 +28,13 @@ public class BadSignInList(IDateService dateService) : IBadSignInList
 
         lock (this)
         {
-            var visit = new BadSignIn()
+            var signin = new BadSignIn()
             {
                 IpAddress = ip,
-                Name = name,
-                Password = password,
+                Name = null,
+                NameLength = name?.Length,
+                Password = null,
+                PasswordLength = password?.Length,
                 Created = dateService.GetDateTimeNow(),
                 BadUsername = exception is UserNotFoundException,
                 BadPassword = exception is PasswordVerificationFailedException,
@@ -32,7 +43,13 @@ public class BadSignInList(IDateService dateService) : IBadSignInList
                     exception is not PasswordVerificationFailedException,
             };
 
-            list.Add(visit);
+            if (_config.LogUsername)
+                signin.Name = name;
+
+            if (_config.LogPassword)
+                signin.Password = password;
+
+            list.Add(signin);
         }
     }
 

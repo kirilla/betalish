@@ -20,9 +20,6 @@ public class BadSignIn : ICreatedDateTime, IFormatOnSave
 
     public void FormatOnSave()
     {
-        NameLength = Name?.Length;
-        PasswordLength = Password?.Length;
-
         Name = Name?.Truncate(MaxLengths.Domain.BadSignIn.Name);
         Password = Password?.Truncate(MaxLengths.Domain.BadSignIn.Password);
     }

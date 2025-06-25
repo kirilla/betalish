@@ -26,6 +26,9 @@ public class Program
         builder.Services.Configure<AccountConfiguration>(
             builder.Configuration.GetSection("Account"));
 
+        builder.Services.Configure<BadSignInConfiguration>(
+            builder.Configuration.GetSection("BadSignIn"));
+
         builder.Services.Configure<FirewallConfiguration>(
             builder.Configuration.GetSection("Firewall"));
 
