@@ -1,0 +1,59 @@
+﻿@page "/show-bad-signins"
+@model ShowBadSignInsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Misslyckade inloggningar -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Misslyckade inloggningar
+    </h4>
+
+    <figure>
+        <table>
+            <tr>
+                <th>När</th>
+                <th>IP-adress</th>
+                <th>Namn</th>
+                <th>Lösenord</th>
+                <th>Fel</th>
+                <th>Fel, inre</th>
+            </tr>
+            @foreach (var visit in Model.BadSignIns)
+            {
+                <tr>
+                    <td>
+                        @(visit.Created.ToFixedFormatDateShortTime())
+                    </td>
+                    <td>
+                        @(visit.IpAddress)
+                    </td>
+                    <td>
+                        @(visit.Name)
+                    </td>
+                    <td>
+                        @(visit.Password)
+                    </td>
+                    <td>
+                        @(visit.Exception)
+                    </td>
+                    <td>
+                        @(visit.InnerException)
+                    </td>
+                </tr>
+            }
+        </table>
+    </figure>
+
+</main>
