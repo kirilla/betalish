@@ -20,6 +20,16 @@ public class EndSessionCommand(
         if (session.UserId != userToken.UserId!.Value)
             throw new NotPermittedException();
 
+        var record = new SessionRecord()
+        {
+            UserId = session.UserId,
+            Login = session.Created!.Value,
+            Logout = dateService.GetDateTimeNow(),
+            IpAddress = session.IpAddress,
+        };
+
+        database.SessionRecords.Add(record);
+
         database.Sessions.Remove(session);
 
         await database.SaveAsync(userToken);

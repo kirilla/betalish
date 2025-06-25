@@ -34,8 +34,8 @@ public class SessionActivityLogger(IServiceProvider serviceProvider) : Backgroun
     {
         using var scope = serviceProvider.CreateScope();
 
-        var list =
-            scope.ServiceProvider.GetRequiredService<ISessionActivityList>();
+        var list = scope.ServiceProvider
+            .GetRequiredService<ISessionActivityList>();
 
         var activeSessionIds = list.RemoveSessionIds();
 

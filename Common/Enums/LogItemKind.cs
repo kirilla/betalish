@@ -9,4 +9,6 @@ public enum LogItemKind
 
     BlockedRequestReaped = 644146724,
     BlockedRequestReaperFailed = 997229645,
+
+    TerminateSessions = 661471773,
 }

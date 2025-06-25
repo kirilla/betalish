@@ -1,8 +1,11 @@
-﻿namespace Betalish.Application.Commands.Sessions.EndOtherSessions;
+﻿using Betalish.Application.Queues.LogItems;
+
+namespace Betalish.Application.Commands.Sessions.EndOtherSessions;
 
 public class EndOtherSessionsCommand(
     IDateService dateService,
-    IDatabaseService database) : IEndOtherSessionsCommand
+    IDatabaseService database,
+    ILogItemList logItemList) : IEndOtherSessionsCommand
 {
     public async Task Execute(
         IUserToken userToken, EndOtherSessionsCommandModel model)
@@ -14,7 +17,26 @@ public class EndOtherSessionsCommand(
             .Where(x => x.Id != userToken.SessionId!.Value)
             .ToListAsync();
 
+        var records = sessions
+            .Select(x => new SessionRecord()
+            {
+                UserId = x.UserId,
+                Login = x.Created!.Value,
+                Logout = dateService.GetDateTimeNow(),
+                IpAddress = x.IpAddress,
+                WasForced = true,
+            });
+
+        database.SessionRecords.AddRange(records);
+
         database.Sessions.RemoveRange(sessions);
+
+        logItemList.AddLogItem(new LogItem()
+        {
+            Description = $"{userToken.Name} terminated all sessions.",
+            LogItemKind = LogItemKind.TerminateSessions,
+            UserId = userToken.UserId,
+        });
 
         await database.SaveAsync(userToken);
     }

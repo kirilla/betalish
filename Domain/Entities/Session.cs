@@ -6,6 +6,8 @@ public class Session : ICreatedDateTime, IUpdatedDateTime
 
     public Guid? Guid { get; set; }
 
+    public string? IpAddress { get; set; }
+
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
 

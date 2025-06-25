@@ -23,6 +23,7 @@ public class DatabaseService(
     public DbSet<NetworkRule> NetworkRules { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<SessionActivity> SessionActivities { get; set; }
+    public DbSet<SessionRecord> SessionRecords { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserEmail> UserEmails { get; set; }
 
@@ -44,6 +45,7 @@ public class DatabaseService(
         new NetworkRuleConfiguration().Configure(builder.Entity<NetworkRule>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
         new SessionActivityConfiguration().Configure(builder.Entity<SessionActivity>());
+        new SessionRecordConfiguration().Configure(builder.Entity<SessionRecord>());
         new UserConfiguration().Configure(builder.Entity<User>());
         new UserEmailConfiguration().Configure(builder.Entity<UserEmail>());
     }

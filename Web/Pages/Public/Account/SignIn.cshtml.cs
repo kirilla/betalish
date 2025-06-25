@@ -62,7 +62,9 @@ public class SignInModel(
             if (!ModelState.IsValid)
                 return Page();
 
-            var loginResult = await signInCommand.Execute(UserToken, CommandModel);
+            var ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+            var loginResult = await signInCommand.Execute(UserToken, CommandModel, ipAddress);
 
             var claims = new List<Claim>
             {

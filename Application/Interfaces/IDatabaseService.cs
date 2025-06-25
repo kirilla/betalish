@@ -18,6 +18,7 @@ public interface IDatabaseService
     DbSet<NetworkRule> NetworkRules { get; set; }
     DbSet<Session> Sessions { get; set; }
     DbSet<SessionActivity> SessionActivities { get; set; }
+    DbSet<SessionRecord> SessionRecords { get; set; }
     DbSet<User> Users { get; set; }
     DbSet<UserEmail> UserEmails { get; set; }
 

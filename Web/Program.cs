@@ -86,6 +86,7 @@ public class Program
             builder.Services.AddHostedService<LogItemLogger>();
             builder.Services.AddHostedService<BlockedRequestReaper>();
             builder.Services.AddHostedService<SessionActivityLogger>();
+            builder.Services.AddHostedService<SessionReaper>();
         }
 
         // API controllers

@@ -11,7 +11,7 @@ public class SignInCommand(
     private readonly AccountConfiguration _config = accountOptions.Value;
 
     public async Task<SessionGuidResultModel> Execute(
-        IUserToken userToken, SignInCommandModel model)
+        IUserToken userToken, SignInCommandModel model, string? ipAddress)
     {
         if (!_config.SignInAllowed)
             throw new FeatureTurnedOffException();
@@ -67,6 +67,7 @@ public class SignInCommand(
         {
             UserId = user.Id,
             Guid = Guid.NewGuid(),
+            IpAddress = ipAddress,
         };
 
         database.Sessions.Add(session);
