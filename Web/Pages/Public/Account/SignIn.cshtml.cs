@@ -119,7 +119,8 @@ public class SignInModel(
                 // which of these is the case.
 
                 ModelState.AddModelError(
-                    nameof(CommandModel.EmailAddress), "Felaktigt lösenord.");
+                    nameof(CommandModel.EmailAddress), 
+                    "Inloggningen misslyckades.");
 
                 return Page();
             }
