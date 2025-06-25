@@ -1,4 +1,5 @@
 using Betalish.Application.Commands.Sessions.SignIn;
+using Betalish.Application.Queues.BadSignIns;
 using Betalish.Application.Queues.LogItems;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -10,6 +11,7 @@ namespace Betalish.Web.Pages.Public.Account;
 [AllowAnonymous]
 public class SignInModel(
     IUserToken userToken,
+    IBadSignInList badSignInList,
     ILogItemList logItemList,
     ISignInCommand signInCommand,
     IOptions<AccountConfiguration> accountOptions) : UserTokenPageModel(userToken)
@@ -104,6 +106,13 @@ public class SignInModel(
         }
         catch (Exception ex)
         {
+            badSignInList.AddSignIn(
+                HttpContext.Connection.RemoteIpAddress,
+                CommandModel.EmailAddress,
+                CommandModel.Password,
+                ex?.Message,
+                ex?.InnerException?.Message);
+
             if (ex is UserNotFoundException ||
                 ex is PasswordVerificationFailedException)
             {

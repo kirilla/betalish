@@ -1,5 +1,6 @@
 using Betalish.Application.BackgroundServices.Loggers;
 using Betalish.Application.BackgroundServices.Reapers;
+using Betalish.Application.Queues.BadSignIns;
 using Betalish.Application.Queues.LogItems;
 using Betalish.Application.Queues.SessionActivities;
 using Betalish.Persistence;
@@ -63,6 +64,7 @@ public class Program
                 options.EventsType = typeof(CookieValidator);
             });
 
+        builder.Services.AddSingleton<IBadSignInList, BadSignInList>();
         builder.Services.AddSingleton<ILogItemList, LogItemList>();
         builder.Services.AddSingleton<ISessionActivityList, SessionActivityList>();
 
@@ -83,8 +85,9 @@ public class Program
 
         if (builder.Environment.IsProduction())
         {
-            builder.Services.AddHostedService<LogItemLogger>();
+            builder.Services.AddHostedService<BadSignInLogger>();
             builder.Services.AddHostedService<BlockedRequestReaper>();
+            builder.Services.AddHostedService<LogItemLogger>();
             builder.Services.AddHostedService<SessionActivityLogger>();
             builder.Services.AddHostedService<SessionReaper>();
         }
