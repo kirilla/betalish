@@ -12,7 +12,7 @@ public class NoUserToken : IUserToken
     public int? ClientId { get; }
     public string? ClientName { get; }
 
-    public bool NoLogin { get; set; }
+    public bool NoLogin { get; }
     public bool NoSave { get; set; }
 
     public NoUserToken()
