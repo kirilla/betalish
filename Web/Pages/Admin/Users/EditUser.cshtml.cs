@@ -28,6 +28,8 @@ public class EditUserModel(
             {
                 Id = user.Id,
                 Name = user.Name,
+                NoLogin = user.NoLogin,
+                NoSave = user.NoSave,
             };
 
             return Page();

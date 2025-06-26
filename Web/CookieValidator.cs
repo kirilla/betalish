@@ -46,6 +46,8 @@ public class CookieValidator(
                 x.User.Name,
                 x.ClientId,
                 ClientName = x.Client.Name,
+                x.User.NoLogin,
+                x.User.NoSave,
             })
             .SingleOrDefault();
 
@@ -71,6 +73,9 @@ public class CookieValidator(
 
         items!["ClientId"] = session.ClientId;
         items!["ClientName"] = session.ClientName;
+
+        items!["NoLogin"] = session.NoLogin;
+        items!["NoSave"] = session.NoSave;
 
         sessionActivityList.AddSessionId(session.SessionId);
     }

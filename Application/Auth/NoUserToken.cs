@@ -12,6 +12,9 @@ public class NoUserToken : IUserToken
     public int? ClientId { get; }
     public string? ClientName { get; }
 
+    public bool NoLogin { get; set; }
+    public bool NoSave { get; set; }
+
     public NoUserToken()
     {
         UserId = null;
@@ -23,5 +26,8 @@ public class NoUserToken : IUserToken
 
         ClientId = null;
         ClientName = null;
+
+        NoLogin = false;
+        NoSave = false;
     }
 }

@@ -1,0 +1,27 @@
+﻿@page "/help/user-account-locked"
+@model UserAccountLockedModel
+@{
+}
+
+@section Meta {
+    <title>
+        Användarkonto låst -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Användarkontot är låst
+    </h4>
+
+    <div class="notice">
+        🧐 Det här användarkontot är låst.
+    </div>
+
+</main>

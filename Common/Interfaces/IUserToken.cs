@@ -11,4 +11,7 @@ public interface IUserToken
 
     int? ClientId { get; }
     string? ClientName { get; }
+
+    bool NoLogin { get; set; }
+    bool NoSave { get; set; }
 }

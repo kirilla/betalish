@@ -21,6 +21,8 @@ public class EditUserCommand(IDatabaseService database) : IEditUserCommand
             throw new NotFoundException();
 
         user.Name = model.Name;
+        user.NoLogin = model.NoLogin;
+        user.NoSave = model.NoSave;
 
         await database.SaveAsync(userToken);
     }

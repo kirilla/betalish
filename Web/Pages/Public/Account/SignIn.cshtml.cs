@@ -104,6 +104,10 @@ public class SignInModel(
         {
             return Redirect("/help/featureturnedoff");
         }
+        catch (UserNoLoginException)
+        {
+            return Redirect("/help/user-account-locked");
+        }
         catch (Exception ex)
         {
             badSignInList.AddSignIn(

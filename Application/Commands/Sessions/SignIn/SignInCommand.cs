@@ -40,6 +40,9 @@ public class SignInCommand(
             .SingleOrDefaultAsync() ??
             throw new UserNotFoundException();
 
+        if (user.NoLogin)
+            throw new UserNoLoginException();
+
         var hasher = new PasswordHasher<User>();
 
         var result = hasher.VerifyHashedPassword(

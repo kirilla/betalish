@@ -30,6 +30,28 @@
             }
         </ul>
 
+        @if (Model.User.NoLogin || Model.User.NoSave)
+        {
+            <ul>
+                @if (Model.User.NoLogin)
+                {
+                    <li>
+                        ❌
+                        &thinsp;
+                        Förhindra inloggning
+                    </li>
+                }
+                @if (Model.User.NoSave)
+                {
+                    <li>
+                        ❌
+                        &thinsp;
+                        Förhindra ändringar
+                    </li>
+                }
+            </ul>
+        }
+
         @if (Model.IsAdmin)
         {
             <ul>

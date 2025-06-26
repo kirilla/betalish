@@ -28,6 +28,18 @@
         </label>
         <input asp-for="CommandModel.Name" />
 
+        <p>
+            <label asp-for="CommandModel.NoLogin">
+                <input asp-for="CommandModel.NoLogin" type="checkbox" />
+                Förhindra inloggning
+            </label>
+
+            <label asp-for="CommandModel.NoSave">
+                <input asp-for="CommandModel.NoSave" type="checkbox" />
+                Förhindra ändringar
+            </label>
+        </p>
+
         <div asp-validation-summary="All"></div>
 
         <button type="submit">

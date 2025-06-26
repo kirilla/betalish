@@ -10,6 +10,9 @@ public class User : ICreatedDateTime, IUpdatedDateTime
 
     public Guid? Guid { get; set; }
 
+    public bool NoLogin { get; set; }
+    public bool NoSave { get; set; }
+
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
 

@@ -14,6 +14,9 @@ public class UserToken : IUserToken
     public int? ClientId { get; }
     public string? ClientName { get; }
 
+    public bool NoLogin { get; set; }
+    public bool NoSave { get; set; }
+
     public UserToken(IHttpContextAccessor httpContext)
     {
         _httpContext = httpContext;
@@ -29,5 +32,8 @@ public class UserToken : IUserToken
 
         ClientId = _httpContext?.HttpContext?.Items?["ClientId"] as int?;
         ClientName = _httpContext?.HttpContext?.Items?["ClientName"] as string;
+
+        NoLogin = _httpContext?.HttpContext?.Items?["NoLogin"] as bool? ?? false;
+        NoSave = _httpContext?.HttpContext?.Items?["NoSave"] as bool? ?? false;
     }
 }

@@ -10,4 +10,7 @@ public class EditUserCommandModel
     [RegularExpression(Pattern.Common.SomeContent)]
     [StringLength(MaxLengths.Common.Person.Name)]
     public string Name { get; set; }
+
+    public bool NoLogin { get; set; }
+    public bool NoSave { get; set; }
 }

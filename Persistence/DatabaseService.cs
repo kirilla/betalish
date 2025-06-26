@@ -1,4 +1,5 @@
-﻿using Betalish.Persistence.Configuration;
+﻿using Betalish.Common.Exceptions;
+using Betalish.Persistence.Configuration;
 
 namespace Betalish.Persistence;
 
@@ -54,6 +55,9 @@ public class DatabaseService(
 
     public async Task SaveAsync(IUserToken userToken)
     {
+        if (userToken.NoSave)
+            throw new UserNoSaveException();
+
         if (!ChangeTracker.HasChanges())
             return;
 
