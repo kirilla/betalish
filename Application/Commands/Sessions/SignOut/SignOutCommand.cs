@@ -28,6 +28,8 @@ public class SignOutCommand(
 
         database.Sessions.Remove(session);
 
+        userToken.NoSave = false;
+
         await database.SaveAsync(userToken);
     }
 

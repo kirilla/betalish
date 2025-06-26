@@ -34,6 +34,8 @@ public class SelectClientCommand(
 
         session.ClientId = client.Id;
 
+        userToken.NoSave = false;
+
         await database.SaveAsync(userToken);
     }
 

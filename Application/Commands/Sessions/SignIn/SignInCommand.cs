@@ -75,6 +75,8 @@ public class SignInCommand(
 
         database.Sessions.Add(session);
 
+        userToken.NoSave = false;
+
         await database.SaveAsync(userToken);
 
         return new SessionGuidResultModel()
