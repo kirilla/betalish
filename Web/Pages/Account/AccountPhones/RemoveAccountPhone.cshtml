@@ -1,11 +1,11 @@
-﻿@page "/remove-email"
-@model RemoveUserEmailModel
+﻿@page "/remove-account-phone"
+@model RemoveAccountPhoneModel
 @{
 }
 
 @section Meta {
     <title>
-        Ta bort epostadress -
+        Ta bort telefonnummer - 
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -16,31 +16,24 @@
 
 <main>
     <h4>
-        Vilken epostadress vill du ta bort?
+        Vilket telefonnummer vill du ta bort?
     </h4>
 
     <form method="post">
 
         <label asp-for="CommandModel.Id">
-            Epostadress
+            Telefonnummer
         </label>
 
         <select asp-for="CommandModel.Id">
             <option value="">–</option>
-            @foreach (var email in Model.UserEmails)
+            @foreach (var phone in Model.UserPhones)
             {
-                <option value="@(email.Id)">
-                    @(email.Address)
+                <option value="@(phone.Id)">
+                    @(phone.Number)
                 </option>
             }
         </select>
-
-        <p>
-            <label asp-for="CommandModel.Confirmed">
-                <input asp-for="CommandModel.Confirmed" type="checkbox" />
-                Ja, jag är säker
-            </label>
-        </p>
 
         <div asp-validation-summary="All"></div>
 

@@ -14,16 +14,15 @@ public class AddUserEmailCommand(
 
         model.Address = model.Address.Trim().ToLowerInvariant();
 
-        var user = database.Users
-            .Where(x => x.Id == userToken.UserId!.Value)
-            .SingleOrDefault() ??
-            throw new NotFoundException();
-
-        var emails = await database.UserEmails
+        if (await database.UserEmails
             .Where(x => x.UserId == userToken.UserId!.Value)
-            .ToListAsync();
+            .CountAsync() >= Limits.User.EmailAddresses.Max)
+            throw new TooManyException();
 
-        if (emails.Any(x => x.Address == model.Address))
+        if (await database.UserEmails
+            .AnyAsync(x =>
+                x.UserId == userToken.UserId!.Value &&
+                x.Address == model.Address))
             throw new BlockedByExistingException();
 
         var email = new UserEmail()

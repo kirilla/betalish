@@ -19,5 +19,10 @@ public static class Pattern
             public const string Type =
                 @"^[a-zA-Z0-9!#$&^_.+-]+/[a-zA-Z0-9!#$&^_.+-]+$";
         }
+
+        public static class Phone
+        {
+            public const string Number = @"^[-\d\s+\(\)]+$";
+        }
     }
 }

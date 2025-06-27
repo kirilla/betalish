@@ -84,6 +84,49 @@
             }
         </p>
 
+        <h5>
+            Telefon
+        </h5>
+
+        @if (Model.UserPhones.Any())
+        {
+            <p>
+                @foreach (var phone in Model.UserPhones)
+                {
+                    <span>
+                        📞
+                        &ensp;
+                        @(phone.Number)
+                    </span>
+                    <br />
+                }
+            </p>
+        }
+        else
+        {
+            <p>
+                📞
+                &ensp;
+                &ndash;
+            </p>
+        }
+
+        <p>
+            @if (Model.CanAddAccountPhone)
+            {
+                <a class="button" href="/add-account-phone">
+                    Lägg till
+                </a>
+            }
+
+            @if (Model.CanRemoveAccountPhone)
+            {
+                <a class="button" href="/remove-account-phone">
+                    Ta bort
+                </a>
+            }
+        </p>
+
     </div>
 
     <p>

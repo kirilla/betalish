@@ -1,15 +1,14 @@
-﻿using Betalish.Application.Commands.UserEmails.AddUserEmail;
-using Betalish.Common.Validation;
+﻿using Betalish.Application.Commands.UserPhones.AddAccountPhone;
 
-namespace Betalish.Web.Pages.Account;
+namespace Betalish.Web.Pages.Account.AccountPhones;
 
-public class AddUserEmailModel(
+public class AddAccountPhoneModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddUserEmailCommand command) : UserTokenPageModel(userToken)
+    IAddAccountPhoneCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]
-    public AddUserEmailCommandModel CommandModel { get; set; }
+    public AddAccountPhoneCommandModel CommandModel { get; set; }
 
     public IActionResult OnGet()
     {
@@ -18,7 +17,7 @@ public class AddUserEmailModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new AddUserEmailCommandModel();
+            CommandModel = new AddAccountPhoneCommandModel();
 
             return Page();
         }
@@ -45,16 +44,16 @@ public class AddUserEmailModel(
         catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.Address),
-                "Adressen finns redan.");
+                nameof(CommandModel.Number),
+                "Numret finns redan.");
 
             return Page();
         }
         catch (TooManyException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.Address),
-                $"Max {Limits.User.EmailAddresses.Max} adresser.");
+                nameof(CommandModel.Number),
+                $"Max {Limits.User.PhoneNumbers.Max} nummer.");
 
             return Page();
         }

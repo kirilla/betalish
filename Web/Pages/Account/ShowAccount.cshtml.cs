@@ -3,6 +3,8 @@ using Betalish.Application.Commands.Account.DeleteAccount;
 using Betalish.Application.Commands.Account.EditAccount;
 using Betalish.Application.Commands.UserEmails.AddUserEmail;
 using Betalish.Application.Commands.UserEmails.RemoveUserEmail;
+using Betalish.Application.Commands.UserPhones.AddAccountPhone;
+using Betalish.Application.Commands.UserPhones.RemoveAccountPhone;
 
 namespace Betalish.Web.Pages.Account;
 
@@ -13,26 +15,22 @@ public class ShowAccountModel(
     IDeleteAccountCommand deleteAccountCommand,
     IEditAccountCommand editAccountCommand,
     IAddUserEmailCommand addUserEmailCommand,
-    IRemoveUserEmailCommand removeUserEmailCommand) : UserTokenPageModel(userToken)
+    IRemoveUserEmailCommand removeUserEmailCommand,
+    IAddAccountPhoneCommand addAccountPhoneCommand,
+    IRemoveAccountPhoneCommand removeAccountPhoneCommand) : UserTokenPageModel(userToken)
 {
     public new User User { get; set; }
 
     public List<UserEmail> UserEmails { get; set; }
+    public List<UserPhone> UserPhones { get; set; }
 
-    public bool CanChangePassword { get; set; } 
-        = changePasswordCommand.IsPermitted(userToken);
-
+    public bool CanChangePassword { get; set; }
     public bool CanDeleteAccount { get; set; }
-        = deleteAccountCommand.IsPermitted(userToken);
-
     public bool CanEditAccount { get; set; }
-        = editAccountCommand.IsPermitted(userToken);
-
     public bool CanAddUserEmail { get; set; }
-        = addUserEmailCommand.IsPermitted(userToken);
-
     public bool CanRemoveUserEmail { get; set; }
-        = removeUserEmailCommand.IsPermitted(userToken);
+    public bool CanAddAccountPhone { get; set; }
+    public bool CanRemoveAccountPhone { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -51,6 +49,27 @@ public class ShowAccountModel(
                 .AsNoTracking()
                 .Where(x => x.UserId == UserToken.UserId!.Value)
                 .ToListAsync();
+
+            UserPhones = await database.UserPhones
+                .AsNoTracking()
+                .Where(x => x.UserId == UserToken.UserId!.Value)
+                .ToListAsync();
+
+            CanChangePassword = changePasswordCommand.IsPermitted(userToken);
+            CanDeleteAccount = deleteAccountCommand.IsPermitted(userToken);
+            CanEditAccount = editAccountCommand.IsPermitted(userToken);
+
+            CanAddUserEmail =
+                addUserEmailCommand.IsPermitted(userToken) &&
+                UserEmails.Count < Limits.User.EmailAddresses.Max;
+
+            CanRemoveUserEmail = removeUserEmailCommand.IsPermitted(userToken);
+
+            CanAddAccountPhone =
+                addAccountPhoneCommand.IsPermitted(userToken) &&
+                UserPhones.Count < Limits.User.PhoneNumbers.Max;
+
+            CanRemoveAccountPhone = removeAccountPhoneCommand.IsPermitted(userToken);
 
             return Page();
         }

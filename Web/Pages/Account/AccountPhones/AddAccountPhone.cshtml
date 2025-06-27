@@ -1,0 +1,38 @@
+﻿@page "/add-account-phone"
+@model AddAccountPhoneModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till telefonnummer - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAccount" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till telefonnummer
+    </h4>
+
+    <form method="post">
+
+        <input asp-for="CommandModel.Number"
+               placeholder="Telefonnummer" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-account">
+            Avbryt
+        </a>
+    </form>
+
+</main>

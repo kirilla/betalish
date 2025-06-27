@@ -12,27 +12,19 @@ public class RemoveUserEmailCommand(
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var user = await database.Users
-            .Where(x => x.Id == userToken.UserId!.Value)
+        if (await database.UserEmails
+            .Where(x => x.UserId == userToken.UserId!.Value)
+            .CountAsync() < 2)
+            throw new NotPermittedException();
+
+        var email = await database.UserEmails
+            .Where(x => 
+                x.Id == model.Id &&
+                x.UserId == userToken.UserId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        var emails = await database.UserEmails
-            .Where(x => x.UserId == userToken.UserId!.Value)
-            .ToListAsync();
-
-        if (emails.Count < 2)
-            throw new NotPermittedException();
-
-        var emailToRemove = emails
-            .Where(x => x.Id == model.UserEmailId)
-            .SingleOrDefault() ??
-            throw new NotFoundException();
-
-        if (emailToRemove.UserId != userToken.UserId!.Value)
-            throw new NotPermittedException();
-
-        database.UserEmails.Remove(emailToRemove);
+        database.UserEmails.Remove(email);
 
         await database.SaveAsync(userToken);
     }

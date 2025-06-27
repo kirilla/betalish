@@ -1,5 +1,4 @@
-﻿using Betalish.Common.Validation;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Betalish.Application.Commands.UserEmails.AddUserEmail;
 
