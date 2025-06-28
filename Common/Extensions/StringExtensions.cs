@@ -1,7 +1,19 @@
-﻿namespace Betalish.Common.Extensions;
+﻿using System.Text.RegularExpressions;
+
+namespace Betalish.Common.Extensions;
 
 public static class StringExtensions
 {
+    public static string StripNonNumeric(this string value)
+    {
+        var regex = new Regex(
+            @"\D",
+            RegexOptions.CultureInvariant,
+            TimeSpan.FromSeconds(1));
+
+        return regex.Replace(value, "");
+    }
+
     public static string? Truncate(this string? value, int maxLength)
     {
         if (value == null)

@@ -29,6 +29,10 @@
             🐵
             &ensp;
             @(Model.User.Name)
+            <br />
+            #️⃣
+            &ensp;
+            @(Model.User.Ssn12.ToSsnWithDash())
         </p>
         
         @if (Model.CanEditAccount)

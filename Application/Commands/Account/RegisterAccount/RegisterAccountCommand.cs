@@ -21,10 +21,16 @@ public class RegisterAccountCommand(
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        if (string.IsNullOrWhiteSpace(model.Name) ||
+        model.Ssn12 = model.Ssn12?.StripNonNumeric();
+
+        if (string.IsNullOrWhiteSpace(model.Ssn12) ||
+            string.IsNullOrWhiteSpace(model.Name) ||
             string.IsNullOrWhiteSpace(model.EmailAddress) ||
             string.IsNullOrWhiteSpace(model.Password))
             throw new NotPermittedException();
+
+        if (!SsnService.IsValidSsn(model.Ssn12))
+            throw new InvalidSsnException();
 
         model.EmailAddress = model.EmailAddress.Trim().ToLowerInvariant();
 
@@ -33,6 +39,7 @@ public class RegisterAccountCommand(
 
         var user = new User()
         {
+            Ssn12 = model.Ssn12,
             Name = model.Name,
             Guid = Guid.NewGuid(),
         };

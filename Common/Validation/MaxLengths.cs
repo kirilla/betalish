@@ -71,6 +71,15 @@ public static class MaxLengths
             public const int ZipCode = 10;
             public const int City = 25;
         }
+
+        public static class Ssn
+        {
+            public const int Ssn10 = 10;
+            public const int Ssn12 = 12;
+
+            public const int Ssn10Permissive = 11;
+            public const int Ssn12Permissive = 13;
+        }
     }
 
     public static class Domain
