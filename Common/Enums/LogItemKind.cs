@@ -2,13 +2,15 @@
 
 public enum LogItemKind
 {
-    SignIn = 279924064,
-    SignOut = 485389262,
+    BlockedRequestReaped = 644146724,
+    BlockedRequestReaperFailed = 997229645,
 
     SelectClient = 341225872,
 
-    BlockedRequestReaped = 644146724,
-    BlockedRequestReaperFailed = 997229645,
+    SignIn = 279924064,
+    SignOut = 485389262,
+
+    SignupsReaped = 786751720,
 
     TerminateSessions = 661471773,
 }

@@ -93,6 +93,7 @@ public class Program
             builder.Services.AddHostedService<LogItemLogger>();
             builder.Services.AddHostedService<SessionActivityLogger>();
             builder.Services.AddHostedService<SessionReaper>();
+            builder.Services.AddHostedService<SignupReaper>();
         }
 
         // API controllers
