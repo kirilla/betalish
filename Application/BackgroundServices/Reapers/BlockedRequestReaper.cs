@@ -44,8 +44,8 @@ namespace Betalish.Application.BackgroundServices.Reapers
         {
             using var scope = serviceProvider.CreateScope();
 
-            IDatabaseService database =
-                scope.ServiceProvider.GetRequiredService<IDatabaseService>();
+            var database = scope.ServiceProvider
+                .GetRequiredService<IDatabaseService>();
 
             var count = await database.BlockedRequests
                 .OrderByDescending(x => x.Created)
