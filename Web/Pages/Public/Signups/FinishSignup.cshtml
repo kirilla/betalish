@@ -1,0 +1,61 @@
+﻿@page "/finish-signup/{guid:guid}"
+@model FinishSignupModel
+@{
+}
+
+@section Meta {
+    <title>
+        Skapa konto -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Vill du skapa ett konto?
+    </h4>
+
+    @if (Model.UserToken.IsAuthenticated)
+    {
+        <div class="notice">
+            Du behöver logga ut innan du svarar på inbjudan
+        </div>
+    }
+
+    <ul class="notice">
+        <li>@(Model.Signup.PersonName)</li>
+        <li>@(Model.Signup.Ssn12)</li>
+        <li>@(Model.Signup.EmailAddress)</li>
+        <li>@(Model.Signup.PhoneNumber)</li>
+    </ul>
+
+    <form method="post">
+        <input asp-for="CommandModel.Guid" type="hidden" />
+
+        <label asp-for="CommandModel.Password">
+            Välj ditt lösenord
+        </label>
+        <input asp-for="CommandModel.Password" type="password" />
+
+        <div asp-validation-summary="All"></div>
+
+        @*<div class="notice">
+        <div>
+        ⚖️ Användarvillkor
+        </div>
+        <div>
+        ...
+        </div>
+        </div>*@
+
+        <button type="submit">
+            Skapa konto
+        </button>
+
+    </form>
+
+</main>

@@ -1,0 +1,39 @@
+﻿@page "/signup/blocked"
+@model SignupBlockedModel
+@{
+}
+
+@section Meta {
+    <title>
+        Förhinder - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Din kontoansökan har fått förhinder 😞
+    </h4>
+
+    <p>
+        <i>
+            En doppelganger<br />
+            Använder samma uppgift<br />
+            Det går inte alls<br />
+        </i>
+    </p>
+
+    <a class="button" href="/signup">
+        Försök igen?
+    </a>
+
+    <p>
+        Använd länken i mejlet för att ta bort ansökan.<br />
+        Eller vänta någon timme så tas den bort automatiskt.
+    </p>
+
+</main>

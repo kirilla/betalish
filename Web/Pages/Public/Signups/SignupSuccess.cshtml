@@ -1,0 +1,28 @@
+﻿@page "/signup-success"
+@model SignupSuccessModel
+@{
+}
+
+@section Meta {
+    <title>
+        Klart! - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Tack!
+    </h4>
+
+    <p>
+        En brev med instruktioner kommer inom några minuter
+        till din e-postadress.
+    </p>
+
+</main>

@@ -10,7 +10,8 @@
         <a href="/">🫰 Betalish!</a>
         @if (!Model.IsAuthenticated)
         {
-            <a href="/register-account">Skaffa konto</a>
+            @* <a href="/register-account">Skaffa konto</a> *@
+            <a href="/sign-up-for-service">Skaffa konto</a>
             <a href="/sign-in">Logga in</a>
         }
         @if (Model.IsAuthenticated)

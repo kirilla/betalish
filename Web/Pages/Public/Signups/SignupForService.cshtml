@@ -1,0 +1,63 @@
+﻿@page "/sign-up-for-service"
+@model SignupForServiceModel
+@{
+}
+
+@section Meta {
+    <title>
+        Skaffa företagskonto - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Skaffa företagskonto
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.PersonName">
+            Ditt namn
+        </label>
+        <input asp-for="CommandModel.PersonName" placeholder="Förnamn Efternamn" />
+
+        <label asp-for="CommandModel.Ssn12">
+            Personnummer
+        </label>
+        <input asp-for="CommandModel.Ssn12" placeholder="ÅÅÅÅMMDD-XXXX" />
+
+        <label asp-for="CommandModel.EmailAddress">
+            Epostadress
+        </label>
+        <input asp-for="CommandModel.EmailAddress" placeholder="namn@företag" />
+
+        <label asp-for="CommandModel.PhoneNumber">
+            Telefonnummer
+        </label>
+        <input asp-for="CommandModel.PhoneNumber" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Skicka ansökan
+        </button>
+
+        <a href="/" class="button">
+            Avbryt
+        </a>
+
+    </form>
+
+    <div class="notice">
+        Syftet med uppgifterna är att vi ska kunna
+        lita på att du är den du säger att du är,
+        och att du har rätt att företräda ditt företag
+        eller arbetsgivare, här i Praktikantbanken.
+    </div>
+
+</main>

@@ -1,0 +1,47 @@
+﻿@page "/show-signup/{id:int}"
+@model SignupModel
+@{
+}
+
+@section Meta {
+    <title>Ansökan - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Ansökan
+    </h4>
+
+    <div class="notice">
+        <b>Namn</b>
+        <br />
+        @(Model.Signup.PersonName)
+        <br />
+        <br />
+        <b>Personnr</b>
+        <br />
+        @(Model.Signup.Ssn12)
+        <br />
+        <br />
+        <b>Epost</b>
+        <br />
+        @(Model.Signup.EmailAddress)
+        <br />
+        <br />
+        <b>Telefon</b>
+        <br />
+        @(Model.Signup.PhoneNumber)
+    </div>
+
+    <p>
+        <a class="button" href="/remove-signup/@(Model.Signup.Id)">
+            Ta bort
+        </a>
+    </p>
+
+</main>

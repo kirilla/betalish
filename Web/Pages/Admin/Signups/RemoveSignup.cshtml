@@ -1,0 +1,53 @@
+﻿@page "/remove-signup/{id:int}"
+@model RemoveSignupModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort kontoansökan -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Ta bort kontoansökan
+    </h4>
+
+    <ul class="notice">
+        <li>@(Model.Signup.PersonName)</li>
+        <li>@(Model.Signup.Ssn12)</li>
+        <li>@(Model.Signup.EmailAddress)</li>
+        <li>@(Model.Signup.PhoneNumber)</li>
+        <li>@(Model.Signup.Created.ToFixedFormatDateShortTime())</li>
+    </ul>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <div asp-validation-summary="All"></div>
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
+
+        <button type="submit">
+            Ta bort
+        </button>
+
+        <a class="button" href="/show-signup/@(Model.Signup.Id)">
+            Avbryt
+        </a>
+
+    </form>
+
+</main>

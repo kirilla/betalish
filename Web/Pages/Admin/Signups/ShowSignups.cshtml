@@ -1,0 +1,55 @@
+﻿@page "/show-signups"
+@model ShowSignupsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ansökningar -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Ansökningar
+    </h4>
+
+    @if (!Model.Signups.Any())
+    {
+        <div class="notice">
+            <p>
+                Inga ansökningar.
+            </p>
+        </div>
+    }
+
+    @foreach (var signup in Model.Signups)
+    {
+        <div class="notice">
+            <p>
+                @(signup.Created.ToFixedFormatDateShortTime())
+            </p>
+            <p>
+                <a href="/show-signup/@(signup.Id)">
+                    @(signup.Ssn12)
+                </a>
+            </p>
+            <p>
+                @(signup.PersonName)
+            </p>
+            <p>
+                @(signup.EmailAddress)
+            </p>
+            <p>
+                @(signup.PhoneNumber)
+            </p>
+        </div>
+    }
+
+</main>

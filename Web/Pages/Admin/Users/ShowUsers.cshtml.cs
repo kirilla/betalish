@@ -13,6 +13,8 @@ public class ShowUsersModel(
 
     public int BadSignInCount { get; set; }
 
+    public int SignupCount { get; set; }
+
     public async Task<IActionResult> OnGetAsync()
     {
         try
@@ -33,8 +35,8 @@ public class ShowUsersModel(
                     !x.ClientAuths.Any());
 
             SessionCount = await database.Sessions.CountAsync();
-
             BadSignInCount = await database.BadSignIns.CountAsync();
+            SignupCount = await database.Signups.CountAsync();
 
             return Page();
         }

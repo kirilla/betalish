@@ -1,0 +1,27 @@
+﻿@page "/finish-signup-success"
+@model FinishSignupSuccessModel
+@{
+}
+
+@section Meta {
+    <title>
+        Klart -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Kontot är skapat!
+    </h4>
+
+    <a class="button" href="/session/signin">
+        Logga in
+    </a>
+
+</main>
