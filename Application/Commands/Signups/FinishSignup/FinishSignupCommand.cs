@@ -1,11 +1,20 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Betalish.Common.Settings;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 
 namespace Betalish.Application.Commands.Signups.FinishSignup;
 
-public class FinishSignupCommand(IDatabaseService database) : IFinishSignupCommand
+public class FinishSignupCommand(
+    IDatabaseService database,
+    IOptions<AccountConfiguration> options) : IFinishSignupCommand
 {
+    private readonly AccountConfiguration _config = options.Value;
+
     public async Task Execute(IUserToken userToken, FinishSignupCommandModel model)
     {
+        if (!_config.FinishSignupAllowed)
+            throw new FeatureTurnedOffException();
+
         if (userToken.IsAuthenticated)
             throw new PleaseLogOutException();
 

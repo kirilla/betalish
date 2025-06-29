@@ -24,7 +24,7 @@ public class FinishSignupModel(
             if (guid == Guid.Empty)
                 throw new NotPermittedException();
 
-            if (!_config.SignupForServiceAllowed)
+            if (!_config.FinishSignupAllowed)
                 throw new FeatureTurnedOffException();
 
             if (UserToken.IsAuthenticated)
@@ -69,7 +69,7 @@ public class FinishSignupModel(
     {
         try
         {
-            if (!_config.SignupForServiceAllowed)
+            if (!_config.FinishSignupAllowed)
                 throw new FeatureTurnedOffException();
 
             if (UserToken.IsAuthenticated)
