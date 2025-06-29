@@ -53,7 +53,7 @@ public class FinishSignupModel(
         }
         catch (NotFoundException)
         {
-            return Redirect("/signup/lost");
+            return Redirect("/signup-lost");
         }
         catch (PleaseLogOutException)
         {
@@ -114,7 +114,7 @@ public class FinishSignupModel(
         }
         catch (NotFoundException)
         {
-            return Redirect("/signup/lost");
+            return Redirect("/signup-lost");
         }
         catch (PleaseLogOutException)
         {

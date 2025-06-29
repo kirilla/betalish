@@ -1,0 +1,82 @@
+﻿@page "/send-test-email"
+@model SendTestEmailModel
+@{
+}
+
+@section Meta {
+    <title>
+        Skicka testmeddelande -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarAdmin" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Skicka testmeddelande
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.ToName">
+            ToName
+        </label>
+        <input asp-for="CommandModel.ToName" />
+
+        <label asp-for="CommandModel.ToAddress">
+            ToAddress
+        </label>
+        <input asp-for="CommandModel.ToAddress" />
+
+        <label asp-for="CommandModel.FromName">
+            FromName
+        </label>
+        <input asp-for="CommandModel.FromName" />
+
+        <label asp-for="CommandModel.FromAddress">
+            FromAddress
+        </label>
+        <input asp-for="CommandModel.FromAddress" />
+
+        <label asp-for="CommandModel.ReplyToName">
+            ReplyToName
+        </label>
+        <input asp-for="CommandModel.ReplyToName" />
+
+        <label asp-for="CommandModel.ReplyToAddress">
+            ReplyToAddress
+        </label>
+        <input asp-for="CommandModel.ReplyToAddress" />
+
+        <label asp-for="CommandModel.Subject">
+            Subject
+        </label>
+        <input asp-for="CommandModel.Subject" />
+
+        <label asp-for="CommandModel.HtmlBody">
+            HtmlBody
+        </label>
+        <textarea asp-for="CommandModel.HtmlBody" rows="10"
+                  placeholder="HTML här"></textarea>
+
+        <label asp-for="CommandModel.TextBody">
+            TextBody
+        </label>
+        <textarea asp-for="CommandModel.TextBody" rows="5"
+                  placeholder="Text här"></textarea>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Skicka
+        </button>
+
+        <a class="button" href="/admin-desktop">
+            Avbryt
+        </a>
+    </form>
+
+</main>

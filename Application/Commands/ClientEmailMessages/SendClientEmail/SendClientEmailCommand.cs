@@ -29,7 +29,7 @@ public class SendClientEmailCommand(
 
         try
         {
-            smtpService.SendMessage(smtpConfiguration, message);
+            smtpService.SendClientEmailMessage(smtpConfiguration, message);
 
             message.EmailStatus = EmailStatus.Sent;
             message.Sent = dateService.GetDateTimeNow();

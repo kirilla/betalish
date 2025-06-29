@@ -1,0 +1,75 @@
+using Betalish.Application.Commands.EmailMessages.SendTestEmail;
+
+namespace Betalish.Web.Pages.Admin.EmailMessages;
+
+public class SendTestEmailModel(
+    IUserToken userToken,
+    IDatabaseService database,
+    ISendTestEmailCommand command) : AdminPageModel(userToken)
+{
+    [BindProperty]
+    public SendTestEmailCommandModel CommandModel { get; set; }
+
+    public async Task<IActionResult> OnGetAsync()
+    {
+        try
+        {
+            await AssertAdminAuthorization(database);
+
+            CommandModel = new SendTestEmailCommandModel();
+
+            CommandModel.FromName = "Betalish";
+            CommandModel.FromAddress = "hej@betalish.se";
+
+            CommandModel.Subject = "Testmeddelande";
+
+            CommandModel.HtmlBody = """
+                <html>
+                <head>
+                <title>
+                Testmeddelande
+                </title>
+                </head>
+                <body>
+                <h1>
+                Ett testmeddelande
+                <h1>
+                </body>
+                </html>
+                """;
+
+            CommandModel.TextBody = """
+                Ett testmeddelande från Betalish.se
+                """;
+
+            return Page();
+        }
+        catch (NotFoundException)
+        {
+            return Redirect("/help/notfound");
+        }
+        catch
+        {
+            return Redirect("/help/notpermitted");
+        }
+    }
+
+    public async Task<IActionResult> OnPostAsync()
+    {
+        try
+        {
+            await AssertAdminAuthorization(database);
+
+            if (!ModelState.IsValid)
+                return Page();
+
+            await command.Execute(UserToken, CommandModel);
+
+            return Redirect("/show-admin-desktop");
+        }
+        catch
+        {
+            return Redirect("/help/notpermitted");
+        }
+    }
+}

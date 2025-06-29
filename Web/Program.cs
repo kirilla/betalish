@@ -1,3 +1,4 @@
+using Betalish.Application.BackgroundServices.Email;
 using Betalish.Application.BackgroundServices.Loggers;
 using Betalish.Application.BackgroundServices.Reapers;
 using Betalish.Application.Queues.BadSignIns;
@@ -90,6 +91,7 @@ public class Program
         {
             builder.Services.AddHostedService<BadSignInLogger>();
             builder.Services.AddHostedService<BlockedRequestReaper>();
+            builder.Services.AddHostedService<EmailSender>();
             builder.Services.AddHostedService<LogItemLogger>();
             builder.Services.AddHostedService<SessionActivityLogger>();
             builder.Services.AddHostedService<SessionReaper>();

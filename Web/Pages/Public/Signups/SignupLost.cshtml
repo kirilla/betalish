@@ -1,0 +1,34 @@
+﻿@page "/signup-lost"
+@model SignupLostModel
+@{
+}
+
+@section Meta {
+    <title>
+        Hittar inte inbjudan - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_NavbarPublic" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Hittar inte inbjudan 😞
+    </h4>
+
+    <p>
+        <i>
+            Inbjudan borta<br />
+            Tranor flyga söderut<br />
+            Festen är över<br />
+        </i>
+    </p>
+
+    <a class="button" href="/sign-up-for-service">
+        Försök igen?
+    </a>
+
+</main>

@@ -35,7 +35,7 @@ public class SendEmailCommand(
 
         try
         {
-            smtpService.SendMessage(smtpConfiguration, message, attachments, images);
+            smtpService.SendEmailMessage(smtpConfiguration, message, attachments, images);
 
             message.EmailStatus = EmailStatus.Sent;
             message.Sent = dateService.GetDateTimeNow();

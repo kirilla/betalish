@@ -2,6 +2,8 @@
 
 public class SmtpConfiguration
 {
+    public bool Active { get; set; }
+
     public string FromName { get; set; }
     public string FromAddress { get; set; }
     public string Password { get; set; }

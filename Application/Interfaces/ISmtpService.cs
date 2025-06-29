@@ -4,13 +4,13 @@ namespace Betalish.Application.Interfaces;
 
 public interface ISmtpService
 {
-    void SendMessage(
+    void SendEmailMessage(
         SmtpConfiguration smtpConfiguration,
         EmailMessage email,
         List<EmailAttachment> attachments,
         List<EmailImage> images);
 
-    void SendMessage(
+    void SendClientEmailMessage(
         SmtpConfiguration smtpConfiguration,
         ClientEmailMessage email);
 }

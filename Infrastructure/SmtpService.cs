@@ -9,7 +9,7 @@ namespace Betalish.Infrastructure;
 
 public class SmtpService() : ISmtpService
 {
-    public void SendMessage(
+    public void SendEmailMessage(
         SmtpConfiguration smtpConf,
         EmailMessage email, 
         List<EmailAttachment> attachments,
@@ -79,7 +79,7 @@ public class SmtpService() : ISmtpService
         smtp.Send(mail);
     }
 
-    public void SendMessage(
+    public void SendClientEmailMessage(
         SmtpConfiguration smtpConf,
         ClientEmailMessage email)
     {
