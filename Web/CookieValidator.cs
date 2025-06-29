@@ -48,6 +48,7 @@ public class CookieValidator(
                 ClientName = x.Client.Name,
                 x.User.NoLogin,
                 x.User.NoSave,
+                IsAdmin = x.User.AdminAuths.Any(),
             })
             .SingleOrDefault();
 
@@ -76,6 +77,8 @@ public class CookieValidator(
 
         items!["NoLogin"] = session.NoLogin;
         items!["NoSave"] = session.NoSave;
+
+        items!["IsAdmin"] = session.IsAdmin;
 
         sessionActivityList.AddSessionId(session.SessionId);
     }

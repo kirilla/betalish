@@ -7,6 +7,7 @@ public class NoUserToken : IUserToken
 
     public string? Name { get; }
 
+    public bool IsAdmin { get; }
     public bool IsAuthenticated { get; }
 
     public int? ClientId { get; }

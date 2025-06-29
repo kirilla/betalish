@@ -7,6 +7,7 @@ public interface IUserToken
 
     string? Name { get; }
 
+    bool IsAdmin { get; }
     bool IsAuthenticated { get; }
 
     int? ClientId { get; }

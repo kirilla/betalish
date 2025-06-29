@@ -9,6 +9,7 @@ public class UserToken : IUserToken
 
     public string? Name { get; }
 
+    public bool IsAdmin { get; }
     public bool IsAuthenticated { get; }
 
     public int? ClientId { get; }
@@ -25,6 +26,8 @@ public class UserToken : IUserToken
         SessionId = _httpContext?.HttpContext?.Items?["SessionId"] as int?;
 
         Name = _httpContext?.HttpContext?.Items?["UserName"] as string;
+
+        IsAdmin = _httpContext?.HttpContext?.Items?["IsAdmin"] as bool? ?? false;
 
         IsAuthenticated = 
             UserId.HasValue && 
