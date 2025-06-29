@@ -5,6 +5,7 @@ public enum LogItemKind
     BlockedRequestReaped = 644146724,
     BlockedRequestReaperFailed = 997229645,
 
+    SelectAdmin = 924284789,
     SelectClient = 341225872,
 
     SignIn = 279924064,

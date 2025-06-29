@@ -17,14 +17,14 @@
         Vem vill du vara?
     </h4>
 
-    @if (Model.IsAdmin)
+    @if (Model.IsAdmin) @* && Model.UserToken.ClientId.HasValue) *@
     {
         <div class="notice">
             <ul>
                 <li>
                     🎓
                     &thinsp;
-                    <a href="/show-admin-desktop">Admin</a>
+                    <a href="/select-admin">Admin</a>
                 </li>
             </ul>
         </div>

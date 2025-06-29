@@ -1,0 +1,35 @@
+﻿@page "/select-admin"
+@model SelectAdminModel
+@{
+}
+
+@section Meta {
+    <title>Logga in som Admin - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    
+    <h4>
+        Vill du logga in som Admin?
+    </h4>
+    
+    <br>
+
+    <div>
+        <form method="post">
+
+            <button type="submit">
+                Logga in
+            </button>
+
+            <a class="button" href="/show-lobby">
+                Avbryt
+            </a>
+        </form>
+    </div>
+    
+</main>
