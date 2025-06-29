@@ -16,6 +16,14 @@
         }
         @if (Model.IsAuthenticated)
         {
+            @if (Model.IsAdmin)
+            {
+                <a href="/show-admin-desktop">🎓 Admin</a>
+            }
+            @if (Model.ClientId.HasValue)
+            {
+                <a href="/show-client-desktop">🏢 @(Model.ClientName)</a>
+            }            
             <a href="/show-account">👤 @(Model.Name)</a>
             <a href="/show-lobby">🔀</a>
             <a href="/sign-out">❌</a>
