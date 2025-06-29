@@ -2,14 +2,14 @@
 @using Betalish.Domain
 @using Betalish.Web
 @using Betalish.Web.Common
-@model ClientNavbarViewModel
+@model IUserToken
 @{
 }
 <header>
     <nav>
         <a href="/">🫰 Betalish!</a>
-        <a href="/show-client-desktop">@(Model.Client.Name)</a>
-        <a href="/show-account">👤 @(Model.UserToken.Name)</a>
+        <a href="/show-client-desktop">@(Model.ClientName)</a>
+        <a href="/show-account">👤 @(Model.Name)</a>
         <a href="/show-lobby">🔀</a>
         <a href="/sign-out">❌</a>
     </nav>
