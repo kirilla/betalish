@@ -1,0 +1,53 @@
+﻿@page "/show-Session-records"
+@model ShowSessionRecordsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Historiska sessioner -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Historiska sessioner
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var record in Model.SessionRecords)
+            {
+                <li>
+                    😵
+                    &thinsp;
+                    <a href="/show-user/@(record.UserId)">
+                        @(record.User.Name)
+                    </a>
+                    &ensp;
+                    <i>
+                        @(record.DateTimeSummary)
+                    </i>
+                </li>
+            }
+
+            @if (!Model.SessionRecords.Any())
+            {
+                <li>
+                    😵
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+</main>

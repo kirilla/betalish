@@ -1,0 +1,53 @@
+﻿@page "/show-Session-activities"
+@model ShowSessionActivitiesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Aktivitet -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Aktivitet
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var activity in Model.SessionActivities)
+            {
+                <li>
+                    👋
+                    &thinsp;
+                    <a href="/show-user/@(activity.Session.UserId)">
+                        @(activity.Session.User.Name)
+                    </a>
+                    &ensp;
+                    <i>
+                        @(activity.Created.ToFixedFormatDateShortTime())
+                    </i>
+                </li>
+            }
+
+            @if (!Model.SessionActivities.Any())
+            {
+                <li>
+                    👋
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+</main>
