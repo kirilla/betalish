@@ -1,8 +1,8 @@
 ﻿using Betalish.Application.Commands.Account.ChangePassword;
 using Betalish.Application.Commands.Account.DeleteAccount;
 using Betalish.Application.Commands.Account.EditAccount;
-using Betalish.Application.Commands.UserEmails.AddUserEmail;
-using Betalish.Application.Commands.UserEmails.RemoveUserEmail;
+using Betalish.Application.Commands.UserEmails.AddAccountEmail;
+using Betalish.Application.Commands.UserEmails.RemoveAccountEmail;
 using Betalish.Application.Commands.UserPhones.AddAccountPhone;
 using Betalish.Application.Commands.UserPhones.RemoveAccountPhone;
 
@@ -14,8 +14,8 @@ public class ShowAccountModel(
     IChangePasswordCommand changePasswordCommand,
     IDeleteAccountCommand deleteAccountCommand,
     IEditAccountCommand editAccountCommand,
-    IAddUserEmailCommand addUserEmailCommand,
-    IRemoveUserEmailCommand removeUserEmailCommand,
+    IAddAccountEmailCommand addUserEmailCommand,
+    IRemoveAccountEmailCommand removeUserEmailCommand,
     IAddAccountPhoneCommand addAccountPhoneCommand,
     IRemoveAccountPhoneCommand removeAccountPhoneCommand) : UserTokenPageModel(userToken)
 {

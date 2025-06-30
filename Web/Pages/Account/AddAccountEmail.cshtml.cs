@@ -1,15 +1,14 @@
-﻿using Betalish.Application.Commands.UserEmails.AddUserEmail;
-using Betalish.Common.Validation;
+﻿using Betalish.Application.Commands.UserEmails.AddAccountEmail;
 
 namespace Betalish.Web.Pages.Account;
 
-public class AddUserEmailModel(
+public class AddAccountEmailModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddUserEmailCommand command) : UserTokenPageModel(userToken)
+    IAddAccountEmailCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]
-    public AddUserEmailCommandModel CommandModel { get; set; }
+    public AddAccountEmailCommandModel CommandModel { get; set; }
 
     public IActionResult OnGet()
     {
@@ -18,7 +17,7 @@ public class AddUserEmailModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new AddUserEmailCommandModel();
+            CommandModel = new AddAccountEmailCommandModel();
 
             return Page();
         }

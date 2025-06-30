@@ -1,10 +1,10 @@
-﻿namespace Betalish.Application.Commands.UserEmails.RemoveUserEmail;
+﻿namespace Betalish.Application.Commands.UserEmails.RemoveAccountEmail;
 
-public class RemoveUserEmailCommand(
-    IDatabaseService database) : IRemoveUserEmailCommand
+public class RemoveAccountEmailCommand(
+    IDatabaseService database) : IRemoveAccountEmailCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemoveUserEmailCommandModel model)
+        IUserToken userToken, RemoveAccountEmailCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();

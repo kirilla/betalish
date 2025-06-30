@@ -74,7 +74,7 @@
         <p>
             @if (Model.CanAddUserEmail)
             {
-                <a class="button" href="/add-user-email">
+                <a class="button" href="/add-account-email">
                     Lägg till
                 </a>
             }
@@ -82,7 +82,7 @@
             @if (Model.CanRemoveUserEmail &&
                 Model.UserEmails.Count > 1)
             {
-                <a class="button" href="/remove-email">
+                <a class="button" href="/remove-account-email">
                     Ta bort
                 </a>
             }

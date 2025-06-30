@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Betalish.Application.Commands.UserEmails.AddUserEmail;
+namespace Betalish.Application.Commands.UserEmails.AddAccountEmail;
 
-public class AddUserEmailCommandModel
+public class AddAccountEmailCommandModel
 {
     [RegularExpression(Pattern.Common.Email.Address)]
     [Required(ErrorMessage = "Skriv din epostadress.")]

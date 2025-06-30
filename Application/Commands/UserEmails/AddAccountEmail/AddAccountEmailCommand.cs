@@ -1,10 +1,10 @@
-﻿namespace Betalish.Application.Commands.UserEmails.AddUserEmail;
+﻿namespace Betalish.Application.Commands.UserEmails.AddAccountEmail;
 
-public class AddUserEmailCommand(
-    IDatabaseService database) : IAddUserEmailCommand
+public class AddAccountEmailCommand(
+    IDatabaseService database) : IAddAccountEmailCommand
 {
     public async Task Execute(
-        IUserToken userToken, AddUserEmailCommandModel model)
+        IUserToken userToken, AddAccountEmailCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();

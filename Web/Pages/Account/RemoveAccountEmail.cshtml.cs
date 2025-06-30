@@ -1,16 +1,16 @@
-using Betalish.Application.Commands.UserEmails.RemoveUserEmail;
+using Betalish.Application.Commands.UserEmails.RemoveAccountEmail;
 
 namespace Betalish.Web.Pages.Account;
 
-public class RemoveUserEmailModel(
+public class RemoveAccountEmailModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemoveUserEmailCommand command) : UserTokenPageModel(userToken)
+    IRemoveAccountEmailCommand command) : UserTokenPageModel(userToken)
 {
     public List<UserEmail> UserEmails { get; set; }
 
     [BindProperty]
-    public RemoveUserEmailCommandModel CommandModel { get; set; }
+    public RemoveAccountEmailCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -23,7 +23,7 @@ public class RemoveUserEmailModel(
                 .Where(x => x.UserId == UserToken.UserId!.Value)
                 .ToListAsync();
 
-            CommandModel = new RemoveUserEmailCommandModel();
+            CommandModel = new RemoveAccountEmailCommandModel();
 
             return Page();
         }
