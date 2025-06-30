@@ -95,6 +95,7 @@ public class Program
             builder.Services.AddHostedService<LogItemLogger>();
             builder.Services.AddHostedService<SessionActivityLogger>();
             builder.Services.AddHostedService<SessionReaper>();
+            builder.Services.AddHostedService<SessionActivityReaper>();
             builder.Services.AddHostedService<SignupReaper>();
         }
 

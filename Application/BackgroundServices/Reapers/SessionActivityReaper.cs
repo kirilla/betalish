@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace Betalish.Application.BackgroundServices.Reapers
 {
-    public class SessionReaper(
+    public class SessionActivityReaper(
         IDateService dateService,
         IServiceProvider serviceProvider) : BackgroundService
     {
@@ -21,7 +21,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
                 }
 
                 await Task
-                    .Delay(TimeSpan.FromMinutes(5), stoppingToken)
+                    .Delay(TimeSpan.FromMinutes(3), stoppingToken)
                     .ConfigureAwait(false);
 
                 // NOTE: Should we ConfigureAwait(false)?
@@ -37,27 +37,26 @@ namespace Betalish.Application.BackgroundServices.Reapers
             var database = scope.ServiceProvider
                 .GetRequiredService<IDatabaseService>();
 
-            var yesterday = dateService.GetDateTimeNow().AddDays(-1);
+            var activitiesToRemove = new List<SessionActivity>();
 
-            var staleSessions = await database.Sessions
-                .Where(x =>
-                    x.Created < yesterday &&
-                    !x.SessionActivities.Any(y => y.Created > yesterday))
-                .ToListAsync(stoppingToken);
+            var activities = await database.SessionActivities.ToListAsync();
 
-            var records = staleSessions
-                .Select(x => new SessionRecord()
-                {
-                    UserId = x.UserId,
-                    Login = x.Created!.Value,
-                    Logout = dateService.GetDateTimeNow(),
-                    WasReaped = true,
-                    IpAddress = x.IpAddress,
-                });
+            var groups = activities
+                .GroupBy(x => x.SessionId)
+                .Where(x => x.Count() > 1)
+                .ToList();
 
-            database.SessionRecords.AddRange(records);
+            foreach (var group in groups)
+            {
+                var redundant = group
+                    .OrderBy(x => x.Created)
+                    .SkipLast(1)
+                    .ToList();
 
-            database.Sessions.RemoveRange(staleSessions);
+                activitiesToRemove.AddRange(redundant);
+            }
+
+            database.SessionActivities.RemoveRange(activitiesToRemove);
 
             await database.SaveAsync(new NoUserToken());
         }
