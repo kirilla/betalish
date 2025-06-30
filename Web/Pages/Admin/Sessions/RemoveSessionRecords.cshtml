@@ -1,0 +1,36 @@
+﻿@page "/remove-session-records"
+@model RemoveSessionRecordsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort historiska sessioner -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Ta bort uppgifter om historiska sessioner
+    </h4>
+
+    <form method="post">
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Ta bort
+        </button>
+
+        <a class="button" href="/show-session-records">
+            Avbryt
+        </a>
+
+    </form>
+
+</main>
