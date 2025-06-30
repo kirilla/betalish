@@ -31,6 +31,15 @@
                     <a href="/show-user/@(record.UserId)">
                         @(record.User.Name)
                     </a>
+                    @if (record.ClientId.HasValue)
+                    {
+                        <span>
+                            &ensp;
+                            <a href="/show-client/@(record.ClientId)">
+                                @(record.Client?.Name ?? "Okänt")
+                            </a>
+                        </span>
+                    }
                     &ensp;
                     <i>
                         @(record.DateTimeSummary)

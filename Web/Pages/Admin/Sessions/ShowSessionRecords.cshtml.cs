@@ -13,6 +13,7 @@ public class ShowSessionRecordsModel(
             await AssertAdminAuthorization(database);
 
             SessionRecords = await database.SessionRecords
+                .Include(x => x.Client)
                 .Include(x => x.User)
                 .OrderBy(x => x.Login)
                 .ThenBy(x => x.Logout)

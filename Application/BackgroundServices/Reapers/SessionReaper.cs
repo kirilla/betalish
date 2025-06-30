@@ -53,6 +53,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
                     Logout = dateService.GetDateTimeNow(),
                     WasReaped = true,
                     IpAddress = x.IpAddress,
+                    ClientId = x.ClientId,
                 });
 
             database.SessionRecords.AddRange(records);

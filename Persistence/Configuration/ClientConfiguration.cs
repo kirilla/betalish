@@ -34,5 +34,10 @@ class ClientConfiguration : IEntityTypeConfiguration<Client>
             .WithOne(x => x.Client)
             .HasForeignKey(x => x.ClientId)
             .IsRequired(false);
+
+        builder.HasMany(x => x.SessionRecords)
+            .WithOne(x => x.Client)
+            .HasForeignKey(x => x.ClientId)
+            .IsRequired(false);
     }
 }

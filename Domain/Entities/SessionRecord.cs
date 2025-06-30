@@ -15,6 +15,9 @@ public class SessionRecord
     public int UserId { get; set; }
     public User User { get; set; }
 
+    public int? ClientId { get; set; }
+    public Client? Client { get; set; }
+
     public string DateSummary =>
         $"{Login.ToDateOnly().ToIso8601()} - " +
         $"{Logout.ToDateOnly().ToIso8601()}";

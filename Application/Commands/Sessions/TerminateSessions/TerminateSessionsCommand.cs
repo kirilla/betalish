@@ -25,6 +25,7 @@ public class TerminateSessionsCommand(
                 Logout = dateService.GetDateTimeNow(),
                 IpAddress = x.IpAddress,
                 WasForced = true,
+                ClientId = x.ClientId,
             });
 
         database.SessionRecords.AddRange(records);
