@@ -7,15 +7,15 @@ namespace Betalish.Application.Commands.Signups.SignupForService;
 public class SignupForServiceCommand(
     IDatabaseService database,
     ISignupEmailTemplate emailTemplate,
-    IOptions<AccountConfiguration> options) : ISignupForServiceCommand
+    IOptions<SignUpConfiguration> options) : ISignupForServiceCommand
 {
-    private readonly AccountConfiguration _config = options.Value;
+    private readonly SignUpConfiguration _config = options.Value;
 
     public async Task Execute(
         IUserToken userToken,
         SignupForServiceCommandModel model)
     {
-        if (!_config.SignupForServiceAllowed)
+        if (!_config.AllowSignupForService)
             throw new FeatureTurnedOffException();
 
         if (userToken.IsAuthenticated)

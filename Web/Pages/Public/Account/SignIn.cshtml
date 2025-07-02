@@ -19,22 +19,21 @@
         Logga in
     </h4>
 
-    <form method="post">
+    <p>
+        @if (Model.SignInConfiguration.AllowSignInBySsn)
+        {
+            <a class="button" href="/sign-in-by-ssn">Med personnummer</a>
+        }
 
-        <p>
-            <input asp-for="CommandModel.EmailAddress"
-                   placeholder="din epostadress" />
-            <br />
-            <input asp-for="CommandModel.Password"
-                   type="password" placeholder="ditt lösenord" />
-        </p>
+        @if (Model.SignInConfiguration.AllowSignInByEmail)
+        {
+            <a class="button" href="/sign-in-by-email">Med epost</a>
+        }
 
-        <div asp-validation-summary="All"></div>
-
-        <button type="submit">
-            Logga in
-        </button>
-
-    </form>
-
+        @if (Model.SignInConfiguration.AllowSignInByPhone)
+        {
+            <a class="button" href="/sign-in-by-phone">Med telefonnummer</a>
+        }
+    </p>
+    
 </main>

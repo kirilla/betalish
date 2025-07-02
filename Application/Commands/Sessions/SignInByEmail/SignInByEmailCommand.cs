@@ -2,18 +2,18 @@
 using Microsoft.Extensions.Options;
 using Betalish.Common.Settings;
 
-namespace Betalish.Application.Commands.Sessions.SignIn;
+namespace Betalish.Application.Commands.Sessions.SignInByEmail;
 
-public class SignInCommand(
+public class SignInByEmailCommand(
     IDatabaseService database,
-    IOptions<AccountConfiguration> accountOptions) : ISignInCommand
+    IOptions<SignInConfiguration> options) : ISignInByEmailCommand
 {
-    private readonly AccountConfiguration _config = accountOptions.Value;
+    private readonly SignInConfiguration _config = options.Value;
 
     public async Task<SessionGuidResultModel> Execute(
-        IUserToken userToken, SignInCommandModel model, string? ipAddress)
+        IUserToken userToken, SignInByEmailCommandModel model, string? ipAddress)
     {
-        if (!_config.SignInAllowed)
+        if (!_config.AllowSignInByEmail)
             throw new FeatureTurnedOffException();
 
         if (userToken.IsAuthenticated)
@@ -89,6 +89,6 @@ public class SignInCommand(
 
     public bool IsPermitted(IUserToken userToken)
     {
-        return _config.SignInAllowed;
+        return _config.AllowSignInByEmail;
     }
 }

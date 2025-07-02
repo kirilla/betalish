@@ -1,4 +1,6 @@
-﻿namespace Betalish.Common.Settings;
+﻿using System.Text.Json.Serialization;
+
+namespace Betalish.Common.Settings;
 
 public class SmtpConfiguration
 {
@@ -6,6 +8,8 @@ public class SmtpConfiguration
 
     public string FromName { get; set; }
     public string FromAddress { get; set; }
+
+    [JsonIgnore]
     public string Password { get; set; }
     public string SmtpHost { get; set; }
 

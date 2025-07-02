@@ -8,9 +8,9 @@ public class FinishSignupModel(
     IUserToken userToken,
     IDatabaseService database,
     IFinishSignupCommand command,
-    IOptions<AccountConfiguration> userAccountOptions) : UserTokenPageModel(userToken)
+    IOptions<SignUpConfiguration> options) : UserTokenPageModel(userToken)
 {
-    private readonly AccountConfiguration _config = userAccountOptions.Value;
+    private readonly SignUpConfiguration _config = options.Value;
 
     public Signup Signup { get; set; }
 
@@ -24,7 +24,7 @@ public class FinishSignupModel(
             if (guid == Guid.Empty)
                 throw new NotPermittedException();
 
-            if (!_config.FinishSignupAllowed)
+            if (!_config.AllowFinishSignup)
                 throw new FeatureTurnedOffException();
 
             if (UserToken.IsAuthenticated)
@@ -69,7 +69,7 @@ public class FinishSignupModel(
     {
         try
         {
-            if (!_config.FinishSignupAllowed)
+            if (!_config.AllowFinishSignup)
                 throw new FeatureTurnedOffException();
 
             if (UserToken.IsAuthenticated)

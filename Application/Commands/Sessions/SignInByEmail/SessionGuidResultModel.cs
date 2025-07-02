@@ -1,4 +1,4 @@
-﻿namespace Betalish.Application.Commands.Sessions.SignIn;
+﻿namespace Betalish.Application.Commands.Sessions.SignInByEmail;
 
 public class SessionGuidResultModel
 {

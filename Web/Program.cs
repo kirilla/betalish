@@ -24,14 +24,17 @@ public class Program
 
         //Console.WriteLine($"ConnectionString: {connectionString}");
 
-        builder.Services.Configure<AccountConfiguration>(
-            builder.Configuration.GetSection("Account"));
+        builder.Services.Configure<SignUpConfiguration>(
+            builder.Configuration.GetSection("SignUp"));
 
         builder.Services.Configure<BadSignInConfiguration>(
             builder.Configuration.GetSection("BadSignIn"));
 
         builder.Services.Configure<FirewallConfiguration>(
             builder.Configuration.GetSection("Firewall"));
+
+        builder.Services.Configure<SignInConfiguration>(
+            builder.Configuration.GetSection("SignIn"));
 
         builder.Services.Configure<SmtpConfiguration>(
             builder.Configuration.GetSection("Smtp"));

@@ -6,13 +6,13 @@ namespace Betalish.Application.Commands.Signups.FinishSignup;
 
 public class FinishSignupCommand(
     IDatabaseService database,
-    IOptions<AccountConfiguration> options) : IFinishSignupCommand
+    IOptions<SignUpConfiguration> options) : IFinishSignupCommand
 {
-    private readonly AccountConfiguration _config = options.Value;
+    private readonly SignUpConfiguration _config = options.Value;
 
     public async Task Execute(IUserToken userToken, FinishSignupCommandModel model)
     {
-        if (!_config.FinishSignupAllowed)
+        if (!_config.AllowFinishSignup)
             throw new FeatureTurnedOffException();
 
         if (userToken.IsAuthenticated)

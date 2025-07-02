@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Betalish.Common.Validation;
 
-namespace Betalish.Application.Commands.Sessions.SignIn;
+namespace Betalish.Application.Commands.Sessions.SignInByEmail;
 
-public class SignInCommandModel
+public class SignInByEmailCommandModel
 {
     [RegularExpression(
         Pattern.Common.Email.Address,

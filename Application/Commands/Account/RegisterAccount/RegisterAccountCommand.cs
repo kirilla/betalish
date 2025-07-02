@@ -6,13 +6,13 @@ namespace Betalish.Application.Commands.Account.RegisterAccount;
 
 public class RegisterAccountCommand(
     IDatabaseService database,
-    IOptions<AccountConfiguration> accountOptions) : IRegisterAccountCommand
+    IOptions<SignUpConfiguration> options) : IRegisterAccountCommand
 {
-    private readonly AccountConfiguration _config = accountOptions.Value;
+    private readonly SignUpConfiguration _config = options.Value;
 
     public async Task Execute(IUserToken userToken, RegisterAccountCommandModel model)
     {
-        if (!_config.RegisterAccountAllowed)
+        if (!_config.AllowRegisterAccount)
             throw new FeatureTurnedOffException();
 
         if (!IsPermitted(userToken))
@@ -68,6 +68,6 @@ public class RegisterAccountCommand(
 
     public bool IsPermitted(IUserToken userToken)
     {
-        return _config.RegisterAccountAllowed;
+        return _config.AllowRegisterAccount;
     }
 }

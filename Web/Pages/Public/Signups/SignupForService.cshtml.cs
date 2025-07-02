@@ -8,9 +8,9 @@ public class SignupForServiceModel(
     IUserToken userToken,
     IDatabaseService database,
     ISignupForServiceCommand command,
-    IOptions<AccountConfiguration> options) : UserTokenPageModel(userToken)
+    IOptions<SignUpConfiguration> options) : UserTokenPageModel(userToken)
 {
-    private readonly AccountConfiguration _config = options.Value;
+    private readonly SignUpConfiguration _config = options.Value;
 
     [BindProperty]
     public SignupForServiceCommandModel CommandModel { get; set; }
@@ -19,7 +19,7 @@ public class SignupForServiceModel(
     {
         try
         {
-            if (!_config.SignupForServiceAllowed)
+            if (!_config.AllowSignupForService)
                 throw new FeatureTurnedOffException();
 
             if (UserToken.IsAuthenticated)
@@ -45,7 +45,7 @@ public class SignupForServiceModel(
     {
         try
         {
-            if (!_config.SignupForServiceAllowed)
+            if (!_config.AllowSignupForService)
                 throw new FeatureTurnedOffException();
 
             if (UserToken.IsAuthenticated)

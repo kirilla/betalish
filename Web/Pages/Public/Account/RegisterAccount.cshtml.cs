@@ -7,9 +7,9 @@ namespace Betalish.Web.Pages.Public.Account;
 public class RegisterAccountModel(
     IUserToken userToken,
     IRegisterAccountCommand command,
-    IOptions<AccountConfiguration> options) : UserTokenPageModel(userToken)
+    IOptions<SignUpConfiguration> options) : UserTokenPageModel(userToken)
 {
-    private readonly AccountConfiguration _config = options.Value;
+    private readonly SignUpConfiguration _config = options.Value;
 
     [BindProperty]
     public RegisterAccountCommandModel CommandModel { get; set; }
@@ -18,7 +18,7 @@ public class RegisterAccountModel(
     {
         try
         {
-            if (!_config.RegisterAccountAllowed)
+            if (!_config.AllowRegisterAccount)
                 throw new FeatureTurnedOffException();
 
             if (!command.IsPermitted(userToken))
@@ -42,7 +42,7 @@ public class RegisterAccountModel(
     {
         try
         {
-            if (!_config.RegisterAccountAllowed)
+            if (!_config.AllowRegisterAccount)
                 throw new FeatureTurnedOffException();
 
             if (!command.IsPermitted(userToken))
