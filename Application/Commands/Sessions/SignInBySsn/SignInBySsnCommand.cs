@@ -1,19 +1,19 @@
-﻿using Betalish.Common.Settings;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using Betalish.Common.Settings;
 
-namespace Betalish.Application.Commands.Sessions.SignInByEmail;
+namespace Betalish.Application.Commands.Sessions.SignInBySsn;
 
-public class SignInByEmailCommand(
+public class SignInBySsnCommand(
     IDatabaseService database,
-    IOptions<SignInConfiguration> options) : ISignInByEmailCommand
+    IOptions<SignInConfiguration> options) : ISignInBySsnCommand
 {
     private readonly SignInConfiguration _config = options.Value;
 
     public async Task<SessionGuidResultModel> Execute(
-        IUserToken userToken, SignInByEmailCommandModel model, string? ipAddress)
+        IUserToken userToken, SignInBySsnCommandModel model, string? ipAddress)
     {
-        if (!_config.AllowSignInByEmail)
+        if (!_config.AllowSignInBySsn)
             throw new FeatureTurnedOffException();
 
         if (userToken.IsAuthenticated)
@@ -25,18 +25,23 @@ public class SignInByEmailCommand(
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        model.EmailAddress = model.EmailAddress.Trim().ToLowerInvariant();
+        model.Ssn12 = model.Ssn12?.StripNonNumeric();
 
-        if (string.IsNullOrWhiteSpace(model.EmailAddress))
+        if (string.IsNullOrWhiteSpace(model.Ssn12))
             throw new NotPermittedException();
 
-        var email = await database.UserEmails
-            .Where(x => x.Address == model.EmailAddress)
-            .SingleOrDefaultAsync() ??
-            throw new UserNotFoundException();
+        if (model.Ssn12.Length != 12)
+            throw new NotPermittedException();
+
+        if (!SsnService.IsValidSsn(model.Ssn12))
+            throw new InvalidSsnException();
+
+        var ssn10 = model.Ssn12.ToSsn10();
 
         var user = await database.Users
-            .Where(x => x.Id == email.UserId)
+            .Where(x =>
+                x.Ssn10 == ssn10 &&
+                x.Ssn12 == model.Ssn12)
             .SingleOrDefaultAsync() ??
             throw new UserNotFoundException();
 
@@ -89,6 +94,6 @@ public class SignInByEmailCommand(
 
     public bool IsPermitted(IUserToken userToken)
     {
-        return _config.AllowSignInByEmail;
+        return _config.AllowSignInBySsn;
     }
 }

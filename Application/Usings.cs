@@ -1,4 +1,5 @@
 ﻿global using Betalish.Application.Auth;
+global using Betalish.Application.Models;
 global using Betalish.Application.Interfaces;
 global using Betalish.Common.Dates;
 global using Betalish.Common.Enums;

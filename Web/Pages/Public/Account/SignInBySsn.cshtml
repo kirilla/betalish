@@ -1,0 +1,41 @@
+﻿@page "/sign-in-by-ssn"
+@model SignInBySsnModel
+@{
+}
+
+@section Meta {
+    <title>
+        Logga in med personnummer -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Logga in med personnummer
+    </h4>
+
+    <br />
+    <form method="post">
+
+        <p>
+            <input asp-for="CommandModel.Ssn12" 
+                placeholder="ditt personnummer, 12 siffror" />
+            <br />
+            <input asp-for="CommandModel.Password"
+                type="password" placeholder="ditt lösenord" />
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Logga in
+        </button>
+
+    </form>
+
+</main>
