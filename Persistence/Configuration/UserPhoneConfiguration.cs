@@ -9,6 +9,8 @@
             builder.Property(p => p.Number)
                 .IsRequired()
                 .HasMaxLength(MaxLengths.Common.Phone.Number);
+
+            builder.HasIndex(p => p.Number).IsUnique();
         }
     }
 }
