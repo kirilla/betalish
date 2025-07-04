@@ -1,11 +1,11 @@
-﻿namespace Betalish.Application.Commands.Sessions.SelectAdmin;
+﻿namespace Betalish.Application.Commands.Sessions.UnselectClient;
 
-public class SelectAdminCommand(
+public class UnselectClientCommand(
     IDateService dateService,
-    IDatabaseService database) : ISelectAdminCommand
+    IDatabaseService database) : IUnselectClientCommand
 {
     public async Task Execute(
-        IUserToken userToken, SelectAdminCommandModel model)
+        IUserToken userToken, UnselectClientCommandModel model)
     {
         if (!await IsPermitted(userToken))
             throw new NotPermittedException();
@@ -16,6 +16,9 @@ public class SelectAdminCommand(
                 x.UserId == userToken.UserId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
+
+        if (session.ClientId == null)
+            return;
 
         session.ClientId = null;
 

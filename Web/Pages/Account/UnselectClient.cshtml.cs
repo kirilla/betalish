@@ -1,16 +1,16 @@
-using Betalish.Application.Commands.Sessions.SelectAdmin;
+using Betalish.Application.Commands.Sessions.UnselectClient;
 using Betalish.Application.Queues.LogItems;
 
 namespace Betalish.Web.Pages.Account;
 
-public class SelectAdminModel(
+public class UnselectClientModel(
     IUserToken userToken,
     IDatabaseService database,
     ILogItemList logItemList,
-    ISelectAdminCommand command) : AdminPageModel(userToken)
+    IUnselectClientCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public SelectAdminCommandModel CommandModel { get; set; }
+    public UnselectClientCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -24,7 +24,7 @@ public class SelectAdminModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new SelectAdminCommandModel();
+            CommandModel = new UnselectClientCommandModel();
 
             return Page();
         }
@@ -58,11 +58,11 @@ public class SelectAdminModel(
             logItemList.AddLogItem(new LogItem()
             {
                 IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
-                LogItemKind = LogItemKind.SelectAdmin,
+                LogItemKind = LogItemKind.UnselectClient,
                 UserId = UserToken.UserId!.Value,
             });
 
-            return Redirect($"/show-admin-desktop");
+            return Redirect($"/show-lobby");
         }
         catch (NotFoundException)
         {

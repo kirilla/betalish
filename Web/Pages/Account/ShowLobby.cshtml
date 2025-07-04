@@ -17,19 +17,32 @@
         Vem vill du vara?
     </h4>
 
-    @if (Model.IsAdmin) @* && Model.UserToken.ClientId.HasValue) *@
+    @if (Model.IsAdmin)
     {
         <div class="notice">
             <ul>
                 <li>
                     🎓
                     &thinsp;
-                    <a href="/select-admin">Admin</a>
+                    <a href="/show-admin-desktop">Admin</a>
                 </li>
             </ul>
         </div>
     }
     
+    @if (Model.IsAdmin && Model.UserToken.ClientId.HasValue)
+    {
+        <div class="notice">
+            <ul>
+                <li>
+                    ❌
+                    &thinsp;
+                    <a href="/unselect-client">Logga ut ur @(Model.UserToken.ClientName)</a>
+                </li>
+            </ul>
+        </div>
+    }
+
     @if (Model.Clients.Any())
     {
         <div class="notice">

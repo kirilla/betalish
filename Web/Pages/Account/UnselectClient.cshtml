@@ -1,10 +1,10 @@
-﻿@page "/select-admin"
-@model SelectAdminModel
+﻿@page "/unselect-client"
+@model UnselectClientModel
 @{
 }
 
 @section Meta {
-    <title>Logga in som Admin - @(Branding.WebsiteTitle)</title>
+    <title>Logga ut ur - @(Branding.WebsiteTitle)</title>
 }
 
 @section Header {
@@ -14,7 +14,7 @@
 <main>
     
     <h4>
-        Vill du logga in som Admin?
+        Vill du logga ut ur @(Model.UserToken.ClientName)?
     </h4>
     
     <br>
@@ -23,7 +23,7 @@
         <form method="post">
 
             <button type="submit">
-                Logga in
+                Logga ut
             </button>
 
             <a class="button" href="/show-lobby">
