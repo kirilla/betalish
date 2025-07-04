@@ -1,0 +1,45 @@
+﻿@page "/remove-bad-signins"
+@model RemoveBadSignInsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort misslyckade inloggningar -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Vill du ta bort misslyckade inloggningar?
+    </h4>
+
+    <br />
+
+    <form method="post">
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Ta bort
+        </button>
+
+        <a class="button" href="/show-bad-signins">
+            Avbryt
+        </a>
+
+    </form>
+
+</main>
