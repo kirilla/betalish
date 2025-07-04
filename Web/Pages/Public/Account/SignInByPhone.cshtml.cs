@@ -57,7 +57,7 @@ public class SignInByPhoneModel(
             if (UserToken.IsAuthenticated)
                 throw new AlreadyLoggedInException();
 
-            Thread.Sleep(
+            await Task.Delay(
                 TimeSpan.FromMilliseconds(
                     Random.Shared.Next(200, 600)));
 
