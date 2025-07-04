@@ -1,6 +1,9 @@
 using Betalish.Application.Commands.Sessions.SignInByEmail;
+using Betalish.Application.Models;
 using Betalish.Application.Queues.BadSignIns;
+using Betalish.Application.Queues.RateLimiting;
 using Betalish.Application.Queues.LogItems;
+using Betalish.Common.Dates;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +15,8 @@ namespace Betalish.Web.Pages.Public.Account;
 public class SignInByEmailModel(
     IUserToken userToken,
     IBadSignInList badSignInList,
+    IDateService dateService,
+    IRateLimiter rateLimiter,
     ILogItemList logItemList,
     ISignInByEmailCommand signInCommand,
     IOptions<SignInConfiguration> options) : UserTokenPageModel(userToken)
@@ -56,6 +61,13 @@ public class SignInByEmailModel(
 
             if (UserToken.IsAuthenticated)
                 throw new AlreadyLoggedInException();
+
+            rateLimiter.TryRateLimit(new EndpointHit()
+            {
+                DateTime = dateService.GetDateTimeNow(),
+                IpAddress = HttpContext.Connection.RemoteIpAddress,
+                Endpoint = Betalish.Common.Enums.Endpoint.SignInByEmail,
+            });
 
             await Task.Delay(
                 TimeSpan.FromMilliseconds(
@@ -103,6 +115,10 @@ public class SignInByEmailModel(
         catch (FeatureTurnedOffException)
         {
             return Redirect("/help/featureturnedoff");
+        }
+        catch (RateLimitedException)
+        {
+            return Redirect("/help/rate-limited");
         }
         catch (UserNoLoginException)
         {

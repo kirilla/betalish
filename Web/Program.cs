@@ -2,6 +2,7 @@ using Betalish.Application.BackgroundServices.Email;
 using Betalish.Application.BackgroundServices.Loggers;
 using Betalish.Application.BackgroundServices.Reapers;
 using Betalish.Application.Queues.BadSignIns;
+using Betalish.Application.Queues.RateLimiting;
 using Betalish.Application.Queues.LogItems;
 using Betalish.Application.Queues.SessionActivities;
 using Betalish.Persistence;
@@ -72,6 +73,7 @@ public class Program
             });
 
         builder.Services.AddSingleton<IBadSignInList, BadSignInList>();
+        builder.Services.AddSingleton<IRateLimiter, RateLimiter>();
         builder.Services.AddSingleton<ILogItemList, LogItemList>();
         builder.Services.AddSingleton<ISessionActivityList, SessionActivityList>();
 

@@ -1,0 +1,56 @@
+﻿@page "/show-rate-limiting"
+@model ShowRateLimitingModel
+@{
+}
+
+@section Meta {
+    <title>
+        Anropsbegränsning -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Anropsbegränsning
+    </h4>
+
+    <div class="notice">
+        <ul>
+            @if (!Model.EndpointHits.Any())
+            {
+                <li>
+                    🚧
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+            @foreach (var hit in Model.EndpointHits)
+            {
+                <li>
+                    🚧
+                    &thinsp;
+                    @(hit.IpAddress)
+                    &thinsp;
+                    @(hit.Endpoint)
+                    &ensp;
+                    <span class="muted">
+                        @(hit.DateTime.ToFixedFormatDateShortTime())
+                    </span>
+                </li>
+            }
+        </ul>
+    </div>
+
+    <p>
+        <a class="button" href="/clear-rate-limiting">
+            Töm
+        </a>
+    </p>
+
+</main>

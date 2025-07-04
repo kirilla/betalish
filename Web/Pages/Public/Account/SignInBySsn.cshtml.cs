@@ -1,6 +1,9 @@
 using Betalish.Application.Commands.Sessions.SignInBySsn;
+using Betalish.Application.Models;
 using Betalish.Application.Queues.BadSignIns;
+using Betalish.Application.Queues.RateLimiting;
 using Betalish.Application.Queues.LogItems;
+using Betalish.Common.Dates;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -12,6 +15,8 @@ namespace Betalish.Web.Pages.Public.Account;
 public class SignInBySsnModel(
     IUserToken userToken,
     IBadSignInList badSignInList,
+    IDateService dateService,
+    IRateLimiter rateLimiter,
     ILogItemList logItemList,
     ISignInBySsnCommand signInCommand,
     IOptions<SignInConfiguration> options) : UserTokenPageModel(userToken)
@@ -56,6 +61,13 @@ public class SignInBySsnModel(
 
             if (UserToken.IsAuthenticated)
                 throw new AlreadyLoggedInException();
+
+            rateLimiter.TryRateLimit(new EndpointHit()
+            {
+                DateTime = dateService.GetDateTimeNow(),
+                IpAddress = HttpContext.Connection.RemoteIpAddress,
+                Endpoint = Betalish.Common.Enums.Endpoint.SignInBySsn,
+            });
 
             await Task.Delay(
                 TimeSpan.FromMilliseconds(
@@ -111,6 +123,10 @@ public class SignInBySsnModel(
                 "Ogiltigt personnummer.");
 
             return Page();
+        }
+        catch (RateLimitedException)
+        {
+            return Redirect("/help/rate-limited");
         }
         catch (UserNoLoginException)
         {

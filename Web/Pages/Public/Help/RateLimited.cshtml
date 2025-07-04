@@ -1,0 +1,27 @@
+﻿@page "/help/rate-limited"
+@model RateLimitedModel
+@{
+}
+
+@section Meta {
+    <title>
+        För många anrop -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Vänta lite
+    </h4>
+
+    <div class="notice">
+        🧐 För många försök på för kort tid.
+    </div>
+
+</main>
