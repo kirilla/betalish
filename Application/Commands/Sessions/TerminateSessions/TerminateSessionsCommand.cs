@@ -26,6 +26,7 @@ public class TerminateSessionsCommand(
                 IpAddress = x.IpAddress,
                 WasForced = true,
                 ClientId = x.ClientId,
+                SignInBy = x.SignInBy,
             });
 
         database.SessionRecords.AddRange(records);

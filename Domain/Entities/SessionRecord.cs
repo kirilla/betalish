@@ -1,8 +1,10 @@
 ﻿namespace Betalish.Domain.Entities;
 
-public class SessionRecord
+public class SessionRecord : IValidateOnSave
 {
     public int Id { get; set; }
+
+    public SignInBy? SignInBy { get; set; }
 
     public DateTime Login { get; set; }
     public DateTime Logout { get; set; }
@@ -28,4 +30,11 @@ public class SessionRecord
 
     public string Duration =>
         $"{(Logout - Login).ToSummary()}";
+
+    public void ValidateOnSave()
+    {
+        if (SignInBy.HasValue &&
+            !Enum.IsDefined(SignInBy.Value))
+            throw new InvalidEnumException();
+    }
 }

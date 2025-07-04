@@ -8,6 +8,7 @@ public interface IBadSignInList
         IPAddress? ipAddress,
         string? name,
         string? password,
+        SignInBy? signInBy,
         Exception? exception);
 
     List<BadSignIn> TakeBadSignIns();

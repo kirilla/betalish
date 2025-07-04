@@ -76,6 +76,7 @@ public class SignInBySsnCommand(
             UserId = user.Id,
             Guid = Guid.NewGuid(),
             IpAddress = ipAddress,
+            SignInBy = SignInBy.Ssn,
         };
 
         database.Sessions.Add(session);

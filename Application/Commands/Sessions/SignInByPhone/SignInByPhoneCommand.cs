@@ -71,6 +71,7 @@ public class SignInByPhoneCommand(
             UserId = user.Id,
             Guid = Guid.NewGuid(),
             IpAddress = ipAddress,
+            SignInBy = SignInBy.Phone,
         };
 
         database.Sessions.Add(session);

@@ -122,6 +122,7 @@ public class SignInBySsnModel(
                 HttpContext.Connection.RemoteIpAddress,
                 CommandModel.Ssn12,
                 CommandModel.Password,
+                SignInBy.Ssn,
                 ex);
 
             if (ex is UserNotFoundException ||

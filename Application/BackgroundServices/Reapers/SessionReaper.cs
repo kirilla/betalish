@@ -54,6 +54,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
                     WasReaped = true,
                     IpAddress = x.IpAddress,
                     ClientId = x.ClientId,
+                    SignInBy = x.SignInBy,
                 });
 
             database.SessionRecords.AddRange(records);

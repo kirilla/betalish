@@ -114,6 +114,7 @@ public class SignInByEmailModel(
                 HttpContext.Connection.RemoteIpAddress,
                 CommandModel.EmailAddress,
                 CommandModel.Password,
+                SignInBy.Email,
                 ex);
 
             if (ex is UserNotFoundException ||

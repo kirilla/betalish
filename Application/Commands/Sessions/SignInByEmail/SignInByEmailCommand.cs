@@ -71,6 +71,7 @@ public class SignInByEmailCommand(
             UserId = user.Id,
             Guid = Guid.NewGuid(),
             IpAddress = ipAddress,
+            SignInBy = SignInBy.Email,
         };
 
         database.Sessions.Add(session);

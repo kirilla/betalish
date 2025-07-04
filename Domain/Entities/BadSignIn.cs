@@ -1,8 +1,11 @@
 ﻿namespace Betalish.Domain.Entities;
 
-public class BadSignIn : ICreatedDateTime, IFormatOnSave
+public class BadSignIn : 
+    ICreatedDateTime, IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
+
+    public SignInBy? SignInBy { get; set; }
 
     public string? IpAddress { get; set; }
 
@@ -22,5 +25,12 @@ public class BadSignIn : ICreatedDateTime, IFormatOnSave
     {
         Name = Name?.Truncate(MaxLengths.Domain.BadSignIn.Name);
         Password = Password?.Truncate(MaxLengths.Domain.BadSignIn.Password);
+    }
+
+    public void ValidateOnSave()
+    {
+        if (SignInBy.HasValue &&
+            !Enum.IsDefined(SignInBy.Value))
+            throw new InvalidEnumException();
     }
 }

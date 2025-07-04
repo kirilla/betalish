@@ -16,6 +16,7 @@ public class BadSignInList(
         IPAddress? ipAddress,
         string? name,
         string? password,
+        SignInBy? signInBy,
         Exception? exception)
     {
         if (!_config.LoggingEnabled)
@@ -41,6 +42,7 @@ public class BadSignInList(
                 OtherException = 
                     exception is not UserNotFoundException &&
                     exception is not PasswordVerificationFailedException,
+                SignInBy = signInBy,
             };
 
             if (_config.LogUsername)

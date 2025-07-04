@@ -1,8 +1,11 @@
 ﻿namespace Betalish.Domain.Entities;
 
-public class Session : ICreatedDateTime, IUpdatedDateTime
+public class Session : 
+    ICreatedDateTime, IUpdatedDateTime, IValidateOnSave
 {
     public int Id { get; set; }
+
+    public SignInBy? SignInBy { get; set; }
 
     public Guid? Guid { get; set; }
 
@@ -26,4 +29,11 @@ public class Session : ICreatedDateTime, IUpdatedDateTime
     public string DateTimeSummary =>
         $"{Created.ToFixedFormatDateShortTime()} - " +
         $"{Updated.ToFixedFormatDateShortTime()}";
+
+    public void ValidateOnSave()
+    {
+        if (SignInBy.HasValue &&
+            !Enum.IsDefined(SignInBy.Value))
+            throw new InvalidEnumException();
+    }
 }

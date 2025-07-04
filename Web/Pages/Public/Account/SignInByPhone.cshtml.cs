@@ -114,6 +114,7 @@ public class SignInByPhoneModel(
                 HttpContext.Connection.RemoteIpAddress,
                 CommandModel.PhoneNumber,
                 CommandModel.Password,
+                SignInBy.Phone,
                 ex);
 
             if (ex is UserNotFoundException ||

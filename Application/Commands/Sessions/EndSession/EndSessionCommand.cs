@@ -27,6 +27,7 @@ public class EndSessionCommand(
             Logout = dateService.GetDateTimeNow(),
             IpAddress = session.IpAddress,
             ClientId = session.ClientId,
+            SignInBy = session.SignInBy,
         };
 
         database.SessionRecords.Add(record);
