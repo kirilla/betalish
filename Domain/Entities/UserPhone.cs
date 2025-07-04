@@ -15,7 +15,7 @@ public class UserPhone :
 
     public void FormatOnSave()
     {
-        Number = Number.StripNonPhoneNumberChars();
+        Number = Number.Trim().StripNonPhoneNumberChars();
 
         this.SetEmptyStringsToNull();
     }
