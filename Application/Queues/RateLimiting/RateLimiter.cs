@@ -30,6 +30,7 @@ public class RateLimiter(
                         $"IP address {hit.IpAddress?.ToString() ??  "okänd"} " +
                         $"rate limitated on endpoint {hit.Endpoint}.",
                     LogItemKind = LogItemKind.RateLimited,
+                    IpAddress = hit.IpAddress,
                 });
 
                 throw new RateLimitedException();
