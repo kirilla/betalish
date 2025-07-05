@@ -9,8 +9,7 @@ public class SessionRecord : IValidateOnSave
     public DateTime Login { get; set; }
     public DateTime Logout { get; set; }
 
-    public bool WasReaped { get; set; }
-    public bool WasForced { get; set; }
+    public SessionEnd SessionEnd { get; set; }
 
     public string? IpAddress { get; set; }
 
@@ -35,6 +34,9 @@ public class SessionRecord : IValidateOnSave
     {
         if (SignInBy.HasValue &&
             !Enum.IsDefined(SignInBy.Value))
-            throw new InvalidEnumException();
+            throw new InvalidEnumException(nameof(SignInBy));
+
+        if (!Enum.IsDefined(SessionEnd))
+            throw new InvalidEnumException(nameof(SessionEnd));
     }
 }

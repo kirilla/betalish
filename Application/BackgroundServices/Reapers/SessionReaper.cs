@@ -51,10 +51,10 @@ namespace Betalish.Application.BackgroundServices.Reapers
                     UserId = x.UserId,
                     Login = x.Created!.Value,
                     Logout = dateService.GetDateTimeNow(),
-                    WasReaped = true,
                     IpAddress = x.IpAddress,
                     ClientId = x.ClientId,
                     SignInBy = x.SignInBy,
+                    SessionEnd = SessionEnd.ReapedByTimeout,
                 });
 
             database.SessionRecords.AddRange(records);

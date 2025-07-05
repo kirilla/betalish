@@ -4,6 +4,7 @@ using Betalish.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Betalish.Persistence.Migrations
 {
     [DbContext(typeof(DatabaseService))]
-    partial class DatabaseServiceModelSnapshot : ModelSnapshot
+    [Migration("20250705155913_SessionRecord_SessionEnd_enum")]
+    partial class SessionRecord_SessionEnd_enum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

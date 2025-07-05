@@ -24,7 +24,7 @@ public class TerminateSessionsCommand(
                 Login = x.Created!.Value,
                 Logout = dateService.GetDateTimeNow(),
                 IpAddress = x.IpAddress,
-                WasForced = true,
+                SessionEnd = SessionEnd.TerminatedByAdmin,
                 ClientId = x.ClientId,
                 SignInBy = x.SignInBy,
             });

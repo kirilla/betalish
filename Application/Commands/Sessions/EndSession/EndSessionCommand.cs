@@ -17,9 +17,6 @@ public class EndSessionCommand(
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (session.UserId != userToken.UserId!.Value)
-            throw new NotPermittedException();
-
         var record = new SessionRecord()
         {
             UserId = session.UserId,
@@ -28,6 +25,7 @@ public class EndSessionCommand(
             IpAddress = session.IpAddress,
             ClientId = session.ClientId,
             SignInBy = session.SignInBy,
+            SessionEnd = SessionEnd.UserEndSession,
         };
 
         database.SessionRecords.Add(record);

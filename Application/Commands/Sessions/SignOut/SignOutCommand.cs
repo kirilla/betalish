@@ -24,6 +24,7 @@ public class SignOutCommand(
             IpAddress = session.IpAddress,
             ClientId = session.ClientId,
             SignInBy = session.SignInBy,
+            SessionEnd = SessionEnd.UserSignOut,
         };
 
         database.SessionRecords.Add(record);

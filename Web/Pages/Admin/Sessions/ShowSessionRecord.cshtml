@@ -24,20 +24,16 @@
                 @(Model.SessionRecord.User.Name)
             </a>
         </span>
-        <br />
-        <span>
-            Klient:
-            @if (Model.SessionRecord.ClientId.HasValue)
-            {
+        @if (Model.SessionRecord.ClientId.HasValue)
+        {
+            <br />
+            <span>
+                Klient:
                 <a href="/show-client/@(Model.SessionRecord.ClientId)">
                     @(Model.SessionRecord.Client?.Name)
                 </a>
-            }
-            else
-            {
-                <span>@(Model.SessionRecord.Client?.Name ?? "-")</span>
-            }
-        </span>
+            </span>
+        }
         <br />
         <span>
             IP-adress:
@@ -52,16 +48,15 @@
         <br />
         <br />
         <span>
-            Timeout: @(Model.SessionRecord.WasReaped ? "Ja" : "Nej")<br />
-            Tvingat: @(Model.SessionRecord.WasForced ? "Ja" : "Nej")
+            Inloggning via:
+            @(Model.SessionRecord.SignInBy)
         </span>
         <br />
         <br />
         <span>
-            Inloggning via:<br />
-            @(Model.SessionRecord.SignInBy)
+            Avslut: @(Model.SessionRecord.SessionEnd)
         </span>
-
+        
     </div>
 
 </main>
