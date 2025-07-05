@@ -1,4 +1,7 @@
 ﻿using Betalish.Application.Commands.Signups.SignupForService;
+using Betalish.Application.Models;
+using Betalish.Application.Queues.RateLimiting;
+using Betalish.Common.Dates;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Betalish.Web.Pages.Public.Signups;
@@ -7,6 +10,8 @@ namespace Betalish.Web.Pages.Public.Signups;
 public class SignupForServiceModel(
     IUserToken userToken,
     IDatabaseService database,
+    IDateService dateService,
+    IRateLimiter rateLimiter,
     ISignupForServiceCommand command,
     IOptions<SignUpConfiguration> options) : UserTokenPageModel(userToken)
 {
@@ -51,6 +56,17 @@ public class SignupForServiceModel(
             if (UserToken.IsAuthenticated)
                 throw new PleaseLogOutException();
 
+            rateLimiter.TryRateLimit(10, new EndpointHit()
+            {
+                DateTime = dateService.GetDateTimeNow(),
+                IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
+                Endpoint = Betalish.Common.Enums.Endpoint.SignupForService,
+            });
+
+            await Task.Delay(
+                TimeSpan.FromMilliseconds(
+                    Random.Shared.Next(200, 600)));
+
             if (!ModelState.IsValid)
                 return Page();
 
@@ -89,6 +105,10 @@ public class SignupForServiceModel(
         catch (PleaseLogOutException)
         {
             return Redirect("/help/please-log-out");
+        }
+        catch (RateLimitedException)
+        {
+            return Redirect("/help/rate-limited");
         }
         catch (Exception ex)
         {
