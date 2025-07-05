@@ -38,17 +38,18 @@ namespace Betalish.Application.BackgroundServices.Reapers
                .Where(x => x.Created < timeInThePast)
                .ToListAsync();
 
-            var count = signups.Count;
+            if (signups.Count == 0)
+                return;
+
+            logItemList.AddLogItem(new LogItem()
+            {
+                Description = $"{signups.Count} signups removed.",
+                LogItemKind = LogItemKind.SignupsReaped,
+            });
 
             database.Signups.RemoveRange(signups);
             
             await database.SaveAsync(new NoUserToken());
-
-            logItemList.AddLogItem(new LogItem()
-            {
-                Description = $"{count} signups reaped.",
-                LogItemKind = LogItemKind.SignupsReaped,
-            });
         }
     }
 }
