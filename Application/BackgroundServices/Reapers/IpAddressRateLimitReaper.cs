@@ -1,5 +1,5 @@
 ﻿using Betalish.Application.Queues.LogItems;
-using Betalish.Application.Queues.RateLimiting;
+using Betalish.Application.Queues.IpAddressRateLimiting;
 using Microsoft.Extensions.Hosting;
 
 namespace Betalish.Application.BackgroundServices.Reapers

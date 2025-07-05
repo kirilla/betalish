@@ -1,7 +1,7 @@
 using Betalish.Application.Commands.Sessions.SignInByPhone;
 using Betalish.Application.Models;
 using Betalish.Application.Queues.BadSignIns;
-using Betalish.Application.Queues.RateLimiting;
+using Betalish.Application.Queues.IpAddressRateLimiting;
 using Betalish.Application.Queues.LogItems;
 using Betalish.Common.Dates;
 using Microsoft.AspNetCore.Authentication;
@@ -16,7 +16,7 @@ public class SignInByPhoneModel(
     IUserToken userToken,
     IBadSignInList badSignInList,
     IDateService dateService,
-    IIpAddressRateLimiter rateLimiter,
+    IIpAddressRateLimiter ipAddressRateLimiter,
     ILogItemList logItemList,
     ISignInByPhoneCommand signInCommand,
     IOptions<SignInConfiguration> options) : UserTokenPageModel(userToken)
@@ -62,7 +62,7 @@ public class SignInByPhoneModel(
             if (UserToken.IsAuthenticated)
                 throw new AlreadyLoggedInException();
 
-            rateLimiter.TryRateLimit(3, new IpAddressEndpointHit()
+            ipAddressRateLimiter.TryRateLimit(3, new IpAddressEndpointHit()
             {
                 DateTime = dateService.GetDateTimeNow(),
                 IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),

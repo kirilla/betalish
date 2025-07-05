@@ -15,5 +15,5 @@ public enum LogItemKind
 
     TerminateSessions = 661471773,
 
-    RateLimited = 820643908,
+    IpAddressRateLimited = 820643908,
 }

@@ -1,4 +1,4 @@
-﻿namespace Betalish.Application.Queues.RateLimiting;
+﻿namespace Betalish.Application.Queues.IpAddressRateLimiting;
 
 public interface IIpAddressRateLimiter
 {

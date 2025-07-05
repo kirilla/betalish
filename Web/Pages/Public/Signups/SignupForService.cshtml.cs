@@ -1,6 +1,6 @@
 ﻿using Betalish.Application.Commands.Signups.SignupForService;
 using Betalish.Application.Models;
-using Betalish.Application.Queues.RateLimiting;
+using Betalish.Application.Queues.IpAddressRateLimiting;
 using Betalish.Common.Dates;
 using Microsoft.AspNetCore.Authorization;
 

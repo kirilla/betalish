@@ -1,5 +1,5 @@
 using Betalish.Application.Models;
-using Betalish.Application.Queues.RateLimiting;
+using Betalish.Application.Queues.IpAddressRateLimiting;
 
 namespace Betalish.Web.Pages.Admin.RateLimiting;
 

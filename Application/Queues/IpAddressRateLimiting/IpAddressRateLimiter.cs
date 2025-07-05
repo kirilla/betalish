@@ -1,6 +1,6 @@
 ﻿using Betalish.Application.Queues.LogItems;
 
-namespace Betalish.Application.Queues.RateLimiting;
+namespace Betalish.Application.Queues.IpAddressRateLimiting;
 
 public class IpAddressRateLimiter(
     IDateService dateService,
@@ -29,7 +29,7 @@ public class IpAddressRateLimiter(
                     Description = 
                         $"IP address {hit.IpAddress?.ToString() ??  "okänd"} " +
                         $"rate limited on endpoint {hit.Endpoint}.",
-                    LogItemKind = LogItemKind.RateLimited,
+                    LogItemKind = LogItemKind.IpAddressRateLimited,
                     IpAddress = hit.IpAddress,
                 });
 
