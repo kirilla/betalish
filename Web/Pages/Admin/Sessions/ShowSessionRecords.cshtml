@@ -28,16 +28,14 @@
                 <li>
                     😵
                     &thinsp;
-                    <a href="/show-user/@(record.UserId)">
+                    <a href="/show-session-record/@(record.Id)">
                         @(record.User.Name)
                     </a>
                     @if (record.ClientId.HasValue)
                     {
                         <span>
                             &ensp;
-                            <a href="/show-client/@(record.ClientId)">
-                                @(record.Client?.Name ?? "Okänt")
-                            </a>
+                            @(record.Client?.Name ?? "Okänt")
                         </span>
                     }
                     &ensp;

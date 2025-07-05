@@ -1,0 +1,67 @@
+﻿@page "/show-session-record/{id:int}"
+@model ShowSessionRecordModel
+@{
+}
+
+@section Meta {
+    <title>Historisk session - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Historisk session
+    </h4>
+
+    <div class="notice">
+        <span>
+            Användare:
+            <a href="/show-user/@(Model.SessionRecord.UserId)">
+                @(Model.SessionRecord.User.Name)
+            </a>
+        </span>
+        <br />
+        <span>
+            Klient:
+            @if (Model.SessionRecord.ClientId.HasValue)
+            {
+                <a href="/show-client/@(Model.SessionRecord.ClientId)">
+                    @(Model.SessionRecord.Client?.Name)
+                </a>
+            }
+            else
+            {
+                <span>@(Model.SessionRecord.Client?.Name ?? "-")</span>
+            }
+        </span>
+        <br />
+        <span>
+            IP-adress:
+            @(Model.SessionRecord.IpAddress ?? "-")
+        </span>
+        <br />
+        <br />
+        <span>
+            @(Model.SessionRecord.Login.ToFixedFormatDateShortTime()) - <br />
+            @(Model.SessionRecord.Logout.ToFixedFormatDateShortTime())
+        </span>
+        <br />
+        <br />
+        <span>
+            Timeout: @(Model.SessionRecord.WasReaped ? "Ja" : "Nej")<br />
+            Tvingat: @(Model.SessionRecord.WasForced ? "Ja" : "Nej")
+        </span>
+        <br />
+        <br />
+        <span>
+            Inloggning via:<br />
+            @(Model.SessionRecord.SignInBy)
+        </span>
+
+    </div>
+
+</main>
