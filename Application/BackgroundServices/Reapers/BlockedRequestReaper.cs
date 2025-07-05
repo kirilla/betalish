@@ -62,7 +62,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
 
             logItemList.AddLogItem(new LogItem()
             {
-                Description = $"{count} blocked requests reaped.",
+                Description = $"{count} blocked requests removed.",
                 LogItemKind = LogItemKind.BlockedRequestReaped,
             });
         }
