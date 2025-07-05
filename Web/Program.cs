@@ -5,6 +5,7 @@ using Betalish.Application.Queues.BadSignIns;
 using Betalish.Application.Queues.IpAddressRateLimiting;
 using Betalish.Application.Queues.LogItems;
 using Betalish.Application.Queues.SessionActivities;
+using Betalish.Application.Queues.SignInRateLimiting;
 using Betalish.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.CookiePolicy;
@@ -76,6 +77,7 @@ public class Program
         builder.Services.AddSingleton<IIpAddressRateLimiter, IpAddressRateLimiter>();
         builder.Services.AddSingleton<ILogItemList, LogItemList>();
         builder.Services.AddSingleton<ISessionActivityList, SessionActivityList>();
+        builder.Services.AddSingleton<ISignInRateLimiter, SignInRateLimiter>();
 
         builder.Services.AddScoped<CookieValidator>();
         builder.Services.AddScoped<IUserToken, UserToken>();
@@ -102,6 +104,7 @@ public class Program
             builder.Services.AddHostedService<SessionActivityLogger>();
             builder.Services.AddHostedService<SessionReaper>();
             builder.Services.AddHostedService<SessionActivityReaper>();
+            builder.Services.AddHostedService<SignInRateLimitReaper>();
             builder.Services.AddHostedService<SignupReaper>();
         }
 

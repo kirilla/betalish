@@ -21,8 +21,11 @@
     </h4>
 
     <div class="notice">
+
+        <h5>IP-address</h5>
+
         <ul>
-            @if (!Model.EndpointHits.Any())
+            @if (!Model.IpAddressEndpointHits.Any())
             {
                 <li>
                     🚧
@@ -30,7 +33,7 @@
                     &ndash;
                 </li>
             }
-            @foreach (var hit in Model.EndpointHits)
+            @foreach (var hit in Model.IpAddressEndpointHits)
             {
                 <li>
                     🚧
@@ -45,12 +48,46 @@
                 </li>
             }
         </ul>
+
+        <p>
+            <a class="button" href="/clear-rate-limiting">
+                Töm
+            </a>
+        </p>
     </div>
 
-    <p>
+    <div class="notice">
+
+        <h5>Inloggningsnamn</h5>
+
+        <ul>
+            @if (!Model.SignInAttempts.Any())
+            {
+                <li>
+                    🚧
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+            @foreach (var hit in Model.SignInAttempts)
+            {
+                <li>
+                    🚧
+                    &thinsp;
+                    @(hit.Username)
+                    &thinsp;
+                    @(hit.Endpoint)
+                    &ensp;
+                    <span class="muted">
+                        @(hit.DateTime.ToFixedFormatDateShortTime())
+                    </span>
+                </li>
+            }
+        </ul>
+
         <a class="button" href="/clear-rate-limiting">
             Töm
         </a>
-    </p>
+    </div>
 
 </main>

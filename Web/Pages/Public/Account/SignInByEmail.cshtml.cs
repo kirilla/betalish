@@ -3,6 +3,7 @@ using Betalish.Application.Models;
 using Betalish.Application.Queues.BadSignIns;
 using Betalish.Application.Queues.IpAddressRateLimiting;
 using Betalish.Application.Queues.LogItems;
+using Betalish.Application.Queues.SignInRateLimiting;
 using Betalish.Common.Dates;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -17,6 +18,7 @@ public class SignInByEmailModel(
     IBadSignInList badSignInList,
     IDateService dateService,
     IIpAddressRateLimiter ipAddressRateLimiter,
+    ISignInRateLimiter signInRateLimiter,
     ILogItemList logItemList,
     ISignInByEmailCommand signInCommand,
     IOptions<SignInConfiguration> options) : UserTokenPageModel(userToken)
@@ -62,10 +64,17 @@ public class SignInByEmailModel(
             if (UserToken.IsAuthenticated)
                 throw new AlreadyLoggedInException();
 
-            ipAddressRateLimiter.TryRateLimit(3, new IpAddressEndpointHit()
+            ipAddressRateLimiter.TryRateLimit(5, new IpAddressEndpointHit()
             {
                 DateTime = dateService.GetDateTimeNow(),
                 IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
+                Endpoint = Betalish.Common.Enums.Endpoint.SignInByEmail,
+            });
+
+            signInRateLimiter.TryRateLimit(3, new SignInAttempt()
+            {
+                DateTime = dateService.GetDateTimeNow(),
+                Username = CommandModel.EmailAddress,
                 Endpoint = Betalish.Common.Enums.Endpoint.SignInByEmail,
             });
 
