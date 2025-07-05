@@ -1,33 +1,40 @@
-﻿namespace Betalish.Application.Queues.RateLimiting;
+﻿using Betalish.Application.Queues.LogItems;
 
-public class RateLimiter(IDateService dateService) : IRateLimiter
+namespace Betalish.Application.Queues.RateLimiting;
+
+public class RateLimiter(
+    IDateService dateService,
+    ILogItemList logItemList) : IRateLimiter
 {
     private List<EndpointHit> list { get; set; } = new List<EndpointHit>();
 
-    public void TryRateLimit(EndpointHit hit)
+    public void TryRateLimit(int limit, EndpointHit hit)
     {
+        if (string.IsNullOrWhiteSpace(hit.IpAddress))
+            throw new NotPermittedException();
+
         lock (this)
         {
             list.Add(hit);
-        }
 
-        Evaluate(hit);
-    }
-
-    private void Evaluate(EndpointHit hit)
-    {
-        int count = 0;
-
-        lock (this)
-        {
-            count = list
+            var count = list
                 .Count(x =>
                     x.Endpoint == hit.Endpoint &&
                     x.IpAddress == hit.IpAddress);
-        }
 
-        if (count > 10)
-            throw new RateLimitedException();
+            if (count > limit)
+            {
+                logItemList.AddLogItem(new LogItem()
+                {
+                    Description = 
+                        $"IP address {hit.IpAddress?.ToString() ??  "okänd"} " +
+                        $"rate limitated on endpoint {hit.Endpoint}.",
+                    LogItemKind = LogItemKind.RateLimited,
+                });
+
+                throw new RateLimitedException();
+            }
+        }
     }
 
     public List<EndpointHit> ToList()

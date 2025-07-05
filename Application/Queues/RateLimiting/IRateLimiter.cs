@@ -2,7 +2,7 @@
 
 public interface IRateLimiter
 {
-    void TryRateLimit(EndpointHit hit);
+    void TryRateLimit(int limit, EndpointHit hit);
 
     List<EndpointHit> ToList();
 

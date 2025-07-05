@@ -62,10 +62,10 @@ public class SignInByEmailModel(
             if (UserToken.IsAuthenticated)
                 throw new AlreadyLoggedInException();
 
-            rateLimiter.TryRateLimit(new EndpointHit()
+            rateLimiter.TryRateLimit(3, new EndpointHit()
             {
                 DateTime = dateService.GetDateTimeNow(),
-                IpAddress = HttpContext.Connection.RemoteIpAddress,
+                IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
                 Endpoint = Betalish.Common.Enums.Endpoint.SignInByEmail,
             });
 

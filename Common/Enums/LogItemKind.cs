@@ -14,4 +14,6 @@ public enum LogItemKind
     SignupsReaped = 786751720,
 
     TerminateSessions = 661471773,
+
+    RateLimited = 820643908,
 }
