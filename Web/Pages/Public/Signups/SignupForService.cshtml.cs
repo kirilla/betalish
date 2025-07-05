@@ -11,7 +11,7 @@ public class SignupForServiceModel(
     IUserToken userToken,
     IDatabaseService database,
     IDateService dateService,
-    IRateLimiter rateLimiter,
+    IIpAddressRateLimiter rateLimiter,
     ISignupForServiceCommand command,
     IOptions<SignUpConfiguration> options) : UserTokenPageModel(userToken)
 {
@@ -56,7 +56,7 @@ public class SignupForServiceModel(
             if (UserToken.IsAuthenticated)
                 throw new PleaseLogOutException();
 
-            rateLimiter.TryRateLimit(10, new EndpointHit()
+            rateLimiter.TryRateLimit(10, new IpAddressEndpointHit()
             {
                 DateTime = dateService.GetDateTimeNow(),
                 IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),

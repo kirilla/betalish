@@ -5,10 +5,10 @@ namespace Betalish.Web.Pages.Admin.RateLimiting;
 
 public class ShowRateLimitingModel(
     IUserToken userToken,
-    IRateLimiter rateLimiter,
+    IIpAddressRateLimiter rateLimiter,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<EndpointHit> EndpointHits { get; set; }
+    public List<IpAddressEndpointHit> EndpointHits { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {

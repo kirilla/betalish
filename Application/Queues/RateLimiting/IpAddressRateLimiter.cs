@@ -2,13 +2,13 @@
 
 namespace Betalish.Application.Queues.RateLimiting;
 
-public class RateLimiter(
+public class IpAddressRateLimiter(
     IDateService dateService,
-    ILogItemList logItemList) : IRateLimiter
+    ILogItemList logItemList) : IIpAddressRateLimiter
 {
-    private List<EndpointHit> list { get; set; } = new List<EndpointHit>();
+    private List<IpAddressEndpointHit> list { get; set; } = new List<IpAddressEndpointHit>();
 
-    public void TryRateLimit(int limit, EndpointHit hit)
+    public void TryRateLimit(int limit, IpAddressEndpointHit hit)
     {
         if (string.IsNullOrWhiteSpace(hit.IpAddress))
             throw new NotPermittedException();
@@ -38,7 +38,7 @@ public class RateLimiter(
         }
     }
 
-    public List<EndpointHit> ToList()
+    public List<IpAddressEndpointHit> ToList()
     {
         lock (this)
         {

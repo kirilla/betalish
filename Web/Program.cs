@@ -73,7 +73,7 @@ public class Program
             });
 
         builder.Services.AddSingleton<IBadSignInList, BadSignInList>();
-        builder.Services.AddSingleton<IRateLimiter, RateLimiter>();
+        builder.Services.AddSingleton<IIpAddressRateLimiter, IpAddressRateLimiter>();
         builder.Services.AddSingleton<ILogItemList, LogItemList>();
         builder.Services.AddSingleton<ISessionActivityList, SessionActivityList>();
 
@@ -98,7 +98,7 @@ public class Program
             builder.Services.AddHostedService<BlockedRequestReaper>();
             builder.Services.AddHostedService<EmailSender>();
             builder.Services.AddHostedService<LogItemLogger>();
-            builder.Services.AddHostedService<RateLimitReaper>();
+            builder.Services.AddHostedService<IpAddressRateLimitReaper>();
             builder.Services.AddHostedService<SessionActivityLogger>();
             builder.Services.AddHostedService<SessionReaper>();
             builder.Services.AddHostedService<SessionActivityReaper>();

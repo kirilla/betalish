@@ -4,10 +4,10 @@ using Microsoft.Extensions.Hosting;
 
 namespace Betalish.Application.BackgroundServices.Reapers
 {
-    public class RateLimitReaper(
+    public class IpAddressRateLimitReaper(
         IDateService dateService,
         ILogItemList logItemList,
-        IRateLimiter rateLimiter,
+        IIpAddressRateLimiter rateLimiter,
         IServiceProvider serviceProvider) : BackgroundService
     {
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

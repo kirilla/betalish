@@ -16,7 +16,7 @@ public class SignInByPhoneModel(
     IUserToken userToken,
     IBadSignInList badSignInList,
     IDateService dateService,
-    IRateLimiter rateLimiter,
+    IIpAddressRateLimiter rateLimiter,
     ILogItemList logItemList,
     ISignInByPhoneCommand signInCommand,
     IOptions<SignInConfiguration> options) : UserTokenPageModel(userToken)
@@ -62,7 +62,7 @@ public class SignInByPhoneModel(
             if (UserToken.IsAuthenticated)
                 throw new AlreadyLoggedInException();
 
-            rateLimiter.TryRateLimit(3, new EndpointHit()
+            rateLimiter.TryRateLimit(3, new IpAddressEndpointHit()
             {
                 DateTime = dateService.GetDateTimeNow(),
                 IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
