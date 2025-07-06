@@ -7,6 +7,4 @@ public enum Endpoint
     SignInByEmail = 493102095,
     SignInByPhone = 696562050,
     SignInBySsn = 159987186,
-
-    SignOut = 929908639,
 }
