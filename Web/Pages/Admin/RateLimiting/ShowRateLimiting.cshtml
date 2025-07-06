@@ -22,7 +22,31 @@
 
     <div class="notice">
 
-        <h5>IP-address</h5>
+        <h5>Logg</h5>
+
+        @if (!Model.RateLimitLogItems.Any())
+        {
+            <p>
+                🚧
+                &thinsp;
+                &ndash;
+            </p>
+        }
+        @foreach (var item in Model.RateLimitLogItems)
+        {
+            <p>
+                <span class="muted">
+                    @(item.Created.ToFixedFormatDateShortTime())
+                </span>
+                <br />
+                @(item.Description)
+            </p>
+        }
+    </div>
+
+    <div class="notice">
+
+        <h5>Aktiva IP-addresser</h5>
 
         <ul>
             @if (!Model.IpAddressEndpointHits.Any())
@@ -58,7 +82,7 @@
 
     <div class="notice">
 
-        <h5>Inloggningsnamn</h5>
+        <h5>Aktiva inloggningsnamn</h5>
 
         <ul>
             @if (!Model.SignInAttempts.Any())
@@ -75,6 +99,38 @@
                     🚧
                     &thinsp;
                     @(hit.Username)
+                    &thinsp;
+                    @(hit.Endpoint)
+                    &ensp;
+                    <span class="muted">
+                        @(hit.DateTime.ToFixedFormatDateShortTime())
+                    </span>
+                </li>
+            }
+        </ul>
+
+        <a class="button" href="/clear-rate-limiting">
+            Töm
+        </a>
+    </div>
+
+    <div class="notice">
+
+        <h5>Aktiva ändpunkter</h5>
+
+        <ul>
+            @if (!Model.EndpointHits.Any())
+            {
+                <li>
+                    🚧
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+            @foreach (var hit in Model.EndpointHits)
+            {
+                <li>
+                    🚧
                     &thinsp;
                     @(hit.Endpoint)
                     &ensp;
