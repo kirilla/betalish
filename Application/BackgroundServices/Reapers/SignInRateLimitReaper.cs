@@ -14,7 +14,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                await Reap(stoppingToken);
+                Reap(stoppingToken);
 
                 await Task
                     .Delay(TimeSpan.FromMinutes(1), stoppingToken)
@@ -26,7 +26,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
             }
         }
 
-        private async Task Reap(CancellationToken stoppingToken)
+        private void Reap(CancellationToken stoppingToken)
         {
             rateLimiter.RemoveOlderThan(TimeSpan.FromMinutes(6));
         }
