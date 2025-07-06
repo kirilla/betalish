@@ -2,6 +2,7 @@ using Betalish.Application.BackgroundServices.Email;
 using Betalish.Application.BackgroundServices.Loggers;
 using Betalish.Application.BackgroundServices.Reapers;
 using Betalish.Application.Queues.BadSignIns;
+using Betalish.Application.Queues.EndpointRateLimiting;
 using Betalish.Application.Queues.IpAddressRateLimiting;
 using Betalish.Application.Queues.LogItems;
 using Betalish.Application.Queues.SessionActivities;
@@ -74,6 +75,7 @@ public class Program
             });
 
         builder.Services.AddSingleton<IBadSignInList, BadSignInList>();
+        builder.Services.AddSingleton<IEndpointRateLimiter, EndpointRateLimiter>();
         builder.Services.AddSingleton<IIpAddressRateLimiter, IpAddressRateLimiter>();
         builder.Services.AddSingleton<ILogItemList, LogItemList>();
         builder.Services.AddSingleton<ISessionActivityList, SessionActivityList>();
@@ -99,6 +101,7 @@ public class Program
             builder.Services.AddHostedService<BadSignInLogger>();
             builder.Services.AddHostedService<BlockedRequestReaper>();
             builder.Services.AddHostedService<EmailSender>();
+            builder.Services.AddHostedService<EndpointRateLimitReaper>();
             builder.Services.AddHostedService<LogItemLogger>();
             builder.Services.AddHostedService<IpAddressRateLimitReaper>();
             builder.Services.AddHostedService<SessionActivityLogger>();

@@ -1,6 +1,7 @@
 using Betalish.Application.Commands.Sessions.SignInByEmail;
 using Betalish.Application.Models;
 using Betalish.Application.Queues.BadSignIns;
+using Betalish.Application.Queues.EndpointRateLimiting;
 using Betalish.Application.Queues.IpAddressRateLimiting;
 using Betalish.Application.Queues.LogItems;
 using Betalish.Application.Queues.SignInRateLimiting;
@@ -17,6 +18,7 @@ public class SignInByEmailModel(
     IUserToken userToken,
     IBadSignInList badSignInList,
     IDateService dateService,
+    IEndpointRateLimiter endpointRateLimiter,
     IIpAddressRateLimiter ipAddressRateLimiter,
     ISignInRateLimiter signInRateLimiter,
     ILogItemList logItemList,
@@ -63,6 +65,12 @@ public class SignInByEmailModel(
 
             if (UserToken.IsAuthenticated)
                 throw new AlreadyLoggedInException();
+
+            endpointRateLimiter.TryRateLimit(100, new EndpointHit()
+            {
+                DateTime = dateService.GetDateTimeNow(),
+                Endpoint = Betalish.Common.Enums.Endpoint.SignInByEmail,
+            });
 
             ipAddressRateLimiter.TryRateLimit(5, new IpAddressEndpointHit()
             {

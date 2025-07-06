@@ -1,5 +1,6 @@
 ﻿using Betalish.Application.Commands.Signups.SignupForService;
 using Betalish.Application.Models;
+using Betalish.Application.Queues.EndpointRateLimiting;
 using Betalish.Application.Queues.IpAddressRateLimiting;
 using Betalish.Common.Dates;
 using Microsoft.AspNetCore.Authorization;
@@ -11,7 +12,8 @@ public class SignupForServiceModel(
     IUserToken userToken,
     IDatabaseService database,
     IDateService dateService,
-    IIpAddressRateLimiter rateLimiter,
+    IEndpointRateLimiter endpointRateLimiter,
+    IIpAddressRateLimiter ipAddressRateLimiter,
     ISignupForServiceCommand command,
     IOptions<SignUpConfiguration> options) : UserTokenPageModel(userToken)
 {
@@ -56,7 +58,13 @@ public class SignupForServiceModel(
             if (UserToken.IsAuthenticated)
                 throw new PleaseLogOutException();
 
-            rateLimiter.TryRateLimit(10, new IpAddressEndpointHit()
+            endpointRateLimiter.TryRateLimit(100, new EndpointHit()
+            {
+                DateTime = dateService.GetDateTimeNow(),
+                Endpoint = Betalish.Common.Enums.Endpoint.SignupForService,
+            });
+
+            ipAddressRateLimiter.TryRateLimit(10, new IpAddressEndpointHit()
             {
                 DateTime = dateService.GetDateTimeNow(),
                 IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
