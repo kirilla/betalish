@@ -23,6 +23,7 @@ public interface IDatabaseService
     DbSet<Signup> Signups { get; set; }
     DbSet<User> Users { get; set; }
     DbSet<UserEmail> UserEmails { get; set; }
+    DbSet<UserEvent> UserEvents { get; set; }
     DbSet<UserPhone> UserPhones { get; set; }
 
     Task SaveAsync(IUserToken userToken);

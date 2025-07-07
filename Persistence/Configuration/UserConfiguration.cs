@@ -40,6 +40,10 @@ class UserConfiguration : IEntityTypeConfiguration<User>
             .WithOne(x => x.User)
             .HasForeignKey(x => x.UserId);
 
+        builder.HasMany(x => x.UserEvents)
+            .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId);
+
         builder.HasMany(x => x.UserPhones)
             .WithOne(x => x.User)
             .HasForeignKey(x => x.UserId);

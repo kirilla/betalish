@@ -174,5 +174,10 @@ public static class MaxLengths
             public const int Exception = 200;
             public const int InnerException = 200;
         }
+
+        public static class UserEvent
+        {
+            public const int Description = 200;
+        }
     }
 }

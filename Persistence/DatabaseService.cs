@@ -29,6 +29,7 @@ public class DatabaseService(
     public DbSet<Signup> Signups { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserEmail> UserEmails { get; set; }
+    public DbSet<UserEvent> UserEvents { get; set; }
     public DbSet<UserPhone> UserPhones { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
@@ -54,6 +55,7 @@ public class DatabaseService(
         new SignupConfiguration().Configure(builder.Entity<Signup>());
         new UserConfiguration().Configure(builder.Entity<User>());
         new UserEmailConfiguration().Configure(builder.Entity<UserEmail>());
+        new UserEventConfiguration().Configure(builder.Entity<UserEvent>());
         new UserPhoneConfiguration().Configure(builder.Entity<UserPhone>());
     }
 
