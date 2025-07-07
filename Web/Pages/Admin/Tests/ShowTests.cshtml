@@ -1,0 +1,36 @@
+﻿@page "/show-tests"
+@model ShowTestsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Testfunktioner - 
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Testfunktioner
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            <li>
+                ⚙️
+                &thinsp;
+                <a href="/test-log-item-dedup">
+                    LogItem deduplication
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+</main>

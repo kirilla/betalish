@@ -1,0 +1,43 @@
+﻿@page "/test-log-item-dedup"
+@model TestLogItemDedupModel
+@{
+}
+
+@section Meta {
+    <title>
+        Testa LogItem deduplication -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Testa LogItem deduplication?
+    </h4>
+
+    <form method="post">
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, gör det!
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Kör test
+        </button>
+
+        <a class="button" href="/show-tests">
+            Avbryt
+        </a>
+
+    </form>
+
+</main>
