@@ -4,7 +4,7 @@ public class ShowBlockedUrlsModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<string> UserAgents { get; set; }
+    public List<string> URLs { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -12,7 +12,7 @@ public class ShowBlockedUrlsModel(
         {
             await AssertAdminAuthorization(database);
 
-            UserAgents = await database.BlockedRequests
+            URLs = await database.BlockedRequests
                 .AsNoTracking()
                 .Select(x => x.Url)
                 .Where(x => x != null)

@@ -14,6 +14,12 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
+<style>
+    html {
+        scroll-behavior: auto;
+    }
+</style>
+
 <main>
 
     <h4>
@@ -21,20 +27,44 @@
     </h4>
 
     <div class="notice">
+        <ul>
+            <li>
+                ➡️
+                &thinsp;
+                <a href="/show-blocked-urls">URL:er</a>
+            </li>
+            <li>
+                ➡️
+                &thinsp;
+                <a href="/show-blocked-user-agents">Agenter</a>
+            </li>
+            <li>
+                ➡️
+                &thinsp;
+                <a href="/show-blocked-ip-addresses">IP-adresser</a>
+            </li>
+        </ul>
+    </div>
+
+    <h5 id="requests">
+        Anrop
+    </h5>
+
+    <div class="notice" >
 
         <ul>
             @foreach (var evt in Model.BlockedRequests)
             {
                 <li>
-                    🛑
-                    &thinsp;
                     <a href="/show-blocked-request/@(evt.Id)">
                         @(evt.Created.ToFixedFormatDateShortTime())
                     </a>
-                    &thinsp;
+                    <br />
                     @(evt.Method)
                     &thinsp;
                     @(evt.Url)
+                    <br />
+                    <br />
                 </li>
             }
 

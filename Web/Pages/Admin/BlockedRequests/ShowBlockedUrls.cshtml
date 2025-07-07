@@ -22,7 +22,7 @@
 
     <div class="notice">
         <ul>
-            @if (!Model.UserAgents.Any())
+            @if (!Model.URLs.Any())
             {
                 <li>
                     🛑
@@ -30,7 +30,7 @@
                     &ndash;
                 </li>
             }
-            @foreach (var agent in Model.UserAgents)
+            @foreach (var agent in Model.URLs)
             {
                 <li>
                     🛑
@@ -40,11 +40,5 @@
             }
         </ul>
     </div>
-
-    <p>
-        <a class="button" href="/remove-blocked-requests">
-            Ta bort
-        </a>
-    </p>
 
 </main>
