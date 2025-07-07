@@ -1,7 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Betalish.Application.Queues.LogItems;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Betalish.Application.Queues.LogItems;
-using Betalish.Application.Auth;
 
 namespace Betalish.Application.BackgroundServices.Loggers;
 
@@ -41,10 +40,41 @@ public class LogItemLogger(IServiceProvider serviceProvider) : BackgroundService
         if (logItems.Count == 0)
             return;
 
+        logItems = Dedup(logItems);
+
         var database = scope.ServiceProvider.GetRequiredService<IDatabaseService>();
 
         database.LogItems.AddRange(logItems);
 
         await database.SaveAsync(new NoUserToken());
+    }
+
+    public static List<LogItem> Dedup(List<LogItem> logItems)
+    {
+        return logItems
+            .GroupBy(x => new
+            {
+                x.Error,
+                x.Description,
+                x.Exception,
+                x.InnerException,
+                x.LogItemKind,
+                x.UserId,
+                x.IpAddress,
+            })
+            .ToList()
+            .Select(x => new LogItem()
+            {
+                Error = x.Key.Error,
+                Description = x.Key.Description,
+                Exception = x.Key.Exception,
+                InnerException = x.Key.InnerException,
+                LogItemKind = x.Key.LogItemKind,
+                UserId = x.Key.UserId,
+                IpAddress = x.Key.IpAddress,
+                RepeatCount = x.Count() == 1 ? null : x.Count(),
+                RepeatedUntil = x.Count() == 1 ? null : x.Max(x => x.Created),
+            })
+            .ToList();
     }
 }

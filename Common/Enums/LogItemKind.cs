@@ -18,4 +18,6 @@ public enum LogItemKind
     IpAddressRateLimited = 820643908,
     SignInRateLimited = 864697948,
     EndpointRateLimited = 291390178,
+
+    Test = 94729107,
 }

@@ -16,7 +16,10 @@ public class LogItem : ICreatedDateTime, IFormatOnSave
     public string? IpAddress { get; set; }
 
     public DateTime? Created { get; set; }
+    public DateTime? RepeatedUntil { get; set; }
 
+    public int? RepeatCount { get; set; }
+    
     public void FormatOnSave()
     {
         Description = Description
