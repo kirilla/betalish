@@ -1,0 +1,64 @@
+﻿@page "/show-log-items"
+@model ShowLogItemsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Logghändelser -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Logghändelser
+    </h4>
+
+    <div class="notice" >
+
+        <ul>
+            @foreach (var item in Model.LogItems)
+            {
+                <li>
+                    @(item.Created.ToFixedFormatDateShortTime())
+                    <br />
+                    <a href="/show-log-item/@(item.Id)">
+                        @(item.Description ?? item.LogItemKind.ToString())
+                    </a>
+                    @if (item.IpAddress != null)
+                    {
+                        <br />
+                        <span>
+                            @(item.IpAddress)
+                        </span>
+                    }
+                    <br />
+                    <br />
+                </li>
+            }
+
+            @if (!Model.LogItems.Any())
+            {
+                <li>
+                    ‼️
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <p>
+        <a class="button" href="/remove-log-items">
+            Ta bort
+        </a>
+    </p>
+
+</main>
