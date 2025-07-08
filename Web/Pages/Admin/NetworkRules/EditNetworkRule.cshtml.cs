@@ -31,6 +31,8 @@ public class EditNetworkRuleModel(
             {
                 Id = NetworkRule.Id,
                 Range = NetworkRule.Range,
+                BaseAddress2 = NetworkRule.BaseAddress2,
+                Prefix2 = NetworkRule.Prefix2,
                 Blocked = NetworkRule.Blocked,
             };
 

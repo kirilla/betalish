@@ -21,7 +21,14 @@
 
     <form method="post">
 
+        <label asp-for="CommandModel.Range">Range</label>
         <input asp-for="CommandModel.Range" placeholder="192.168.0.1/32" />
+
+        <label asp-for="CommandModel.BaseAddress2">Basadress</label>
+        <input asp-for="CommandModel.BaseAddress2" placeholder="192.168.0.1" />
+
+        <label asp-for="CommandModel.Prefix2">Prefix</label>
+        <input asp-for="CommandModel.Prefix2" placeholder="1-128" />
 
         <p>
             <label asp-for="CommandModel.Blocked">

@@ -8,6 +8,9 @@ public class NetworkRule : ICreatedDateTime, IUpdatedDateTime
 
     public string Range { get; set; }
 
+    public string? BaseAddress2 { get; set; }
+    public int? Prefix2 { get; set; }
+
     public bool Blocked { get; set; }
 
     public DateTime? Created { get; set; }

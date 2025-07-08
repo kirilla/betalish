@@ -35,6 +35,8 @@ public class EditNetworkRuleCommand(
             throw new BlockedByExistingException();
 
         range.Range = model.Range;
+        range.BaseAddress2 = model.BaseAddress2;
+        range.Prefix2 = model.Prefix2;
         range.Blocked = model.Blocked;
 
         await database.SaveAsync(userToken);

@@ -30,7 +30,9 @@ public class AddNetworkRuleCommand(
         var range = new NetworkRule()
         {
             Range = model.Range,
-            Blocked = model.Blocked
+            BaseAddress2 = model.BaseAddress2,
+            Prefix2 = model.Prefix2,
+            Blocked = model.Blocked,
         };
 
         database.NetworkRules.Add(range);
