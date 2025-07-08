@@ -28,7 +28,7 @@ public class AddNetworkRuleCommand(
         var rule = new NetworkRule()
         {
             BaseAddress = model.BaseAddress,
-            PrefixLength = model.PrefixLength,
+            PrefixLength = model.PrefixLength!.Value,
             Blocked = model.Blocked,
         };
 
