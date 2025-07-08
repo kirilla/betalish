@@ -17,7 +17,7 @@ public class UserEvent : ICreatedDateTime, IFormatOnSave
     public void FormatOnSave()
     {
         Description = Description
-            .Truncate(MaxLengths.Domain.LogItem.Description);
+            .Truncate(MaxLengths.Domain.UserEvent.Description);
 
         IpAddress = IpAddress
             .Truncate(MaxLengths.Common.Ip.Address.IPv6);
