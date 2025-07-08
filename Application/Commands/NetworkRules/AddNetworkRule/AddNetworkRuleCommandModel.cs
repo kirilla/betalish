@@ -8,11 +8,11 @@ public class AddNetworkRuleCommandModel
     [StringLength(
         MaxLengths.Common.Ip.Prefix.IPv6,
         ErrorMessage = "Skriv kortare.")]
-    public string? BaseAddress2 { get; set; }
+    public string? BaseAddress { get; set; }
 
     [Required(ErrorMessage = "Skriv ett prefix.")]
     [Range(1, 128)]
-    public int? Prefix2 { get; set; }
+    public int? PrefixLength { get; set; }
 
     public bool Blocked { get; set; }
 }

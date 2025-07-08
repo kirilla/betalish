@@ -51,7 +51,7 @@ public class AddNetworkRuleModel(
         catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.BaseAddress2),
+                nameof(CommandModel.BaseAddress),
                 "Intervallet finns redan.");
 
             return Page();
@@ -59,7 +59,7 @@ public class AddNetworkRuleModel(
         catch (FormatException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.Prefix2),
+                nameof(CommandModel.PrefixLength),
                 "Oväntat format.");
 
             return Page();

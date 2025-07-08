@@ -6,8 +6,8 @@ public class NetworkRule : ICreatedDateTime, IUpdatedDateTime
 {
     public int Id { get; set; }
 
-    public string? BaseAddress2 { get; set; }
-    public int? Prefix2 { get; set; } // TODO: PrefixLength
+    public string? BaseAddress { get; set; }
+    public int? PrefixLength { get; set; }
 
     public bool Blocked { get; set; }
 
@@ -30,8 +30,8 @@ public class NetworkRule : ICreatedDateTime, IUpdatedDateTime
 
     private IPNetwork CreateIPNetwork()
     {
-        IPAddress baseIp = IPAddress.Parse(BaseAddress2);
+        IPAddress baseIp = IPAddress.Parse(BaseAddress);
 
-        return new IPNetwork(baseIp, Prefix2 ?? 0);
+        return new IPNetwork(baseIp, PrefixLength ?? 0);
     }
 }

@@ -15,9 +15,9 @@ public class EditNetworkRuleCommand(
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        IPAddress.Parse(model.BaseAddress2);
+        IPAddress.Parse(model.BaseAddress);
 
-        var network = $"{model.BaseAddress2}/{model.Prefix2}";
+        var network = $"{model.BaseAddress}/{model.PrefixLength}";
 
         IPNetwork.Parse(network);
 
@@ -28,12 +28,12 @@ public class EditNetworkRuleCommand(
 
         if (await database.NetworkRules
             .AnyAsync(x => 
-                x.BaseAddress2 == model.BaseAddress2 &&
+                x.BaseAddress == model.BaseAddress &&
                 x.Id != model.Id))
             throw new BlockedByExistingException();
 
-        rule.BaseAddress2 = model.BaseAddress2;
-        rule.Prefix2 = model.Prefix2;
+        rule.BaseAddress = model.BaseAddress;
+        rule.PrefixLength = model.PrefixLength;
         rule.Blocked = model.Blocked;
 
         await database.SaveAsync(userToken);

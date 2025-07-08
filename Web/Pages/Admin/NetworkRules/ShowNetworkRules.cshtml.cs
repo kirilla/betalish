@@ -18,8 +18,8 @@ public class ShowNetworkRulesModel(
             NetworkRules = await database.NetworkRules.ToListAsync();
 
             NetworkRules = NetworkRules
-                .OrderByDescending(x => x.Prefix2) // Higher specificity
-                .ThenBy(x => x.BaseAddress2)
+                .OrderByDescending(x => x.PrefixLength) // Higher specificity
+                .ThenBy(x => x.BaseAddress)
                 .ToList();
 
             return Page();

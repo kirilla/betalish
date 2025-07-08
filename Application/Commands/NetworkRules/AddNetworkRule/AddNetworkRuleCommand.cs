@@ -15,20 +15,20 @@ public class AddNetworkRuleCommand(
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        IPAddress.Parse(model.BaseAddress2);
+        IPAddress.Parse(model.BaseAddress);
 
-        var network = $"{model.BaseAddress2}/{model.Prefix2}";
+        var network = $"{model.BaseAddress}/{model.PrefixLength}";
 
         IPNetwork.Parse(network);
 
         if (await database.NetworkRules
-            .AnyAsync(x => x.BaseAddress2 == model.BaseAddress2))
+            .AnyAsync(x => x.BaseAddress == model.BaseAddress))
             throw new BlockedByExistingException();
 
         var rule = new NetworkRule()
         {
-            BaseAddress2 = model.BaseAddress2,
-            Prefix2 = model.Prefix2,
+            BaseAddress = model.BaseAddress,
+            PrefixLength = model.PrefixLength,
             Blocked = model.Blocked,
         };
 
