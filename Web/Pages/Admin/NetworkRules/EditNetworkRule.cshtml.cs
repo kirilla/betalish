@@ -33,6 +33,7 @@ public class EditNetworkRuleModel(
                 BaseAddress = NetworkRule.BaseAddress,
                 PrefixLength = NetworkRule.PrefixLength,
                 Blocked = NetworkRule.Blocked,
+                Log = NetworkRule.Log,
             };
 
             return Page();

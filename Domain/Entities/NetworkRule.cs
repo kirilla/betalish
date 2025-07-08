@@ -10,6 +10,7 @@ public class NetworkRule : ICreatedDateTime, IUpdatedDateTime
     public int PrefixLength { get; set; }
 
     public bool Blocked { get; set; }
+    public bool Log { get; set; }
 
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }

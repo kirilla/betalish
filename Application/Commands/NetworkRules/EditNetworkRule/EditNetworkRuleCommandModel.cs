@@ -17,4 +17,5 @@ public class EditNetworkRuleCommandModel
     public int? PrefixLength { get; set; }
 
     public bool Blocked { get; set; }
+    public bool Log { get; set; }
 }

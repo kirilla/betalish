@@ -56,6 +56,7 @@
             <tr>
                 <th>Nätverk</th>
                 <th>Blockerat</th>
+                <th>Logga</th>
             </tr>
             @foreach (var rule in Model.NetworkRules)
             {
@@ -73,6 +74,16 @@
                         else
                         {
                             <span>🛣️ Öppet</span>
+                        }
+                    </td>
+                    <td>
+                        @if (rule.Log)
+                        {
+                            <span>🐵 Logga</span>
+                        }
+                        else
+                        {
+                            <span>🙈 Logga inte</span>
                         }
                     </td>
                 </tr>

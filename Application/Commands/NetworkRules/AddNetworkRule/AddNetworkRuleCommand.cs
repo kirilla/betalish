@@ -30,6 +30,7 @@ public class AddNetworkRuleCommand(
             BaseAddress = model.BaseAddress,
             PrefixLength = model.PrefixLength!.Value,
             Blocked = model.Blocked,
+            Log = model.Log,
         };
 
         database.NetworkRules.Add(rule);
