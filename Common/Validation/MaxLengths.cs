@@ -123,6 +123,11 @@ public static class MaxLengths
             public const int TextBody = Common.DbSuperSize;
         }
 
+        public static class ClientEvent
+        {
+            public const int Description = 200;
+        }
+
         public static class Customer
         {
             public const int Name = Common.Person.Name;

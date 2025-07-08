@@ -26,6 +26,10 @@ class ClientConfiguration : IEntityTypeConfiguration<Client>
             .WithOne(x => x.Client)
             .HasForeignKey(x => x.ClientId);
 
+        builder.HasMany(x => x.ClientEvents)
+            .WithOne(x => x.Client)
+            .HasForeignKey(x => x.ClientId);
+
         builder.HasMany(x => x.Customers)
             .WithOne(x => x.Client)
             .HasForeignKey(x => x.ClientId);

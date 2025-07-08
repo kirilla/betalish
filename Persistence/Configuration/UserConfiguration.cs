@@ -32,6 +32,12 @@ class UserConfiguration : IEntityTypeConfiguration<User>
             .WithOne(x => x.User)
             .HasForeignKey(x => x.UserId);
 
+        builder.HasMany(x => x.ClientEvents)
+            .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId)
+            .IsRequired(false)
+            .OnDelete(DeleteBehavior.Cascade);
+
         builder.HasMany(x => x.Sessions)
             .WithOne(x => x.User)
             .HasForeignKey(x => x.UserId);

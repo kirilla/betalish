@@ -11,6 +11,7 @@ public interface IDatabaseService
     DbSet<ClientAuth> ClientAuths { get; set; }
     DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }
     DbSet<ClientEmailMessage> ClientEmailMessages { get; set; }
+    DbSet<ClientEvent> ClientEvents { get; set; }
     DbSet<Customer> Customers { get; set; }
     DbSet<EmailAttachment> EmailAttachments { get; set; }
     DbSet<EmailImage> EmailImages { get; set; }

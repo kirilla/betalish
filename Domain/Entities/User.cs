@@ -27,6 +27,7 @@ public class User :
 
     public List<AdminAuth> AdminAuths { get; set; }
     public List<ClientAuth> ClientAuths { get; set; }
+    public List<ClientEvent> ClientEvents { get; set; }
     public List<Session> Sessions { get; set; }
     public List<UserEmail> UserEmails { get; set; }
     public List<UserEvent> UserEvents { get; set; }
