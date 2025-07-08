@@ -81,7 +81,7 @@ public class SignInByEmailCommand(
         var userEvent = new UserEvent()
         {
             UserId = user.Id,
-            UserEventKind = UserEventKind.SignInBySsn,
+            UserEventKind = UserEventKind.SignInByEmail,
             IpAddress = ipAddress,
         };
 
