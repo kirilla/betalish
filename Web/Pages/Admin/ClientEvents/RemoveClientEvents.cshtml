@@ -1,0 +1,45 @@
+﻿@page "/remove-client-events"
+@model RemoveClientEventsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort klienthändelser -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Vill du ta bort alla klienthändelser?
+    </h4>
+
+    <br />
+
+    <form method="post">
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Ta bort
+        </button>
+
+        <a class="button" href="/show-client-events">
+            Avbryt
+        </a>
+
+    </form>
+
+</main>

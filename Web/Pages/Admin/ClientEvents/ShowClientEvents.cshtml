@@ -1,0 +1,66 @@
+﻿@page "/show-client-events"
+@model ShowClientEventsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Klienthändelser -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Klienthändelser
+    </h4>
+
+    <div class="notice" >
+
+        <ul>
+            @foreach (var item in Model.ClientEvents)
+            {
+                <li>
+                    @(item.Created.ToFixedFormatDateShortTime())
+                    <br />
+                    <a href="/show-client-events-for-client/@(item.ClientId)">
+                        @(item.Client.Name)
+                    </a>
+                    <br />
+                    @(item.Description ?? item.ClientEventKind.ToString())
+                    @if (item.IpAddress != null)
+                    {
+                        <br />
+                        <span>
+                            @(item.IpAddress)
+                        </span>
+                    }
+                    <br />
+                    <br />
+                </li>
+            }
+
+            @if (!Model.ClientEvents.Any())
+            {
+                <li>
+                    🗒️
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <p>
+        <a class="button" href="/remove-client-events">
+            Ta bort
+        </a>
+    </p>
+
+</main>
