@@ -6,8 +6,6 @@ public class NetworkRule : ICreatedDateTime, IUpdatedDateTime
 {
     public int Id { get; set; }
 
-    public string Range { get; set; }
-
     public string? BaseAddress2 { get; set; }
     public int? Prefix2 { get; set; } // TODO: PrefixLength
 
@@ -25,7 +23,7 @@ public class NetworkRule : ICreatedDateTime, IUpdatedDateTime
         _ipNetwork = new Lazy<IPNetwork>(() => CreateIPNetwork());
     }
 
-    public bool IsInRange(IPAddress ipAddress)
+    public bool NetworkContains(IPAddress ipAddress)
     {
         return IPNetwork.Contains(ipAddress);
     }

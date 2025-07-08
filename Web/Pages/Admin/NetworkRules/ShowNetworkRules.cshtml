@@ -55,30 +55,18 @@
         <table>
             <tr>
                 <th>Nätverk</th>
-                @* <th>IPNetwork</th>
-                <th>Basadress</th>
-                <th>Prefix</th> *@
                 <th>Blockerat</th>
             </tr>
-            @foreach (var range in Model.NetworkRules)
+            @foreach (var rule in Model.NetworkRules)
             {
                 <tr>
                     <td>
-                        <a href="/show-network-rule/@(range.Id)">
-                            @(range.Range)
+                        <a href="/show-network-rule/@(rule.Id)">
+                            @(rule.BaseAddress2)/@(rule.Prefix2)
                         </a>
                     </td>
-                    @* <td>
-                        @(range.IPNetwork)
-                    </td>
                     <td>
-                        @(range.BaseAddress)
-                    </td>
-                    <td>
-                        @(range.Prefix)
-                    </td> *@
-                    <td>
-                        @if (range.Blocked)
+                        @if (rule.Blocked)
                         {
                             <span>🛑 Blockerat</span>
                         }

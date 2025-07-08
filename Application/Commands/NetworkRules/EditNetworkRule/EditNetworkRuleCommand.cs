@@ -15,29 +15,26 @@ public class EditNetworkRuleCommand(
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        if (!model.Range.Contains("/"))
-            throw new MissingPartException();
+        IPAddress.Parse(model.BaseAddress2);
 
-        if (model.Range.Split('/').Length != 2)
-            throw new MissingPartException();
+        var network = $"{model.BaseAddress2}/{model.Prefix2}";
 
-        IPNetwork.Parse(model.Range);
+        IPNetwork.Parse(network);
 
-        var range = await database.NetworkRules
+        var rule = await database.NetworkRules
             .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         if (await database.NetworkRules
             .AnyAsync(x => 
-                x.Range == model.Range &&
+                x.BaseAddress2 == model.BaseAddress2 &&
                 x.Id != model.Id))
             throw new BlockedByExistingException();
 
-        range.Range = model.Range;
-        range.BaseAddress2 = model.BaseAddress2;
-        range.Prefix2 = model.Prefix2;
-        range.Blocked = model.Blocked;
+        rule.BaseAddress2 = model.BaseAddress2;
+        rule.Prefix2 = model.Prefix2;
+        rule.Blocked = model.Blocked;
 
         await database.SaveAsync(userToken);
 

@@ -30,7 +30,6 @@ public class EditNetworkRuleModel(
             CommandModel = new EditNetworkRuleCommandModel()
             {
                 Id = NetworkRule.Id,
-                Range = NetworkRule.Range,
                 BaseAddress2 = NetworkRule.BaseAddress2,
                 Prefix2 = NetworkRule.Prefix2,
                 Blocked = NetworkRule.Blocked,
@@ -74,7 +73,7 @@ public class EditNetworkRuleModel(
         catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.Range),
+                nameof(CommandModel.BaseAddress2),
                 "Intervallet finns redan.");
 
             return Page();
@@ -82,7 +81,7 @@ public class EditNetworkRuleModel(
         catch (FormatException ex)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.Range),
+                nameof(CommandModel.Prefix2),
                 "Ogiltig CIDR-adressblock.");
 
             return Page();

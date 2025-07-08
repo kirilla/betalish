@@ -17,15 +17,12 @@
 <main>
     <h4>
         Redigera IP-adressintervallet:
-        @(Model.NetworkRule.Range)
+        @(Model.NetworkRule.BaseAddress2)/@(Model.NetworkRule.Prefix2)
     </h4>
 
     <form method="post">
 
         <input type="hidden" asp-for="CommandModel.Id" />
-
-        <label asp-for="CommandModel.Range">Range</label>
-        <input asp-for="CommandModel.Range" placeholder="192.168.0.1/32" />
 
         <label asp-for="CommandModel.BaseAddress2">Basadress</label>
         <input asp-for="CommandModel.BaseAddress2" placeholder="192.168.0.1" />

@@ -13,12 +13,12 @@ public class RemoveNetworkRuleCommand(
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var range = await database.NetworkRules
+        var rule = await database.NetworkRules
             .Where(x => x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.NetworkRules.Remove(range);
+        database.NetworkRules.Remove(rule);
 
         await database.SaveAsync(userToken);
 

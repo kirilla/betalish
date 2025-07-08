@@ -6,12 +6,6 @@ public class EditNetworkRuleCommandModel
 {
     public int Id { get; set; }
 
-    [Required(ErrorMessage = "Skriv ett adressintervall.")]
-    [StringLength(
-        MaxLengths.Common.Ip.Prefix.IPv6,
-        ErrorMessage = "Skriv kortare.")]
-    public string Range { get; set; }
-
     [Required(ErrorMessage = "Skriv en basadress.")]
     [StringLength(
         MaxLengths.Common.Ip.Prefix.IPv6,

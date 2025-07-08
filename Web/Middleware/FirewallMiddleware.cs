@@ -73,7 +73,7 @@ public class FirewallMiddleware(
 
         foreach (var rule in rules)
         {
-            if (rule.IsInRange(requestIp))
+            if (rule.NetworkContains(requestIp))
             {
                 if (rule.Blocked)
                     return FirewallDecision.BlockedByRule;
