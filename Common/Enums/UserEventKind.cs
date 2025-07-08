@@ -2,9 +2,12 @@
 
 public enum UserEventKind
 {
-    SelectClient = 341225872,
-    UnselectClient = 924284789,
+    SelectClient = 719893021,
+    UnselectClient = 864874338,
 
-    SignIn = 279924064,
-    SignOut = 485389262,
+    SignInByEmail = 364885119,
+    SignInByPhone = 667732906,
+    SignInBySsn = 745612749,
+
+    SignOut = 171329410,
 }

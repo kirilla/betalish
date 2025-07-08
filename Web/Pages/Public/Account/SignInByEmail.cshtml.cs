@@ -3,7 +3,6 @@ using Betalish.Application.Models;
 using Betalish.Application.Queues.BadSignIns;
 using Betalish.Application.Queues.EndpointRateLimiting;
 using Betalish.Application.Queues.IpAddressRateLimiting;
-using Betalish.Application.Queues.LogItems;
 using Betalish.Application.Queues.SignInRateLimiting;
 using Betalish.Common.Dates;
 using Microsoft.AspNetCore.Authentication;
@@ -21,7 +20,6 @@ public class SignInByEmailModel(
     IEndpointRateLimiter endpointRateLimiter,
     IIpAddressRateLimiter ipAddressRateLimiter,
     ISignInRateLimiter signInRateLimiter,
-    ILogItemList logItemList,
     ISignInByEmailCommand signInCommand,
     IOptions<SignInConfiguration> options) : UserTokenPageModel(userToken)
 {
@@ -115,13 +113,6 @@ public class SignInByEmailModel(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
-
-            logItemList.AddLogItem(new LogItem()
-            {
-                IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
-                LogItemKind = LogItemKind.SignIn,
-                UserId = loginResult.UserId,
-            });
 
             return Redirect("/show-lobby");
         }

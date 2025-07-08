@@ -78,6 +78,15 @@ public class SignInByPhoneCommand(
 
         userToken.NoSave = false;
 
+        var userEvent = new UserEvent()
+        {
+            UserId = user.Id,
+            UserEventKind = UserEventKind.SignInByPhone,
+            IpAddress = ipAddress,
+        };
+
+        database.UserEvents.Add(userEvent);
+
         await database.SaveAsync(userToken);
 
         return new SessionGuidResultModel()
