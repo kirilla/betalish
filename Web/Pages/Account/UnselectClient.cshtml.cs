@@ -1,12 +1,10 @@
 using Betalish.Application.Commands.Sessions.UnselectClient;
-using Betalish.Application.Queues.LogItems;
 
 namespace Betalish.Web.Pages.Account;
 
 public class UnselectClientModel(
     IUserToken userToken,
     IDatabaseService database,
-    ILogItemList logItemList,
     IUnselectClientCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
@@ -54,13 +52,6 @@ public class UnselectClientModel(
                 return Page();
 
             await command.Execute(UserToken, CommandModel);
-
-            logItemList.AddLogItem(new LogItem()
-            {
-                IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
-                LogItemKind = LogItemKind.UnselectClient,
-                UserId = UserToken.UserId!.Value,
-            });
 
             return Redirect($"/show-lobby");
         }

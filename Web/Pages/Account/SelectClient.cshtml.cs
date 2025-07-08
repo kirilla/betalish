@@ -1,12 +1,10 @@
 using Betalish.Application.Commands.Sessions.SelectClient;
-using Betalish.Application.Queues.LogItems;
 
 namespace Betalish.Web.Pages.Account;
 
 public class SelectClientModel(
     IUserToken userToken,
     IDatabaseService database,
-    ILogItemList logItemList,
     ISelectClientCommand command) : UserTokenPageModel(userToken)
 {
     public Client Client { get; set; }
@@ -85,13 +83,6 @@ public class SelectClientModel(
                 return Page();
 
             await command.Execute(UserToken, CommandModel);
-
-            logItemList.AddLogItem(new LogItem()
-            {
-                IpAddress = HttpContext.Connection.RemoteIpAddress?.ToString(),
-                LogItemKind = LogItemKind.SelectClient,
-                UserId = UserToken.UserId!.Value,
-            });
 
             return Redirect($"/show-client-desktop");
         }

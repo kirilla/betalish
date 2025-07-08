@@ -22,6 +22,15 @@ public class UnselectClientCommand(
 
         session.ClientId = null;
 
+        var userEvent = new UserEvent()
+        {
+            UserId = session.UserId,
+            UserEventKind = UserEventKind.UnselectClient,
+            IpAddress = session.IpAddress,
+        };
+
+        database.UserEvents.Add(userEvent);
+
         await database.SaveAsync(userToken);
     }
 

@@ -31,6 +31,15 @@ public class SignOutCommand(
 
         database.Sessions.Remove(session);
 
+        var userEvent = new UserEvent()
+        {
+            UserId = session.UserId,
+            UserEventKind = UserEventKind.SignOut,
+            IpAddress = session.IpAddress,
+        };
+
+        database.UserEvents.Add(userEvent);
+
         userToken.NoSave = false;
 
         await database.SaveAsync(userToken);

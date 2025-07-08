@@ -34,6 +34,15 @@ public class SelectClientCommand(
 
         session.ClientId = client.Id;
 
+        var userEvent = new UserEvent()
+        {
+            UserId = session.UserId,
+            UserEventKind = UserEventKind.SelectClient,
+            IpAddress = session.IpAddress,
+        };
+
+        database.UserEvents.Add(userEvent);
+
         userToken.NoSave = false;
 
         await database.SaveAsync(userToken);

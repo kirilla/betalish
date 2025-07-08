@@ -5,11 +5,6 @@ public enum LogItemKind
     BlockedRequestReaped = 644146724,
     BlockedRequestReaperFailed = 997229645,
 
-    SelectClient = 341225872,
-    UnselectClient = 924284789,
-
-    SignOut = 485389262,
-
     SignupsReaped = 786751720,
 
     TerminateSessions = 661471773,
