@@ -1,0 +1,58 @@
+﻿@page "/show-user-events-for-user/{id:int}"
+@model ShowUserEventsForUserModel
+@{
+}
+
+@section Meta {
+    <title>
+        Användarhändelser -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Användarhändelser för @(Model.User.Name)
+    </h4>
+
+    <div class="notice" >
+
+        <ul>
+            @foreach (var item in Model.UserEvents)
+            {
+                <li>
+                    @(item.Created.ToFixedFormatDateShortTime())
+                    <br />
+                    @(item.User.Name)
+                    <br />
+                    @(item.Description ?? item.UserEventKind.ToString())
+                    @if (item.IpAddress != null)
+                    {
+                        <br />
+                        <span>
+                            @(item.IpAddress)
+                        </span>
+                    }
+                    <br />
+                    <br />
+                </li>
+            }
+
+            @if (!Model.UserEvents.Any())
+            {
+                <li>
+                    🗒️
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+</main>

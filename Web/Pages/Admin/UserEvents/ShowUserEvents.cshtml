@@ -1,0 +1,66 @@
+﻿@page "/show-user-events"
+@model ShowUserEventsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Användarhändelser -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Användarhändelser
+    </h4>
+
+    <div class="notice" >
+
+        <ul>
+            @foreach (var item in Model.UserEvents)
+            {
+                <li>
+                    @(item.Created.ToFixedFormatDateShortTime())
+                    <br />
+                    <a href="/show-user-events-for-user/@(item.UserId)">
+                        @(item.User.Name)
+                    </a>
+                    <br />
+                    @(item.Description ?? item.UserEventKind.ToString())
+                    @if (item.IpAddress != null)
+                    {
+                        <br />
+                        <span>
+                            @(item.IpAddress)
+                        </span>
+                    }
+                    <br />
+                    <br />
+                </li>
+            }
+
+            @if (!Model.UserEvents.Any())
+            {
+                <li>
+                    🗒️
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <p>
+        <a class="button" href="/remove-user-events">
+            Ta bort
+        </a>
+    </p>
+
+</main>
