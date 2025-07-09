@@ -42,7 +42,7 @@ public class FirewallMiddleware(
 
         if (rule.Log)
         {
-            await Log(context);
+            await Log(context, rule.Block);
         }
 
         if (rule.Block)
@@ -59,7 +59,7 @@ public class FirewallMiddleware(
         return;
     }
 
-    private async Task Log(HttpContext context)
+    private async Task Log(HttpContext context, bool blocked)
     {
         using var scope = scopeFactory.CreateScope();
 
@@ -71,6 +71,7 @@ public class FirewallMiddleware(
             Method = context.Request.Method,
             IpAddress = context.Connection.RemoteIpAddress?.ToString(),
             UserAgent = context.Request.Headers?.UserAgent,
+            Blocked = blocked,
         };
 
         database.NetworkRequests.Add(request);

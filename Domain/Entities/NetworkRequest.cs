@@ -11,4 +11,6 @@ public class NetworkRequest : ICreatedDateTime
 
     public string? IpAddress { get; set; }
     public string? UserAgent { get; set; }
+
+    public bool Blocked { get; set; }
 }
