@@ -20,7 +20,10 @@ public class AddNetworkRuleModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new AddNetworkRuleCommandModel();
+            CommandModel = new AddNetworkRuleCommandModel()
+            {
+                Active = true,
+            };
 
             return Page();
         }

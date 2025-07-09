@@ -16,6 +16,13 @@ public class AddNetworkRuleCommandModel
         Limits.NetworkRule.PrefixLength.Max)]
     public int? PrefixLength { get; set; }
 
+    public bool Active { get; set; }
+
     public bool Block { get; set; }
     public bool Log { get; set; }
+
+    [StringLength(
+        MaxLengths.Domain.NetworkRule.Description,
+        ErrorMessage = "Skriv kortare.")]
+    public string? Description { get; set; }
 }

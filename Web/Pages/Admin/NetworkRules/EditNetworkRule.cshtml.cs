@@ -32,8 +32,10 @@ public class EditNetworkRuleModel(
                 Id = NetworkRule.Id,
                 BaseAddress = NetworkRule.BaseAddress,
                 PrefixLength = NetworkRule.PrefixLength,
+                Active = NetworkRule.Active,
                 Block = NetworkRule.Block,
                 Log = NetworkRule.Log,
+                Description = NetworkRule.Description,
             };
 
             return Page();

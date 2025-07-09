@@ -18,7 +18,7 @@
         &raquo;
         <a href="/show-network-rules">IP-addressintervall</a>
         &raquo;
-        @(Model.NetworkRule.BaseAddress)/@(Model.NetworkRule.PrefixLength)
+        @(Model.NetworkRule.NetworkCidr)
     </p>
 
     <h4>
@@ -26,9 +26,44 @@
     </h4>
 
     <div class="notice">
-        <b>Adress</b>
+        <b>@(Model.NetworkRule.NetworkCidr)</b>
         <br />
-        @(Model.NetworkRule.BaseAddress)/@(Model.NetworkRule.PrefixLength)
+        <br />
+        @if (Model.NetworkRule.Active)
+        {
+            <span>✅ Aktiv</span>
+        }
+        else
+        {
+            <span>⏸️ Deaktiverad</span>
+        }
+
+        <br />
+        @if (Model.NetworkRule.Block)
+        {
+            <span>⛔ Blockera</span>
+        }
+        else
+        {
+            <span>💚 Tillåt</span>
+        }
+
+        <br />
+        @if (Model.NetworkRule.Log)
+        {
+            <span>✍️ Logga</span>
+        }
+        else
+        {
+            <span>❌ Logga inte</span>
+        }
+
+        @if (Model.NetworkRule.Description != null)
+        {
+            <br />
+            <br />
+            <span>@(Model.NetworkRule.Description)</span>
+        }
     </div>
 
     <p>

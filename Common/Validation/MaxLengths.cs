@@ -180,6 +180,11 @@ public static class MaxLengths
             public const int InnerException = 200;
         }
 
+        public static class NetworkRule
+        {
+            public const int Description = 200;
+        }
+        
         public static class UserEvent
         {
             public const int Description = 200;

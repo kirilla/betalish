@@ -29,8 +29,10 @@ public class AddNetworkRuleCommand(
         {
             BaseAddress = model.BaseAddress,
             PrefixLength = model.PrefixLength!.Value,
+            Active = model.Active,
             Block = model.Block,
             Log = model.Log,
+            Description = model.Description,
         };
 
         database.NetworkRules.Add(rule);

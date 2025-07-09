@@ -28,18 +28,24 @@
         <input asp-for="CommandModel.PrefixLength" placeholder="1-128" />
 
         <p>
+            <label asp-for="CommandModel.Active">
+                <input asp-for="CommandModel.Active" type="checkbox" />
+                Aktiv
+            </label>
+
             <label asp-for="CommandModel.Block">
                 <input asp-for="CommandModel.Block" type="checkbox" />
                 Blockera
             </label>
-        </p>
 
-        <p>
             <label asp-for="CommandModel.Log">
                 <input asp-for="CommandModel.Log" type="checkbox" />
                 Logga
             </label>
         </p>
+
+        <label asp-for="CommandModel.Description">Anteckning</label>
+        <input asp-for="CommandModel.Description" />
 
         <div asp-validation-summary="All"></div>
 

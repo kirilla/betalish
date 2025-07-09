@@ -34,8 +34,10 @@ public class EditNetworkRuleCommand(
 
         rule.BaseAddress = model.BaseAddress;
         rule.PrefixLength = model.PrefixLength!.Value;
+        rule.Active = model.Active;
         rule.Block = model.Block;
         rule.Log = model.Log;
+        rule.Description = model.Description;
 
         await database.SaveAsync(userToken);
 

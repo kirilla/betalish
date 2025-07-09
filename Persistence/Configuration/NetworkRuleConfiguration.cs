@@ -8,5 +8,9 @@ class NetworkRuleConfiguration : IEntityTypeConfiguration<NetworkRule>
 
         builder.Property(p => p.BaseAddress)
             .HasMaxLength(MaxLengths.Common.Ip.Prefix.IPv6);
+
+        builder.Property(p => p.Description)
+            .IsRequired(false)
+            .HasMaxLength(MaxLengths.Domain.NetworkRule.Description);
     }
 }

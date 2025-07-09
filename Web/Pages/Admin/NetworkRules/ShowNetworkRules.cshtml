@@ -36,37 +36,52 @@
     <figure>
         <table>
             <tr>
+                <th>Aktiv</th>
                 <th>Nätverk</th>
                 <th>Blockera</th>
                 <th>Logga</th>
+                <th>Anteckning</th>
             </tr>
             @foreach (var rule in Model.NetworkRules)
             {
                 <tr>
                     <td>
+                        @if (rule.Active)
+                        {
+                            <span>✅</span>
+                        }
+                        else
+                        {
+                            <span>⏸️</span>
+                        }
+                    </td>
+                    <td>
                         <a href="/show-network-rule/@(rule.Id)">
-                            @(rule.BaseAddress)/@(rule.PrefixLength)
+                            @(rule.NetworkCidr)
                         </a>
                     </td>
                     <td>
                         @if (rule.Block)
                         {
-                            <span>🛑 Blockera</span>
+                            <span>⛔ Blockera</span>
                         }
                         else
                         {
-                            <span>🛣️ Tillåt</span>
+                            <span>💚 Tillåt</span>
                         }
                     </td>
                     <td>
                         @if (rule.Log)
                         {
-                            <span>🐵 Logga</span>
+                            <span>✍️ Logga</span>
                         }
                         else
                         {
-                            <span>🙈 Logga inte</span>
+                            <span>❌ Logga inte</span>
                         }
+                    </td>
+                    <td>
+                        <span>@(rule.Description ?? "–")</span>
                     </td>
                 </tr>
             }
