@@ -21,7 +21,7 @@ public class RemoveBlockedRequestModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            BlockedRequest = await database.BlockedRequests
+            BlockedRequest = await database.NetworkRequests
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -52,7 +52,7 @@ public class RemoveBlockedRequestModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            BlockedRequest = await database.BlockedRequests
+            BlockedRequest = await database.NetworkRequests
                 .Where(x => x.Id == CommandModel.BlockedRequestId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

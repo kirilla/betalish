@@ -12,7 +12,7 @@ public class DatabaseService(
 {
     public DbSet<AdminAuth> AdminAuths { get; set; }
     public DbSet<BadSignIn> BadSignIns { get; set; }
-    public DbSet<BlockedRequest> BlockedRequests { get; set; }
+    public DbSet<BlockedRequest> NetworkRequests { get; set; }
     public DbSet<Client> Clients { get; set; }
     public DbSet<ClientAuth> ClientAuths { get; set; }
     public DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }

@@ -12,7 +12,7 @@ public class ShowBlockedUrlsModel(
         {
             await AssertAdminAuthorization(database);
 
-            URLs = await database.BlockedRequests
+            URLs = await database.NetworkRequests
                 .AsNoTracking()
                 .Select(x => x.Url)
                 .Where(x => x != null)

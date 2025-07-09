@@ -11,7 +11,7 @@ public class RemoveBlockedRequestsCommand(IDatabaseService database) : IRemoveBl
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        await database.BlockedRequests.ExecuteDeleteAsync();
+        await database.NetworkRequests.ExecuteDeleteAsync();
     }
 
     public async Task<bool> IsPermitted(IUserToken userToken)

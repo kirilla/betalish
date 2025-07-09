@@ -12,7 +12,7 @@ public class ShowBlockedRequestsModel(
         {
             await AssertAdminAuthorization(database);
 
-            BlockedRequests = await database.BlockedRequests
+            BlockedRequests = await database.NetworkRequests
                 .AsNoTracking()
                 .OrderByDescending(x => x.Created)
                 .ToListAsync();

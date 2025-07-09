@@ -73,7 +73,7 @@ public class FirewallMiddleware(
             UserAgent = context.Request.Headers?.UserAgent,
         };
 
-        database.BlockedRequests.Add(request);
+        database.NetworkRequests.Add(request);
 
         await database.SaveAsync(new NoUserToken());
     }

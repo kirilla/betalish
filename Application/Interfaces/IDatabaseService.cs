@@ -6,7 +6,7 @@ public interface IDatabaseService
 {
     DbSet<AdminAuth> AdminAuths { get; set; }
     DbSet<BadSignIn> BadSignIns { get; set; }
-    DbSet<BlockedRequest> BlockedRequests { get; set; }
+    DbSet<BlockedRequest> NetworkRequests { get; set; }
     DbSet<Client> Clients { get; set; }
     DbSet<ClientAuth> ClientAuths { get; set; }
     DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }

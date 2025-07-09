@@ -17,7 +17,7 @@ public class ShowBlockedRequestModel(
         {
             await AssertAdminAuthorization(database);
 
-            BlockedRequest = await database.BlockedRequests
+            BlockedRequest = await database.NetworkRequests
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

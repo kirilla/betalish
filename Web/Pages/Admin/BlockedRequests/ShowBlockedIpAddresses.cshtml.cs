@@ -12,7 +12,7 @@ public class ShowBlockedIpAddressesModel(
         {
             await AssertAdminAuthorization(database);
 
-            IpAddresses = await database.BlockedRequests
+            IpAddresses = await database.NetworkRequests
                 .AsNoTracking()
                 .Select(x => x.IpAddress)
                 .Where(x => x != null)

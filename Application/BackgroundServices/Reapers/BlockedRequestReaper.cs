@@ -47,7 +47,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
             var database = scope.ServiceProvider
                 .GetRequiredService<IDatabaseService>();
 
-            var count = await database.BlockedRequests
+            var count = await database.NetworkRequests
                 .OrderByDescending(x => x.Created)
                 .Skip(_historySize)
                 .CountAsync();
@@ -55,7 +55,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
             if (count == 0)
                 return;
 
-            await database.BlockedRequests
+            await database.NetworkRequests
                 .OrderByDescending(x => x.Created)
                 .Skip(_historySize)
                 .ExecuteDeleteAsync();

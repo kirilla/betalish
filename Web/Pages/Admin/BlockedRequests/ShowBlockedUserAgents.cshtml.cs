@@ -12,7 +12,7 @@ public class ShowBlockedUserAgentsModel(
         {
             await AssertAdminAuthorization(database);
 
-            UserAgents = await database.BlockedRequests
+            UserAgents = await database.NetworkRequests
                 .AsNoTracking()
                 .Select(x => x.UserAgent)
                 .Where(x => x != null)
