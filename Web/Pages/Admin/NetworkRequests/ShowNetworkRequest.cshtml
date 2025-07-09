@@ -14,7 +14,14 @@
 <main>
 
     <h4>
-        ⛔
+        @if (Model.NetworkRequest.Blocked)
+        {
+            <span>⛔</span>
+        }
+        else
+        {
+            <span>💚</span>
+        }
         @(Model.NetworkRequest.Method)
         @(Model.NetworkRequest.Url)
     </h4>

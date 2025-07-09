@@ -54,6 +54,14 @@
                         @(request.Created.ToFixedFormatDateShortTime())
                     </a>
                     <br />
+                    @if (request.Blocked)
+                    {
+                        <span>⛔</span>
+                    }
+                    else
+                    {
+                        <span>💚</span>
+                    }
                     @(request.Method)
                     &thinsp;
                     @(request.Url)
