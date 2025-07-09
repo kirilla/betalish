@@ -53,7 +53,7 @@ public class TestLogItemDedupModel(
         {
             ModelState.AddModelError(
                 nameof(CommandModel.Confirmed),
-                "Bekräfta att du verkligen vill ta bort användaren.");
+                "Bekräfta att du vill genomföra testet.");
 
             return Page();
         }
