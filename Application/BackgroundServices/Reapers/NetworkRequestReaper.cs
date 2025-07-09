@@ -26,7 +26,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
                 {
                     logItemList.AddLogItem(new LogItem(ex)
                     {
-                        LogItemKind = LogItemKind.BlockedRequestReaperFailed,
+                        LogItemKind = LogItemKind.NetworkRequestReaperFailed,
                     });
                 }
 
@@ -62,8 +62,8 @@ namespace Betalish.Application.BackgroundServices.Reapers
 
             logItemList.AddLogItem(new LogItem()
             {
-                Description = $"{count} blocked requests removed.",
-                LogItemKind = LogItemKind.BlockedRequestReaped,
+                Description = $"{count} logged network requests removed.",
+                LogItemKind = LogItemKind.NetworkRequestReaped,
             });
         }
     }

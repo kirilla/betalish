@@ -18,6 +18,6 @@ public class EditNetworkRuleCommandModel
         Limits.NetworkRule.PrefixLength.Max)]
     public int? PrefixLength { get; set; }
 
-    public bool Blocked { get; set; }
+    public bool Block { get; set; }
     public bool Log { get; set; }
 }

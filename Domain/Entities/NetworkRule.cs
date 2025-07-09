@@ -9,7 +9,7 @@ public class NetworkRule : ICreatedDateTime, IUpdatedDateTime
     public string BaseAddress { get; set; }
     public int PrefixLength { get; set; }
 
-    public bool Blocked { get; set; }
+    public bool Block { get; set; }
     public bool Log { get; set; }
 
     public DateTime? Created { get; set; }

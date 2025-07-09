@@ -2,8 +2,8 @@
 
 public enum LogItemKind
 {
-    BlockedRequestReaped = 644146724,
-    BlockedRequestReaperFailed = 997229645,
+    NetworkRequestReaped = 644146724,
+    NetworkRequestReaperFailed = 997229645,
 
     SignupsReaped = 786751720,
 

@@ -45,7 +45,7 @@ public class FirewallMiddleware(
             await Log(context);
         }
 
-        if (rule.Blocked)
+        if (rule.Block)
         {
             context.Response.StatusCode = StatusCodes.Status404NotFound;
 

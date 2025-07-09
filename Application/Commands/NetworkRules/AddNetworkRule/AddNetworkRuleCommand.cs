@@ -29,7 +29,7 @@ public class AddNetworkRuleCommand(
         {
             BaseAddress = model.BaseAddress,
             PrefixLength = model.PrefixLength!.Value,
-            Blocked = model.Blocked,
+            Block = model.Block,
             Log = model.Log,
         };
 
