@@ -1,10 +1,10 @@
-namespace Betalish.Web.Pages.Admin.BlockedRequests;
+namespace Betalish.Web.Pages.Admin.NetworkRequests;
 
-public class ShowBlockedRequestsModel(
+public class ShowBlockedIpAddressesModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<BlockedRequest> BlockedRequests { get; set; }
+    public List<string> IpAddresses { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -12,9 +12,13 @@ public class ShowBlockedRequestsModel(
         {
             await AssertAdminAuthorization(database);
 
-            BlockedRequests = await database.NetworkRequests
+            IpAddresses = await database.NetworkRequests
                 .AsNoTracking()
-                .OrderByDescending(x => x.Created)
+                .Select(x => x.IpAddress)
+                .Where(x => x != null)
+                .Cast<string>()
+                .Distinct()
+                .OrderBy(x => x)
                 .ToListAsync();
 
             return Page();

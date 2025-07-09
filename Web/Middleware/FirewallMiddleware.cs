@@ -65,7 +65,7 @@ public class FirewallMiddleware(
 
         var database = scope.ServiceProvider.GetRequiredService<IDatabaseService>();
 
-        var request = new BlockedRequest()
+        var request = new NetworkRequest()
         {
             Url = context.Request.GetDisplayUrl(),
             Method = context.Request.Method,

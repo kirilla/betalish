@@ -1,16 +1,16 @@
-using Betalish.Application.Commands.BlockedRequests.RemoveBlockedRequest;
+using Betalish.Application.Commands.NetworkRequests.RemoveNetworkRequest;
 
-namespace Betalish.Web.Pages.Admin.BlockedRequests;
+namespace Betalish.Web.Pages.Admin.NetworkRequests;
 
-public class RemoveBlockedRequestModel(
+public class RemoveNetworkRequestModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemoveBlockedRequestCommand command) : AdminPageModel(userToken)
+    IRemoveNetworkRequestCommand command) : AdminPageModel(userToken)
 {
-    public BlockedRequest BlockedRequest { get; set; }
+    public NetworkRequest NetworkRequest { get; set; }
 
     [BindProperty]
-    public RemoveBlockedRequestCommandModel CommandModel { get; set; }
+    public RemoveNetworkRequestCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -21,14 +21,14 @@ public class RemoveBlockedRequestModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            BlockedRequest = await database.NetworkRequests
+            NetworkRequest = await database.NetworkRequests
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new RemoveBlockedRequestCommandModel()
+            CommandModel = new RemoveNetworkRequestCommandModel()
             {
-                BlockedRequestId = BlockedRequest.Id,
+                Id = NetworkRequest.Id,
             };
 
             return Page();
@@ -52,8 +52,8 @@ public class RemoveBlockedRequestModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            BlockedRequest = await database.NetworkRequests
-                .Where(x => x.Id == CommandModel.BlockedRequestId)
+            NetworkRequest = await database.NetworkRequests
+                .Where(x => x.Id == CommandModel.Id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -62,7 +62,7 @@ public class RemoveBlockedRequestModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-blocked-requests");
+            return Redirect($"/show-network-requests");
         }
         catch (ConfirmationRequiredException)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Betalish.Domain.Entities;
 
-public class BlockedRequest : ICreatedDateTime
+public class NetworkRequest : ICreatedDateTime
 {
     public int Id { get; set; }
 

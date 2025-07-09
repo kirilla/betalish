@@ -1,5 +1,5 @@
-﻿@page "/remove-blocked-request/{id:int}"
-@model RemoveBlockedRequestModel
+﻿@page "/remove-network-request/{id:int}"
+@model RemoveNetworkRequestModel
 @{
 }
 
@@ -17,12 +17,12 @@
 <main>
     <h4>
         Ta bort sidbesöket:<br />
-        @(Model.BlockedRequest.Created.ToFixedFormatDateShortTime())
+        @(Model.NetworkRequest.Created.ToFixedFormatDateShortTime())
     </h4>
 
     <form method="post">
 
-        <input type="hidden" asp-for="CommandModel.BlockedRequestId" />
+        <input type="hidden" asp-for="CommandModel.Id" />
 
         <p>
             <label asp-for="CommandModel.Confirmed">
@@ -37,7 +37,7 @@
             Ta bort
         </button>
 
-        <a class="button" href="/show-blocked-request/@(Model.CommandModel.BlockedRequestId)">
+        <a class="button" href="/show-network-request/@(Model.CommandModel.Id)">
             Avbryt
         </a>
     </form>

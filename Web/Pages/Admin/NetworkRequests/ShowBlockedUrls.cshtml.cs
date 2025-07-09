@@ -1,10 +1,10 @@
-namespace Betalish.Web.Pages.Admin.BlockedRequests;
+namespace Betalish.Web.Pages.Admin.NetworkRequests;
 
-public class ShowBlockedUserAgentsModel(
+public class ShowBlockedUrlsModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<string> UserAgents { get; set; }
+    public List<string> URLs { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -12,9 +12,9 @@ public class ShowBlockedUserAgentsModel(
         {
             await AssertAdminAuthorization(database);
 
-            UserAgents = await database.NetworkRequests
+            URLs = await database.NetworkRequests
                 .AsNoTracking()
-                .Select(x => x.UserAgent)
+                .Select(x => x.Url)
                 .Where(x => x != null)
                 .Cast<string>()
                 .Distinct()

@@ -1,15 +1,15 @@
-﻿using Betalish.Application.Commands.BlockedRequests.RemoveBlockedRequest;
+﻿using Betalish.Application.Commands.NetworkRequests.RemoveNetworkRequest;
 
-namespace Betalish.Web.Pages.Admin.BlockedRequests;
+namespace Betalish.Web.Pages.Admin.NetworkRequests;
 
-public class ShowBlockedRequestModel(
+public class ShowNetworkRequestModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemoveBlockedRequestCommand removeBlockedRequestCommand) : AdminPageModel(userToken)
+    IRemoveNetworkRequestCommand removeNetworkRequestCommand) : AdminPageModel(userToken)
 {
-    public BlockedRequest BlockedRequest { get; set; }
+    public NetworkRequest NetworkRequest { get; set; }
 
-    public bool CanRemoveBlockedRequest { get; set; }
+    public bool CanRemoveNetworkRequest { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -17,13 +17,13 @@ public class ShowBlockedRequestModel(
         {
             await AssertAdminAuthorization(database);
 
-            BlockedRequest = await database.NetworkRequests
+            NetworkRequest = await database.NetworkRequests
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CanRemoveBlockedRequest = 
-                await removeBlockedRequestCommand.IsPermitted(userToken);
+            CanRemoveNetworkRequest = 
+                await removeNetworkRequestCommand.IsPermitted(userToken);
 
             return Page();
         }

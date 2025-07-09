@@ -1,8 +1,8 @@
 ﻿namespace Betalish.Persistence.Configuration;
 
-class BlockedRequestConfiguration : IEntityTypeConfiguration<BlockedRequest>
+class NetworkRequestConfiguration : IEntityTypeConfiguration<NetworkRequest>
 {
-    public void Configure(EntityTypeBuilder<BlockedRequest> builder)
+    public void Configure(EntityTypeBuilder<NetworkRequest> builder)
     {
         builder.HasKey(p => p.Id);
 

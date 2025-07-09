@@ -1,0 +1,48 @@
+﻿@page "/show-network-request/{id:int}"
+@model ShowNetworkRequestModel
+@{
+}
+
+@section Meta {
+    <title>Webbsida - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        🛑
+        @(Model.NetworkRequest.Method)
+        @(Model.NetworkRequest.Url)
+    </h4>
+
+    <dl class="notice">
+        <dt>När</dt>
+        <dd>@(Model.NetworkRequest.Created.ToFixedFormatDateShortTime())</dd>
+
+        <dt>URL</dt>
+        <dd>@(Model.NetworkRequest.Url)</dd>
+
+        @* <dt>Metod</dt>
+        <dd>@(Model.NetworkRequest.Method)</dd> *@
+
+        <dt>UserAgent</dt>
+        <dd>@(Model.NetworkRequest.UserAgent)</dd>
+
+        <dt>Ip-nummer</dt>
+        <dd>@(Model.NetworkRequest.IpAddress)</dd>
+    </dl>
+
+    <p>
+        @if (Model.CanRemoveNetworkRequest)
+        {
+            <a class="button" href="/remove-network-request/@(Model.NetworkRequest.Id)">
+                Ta bort
+            </a>
+        }
+    </p>
+
+</main>

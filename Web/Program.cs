@@ -101,7 +101,7 @@ public class Program
         if (builder.Environment.IsProduction())
         {
             builder.Services.AddHostedService<BadSignInLogger>();
-            builder.Services.AddHostedService<BlockedRequestReaper>();
+            builder.Services.AddHostedService<NetworkRequestReaper>();
             builder.Services.AddHostedService<EmailSender>();
             builder.Services.AddHostedService<EndpointRateLimitReaper>();
             builder.Services.AddHostedService<LogItemLogger>();

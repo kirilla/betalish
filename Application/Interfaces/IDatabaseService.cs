@@ -6,7 +6,6 @@ public interface IDatabaseService
 {
     DbSet<AdminAuth> AdminAuths { get; set; }
     DbSet<BadSignIn> BadSignIns { get; set; }
-    DbSet<BlockedRequest> NetworkRequests { get; set; }
     DbSet<Client> Clients { get; set; }
     DbSet<ClientAuth> ClientAuths { get; set; }
     DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }
@@ -17,6 +16,7 @@ public interface IDatabaseService
     DbSet<EmailImage> EmailImages { get; set; }
     DbSet<EmailMessage> EmailMessages { get; set; }
     DbSet<LogItem> LogItems { get; set; }
+    DbSet<NetworkRequest> NetworkRequests { get; set; }
     DbSet<NetworkRule> NetworkRules { get; set; }
     DbSet<Session> Sessions { get; set; }
     DbSet<SessionActivity> SessionActivities { get; set; }

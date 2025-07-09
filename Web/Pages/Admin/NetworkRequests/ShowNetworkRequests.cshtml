@@ -1,5 +1,5 @@
-﻿@page "/show-blocked-requests"
-@model ShowBlockedRequestsModel
+﻿@page "/show-network-requests"
+@model ShowNetworkRequestsModel
 @{
 }
 
@@ -25,17 +25,17 @@
             <li>
                 ➡️
                 &thinsp;
-                <a href="/show-blocked-urls">URL:er</a>
+                <a href="/show-network-urls">URL:er</a>
             </li>
             <li>
                 ➡️
                 &thinsp;
-                <a href="/show-blocked-user-agents">Agenter</a>
+                <a href="/show-network-user-agents">Agenter</a>
             </li>
             <li>
                 ➡️
                 &thinsp;
-                <a href="/show-blocked-ip-addresses">IP-adresser</a>
+                <a href="/show-network-ip-addresses">IP-adresser</a>
             </li>
         </ul>
     </div>
@@ -47,10 +47,10 @@
     <div class="notice" >
 
         <ul>
-            @foreach (var request in Model.BlockedRequests)
+            @foreach (var request in Model.NetworkRequests)
             {
                 <li>
-                    <a href="/show-blocked-request/@(request.Id)">
+                    <a href="/show-network-request/@(request.Id)">
                         @(request.Created.ToFixedFormatDateShortTime())
                     </a>
                     <br />
@@ -64,7 +64,7 @@
                 </li>
             }
 
-            @if (!Model.BlockedRequests.Any())
+            @if (!Model.NetworkRequests.Any())
             {
                 <li>
                     🛑
@@ -77,7 +77,7 @@
     </div>
 
     <p>
-        <a class="button" href="/remove-blocked-requests">
+        <a class="button" href="/remove-network-requests">
             Ta bort
         </a>
     </p>

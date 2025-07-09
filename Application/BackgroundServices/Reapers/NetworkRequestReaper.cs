@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace Betalish.Application.BackgroundServices.Reapers
 {
-    public class BlockedRequestReaper(
+    public class NetworkRequestReaper(
         IDateService dateService,
         ILogItemList logItemList,
         IServiceProvider serviceProvider,

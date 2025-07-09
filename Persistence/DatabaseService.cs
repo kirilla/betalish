@@ -12,7 +12,6 @@ public class DatabaseService(
 {
     public DbSet<AdminAuth> AdminAuths { get; set; }
     public DbSet<BadSignIn> BadSignIns { get; set; }
-    public DbSet<BlockedRequest> NetworkRequests { get; set; }
     public DbSet<Client> Clients { get; set; }
     public DbSet<ClientAuth> ClientAuths { get; set; }
     public DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }
@@ -23,6 +22,7 @@ public class DatabaseService(
     public DbSet<EmailImage> EmailImages { get; set; }
     public DbSet<EmailMessage> EmailMessages { get; set; }
     public DbSet<LogItem> LogItems { get; set; }
+    public DbSet<NetworkRequest> NetworkRequests { get; set; }
     public DbSet<NetworkRule> NetworkRules { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<SessionActivity> SessionActivities { get; set; }
@@ -39,7 +39,6 @@ public class DatabaseService(
 
         new AdminAuthConfiguration().Configure(builder.Entity<AdminAuth>());
         new BadSignInConfiguration().Configure(builder.Entity<BadSignIn>());
-        new BlockedRequestConfiguration().Configure(builder.Entity<BlockedRequest>());
         new ClientConfiguration().Configure(builder.Entity<Client>());
         new ClientAuthConfiguration().Configure(builder.Entity<ClientAuth>());
         new ClientEmailAccountConfiguration().Configure(builder.Entity<ClientEmailAccount>());
@@ -50,6 +49,7 @@ public class DatabaseService(
         new EmailImageConfiguration().Configure(builder.Entity<EmailImage>());
         new EmailMessageConfiguration().Configure(builder.Entity<EmailMessage>());
         new LogItemConfiguration().Configure(builder.Entity<LogItem>());
+        new NetworkRequestConfiguration().Configure(builder.Entity<NetworkRequest>());
         new NetworkRuleConfiguration().Configure(builder.Entity<NetworkRule>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
         new SessionActivityConfiguration().Configure(builder.Entity<SessionActivity>());

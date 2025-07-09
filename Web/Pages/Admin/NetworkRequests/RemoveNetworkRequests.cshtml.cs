@@ -1,14 +1,14 @@
-using Betalish.Application.Commands.BlockedRequests.RemoveBlockedRequests;
+using Betalish.Application.Commands.NetworkRequests.RemoveNetworkRequests;
 
-namespace Betalish.Web.Pages.Admin.BlockedRequests;
+namespace Betalish.Web.Pages.Admin.NetworkRequests;
 
-public class RemoveBlockedRequestsModel(
+public class RemoveNetworkRequestsModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemoveBlockedRequestsCommand command) : AdminPageModel(userToken)
+    IRemoveNetworkRequestsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public RemoveBlockedRequestsCommandModel CommandModel { get; set; }
+    public RemoveNetworkRequestsCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -19,7 +19,7 @@ public class RemoveBlockedRequestsModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new RemoveBlockedRequestsCommandModel();
+            CommandModel = new RemoveNetworkRequestsCommandModel();
 
             return Page();
         }
@@ -47,7 +47,7 @@ public class RemoveBlockedRequestsModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/show-blocked-requests");
+            return Redirect("/show-network-requests");
         }
         catch (ConfirmationRequiredException)
         {

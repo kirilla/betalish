@@ -1,9 +1,9 @@
-﻿namespace Betalish.Application.Commands.BlockedRequests.RemoveBlockedRequests;
+﻿namespace Betalish.Application.Commands.NetworkRequests.RemoveNetworkRequests;
 
-public class RemoveBlockedRequestsCommand(IDatabaseService database) : IRemoveBlockedRequestsCommand
+public class RemoveNetworkRequestsCommand(IDatabaseService database) : IRemoveNetworkRequestsCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemoveBlockedRequestsCommandModel model)
+        IUserToken userToken, RemoveNetworkRequestsCommandModel model)
     {
         if (!await IsPermitted(userToken))
             throw new NotPermittedException();
