@@ -24,6 +24,7 @@ public class NetworkRuleCacheService(
 
         list = await database.NetworkRules
             .AsNoTracking()
+            .Where(x => x.Active)
             .OrderByDescending(x => x.PrefixLength) // Higher specificity
             .ThenBy(x => x.BaseAddress)
             .ToListAsync();
