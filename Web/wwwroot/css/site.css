@@ -200,3 +200,8 @@ summary {
 .spaced-list li {
     margin-bottom: 8px;
 }
+
+main h4 + form,
+main h5 + form {
+    margin-top: 1rem;
+}
