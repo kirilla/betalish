@@ -2,6 +2,15 @@
 
 public static class Limits
 {
+    public static class NetworkRule
+    {
+        public static class PrefixLength
+        {
+            public const int Min = 0;
+            public const int Max = 128;
+        }
+    }
+
     public static class User
     {
         public static class EmailAddresses

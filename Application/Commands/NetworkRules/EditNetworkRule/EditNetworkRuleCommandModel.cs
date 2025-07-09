@@ -13,7 +13,9 @@ public class EditNetworkRuleCommandModel
     public string? BaseAddress { get; set; }
 
     [Required(ErrorMessage = "Skriv ett prefix.")]
-    [Range(1, 128)]
+    [Range(
+        Limits.NetworkRule.PrefixLength.Min,
+        Limits.NetworkRule.PrefixLength.Max)]
     public int? PrefixLength { get; set; }
 
     public bool Blocked { get; set; }
