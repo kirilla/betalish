@@ -30,24 +30,6 @@
             {
                 <li>⚠️ Deaktiverad</li>
             }
-
-            @if (Model.IpFilterConfiguration.LogBlockedRequest)
-            {
-                <li>🐵 Loggning på</li>
-            }
-            else
-            {
-                <li>🙈 Loggning av</li>
-            }
-
-            @if (Model.IpFilterConfiguration.BlockByDefault)
-            {
-                <li>🛑 Grundregel: blockerat</li>
-            }
-            else
-            {
-                <li>🛣️ Grundregel: öppet</li>
-            }
         </ul>
     </div>
 

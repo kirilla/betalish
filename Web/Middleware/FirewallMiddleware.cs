@@ -1,6 +1,5 @@
 ﻿using Betalish.Application.Auth;
 using Microsoft.AspNetCore.Http.Extensions;
-using System.Net;
 
 namespace Betalish.Web.Middleware;
 
@@ -28,63 +27,54 @@ public class FirewallMiddleware(
             return;
         }
 
-        var decision = await Decide(requestIp);
+        var rule = 
+            (await cacheService.GetNetworkRules())
+            .OrderByDescending(x => x.PrefixLength)
+            .ThenBy(x => x.BaseAddress)
+            .Where(x => x.NetworkContains(requestIp))
+            .FirstOrDefault();
 
-        if (decision == FirewallDecision.AllowedByDefault ||
-            decision == FirewallDecision.AllowedByRule)
+        if (rule == null)
         {
             await next(context);
             return;
         }
 
-        context.Response.StatusCode = StatusCodes.Status404NotFound;
-
-        //context.Response.StatusCode = StatusCodes.Status403Forbidden;
-        //await context.Response.WriteAsync("Access Denied");
-
-        if (_config.LogBlockedRequest &&
-            decision == FirewallDecision.BlockedByDefault)
+        if (rule.Log)
         {
-            // NOTE: Only log the BlockedByDefault case.
-            //
-            // No logging for explicitly blocked IP ranges.
-
-            using var scope = scopeFactory.CreateScope();
-
-            var database = scope.ServiceProvider.GetRequiredService<IDatabaseService>();
-
-            var request = new BlockedRequest()
-            {
-                Url = context.Request.GetDisplayUrl(),
-                Method = context.Request.Method,
-                IpAddress = context.Connection.RemoteIpAddress?.ToString(),
-                UserAgent = context.Request.Headers?.UserAgent,
-            };
-
-            database.BlockedRequests.Add(request);
-
-            await database.SaveAsync(new NoUserToken());
+            await Log(context);
         }
+
+        if (rule.Blocked)
+        {
+            context.Response.StatusCode = StatusCodes.Status404NotFound;
+
+            //context.Response.StatusCode = StatusCodes.Status403Forbidden;
+            //await context.Response.WriteAsync("Access Denied");
+
+            return;
+        }
+
+        await next(context);
+        return;
     }
 
-    private async Task<FirewallDecision> Decide(IPAddress requestIp)
+    private async Task Log(HttpContext context)
     {
-        var rules = await cacheService.GetNetworkRules();
+        using var scope = scopeFactory.CreateScope();
 
-        foreach (var rule in rules)
+        var database = scope.ServiceProvider.GetRequiredService<IDatabaseService>();
+
+        var request = new BlockedRequest()
         {
-            if (rule.NetworkContains(requestIp))
-            {
-                if (rule.Blocked)
-                    return FirewallDecision.BlockedByRule;
-                else
-                    return FirewallDecision.AllowedByRule;
-            }
-        }
+            Url = context.Request.GetDisplayUrl(),
+            Method = context.Request.Method,
+            IpAddress = context.Connection.RemoteIpAddress?.ToString(),
+            UserAgent = context.Request.Headers?.UserAgent,
+        };
 
-        if (_config.BlockByDefault)
-            return FirewallDecision.BlockedByDefault;
-        else
-            return FirewallDecision.AllowedByDefault;
+        database.BlockedRequests.Add(request);
+
+        await database.SaveAsync(new NoUserToken());
     }
 }
