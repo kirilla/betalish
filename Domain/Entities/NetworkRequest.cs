@@ -13,4 +13,6 @@ public class NetworkRequest : ICreatedDateTime
     public string? UserAgent { get; set; }
 
     public bool Blocked { get; set; }
+
+    public int? RepeatCount { get; set; }
 }

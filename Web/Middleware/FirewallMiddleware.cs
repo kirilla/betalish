@@ -1,4 +1,5 @@
 ﻿using Betalish.Application.Auth;
+using Betalish.Application.Queues.NetworkRequests;
 using Microsoft.AspNetCore.Http.Extensions;
 
 namespace Betalish.Web.Middleware;
@@ -42,7 +43,7 @@ public class FirewallMiddleware(
 
         if (rule.Log)
         {
-            await Log(context, rule.Block);
+            Log(context, rule.Block);
         }
 
         if (rule.Block)
@@ -59,11 +60,11 @@ public class FirewallMiddleware(
         return;
     }
 
-    private async Task Log(HttpContext context, bool blocked)
+    private void Log(HttpContext context, bool blocked)
     {
         using var scope = scopeFactory.CreateScope();
 
-        var database = scope.ServiceProvider.GetRequiredService<IDatabaseService>();
+        var networkRequestList = scope.ServiceProvider.GetRequiredService<INetworkRequestList>();
 
         var request = new NetworkRequest()
         {
@@ -74,8 +75,6 @@ public class FirewallMiddleware(
             Blocked = blocked,
         };
 
-        database.NetworkRequests.Add(request);
-
-        await database.SaveAsync(new NoUserToken());
+        networkRequestList.Add(request);
     }
 }
