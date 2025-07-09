@@ -1,11 +1,11 @@
-﻿@page "/show-network-request-urls"
-@model ShowBlockedUrlsModel
+﻿@page "/show-network-request-ip-addresses"
+@model ShowNetworkRequestIpAddressesModel
 @{
 }
 
 @section Meta {
     <title>
-        Blockerade URL:er -
+        Loggade IP-adresser -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -17,12 +17,12 @@
 <main>
 
     <h4>
-        Blockerade URL:er
+        Loggade IP-adresser
     </h4>
 
     <div class="notice">
         <ul>
-            @if (!Model.URLs.Any())
+            @if (!Model.IpAddresses.Any())
             {
                 <li>
                     🛑
@@ -30,12 +30,10 @@
                     &ndash;
                 </li>
             }
-            @foreach (var agent in Model.URLs)
+            @foreach (var address in Model.IpAddresses)
             {
                 <li>
-                    🛑
-                    &thinsp;
-                    @(agent)
+                    @(address)
                 </li>
             }
         </ul>

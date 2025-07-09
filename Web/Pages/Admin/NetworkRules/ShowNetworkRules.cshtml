@@ -37,7 +37,7 @@
         <table>
             <tr>
                 <th>Nätverk</th>
-                <th>Blockerat</th>
+                <th>Blockera</th>
                 <th>Logga</th>
             </tr>
             @foreach (var rule in Model.NetworkRules)
@@ -51,11 +51,11 @@
                     <td>
                         @if (rule.Blocked)
                         {
-                            <span>🛑 Blockerat</span>
+                            <span>🛑 Blockera</span>
                         }
                         else
                         {
-                            <span>🛣️ Öppet</span>
+                            <span>🛣️ Tillåt</span>
                         }
                     </td>
                     <td>
