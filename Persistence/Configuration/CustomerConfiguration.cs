@@ -6,6 +6,12 @@ class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
         builder.HasKey(p => p.Id);
 
+        builder.Property(p => p.Ssn10)
+            .HasMaxLength(MaxLengths.Common.Ssn.Ssn10);
+
+        builder.Property(p => p.Orgnum)
+            .HasMaxLength(MaxLengths.Common.Organization.Orgnum);
+
         builder.Property(p => p.Name)
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.Customer.Name);

@@ -49,6 +49,12 @@ public static class MaxLengths
             public const int ContentType = 255;
         }
 
+        public static class Organization
+        {
+            public const int Orgnum = 10;
+            public const int OrgnumPermissive = 11;
+        }
+
         public static class Password
         {
             public const int Clear = 70;
