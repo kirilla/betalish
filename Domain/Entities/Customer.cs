@@ -9,6 +9,7 @@ public class Customer : IValidateOnSave
     public CustomerKind CustomerKind { get; set; }
 
     public string Name { get; set; }
+
     public string Address { get; set; }
 
     public int ClientId { get; set; }

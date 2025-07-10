@@ -13,7 +13,7 @@ class SignupConfiguration : IEntityTypeConfiguration<Signup>
 
         builder.Property(p => p.PersonName)
             .IsRequired()
-            .HasMaxLength(MaxLengths.Common.Person.Name);
+            .HasMaxLength(MaxLengths.Common.Person.FullName);
 
         builder.Property(p => p.EmailAddress)
             .IsRequired()

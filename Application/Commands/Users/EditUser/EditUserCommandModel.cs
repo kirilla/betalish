@@ -8,7 +8,7 @@ public class EditUserCommandModel
     public int Id { get; set; }
 
     [RegularExpression(Pattern.Common.SomeContent)]
-    [StringLength(MaxLengths.Common.Person.Name)]
+    [StringLength(MaxLengths.Common.Person.FullName)]
     public string Name { get; set; }
 
     public bool NoLogin { get; set; }

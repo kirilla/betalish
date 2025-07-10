@@ -22,7 +22,7 @@ public class SignupForServiceCommandModel
     [Required(
         ErrorMessage = "Skriv ditt namn.")]
     [StringLength(
-        MaxLengths.Common.Person.Name,
+        MaxLengths.Common.Person.FullName,
         ErrorMessage = "Skriv kortare.")]
     public string PersonName { get; set; }
 

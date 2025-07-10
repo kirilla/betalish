@@ -13,7 +13,7 @@ public class RegisterAccountCommandModel
     public string Ssn12 { get; set; }
 
     [RegularExpression(Pattern.Common.SomeContent)]
-    [StringLength(MaxLengths.Common.Person.Name)]
+    [StringLength(MaxLengths.Common.Person.FullName)]
     public string Name { get; set; }
 
     [RegularExpression(Pattern.Common.Email.Address)]
