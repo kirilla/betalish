@@ -1,4 +1,4 @@
-﻿namespace Betalish.Common.Dates;
+﻿namespace Betalish.Common.Services;
 
 public class DateService : IDateService
 {

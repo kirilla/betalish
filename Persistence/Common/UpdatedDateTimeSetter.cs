@@ -1,5 +1,4 @@
-﻿using Betalish.Common.Dates;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Betalish.Persistence.Common;
 

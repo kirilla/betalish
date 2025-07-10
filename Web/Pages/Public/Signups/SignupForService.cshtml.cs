@@ -2,7 +2,6 @@
 using Betalish.Application.Models;
 using Betalish.Application.Queues.EndpointRateLimiting;
 using Betalish.Application.Queues.IpAddressRateLimiting;
-using Betalish.Common.Dates;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Betalish.Web.Pages.Public.Signups;
