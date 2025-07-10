@@ -54,10 +54,10 @@ public class SignupEmailTemplate : ISignupEmailTemplate
             <body style="background-color:white">
                 <h5>Hej och välkommen!</h5>
                 <p>
-                    <a href="https://praktikantbanken.se/finish-signup/{guid}">Skapa ditt konto nu</a>
+                    <a href="https://betalish.se/finish-signup/{guid}">Skapa ditt konto nu</a>
                 </p>
                 <p>
-                    Mvh, Praktikantbanken.
+                    Mvh, Betalish.
                 </p>
             </body>
             """;
@@ -71,9 +71,9 @@ public class SignupEmailTemplate : ISignupEmailTemplate
             Hej och välkommen!
             
             Skapa ditt konto nu
-            https://praktikantbanken.se/finish-signup/{guid}
+            https://betalish.se/finish-signup/{guid}
             
-            Mvh, Praktikantbanken.
+            Mvh, Betalish.
             """;
     }
 }
