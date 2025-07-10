@@ -7,8 +7,7 @@ public class DatabaseService(
     IOnSaveFormatter formatter,
     IOnSaveValidator validator,
     ICreatedDateTimeSetter createdDateTimeSetter,
-    IUpdatedDateTimeSetter updatedDateTimeSetter,
-    IGuidAsserter guidAsserter) : DbContext(options), IDatabaseService
+    IUpdatedDateTimeSetter updatedDateTimeSetter) : DbContext(options), IDatabaseService
 {
     public DbSet<AdminAuth> AdminAuths { get; set; }
     public DbSet<BadSignIn> BadSignIns { get; set; }
@@ -76,8 +75,6 @@ public class DatabaseService(
         
         formatter.Format(entries);
         validator.Validate(entries);
-
-        guidAsserter.AssertGuid(entries);
 
         await base.SaveChangesAsync();
 

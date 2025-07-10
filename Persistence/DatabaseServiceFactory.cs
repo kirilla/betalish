@@ -41,14 +41,12 @@ public class DatabaseServiceFactory : IDesignTimeDbContextFactory<DatabaseServic
         var validator = new OnSaveValidator();
         var createdDateTimeSetter = new CreatedDateTimeSetter(dateService);
         var updatedDateTimeSetter = new UpdatedDateTimeSetter(dateService);
-        var guidAsserter = new GuidAsserter();
 
         return new DatabaseService(
             optionsBuilder.Options, 
             formatter, 
             validator, 
             createdDateTimeSetter, 
-            updatedDateTimeSetter,
-            guidAsserter);
+            updatedDateTimeSetter);
     }
 }
