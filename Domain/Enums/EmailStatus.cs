@@ -1,4 +1,4 @@
-﻿namespace Betalish.Common.Enums;
+﻿namespace Betalish.Domain.Enums;
 
 public enum EmailStatus
 {

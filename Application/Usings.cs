@@ -8,4 +8,5 @@ global using Betalish.Common.Extensions;
 global using Betalish.Common.Interfaces;
 global using Betalish.Common.Validation;
 global using Betalish.Domain.Entities;
+global using Betalish.Domain.Enums;
 global using Microsoft.EntityFrameworkCore;
