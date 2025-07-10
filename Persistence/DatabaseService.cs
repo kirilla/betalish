@@ -69,13 +69,15 @@ public class DatabaseService(
         if (!ChangeTracker.HasChanges())
             return;
 
-        createdDateTimeSetter.SetCreated(ChangeTracker);
-        updatedDateTimeSetter.SetUpdated(ChangeTracker);
-        
-        guidAsserter.AssertGuid(ChangeTracker);
+        var entries = ChangeTracker.Entries();
 
-        formatter.Format(ChangeTracker);
-        validator.Validate(ChangeTracker);
+        createdDateTimeSetter.SetCreated(entries);
+        updatedDateTimeSetter.SetUpdated(entries);
+        
+        formatter.Format(entries);
+        validator.Validate(entries);
+
+        guidAsserter.AssertGuid(entries);
 
         await base.SaveChangesAsync();
 

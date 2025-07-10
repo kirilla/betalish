@@ -4,6 +4,6 @@ namespace Betalish.Application.Interfaces
 {
     public interface IUpdatedDateTimeSetter
     {
-        void SetUpdated(ChangeTracker changeTracker);
+        void SetUpdated(IEnumerable<EntityEntry> entries);
     }
 }

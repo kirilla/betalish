@@ -4,5 +4,5 @@ namespace Betalish.Application.Interfaces;
 
 public interface IOnSaveValidator
 {
-    void Validate(ChangeTracker changeTracker);
+    void Validate(IEnumerable<EntityEntry> entries);
 }

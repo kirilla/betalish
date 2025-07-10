@@ -4,10 +4,9 @@ namespace Betalish.Persistence.Common;
 
 public class GuidAsserter : IGuidAsserter
 {
-    public void AssertGuid(ChangeTracker changeTracker)
+    public void AssertGuid(IEnumerable<EntityEntry> entries)
     {
-        var entries = changeTracker
-            .Entries()
+        var entities = entries
             .Where(x => 
                 x.State == EntityState.Added ||
                 x.State == EntityState.Modified)
@@ -15,12 +14,12 @@ public class GuidAsserter : IGuidAsserter
             .Where(x => x != null)
             .ToList();
 
-        foreach (var entry in entries)
+        foreach (var entity in entities)
         {
-            if (entry!.Guid == null)
+            if (entity!.Guid == null)
                 throw new NullGuidException();
 
-            if (entry!.Guid == Guid.Empty)
+            if (entity!.Guid == Guid.Empty)
                 throw new EmptyGuidException();
         }
     }

@@ -12,10 +12,9 @@ public class UpdatedDateTimeSetter : IUpdatedDateTimeSetter
         _dateService = dateService;
     }
 
-    public void SetUpdated(ChangeTracker changeTracker)
+    public void SetUpdated(IEnumerable<EntityEntry> entries)
     {
-        var entries = changeTracker
-            .Entries()
+        var entities = entries
             .Where(x =>
                 x.State == EntityState.Added ||
                 x.State == EntityState.Modified)
@@ -23,9 +22,9 @@ public class UpdatedDateTimeSetter : IUpdatedDateTimeSetter
             .Where(x => x != null)
             .ToList();
 
-        foreach (var entry in entries)
+        foreach (var entity in entities)
         {
-            entry!.Updated = _dateService.GetDateTimeNow();
+            entity!.Updated = _dateService.GetDateTimeNow();
         }
     }
 }

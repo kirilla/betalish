@@ -12,10 +12,9 @@ public class CreatedDateTimeSetter : ICreatedDateTimeSetter
         _dateService = dateService;
     }
 
-    public void SetCreated(ChangeTracker changeTracker)
+    public void SetCreated(IEnumerable<EntityEntry> entries)
     {
-        var entries = changeTracker
-            .Entries()
+        var entities = entries
             .Where(x => x.State == EntityState.Added)
             .Select(x => x.Entity as ICreatedDateTime)
             .Where(x =>
@@ -23,9 +22,9 @@ public class CreatedDateTimeSetter : ICreatedDateTimeSetter
                 x.Created == null)
             .ToList();
 
-        foreach (var entry in entries)
+        foreach (var entity in entities)
         {
-            entry!.Created = _dateService.GetDateTimeNow();
+            entity!.Created = _dateService.GetDateTimeNow();
         }
     }
 }

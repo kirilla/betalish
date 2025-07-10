@@ -9,10 +9,9 @@ public class OnSaveFormatter : IOnSaveFormatter
     {
     }
 
-    public void Format(ChangeTracker changeTracker)
+    public void Format(IEnumerable<EntityEntry> entries)
     {
-        var entries = changeTracker
-            .Entries()
+        var entities = entries
             .Where(x =>
                 x.State == EntityState.Added ||
                 x.State == EntityState.Modified)
@@ -20,9 +19,9 @@ public class OnSaveFormatter : IOnSaveFormatter
             .Where(x => x != null)
             .ToList();
 
-        foreach (var entry in entries)
+        foreach (var entity in entities)
         {
-            entry!.FormatOnSave();
+            entity!.FormatOnSave();
         }
     }
 }

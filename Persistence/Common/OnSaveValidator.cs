@@ -1,5 +1,4 @@
-﻿using Betalish.Common.Interfaces;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Betalish.Persistence.Common;
 
@@ -9,10 +8,9 @@ public class OnSaveValidator : IOnSaveValidator
     {
     }
 
-    public void Validate(ChangeTracker changeTracker)
+    public void Validate(IEnumerable<EntityEntry> entries)
     {
-        var entries = changeTracker
-            .Entries()
+        var entities = entries
             .Where(x =>
                 x.State == EntityState.Added ||
                 x.State == EntityState.Modified)
@@ -20,9 +18,9 @@ public class OnSaveValidator : IOnSaveValidator
             .Where(x => x != null)
             .ToList();
 
-        foreach (var entry in entries)
+        foreach (var entity in entities)
         {
-            entry!.ValidateOnSave();
+            entity!.ValidateOnSave();
         }
     }
 }

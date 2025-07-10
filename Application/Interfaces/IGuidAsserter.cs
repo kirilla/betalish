@@ -4,5 +4,5 @@ namespace Betalish.Application.Interfaces;
 
 public interface IGuidAsserter
 {
-    void AssertGuid(ChangeTracker changeTracker);
+    void AssertGuid(IEnumerable<EntityEntry> entries);
 }

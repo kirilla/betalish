@@ -4,5 +4,5 @@ namespace Betalish.Application.Interfaces;
 
 public interface IOnSaveFormatter
 {
-    void Format(ChangeTracker changeTracker);
+    void Format(IEnumerable<EntityEntry> entries);
 }
