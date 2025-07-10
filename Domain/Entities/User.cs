@@ -1,4 +1,6 @@
-﻿namespace Betalish.Domain.Entities;
+﻿using Betalish.Common.Logic;
+
+namespace Betalish.Domain.Entities;
 
 public class User : 
     ICreatedDateTime, 
@@ -51,10 +53,10 @@ public class User :
         if (string.IsNullOrWhiteSpace(Ssn10))
             throw new MissingSsnException();
 
-        if (!RegexService.IsMatch(Ssn10, Pattern.Common.Ssn.Ssn10))
+        if (!RegexLogic.IsMatch(Ssn10, Pattern.Common.Ssn.Ssn10))
             throw new InvalidSsnException();
 
-        if (!SsnService.IsValidSsn(Ssn10))
+        if (!SsnLogic.IsValidSsn(Ssn10))
             throw new InvalidSsnException();
     }
 
@@ -63,10 +65,10 @@ public class User :
         if (string.IsNullOrWhiteSpace(Ssn12))
             throw new MissingSsnException();
 
-        if (!RegexService.IsMatch(Ssn12, Pattern.Common.Ssn.Ssn12))
+        if (!RegexLogic.IsMatch(Ssn12, Pattern.Common.Ssn.Ssn12))
             throw new InvalidSsnException();
 
-        if (!SsnService.IsValidSsn(Ssn12))
+        if (!SsnLogic.IsValidSsn(Ssn12))
             throw new InvalidSsnException();
     }
 }

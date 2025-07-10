@@ -1,4 +1,6 @@
-﻿namespace Betalish.Domain.Entities;
+﻿using Betalish.Common.Logic;
+
+namespace Betalish.Domain.Entities;
 
 public class Signup :
     ICreatedDateTime, 
@@ -40,7 +42,7 @@ public class Signup :
         if (string.IsNullOrWhiteSpace(EmailAddress))
             throw new MissingEmailException();
 
-        if (!RegexService.IsMatch(EmailAddress, Pattern.Common.Email.Address))
+        if (!RegexLogic.IsMatch(EmailAddress, Pattern.Common.Email.Address))
             throw new InvalidEmailException();
     }
 
@@ -49,10 +51,10 @@ public class Signup :
         if (string.IsNullOrWhiteSpace(Ssn12))
             throw new MissingSsnException();
 
-        if (!RegexService.IsMatch(Ssn12, Pattern.Common.Ssn.Ssn12))
+        if (!RegexLogic.IsMatch(Ssn12, Pattern.Common.Ssn.Ssn12))
             throw new InvalidSsnException();
 
-        if (!SsnService.IsValidSsn(Ssn12))
+        if (!SsnLogic.IsValidSsn(Ssn12))
             throw new InvalidSsnException();
     }
 }

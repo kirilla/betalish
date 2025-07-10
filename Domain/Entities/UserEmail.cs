@@ -1,4 +1,6 @@
-﻿namespace Betalish.Domain.Entities;
+﻿using Betalish.Common.Logic;
+
+namespace Betalish.Domain.Entities;
 
 public class UserEmail : 
     ICreatedDateTime, IUpdatedDateTime, IFormatOnSave, IValidateOnSave
@@ -25,7 +27,7 @@ public class UserEmail :
         if (string.IsNullOrWhiteSpace(Address))
             throw new MissingEmailException();
 
-        if (!RegexService.IsMatch(Address, Pattern.Common.Email.Address))
+        if (!RegexLogic.IsMatch(Address, Pattern.Common.Email.Address))
             throw new InvalidEmailException();
     }
 }

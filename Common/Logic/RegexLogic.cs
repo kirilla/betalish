@@ -1,8 +1,8 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Betalish.Common.Validation;
+namespace Betalish.Common.Logic;
 
-public static class RegexService
+public static class RegexLogic
 {
     public static bool IsMatch(string input, string pattern)
     {

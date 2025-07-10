@@ -5,6 +5,7 @@ global using Betalish.Common.Enums;
 global using Betalish.Common.Exceptions;
 global using Betalish.Common.Extensions;
 global using Betalish.Common.Interfaces;
+global using Betalish.Common.Logic;
 global using Betalish.Common.Services;
 global using Betalish.Common.Validation;
 global using Betalish.Domain.Entities;

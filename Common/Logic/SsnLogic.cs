@@ -1,8 +1,9 @@
 ﻿using Betalish.Common.Extensions;
+using Betalish.Common.Validation;
 
-namespace Betalish.Common.Validation;
+namespace Betalish.Common.Logic;
 
-public static class SsnService
+public static class SsnLogic
 {
     public static bool IsCheckDigitValid(string ssn)
     {
@@ -16,7 +17,7 @@ public static class SsnService
         int temp;
 
         var arr = ssn
-            .Where(c => Char.IsDigit(c))
+            .Where(c => char.IsDigit(c))
             .Reverse()
             .Select(x =>
             {
@@ -54,7 +55,7 @@ public static class SsnService
 
         sum += lastDigit;
 
-        return (sum % 10 == 0);
+        return sum % 10 == 0;
     }
 
     public static bool IsValidSsn(string ssn)
@@ -73,7 +74,7 @@ public static class SsnService
             return false;
         }
 
-        if (!RegexService.IsMatch(ssn, Pattern.Common.Ssn.Ssn10))
+        if (!RegexLogic.IsMatch(ssn, Pattern.Common.Ssn.Ssn10))
         {
             return false;
         }

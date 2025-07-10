@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Betalish.Common.Settings;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
-using Betalish.Common.Settings;
 
 namespace Betalish.Application.Commands.Sessions.SignInBySsn;
 
@@ -33,7 +33,7 @@ public class SignInBySsnCommand(
         if (model.Ssn12.Length != 12)
             throw new NotPermittedException();
 
-        if (!SsnService.IsValidSsn(model.Ssn12))
+        if (!SsnLogic.IsValidSsn(model.Ssn12))
             throw new InvalidSsnException();
 
         var ssn10 = model.Ssn12.ToSsn10();
