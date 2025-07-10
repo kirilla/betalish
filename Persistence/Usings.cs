@@ -1,4 +1,5 @@
 ﻿global using Betalish.Application.Interfaces;
+global using Betalish.Common.Exceptions;
 global using Betalish.Common.Interfaces;
 global using Betalish.Common.Validation;
 global using Betalish.Domain.Entities;

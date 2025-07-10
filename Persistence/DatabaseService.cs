@@ -1,5 +1,4 @@
-﻿using Betalish.Common.Exceptions;
-using Betalish.Persistence.Configuration;
+﻿using Betalish.Persistence.Configuration;
 
 namespace Betalish.Persistence;
 
@@ -8,7 +7,8 @@ public class DatabaseService(
     IOnSaveFormatter formatter,
     IOnSaveValidator validator,
     ICreatedDateTimeSetter createdDateTimeSetter,
-    IUpdatedDateTimeSetter updatedDateTimeSetter) : DbContext(options), IDatabaseService
+    IUpdatedDateTimeSetter updatedDateTimeSetter,
+    IGuidAsserter guidAsserter) : DbContext(options), IDatabaseService
 {
     public DbSet<AdminAuth> AdminAuths { get; set; }
     public DbSet<BadSignIn> BadSignIns { get; set; }
@@ -71,6 +71,8 @@ public class DatabaseService(
 
         createdDateTimeSetter.SetCreated(ChangeTracker);
         updatedDateTimeSetter.SetUpdated(ChangeTracker);
+        
+        guidAsserter.AssertGuid(ChangeTracker);
 
         formatter.Format(ChangeTracker);
         validator.Validate(ChangeTracker);
