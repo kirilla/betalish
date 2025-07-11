@@ -31,12 +31,9 @@
     </div>
 
     <p>
-        @if (Model.CanEndSession)
-        {
-            <a class="button" href="/end-session/@(Model.Session.Id)">
-                Avsluta sessionen
-            </a>
-        }
+        <a class="button" href="/end-session/@(Model.Session.Id)">
+            Avsluta sessionen
+        </a>
 
         <a class="button" href="/sessions">
             Avbryt

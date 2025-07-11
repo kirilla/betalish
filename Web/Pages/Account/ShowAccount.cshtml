@@ -35,14 +35,11 @@
             @(Model.User.Ssn12.ToSsnWithDash())
         </p>
         
-        @if (Model.CanEditAccount)
-        {
-            <p>
-                <a class="button" href="/edit-account">
-                    Ändra
-                </a>
-            </p>
-        }
+        <p>
+            <a class="button" href="/edit-account">
+                Ändra
+            </a>
+        </p>
 
         <h5>
             Epost
@@ -134,19 +131,13 @@
     </div>
 
     <p>
-        @if (Model.CanChangePassword)
-        {
-            <a class="button" href="/change-password">
-                Ändra lösenord
-            </a>
-        }
+        <a class="button" href="/change-password">
+            Ändra lösenord
+        </a>
 
-        @if (Model.CanDeleteAccount)
-        {
-            <a class="button" href="/delete-account">
-                Ta bort konto
-            </a>
-        }
+        <a class="button" href="/delete-account">
+            Ta bort konto
+        </a>
     </p>
 
 </main>

@@ -1,32 +1,14 @@
-﻿using Betalish.Application.Commands.Account.ChangePassword;
-using Betalish.Application.Commands.Account.DeleteAccount;
-using Betalish.Application.Commands.Account.EditAccount;
-using Betalish.Application.Commands.UserEmails.AddAccountEmail;
-using Betalish.Application.Commands.UserEmails.RemoveAccountEmail;
-using Betalish.Application.Commands.UserPhones.AddAccountPhone;
-using Betalish.Application.Commands.UserPhones.RemoveAccountPhone;
-
-namespace Betalish.Web.Pages.Account;
+﻿namespace Betalish.Web.Pages.Account;
 
 public class ShowAccountModel(
     IDatabaseService database,
-    IUserToken userToken,
-    IChangePasswordCommand changePasswordCommand,
-    IDeleteAccountCommand deleteAccountCommand,
-    IEditAccountCommand editAccountCommand,
-    IAddAccountEmailCommand addUserEmailCommand,
-    IRemoveAccountEmailCommand removeUserEmailCommand,
-    IAddAccountPhoneCommand addAccountPhoneCommand,
-    IRemoveAccountPhoneCommand removeAccountPhoneCommand) : UserTokenPageModel(userToken)
+    IUserToken userToken) : UserTokenPageModel(userToken)
 {
     public new User User { get; set; }
 
     public List<UserEmail> UserEmails { get; set; }
     public List<UserPhone> UserPhones { get; set; }
 
-    public bool CanChangePassword { get; set; }
-    public bool CanDeleteAccount { get; set; }
-    public bool CanEditAccount { get; set; }
     public bool CanAddUserEmail { get; set; }
     public bool CanRemoveUserEmail { get; set; }
     public bool CanAddAccountPhone { get; set; }
@@ -55,21 +37,11 @@ public class ShowAccountModel(
                 .Where(x => x.UserId == UserToken.UserId!.Value)
                 .ToListAsync();
 
-            CanChangePassword = changePasswordCommand.IsPermitted(userToken);
-            CanDeleteAccount = deleteAccountCommand.IsPermitted(userToken);
-            CanEditAccount = editAccountCommand.IsPermitted(userToken);
+            CanAddUserEmail = UserEmails.Count < Limits.User.EmailAddresses.Max;
+            CanAddAccountPhone = UserPhones.Count < Limits.User.PhoneNumbers.Max;
 
-            CanAddUserEmail =
-                addUserEmailCommand.IsPermitted(userToken) &&
-                UserEmails.Count < Limits.User.EmailAddresses.Max;
-
-            CanRemoveUserEmail = removeUserEmailCommand.IsPermitted(userToken);
-
-            CanAddAccountPhone =
-                addAccountPhoneCommand.IsPermitted(userToken) &&
-                UserPhones.Count < Limits.User.PhoneNumbers.Max;
-
-            CanRemoveAccountPhone = removeAccountPhoneCommand.IsPermitted(userToken);
+            CanRemoveUserEmail = UserEmails.Count > 1;
+            CanRemoveAccountPhone = UserPhones.Count > 1;
 
             return Page();
         }

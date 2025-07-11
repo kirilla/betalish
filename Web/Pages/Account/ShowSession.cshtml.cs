@@ -1,16 +1,10 @@
-﻿using Betalish.Application.Commands.Sessions.EndSession;
-
-namespace Betalish.Web.Pages.Account;
+﻿namespace Betalish.Web.Pages.Account;
 
 public class ShowSessionModel(
     IUserToken userToken,
-    IDatabaseService database,
-    IEndSessionCommand endSessionCommand) : UserTokenPageModel(userToken)
+    IDatabaseService database) : UserTokenPageModel(userToken)
 {
     public Session Session { get; set; }
-
-    public bool CanEndSession { get; set; }
-        = endSessionCommand.IsPermitted(userToken);
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

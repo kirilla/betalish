@@ -1,15 +1,10 @@
-using Betalish.Application.Commands.Clients.AddClient;
-
 namespace Betalish.Web.Pages.Admin.Clients;
 
 public class ShowClientsModel(
     IUserToken userToken,
-    IDatabaseService database,
-    IAddClientCommand addClientCommand) : AdminPageModel(userToken)
+    IDatabaseService database) : AdminPageModel(userToken)
 {
     public List<Client> Clients { get; set; }
-
-    public bool CanAddClient { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -22,8 +17,6 @@ public class ShowClientsModel(
                 .OrderBy(x => x.Address)
                 .ThenBy(x => x.Name)
                 .ToListAsync();
-
-            CanAddClient = await addClientCommand.IsPermitted(userToken);
 
             return Page();
         }
