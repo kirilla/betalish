@@ -16,45 +16,55 @@
 
 <main>
     <h4>
-        Redigera epostkonto:
-        @(Model.ClientEmailAccount.FromName)
-        @(Model.ClientEmailAccount.FromAddress)
+        Redigera epostkonto
     </h4>
 
     <form method="post">
 
         <input type="hidden" asp-for="CommandModel.Id" />
 
-        <label asp-for="CommandModel.FromName">
-            Avsändarnamn
-        </label>
-        <input asp-for="CommandModel.FromName" />
+        <p>
+            <h5>Server</h5>
 
-        <label asp-for="CommandModel.FromAddress">
-            Epostadress
-        </label>
-        <input asp-for="CommandModel.FromAddress" />
+            <label asp-for="CommandModel.SmtpHost">
+                SMTP-server
+            </label>
+            <input asp-for="CommandModel.SmtpHost" />
 
-        <label asp-for="CommandModel.ReplyToName">
-            Svara till, namn
-        </label>
-        <input asp-for="CommandModel.ReplyToName" />
+            <label asp-for="CommandModel.SmtpPort">
+                SMTP-port
+            </label>
+            <input asp-for="CommandModel.SmtpPort" />
+        </p>
 
-        <label asp-for="CommandModel.ReplyToAddress">
-            Svara till, adress
-        </label>
-        <input asp-for="CommandModel.ReplyToAddress" />
+        <p>
+            <h5>Avsändare</h5>
 
-        <label asp-for="CommandModel.SmtpHost">
-            SMTP-server
-        </label>
-        <input asp-for="CommandModel.SmtpHost" />
+            <label asp-for="CommandModel.FromName">
+                Namn
+            </label>
+            <input asp-for="CommandModel.FromName" />
 
-        <label asp-for="CommandModel.SmtpPort">
-            SMTP-port
-        </label>
-        <input asp-for="CommandModel.SmtpPort" />
+            <label asp-for="CommandModel.FromAddress">
+                Epostadress
+            </label>
+            <input asp-for="CommandModel.FromAddress" />
+        </p>
 
+        <p>
+            <h5>Svara till</h5>
+
+            <label asp-for="CommandModel.ReplyToName">
+                Namn
+            </label>
+            <input asp-for="CommandModel.ReplyToName" />
+
+            <label asp-for="CommandModel.ReplyToAddress">
+                Epostadress
+            </label>
+            <input asp-for="CommandModel.ReplyToAddress" />
+        </p>
+        
         <div asp-validation-summary="All"></div>
 
         <button type="submit">

@@ -15,14 +15,13 @@
 
     <h4>
         📮
-        @(Model.ClientEmailAccount.FromName)
-        @(Model.ClientEmailAccount.FromAddress)
+        Epostkonto
     </h4>
 
     <div class="notice">
         <ul>
             <li>
-                Från: @(Model.ClientEmailAccount.FromName),
+                Avsändare: "@(Model.ClientEmailAccount.FromName)"
                 @(Model.ClientEmailAccount.FromAddress)
             </li>
             @if (Model.ClientEmailAccount.ReplyToName.HasValue() || 
@@ -30,7 +29,7 @@
             {
                 <li>
                     Svara till:
-                    @(Model.ClientEmailAccount.ReplyToName),
+                    "@(Model.ClientEmailAccount.ReplyToName)"
                     @(Model.ClientEmailAccount.ReplyToAddress)
                 </li>
             }
