@@ -23,6 +23,7 @@ public static class Pattern
         public static class Organization
         {
             public const string Orgnum = @"^\d{10}$";
+            public const string OrgnumPermissive = @"\d{6}.?\d{4}"; // open-ended
         }
 
         public static class Phone

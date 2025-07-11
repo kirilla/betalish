@@ -29,8 +29,9 @@ public class ShowCustomersModel(
             Customers = await database.Customers
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
-                .OrderBy(x => x.EmailAddress)
-                .ThenBy(x => x.Name)
+                .OrderBy(x => x.Name)
+                .ThenBy(x => x.Ssn10)
+                .ThenBy(x => x.Orgnum)
                 .ToListAsync();
 
             CanAddCustomer = await addCustomerCommand.IsPermitted(userToken);
