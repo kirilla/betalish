@@ -11,6 +11,7 @@ public class UserToken : IUserToken
 
     public bool IsAdmin { get; }
     public bool IsAuthenticated { get; }
+    public bool IsClient { get; }
 
     public int? ClientId { get; }
     public string? ClientName { get; }
@@ -35,6 +36,11 @@ public class UserToken : IUserToken
 
         ClientId = _httpContext?.HttpContext?.Items?["ClientId"] as int?;
         ClientName = _httpContext?.HttpContext?.Items?["ClientName"] as string;
+
+        IsClient =
+            UserId.HasValue &&
+            SessionId.HasValue &&
+            ClientId.HasValue;
 
         NoLogin = _httpContext?.HttpContext?.Items?["NoLogin"] as bool? ?? false;
         NoSave = _httpContext?.HttpContext?.Items?["NoSave"] as bool? ?? false;

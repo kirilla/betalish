@@ -9,6 +9,7 @@ public class NoUserToken : IUserToken
 
     public bool IsAdmin { get; }
     public bool IsAuthenticated { get; }
+    public bool IsClient { get; }
 
     public int? ClientId { get; }
     public string? ClientName { get; }
@@ -23,7 +24,9 @@ public class NoUserToken : IUserToken
 
         Name = null;
 
+        IsAdmin = false;
         IsAuthenticated = false;
+        IsClient = false;
 
         ClientId = null;
         ClientName = null;
