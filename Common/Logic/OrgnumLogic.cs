@@ -3,20 +3,20 @@ using Betalish.Common.Validation;
 
 namespace Betalish.Common.Logic;
 
-public static class SsnLogic
+public static class OrgnumLogic
 {
-    private static bool IsCheckDigitValid(string ssn)
+    private static bool IsCheckDigitValid(string orgnum)
     {
-        ssn = ssn.Trim().StripNonNumeric();
+        orgnum = orgnum.Trim().StripNonNumeric();
 
-        if (ssn.Length != 10)
+        if (orgnum.Length != 10)
         {
-            throw new ArgumentException("Unexpected ssn length: " + ssn.Length);
+            throw new ArgumentException("Unexpected orgnum length: " + orgnum.Length);
         }
 
         int temp;
 
-        var arr = ssn
+        var arr = orgnum
             .Where(c => char.IsDigit(c))
             .Reverse()
             .Select(x =>
@@ -27,7 +27,7 @@ public static class SsnLogic
                 }
                 else
                 {
-                    throw new Exception($"Internt fel i {nameof(SsnLogic)}.IsCheckDigitValid");
+                    throw new Exception($"Internt fel i {nameof(OrgnumLogic)}.IsCheckDigitValid");
                 }
             })
             .ToArray();
@@ -58,33 +58,17 @@ public static class SsnLogic
         return sum % 10 == 0;
     }
 
-    public static bool IsValidSsn10(string ssn10)
+    public static bool IsValidOrgnum(string orgnum)
     {
-        if (string.IsNullOrWhiteSpace(ssn10))
+        if (string.IsNullOrWhiteSpace(orgnum))
             return false;
 
-        if (ssn10.Length != 10)
+        if (orgnum.Length != 10)
             return false;
 
-        if (!RegexLogic.IsMatch(ssn10, Pattern.Common.Ssn.Ssn10))
+        if (!RegexLogic.IsMatch(orgnum, Pattern.Common.Organization.Orgnum))
             return false;
 
-        return IsCheckDigitValid(ssn10);
-    }
-
-    public static bool IsValidSsn12(string ssn12)
-    {
-        if (string.IsNullOrWhiteSpace(ssn12))
-            return false;
-
-        if (ssn12.Length != 12)
-            return false;
-
-        if (!RegexLogic.IsMatch(ssn12, Pattern.Common.Ssn.Ssn12))
-            return false;
-
-        var ssn10 = ssn12.ToSsn10();
-
-        return IsCheckDigitValid(ssn10);
+        return IsCheckDigitValid(orgnum);
     }
 }

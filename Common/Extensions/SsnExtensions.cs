@@ -1,7 +1,17 @@
-﻿namespace Betalish.Common.Extensions;
+﻿using Betalish.Common.Exceptions;
+using Betalish.Common.Logic;
+
+namespace Betalish.Common.Extensions;
 
 public static class SsnExtensions
 {
+    public static void AssertSsn10Valid(this string ssn10)
+    {
+        if (string.IsNullOrWhiteSpace(ssn10) ||
+            !SsnLogic.IsValidSsn10(ssn10))
+            throw new InvalidSsnException();
+    }
+
     public static DateOnly? ToDateOnly(this string ssn)
     {
         if (ssn == null)

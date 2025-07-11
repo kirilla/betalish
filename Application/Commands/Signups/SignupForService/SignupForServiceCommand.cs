@@ -31,7 +31,7 @@ public class SignupForServiceCommand(
         model.EmailAddress = model.EmailAddress.ToLowerInvariant();
         model.Ssn12 = model.Ssn12.StripNonNumeric();
 
-        if (!SsnLogic.IsValidSsn(model.Ssn12))
+        if (!SsnLogic.IsValidSsn12(model.Ssn12))
             throw new InvalidSsnException();
 
         // Blocking data or conflicts?

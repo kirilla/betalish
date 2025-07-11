@@ -33,7 +33,7 @@ public class SignInBySsnCommand(
         if (model.Ssn12.Length != 12)
             throw new NotPermittedException();
 
-        if (!SsnLogic.IsValidSsn(model.Ssn12))
+        if (!SsnLogic.IsValidSsn12(model.Ssn12))
             throw new InvalidSsnException();
 
         var ssn10 = model.Ssn12.ToSsn10();

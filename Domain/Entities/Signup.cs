@@ -54,7 +54,7 @@ public class Signup :
         if (!RegexLogic.IsMatch(Ssn12, Pattern.Common.Ssn.Ssn12))
             throw new InvalidSsnException();
 
-        if (!SsnLogic.IsValidSsn(Ssn12))
+        if (!SsnLogic.IsValidSsn12(Ssn12))
             throw new InvalidSsnException();
     }
 }

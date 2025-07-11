@@ -21,5 +21,8 @@ public class Customer : IValidateOnSave
     public void ValidateOnSave()
     {
         Guid.AssertValid();
+
+        Ssn10?.AssertSsn10Valid();
+        Orgnum?.AssertOrgnumValid();
     }
 }

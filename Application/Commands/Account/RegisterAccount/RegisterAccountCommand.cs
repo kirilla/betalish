@@ -29,7 +29,7 @@ public class RegisterAccountCommand(
             string.IsNullOrWhiteSpace(model.Password))
             throw new NotPermittedException();
 
-        if (!SsnLogic.IsValidSsn(model.Ssn12))
+        if (!SsnLogic.IsValidSsn12(model.Ssn12))
             throw new InvalidSsnException();
 
         model.EmailAddress = model.EmailAddress.Trim().ToLowerInvariant();

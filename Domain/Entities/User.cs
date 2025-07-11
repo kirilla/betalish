@@ -56,7 +56,7 @@ public class User :
         if (!RegexLogic.IsMatch(Ssn10, Pattern.Common.Ssn.Ssn10))
             throw new InvalidSsnException();
 
-        if (!SsnLogic.IsValidSsn(Ssn10))
+        if (!SsnLogic.IsValidSsn10(Ssn10))
             throw new InvalidSsnException();
     }
 
@@ -68,7 +68,7 @@ public class User :
         if (!RegexLogic.IsMatch(Ssn12, Pattern.Common.Ssn.Ssn12))
             throw new InvalidSsnException();
 
-        if (!SsnLogic.IsValidSsn(Ssn12))
+        if (!SsnLogic.IsValidSsn10(Ssn12))
             throw new InvalidSsnException();
     }
 }

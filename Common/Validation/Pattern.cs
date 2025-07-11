@@ -20,6 +20,11 @@ public static class Pattern
                 @"^[a-zA-Z0-9!#$&^_.+-]+/[a-zA-Z0-9!#$&^_.+-]+$";
         }
 
+        public static class Organization
+        {
+            public const string Orgnum = @"^\d{10}$";
+        }
+
         public static class Phone
         {
             public const string Number = @"^[-\d\s+\(\)]+$";
