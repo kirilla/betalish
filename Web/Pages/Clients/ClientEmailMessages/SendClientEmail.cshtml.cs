@@ -21,11 +21,6 @@ public class SendClientEmailModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             ClientEmailMessage = await database.ClientEmailMessages
                 .Where(x => 
                     x.Id == id &&
@@ -58,11 +53,6 @@ public class SendClientEmailModel(
 
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
-
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
 
             ClientEmailMessage = await database.ClientEmailMessages
                 .Where(x => 

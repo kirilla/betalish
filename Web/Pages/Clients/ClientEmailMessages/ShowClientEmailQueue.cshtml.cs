@@ -16,11 +16,6 @@ public class ShowClientEmailQueueModel(
         {
             await AssertClientAuthorization(database);
 
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             EmailHeaders = await database.ClientEmailMessages
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .OrderBy(x => x.Created)

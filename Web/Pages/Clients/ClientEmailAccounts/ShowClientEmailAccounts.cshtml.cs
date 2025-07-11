@@ -17,11 +17,6 @@ public class ShowClientEmailAccountsModel(
         {
             await AssertClientAuthorization(database);
 
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             ClientEmailAccounts = await database.ClientEmailAccounts
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)

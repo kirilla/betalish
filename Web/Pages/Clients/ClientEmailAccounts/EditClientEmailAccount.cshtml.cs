@@ -19,11 +19,6 @@ public class EditClientEmailAccountModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             ClientEmailAccount = await database.ClientEmailAccounts
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
@@ -59,11 +54,6 @@ public class EditClientEmailAccountModel(
         {
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
-
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
 
             ClientEmailAccount = await database.ClientEmailAccounts
                 .Where(x => 

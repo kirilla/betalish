@@ -17,11 +17,6 @@ public class AddClientEmailAccountModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             CommandModel = new AddClientEmailAccountCommandModel();
 
             return Page();
@@ -42,11 +37,6 @@ public class AddClientEmailAccountModel(
         {
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
-
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
 
             if (!ModelState.IsValid)
                 return Page();

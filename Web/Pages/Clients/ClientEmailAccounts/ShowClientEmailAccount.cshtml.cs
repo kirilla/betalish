@@ -20,11 +20,6 @@ public class ShowClientEmailAccountModel(
         {
             await AssertClientAuthorization(database);
 
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             ClientEmailAccount = await database.ClientEmailAccounts
                 .Where(x => 
                     x.Id == id &&

@@ -12,11 +12,6 @@ public class ShowClientEmailMessageModel(
         {
             await AssertClientAuthorization(database);
 
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             ClientEmailMessage = await database.ClientEmailMessages
                 .Where(x => 
                     x.Id == id &&

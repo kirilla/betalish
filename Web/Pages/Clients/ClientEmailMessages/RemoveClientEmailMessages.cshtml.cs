@@ -19,11 +19,6 @@ public class RemoveClientEmailMessagesModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             CommandModel = new RemoveClientEmailMessagesCommandModel();
 
             return Page();
@@ -46,11 +41,6 @@ public class RemoveClientEmailMessagesModel(
 
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
-
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
 
             if (!ModelState.IsValid)
                 return Page();

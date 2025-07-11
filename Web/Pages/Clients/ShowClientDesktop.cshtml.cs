@@ -13,11 +13,6 @@ public class ShowClientDesktopModel(
 
             await AssertClientAuthorization(database);
 
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             return Page();
         }
         catch (NotFoundException)

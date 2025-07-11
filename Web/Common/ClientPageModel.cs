@@ -4,8 +4,6 @@ public class ClientPageModel(IUserToken userToken) : PageModel
 {
     public IUserToken UserToken { get; } = userToken;
 
-    public Client Client { get; set; }
-
     public async Task AssertClientAuthorization(
         IDatabaseService database)
     {
