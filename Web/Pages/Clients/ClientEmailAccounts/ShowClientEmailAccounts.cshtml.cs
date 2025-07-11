@@ -1,11 +1,8 @@
-using Betalish.Application.Commands.ClientEmailAccounts.AddClientEmailAccount;
-
 namespace Betalish.Web.Pages.Clients.ClientEmailAccounts;
 
 public class ShowClientEmailAccountsModel(
     IUserToken userToken,
-    IDatabaseService database,
-    IAddClientEmailAccountCommand addClientEmailAccountCommand) : ClientPageModel(userToken)
+    IDatabaseService database) : ClientPageModel(userToken)
 {
     public List<ClientEmailAccount> ClientEmailAccounts { get; set; }
 
@@ -24,8 +21,7 @@ public class ShowClientEmailAccountsModel(
                 .ThenBy(x => x.FromAddress)
                 .ToListAsync();
 
-            CanAddClientEmailAccount = 
-                await addClientEmailAccountCommand.IsPermitted(userToken);
+            CanAddClientEmailAccount = ClientEmailAccounts.Count == 0;
 
             return Page();
         }
