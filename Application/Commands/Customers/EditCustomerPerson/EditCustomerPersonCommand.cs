@@ -1,15 +1,20 @@
-﻿namespace Betalish.Application.Commands.Customers.EditCustomer;
+﻿namespace Betalish.Application.Commands.Customers.EditCustomerPerson;
 
-public class EditCustomerCommand(IDatabaseService database) : IEditCustomerCommand
+public class EditCustomerPersonCommand(IDatabaseService database) : IEditCustomerPersonCommand
 {
     public async Task Execute(
-        IUserToken userToken, EditCustomerCommandModel model)
+        IUserToken userToken, EditCustomerPersonCommandModel model)
     {
         if (!await IsPermitted(userToken))
             throw new NotPermittedException();
 
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
+
+        model.Ssn10 = model.Ssn10?.StripNonNumeric();
+        model.EmailAddress = model.EmailAddress?.Trim().ToLowerInvariant();
+
+        model.Ssn10?.AssertSsn10Valid();
 
         var customer = await database.Customers
             .Where(x => 
@@ -18,15 +23,15 @@ public class EditCustomerCommand(IDatabaseService database) : IEditCustomerComma
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        //if (await database.Customers
-        //    .AnyAsync(x =>
-        //        x.EmailAddress == model.EmailAddress &&
-        //        x.ClientId == userToken.ClientId!.Value &&
-        //        x.Id != model.Id))
-        //    throw new BlockedByAddressException();
+        if (model.Ssn10.HasValue() &&
+            await database.Customers
+            .AnyAsync(x =>
+                x.ClientId == userToken.ClientId!.Value &&
+                x.Ssn10 == model.Ssn10 &&
+                x.Id != model.Id))
+            throw new BlockedBySsnException();
 
-        // KEEP FOR SSN/ORGNUM
-
+        customer.Ssn10 = model.Ssn10;
         customer.Name = model.Name;
         customer.EmailAddress = model.EmailAddress;
 

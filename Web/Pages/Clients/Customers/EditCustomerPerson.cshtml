@@ -1,11 +1,11 @@
-﻿@page "/edit-customer/{id:int}"
-@model EditCustomerModel
+﻿@page "/edit-customer-person/{id:int}"
+@model EditCustomerPersonModel
 @{
 }
 
 @section Meta {
     <title>
-        Redigera kund -
+        Redigera person -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -16,14 +16,18 @@
 
 <main>
     <h4>
-        Redigera kund:
+        Redigera person:
         @(Model.Customer.Name)
-        @(Model.Customer.EmailAddress)
     </h4>
 
     <form method="post">
 
         <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.Ssn10">
+            Personnummer
+        </label>
+        <input asp-for="CommandModel.Ssn10" placeholder="ÅÅMMDD-NNNN" />
 
         <label asp-for="CommandModel.Name">
             Namn

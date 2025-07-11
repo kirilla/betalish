@@ -36,8 +36,8 @@ public static class Pattern
             public const string Ssn10 = @"^\d{10}$";
             public const string Ssn12 = @"^\d{12}$";
 
-            public const string Ssn10Permissive = @"\d{6}-?\d{4}"; // open-ended
-            public const string Ssn12Permissive = @"\d{8}-?\d{4}"; // open-ended
+            public const string Ssn10Permissive = @"\d{6}.?\d{4}"; // open-ended
+            public const string Ssn12Permissive = @"\d{8}.?\d{4}"; // open-ended
 
             public const string Ssn12Century = @"^(19|20)\d{10}$";
 

@@ -1,16 +1,16 @@
-﻿using Betalish.Application.Commands.Customers.EditCustomer;
+﻿using Betalish.Application.Commands.Customers.EditCustomerPerson;
 
 namespace Betalish.Web.Pages.Clients.Customers;
 
-public class EditCustomerModel(
+public class EditCustomerPersonModel(
     IUserToken userToken,
     IDatabaseService database,
-    IEditCustomerCommand command) : ClientPageModel(userToken)
+    IEditCustomerPersonCommand command) : ClientPageModel(userToken)
 {
     public Customer Customer { get; set; }
 
     [BindProperty]
-    public EditCustomerCommandModel CommandModel { get; set; }
+    public EditCustomerPersonCommandModel CommandModel { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -19,11 +19,6 @@ public class EditCustomerModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             Customer = await database.Customers
                 .Where(x =>
                     x.Id == id &&
@@ -31,10 +26,11 @@ public class EditCustomerModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new EditCustomerCommandModel()
+            CommandModel = new EditCustomerPersonCommandModel()
             {
                 Id = Customer.Id,
                 Name = Customer.Name,
+                Ssn10 = Customer.Ssn10?.ToSsnWithDash(),
                 EmailAddress = Customer.EmailAddress,
             };
 
@@ -57,11 +53,6 @@ public class EditCustomerModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             Customer = await database.Customers
                 .Where(x =>
                     x.Id == id &&
@@ -76,7 +67,23 @@ public class EditCustomerModel(
 
             return Redirect($"/show-customer/{id}");
         }
-        catch
+        catch (BlockedBySsnException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Ssn10),
+                "Det finns en annan kund eller medlem med detta personnummer.");
+
+            return Page();
+        }
+        catch (InvalidSsnException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Ssn10),
+                "Ogiltigt personnummer.");
+
+            return Page();
+        }
+        catch (Exception ex)
         {
             return Redirect("/help/notpermitted");
         }

@@ -30,9 +30,12 @@
         @if (Model.Customer.CustomerKind == CustomerKind.Person)
         {
             <ul>
-                <li>
-                    @(Model.Customer.Ssn10?.ToSsnWithDash() ?? "Okänt personnummer")
-                </li>
+                @if (Model.Customer.Ssn10.HasValue())
+                {
+                    <li>
+                        @(Model.Customer.Ssn10?.ToSsnWithDash() ?? "Okänt personnummer")
+                    </li>
+                }
                 <li>
                     @(Model.Customer.EmailAddress)
                 </li>
@@ -41,9 +44,12 @@
         @if (Model.Customer.CustomerKind == CustomerKind.Organization)
         {
             <ul>
-                <li>
-                    @(Model.Customer.Orgnum?.ToOrgnumWithDash() ?? "Okänt organisationsnr")
-                </li>
+                @if (Model.Customer.Orgnum.HasValue())
+                {
+                    <li>
+                        @(Model.Customer.Orgnum?.ToOrgnumWithDash() ?? "Okänt organisationsnr")
+                    </li>
+                }
                 <li>
                     @(Model.Customer.EmailAddress)
                 </li>
@@ -52,19 +58,22 @@
     </div>
 
     <p>
-        @if (Model.CanEditCustomer)
+        @if (Model.Customer.CustomerKind == CustomerKind.Person)
         {
-            <a class="button" href="/edit-customer/@(Model.Customer.Id)">
+            <a class="button" href="/edit-customer-person/@(Model.Customer.Id)">
+                Redigera
+            </a>
+        }
+        @if (Model.Customer.CustomerKind == CustomerKind.Organization)
+        {
+            <a class="button" href="/edit-customer-organization/@(Model.Customer.Id)">
                 Redigera
             </a>
         }
 
-        @if (Model.CanRemoveCustomer)
-        {
-            <a class="button" href="/remove-customer/@(Model.Customer.Id)">
-                Ta bort
-            </a>
-        }
+        <a class="button" href="/remove-customer/@(Model.Customer.Id)">
+            Ta bort
+        </a>
     </p>
 
 </main>
