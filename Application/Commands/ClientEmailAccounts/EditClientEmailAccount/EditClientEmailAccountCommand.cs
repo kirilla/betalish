@@ -13,7 +13,9 @@ public class EditClientEmailAccountCommand(IDatabaseService database) : IEditCli
         model.SetEmptyStringsToNull();
 
         var account = await database.ClientEmailAccounts
-            .Where(x => x.Id == model.ClientEmailAccountId)
+            .Where(x =>
+                x.Id == model.Id &&
+                x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
