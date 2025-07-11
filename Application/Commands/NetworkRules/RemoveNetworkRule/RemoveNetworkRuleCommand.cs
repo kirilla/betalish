@@ -7,7 +7,7 @@ public class RemoveNetworkRuleCommand(
     public async Task Execute(
         IUserToken userToken, RemoveNetworkRuleCommandModel model)
     {
-        if (!await IsPermitted(userToken))
+        if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
         if (!model.Confirmed)
@@ -25,9 +25,8 @@ public class RemoveNetworkRuleCommand(
         cacheService.InvalidateCache();
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken)
+    public bool IsPermitted(IUserToken userToken)
     {
-        return await database.AdminAuths.AnyAsync(x =>
-            x.UserId == userToken.UserId!.Value);
+        return userToken.IsAdmin;
     }
 }

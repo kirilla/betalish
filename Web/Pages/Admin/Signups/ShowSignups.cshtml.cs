@@ -10,7 +10,7 @@ public class ShowSignupsModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             Signups = await database.Signups
                 .OrderBy(x => x.Created)

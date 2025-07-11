@@ -4,5 +4,5 @@ public interface IRemoveBadSignInsCommand
 {
     Task Execute(IUserToken userToken, RemoveBadSignInsCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

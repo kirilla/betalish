@@ -16,9 +16,9 @@ public class RemoveNetworkRequestModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             NetworkRequest = await database.NetworkRequests
@@ -47,9 +47,9 @@ public class RemoveNetworkRequestModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             NetworkRequest = await database.NetworkRequests

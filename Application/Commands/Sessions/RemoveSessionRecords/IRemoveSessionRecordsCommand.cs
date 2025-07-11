@@ -4,5 +4,5 @@ public interface IRemoveSessionRecordsCommand
 {
     Task Execute(IUserToken userToken, RemoveSessionRecordsCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

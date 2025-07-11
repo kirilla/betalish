@@ -5,7 +5,7 @@ public class GrantClientAuthCommand(IDatabaseService database) : IGrantClientAut
     public async Task Execute(
         IUserToken userToken, GrantClientAuthCommandModel model)
     {
-        if (!await IsPermitted(userToken))
+        if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
         var user = await database.Users
@@ -34,9 +34,8 @@ public class GrantClientAuthCommand(IDatabaseService database) : IGrantClientAut
         await database.SaveAsync(userToken);
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken)
+    public bool IsPermitted(IUserToken userToken)
     {
-        return await database.AdminAuths.AnyAsync(x =>
-            x.UserId == userToken.UserId!.Value);
+        return userToken.IsAdmin;
     }
 }

@@ -14,7 +14,7 @@ public class ShowEmailQueueModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             EmailHeaders = await database.EmailMessages
                 .OrderBy(x => x.Created)

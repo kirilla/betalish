@@ -12,7 +12,7 @@ public class ShowClientModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             Client = await database.Clients
                 .Where(x => x.Id == id)

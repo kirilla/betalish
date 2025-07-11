@@ -10,7 +10,7 @@ public class ShowClientsModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             Clients = await database.Clients
                 .AsNoTracking()

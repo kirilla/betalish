@@ -22,7 +22,7 @@ public class ShowRateLimitingModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             RateLimitLogItems = await database.LogItems
                 .Where(x =>

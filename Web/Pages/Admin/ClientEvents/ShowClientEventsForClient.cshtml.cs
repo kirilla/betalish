@@ -12,7 +12,7 @@ public class ShowClientEventsForClientModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             Client = await database.Clients
                 .AsNoTracking()

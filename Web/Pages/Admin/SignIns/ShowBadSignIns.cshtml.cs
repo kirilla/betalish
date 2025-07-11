@@ -10,7 +10,7 @@ public class ShowBadSignInsModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             BadSignIns = await database.BadSignIns
                 .OrderByDescending(x => x.Created)

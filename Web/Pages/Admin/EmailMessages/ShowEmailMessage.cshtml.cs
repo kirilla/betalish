@@ -10,7 +10,7 @@ public class ShowEmailMessageModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             EmailMessage = await database.EmailMessages
                 .Where(x => x.Id == id)

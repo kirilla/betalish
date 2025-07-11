@@ -5,7 +5,7 @@ public class SendTestEmailCommand(IDatabaseService database) : ISendTestEmailCom
     public async Task Execute(
         IUserToken userToken, SendTestEmailCommandModel model)
     {
-        if (!await IsPermitted(userToken))
+        if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
         model.TrimStringProperties();
@@ -31,9 +31,8 @@ public class SendTestEmailCommand(IDatabaseService database) : ISendTestEmailCom
         await database.SaveAsync(userToken);
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken)
+    public bool IsPermitted(IUserToken userToken)
     {
-        return await database.AdminAuths.AnyAsync(x =>
-            x.UserId == userToken.UserId!.Value);
+        return userToken.IsAdmin;
     }
 }

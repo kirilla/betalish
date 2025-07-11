@@ -4,5 +4,5 @@ public interface IEditUserCommand
 {
     Task Execute(IUserToken userToken, EditUserCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

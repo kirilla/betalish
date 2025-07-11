@@ -10,7 +10,7 @@ public class ShowNetworkRequestIpAddressesModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             IpAddresses = await database.NetworkRequests
                 .AsNoTracking()

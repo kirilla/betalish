@@ -8,7 +8,7 @@ public class ShowTestsModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             return Page();
         }

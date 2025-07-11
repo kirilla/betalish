@@ -12,7 +12,7 @@ public class ShowSessionActivitiesModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             SessionActivities = await database.SessionActivities
                 .Include(x => x.Session.User)

@@ -16,9 +16,9 @@ public class RemoveClientModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients
@@ -47,9 +47,9 @@ public class RemoveClientModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Client = await database.Clients

@@ -4,5 +4,5 @@ public interface IRemoveClientCommand
 {
     Task Execute(IUserToken userToken, RemoveClientCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

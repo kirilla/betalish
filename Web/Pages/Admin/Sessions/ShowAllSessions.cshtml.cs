@@ -10,7 +10,7 @@ public class ShowAllSessionsModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             Sessions = await database.Sessions
                 .Include(x => x.User)

@@ -5,7 +5,7 @@ public class EditClientCommand(IDatabaseService database) : IEditClientCommand
     public async Task Execute(
         IUserToken userToken, EditClientCommandModel model)
     {
-        if (!await IsPermitted(userToken))
+        if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
         model.TrimStringProperties();
@@ -28,9 +28,8 @@ public class EditClientCommand(IDatabaseService database) : IEditClientCommand
         await database.SaveAsync(userToken);
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken)
+    public bool IsPermitted(IUserToken userToken)
     {
-        return await database.AdminAuths.AnyAsync(x =>
-            x.UserId == userToken.UserId!.Value);
+        return userToken.IsAdmin;
     }
 }

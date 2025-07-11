@@ -19,7 +19,7 @@ public class ShowUsersModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             UserCount = await database.Users.CountAsync();
 

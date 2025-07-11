@@ -4,5 +4,5 @@ public interface IStripUserAdminCommand
 {
     Task Execute(IUserToken userToken, StripUserAdminCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

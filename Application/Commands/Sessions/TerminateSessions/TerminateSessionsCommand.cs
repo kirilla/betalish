@@ -10,7 +10,7 @@ public class TerminateSessionsCommand(
     public async Task Execute(
         IUserToken userToken, TerminateSessionsCommandModel model)
     {
-        if (!await IsPermitted(userToken))
+        if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
         var sessions = await database.Sessions
@@ -43,9 +43,8 @@ public class TerminateSessionsCommand(
         await database.SaveAsync(userToken);
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken)
+    public bool IsPermitted(IUserToken userToken)
     {
-        return await database.AdminAuths.AnyAsync(x =>
-            x.UserId == userToken.UserId!.Value);
+        return userToken.IsAdmin;
     }
 }

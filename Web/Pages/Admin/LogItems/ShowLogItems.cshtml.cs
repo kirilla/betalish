@@ -10,7 +10,7 @@ public class ShowLogItemsModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             LogItems = await database.LogItems
                 .AsNoTracking()

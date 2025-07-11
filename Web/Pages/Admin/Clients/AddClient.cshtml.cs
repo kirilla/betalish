@@ -14,9 +14,9 @@ public class AddClientModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             CommandModel = new AddClientCommandModel();
@@ -33,9 +33,9 @@ public class AddClientModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             if (!ModelState.IsValid)

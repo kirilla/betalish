@@ -14,7 +14,7 @@ public class TestLogItemDedupModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
@@ -37,7 +37,7 @@ public class TestLogItemDedupModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();

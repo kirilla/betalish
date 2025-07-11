@@ -28,7 +28,7 @@ public class ShowConfigModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             BadSignInJson = JsonSerializer.Serialize(
                 _badSignConfig, new JsonSerializerOptions { WriteIndented = true });

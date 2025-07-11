@@ -10,7 +10,7 @@ public class SignupModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             Signup = await database.Signups
                 .Where(x => x.Id == id)

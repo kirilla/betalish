@@ -14,9 +14,9 @@ public class EditUserModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             var user = await database.Users
@@ -44,9 +44,9 @@ public class EditUserModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             if (!ModelState.IsValid)

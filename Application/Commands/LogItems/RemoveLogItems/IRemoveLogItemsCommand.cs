@@ -4,5 +4,5 @@ public interface IRemoveLogItemsCommand
 {
     Task Execute(IUserToken userToken, RemoveLogItemsCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

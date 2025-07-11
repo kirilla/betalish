@@ -10,7 +10,7 @@ public class ShowAllUsersModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             Users = await database.Users
                 .AsNoTracking()

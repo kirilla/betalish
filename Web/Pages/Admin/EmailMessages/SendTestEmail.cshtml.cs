@@ -14,7 +14,7 @@ public class SendTestEmailModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             CommandModel = new SendTestEmailCommandModel();
 
@@ -58,7 +58,7 @@ public class SendTestEmailModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             if (!ModelState.IsValid)
                 return Page();

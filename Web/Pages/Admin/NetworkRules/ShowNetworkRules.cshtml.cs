@@ -13,7 +13,7 @@ public class ShowNetworkRulesModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             NetworkRules = await database.NetworkRules.ToListAsync();
 

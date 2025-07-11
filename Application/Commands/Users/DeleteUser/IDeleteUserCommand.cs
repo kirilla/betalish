@@ -4,5 +4,5 @@ public interface IDeleteUserCommand
 {
     Task Execute(IUserToken userToken, DeleteUserCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

@@ -4,5 +4,5 @@ public interface IEditNetworkRuleCommand
 {
     Task Execute(IUserToken userToken, EditNetworkRuleCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

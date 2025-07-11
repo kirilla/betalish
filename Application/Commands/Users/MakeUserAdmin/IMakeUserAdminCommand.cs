@@ -4,5 +4,5 @@ public interface IMakeUserAdminCommand
 {
     Task Execute(IUserToken userToken, MakeUserAdminCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

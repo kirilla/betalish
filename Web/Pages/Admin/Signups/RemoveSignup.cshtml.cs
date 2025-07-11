@@ -16,7 +16,7 @@ public class RemoveSignupModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             Signup = await database.Signups
                 .Where(x => x.Id == id)
@@ -44,7 +44,7 @@ public class RemoveSignupModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             Signup = await database.Signups
                 .Where(x => x.Id == CommandModel.Id)

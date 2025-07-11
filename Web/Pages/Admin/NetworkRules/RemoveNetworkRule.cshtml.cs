@@ -17,9 +17,9 @@ public class RemoveNetworkRuleModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             NetworkRule = await database.NetworkRules
@@ -48,9 +48,9 @@ public class RemoveNetworkRuleModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             NetworkRule = await database.NetworkRules

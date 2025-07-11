@@ -4,5 +4,5 @@ public interface IRemoveSignupCommand
 {
     Task Execute(IUserToken userToken, RemoveSignupCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

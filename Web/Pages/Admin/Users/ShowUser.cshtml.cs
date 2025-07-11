@@ -15,7 +15,7 @@ public class ShowUserModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             User = await database.Users
                 .Where(x => x.Id == id)

@@ -10,7 +10,7 @@ public class ShowNetworkRequestModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             NetworkRequest = await database.NetworkRequests
                 .Where(x => x.Id == id)

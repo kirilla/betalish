@@ -4,5 +4,5 @@ public interface IRemoveNetworkRequestCommand
 {
     Task Execute(IUserToken userToken, RemoveNetworkRequestCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

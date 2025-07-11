@@ -8,7 +8,7 @@ public class ShowAdminDesktopModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             return Page();
         }

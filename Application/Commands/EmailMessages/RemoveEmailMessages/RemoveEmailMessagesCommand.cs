@@ -5,7 +5,7 @@ public class RemoveEmailMessagesCommand(IDatabaseService database) : IRemoveEmai
     public async Task Execute(
         IUserToken userToken, RemoveEmailMessagesCommandModel model)
     {
-        if (!await IsPermitted(userToken))
+        if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
         var query = await database.EmailMessages
@@ -13,9 +13,8 @@ public class RemoveEmailMessagesCommand(IDatabaseService database) : IRemoveEmai
             .ExecuteDeleteAsync();
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken)
+    public bool IsPermitted(IUserToken userToken)
     {
-        return await database.AdminAuths.AnyAsync(x =>
-            x.UserId == userToken.UserId!.Value);
+        return userToken.IsAdmin;
     }
 }

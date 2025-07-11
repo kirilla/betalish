@@ -10,7 +10,7 @@ public class ShowNetworkRequestUserAgentsModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             UserAgents = await database.NetworkRequests
                 .AsNoTracking()

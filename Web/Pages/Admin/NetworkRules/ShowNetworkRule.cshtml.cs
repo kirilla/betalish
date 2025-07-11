@@ -10,7 +10,7 @@ public class ShowNetworkRuleModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             NetworkRule = await database.NetworkRules
                 .Where(x => x.Id == id)

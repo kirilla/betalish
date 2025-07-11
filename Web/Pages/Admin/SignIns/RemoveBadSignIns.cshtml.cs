@@ -14,9 +14,9 @@ public class RemoveBadSignInsModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!userToken.IsAdmin)
                 throw new NotPermittedException();
 
             CommandModel = new RemoveBadSignInsCommandModel();
@@ -37,9 +37,9 @@ public class RemoveBadSignInsModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!userToken.IsAdmin)
                 throw new NotPermittedException();
 
             if (!ModelState.IsValid)

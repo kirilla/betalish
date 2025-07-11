@@ -10,7 +10,7 @@ public class ShowUserEventsModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             UserEvents = await database.UserEvents
                 .AsNoTracking()

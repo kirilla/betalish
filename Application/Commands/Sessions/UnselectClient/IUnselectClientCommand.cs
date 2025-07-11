@@ -4,5 +4,5 @@ public interface IUnselectClientCommand
 {
     Task Execute(IUserToken userToken, UnselectClientCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

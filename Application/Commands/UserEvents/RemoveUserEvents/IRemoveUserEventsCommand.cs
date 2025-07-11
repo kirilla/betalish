@@ -4,5 +4,5 @@ public interface IRemoveUserEventsCommand
 {
     Task Execute(IUserToken userToken, RemoveUserEventsCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

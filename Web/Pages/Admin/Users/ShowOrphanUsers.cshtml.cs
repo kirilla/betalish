@@ -10,7 +10,7 @@ public class ShowOrphanUsersModel(
     {
         try
         {
-            await AssertAdminAuthorization(database);
+            AssertIsAdmin();
 
             Users = await database.Users
                 .AsNoTracking()

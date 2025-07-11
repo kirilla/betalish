@@ -5,7 +5,7 @@ public class RemoveUserEventsCommand(IDatabaseService database) : IRemoveUserEve
     public async Task Execute(
         IUserToken userToken, RemoveUserEventsCommandModel model)
     {
-        if (!await IsPermitted(userToken))
+        if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
         if (!model.Confirmed)
@@ -14,9 +14,8 @@ public class RemoveUserEventsCommand(IDatabaseService database) : IRemoveUserEve
         await database.UserEvents.ExecuteDeleteAsync();
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken)
+    public bool IsPermitted(IUserToken userToken)
     {
-        return await database.AdminAuths.AnyAsync(x =>
-            x.UserId == userToken.UserId!.Value);
+        return userToken.IsAdmin;
     }
 }
