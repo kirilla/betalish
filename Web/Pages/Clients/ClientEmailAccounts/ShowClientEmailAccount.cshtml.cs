@@ -1,18 +1,10 @@
-﻿using Betalish.Application.Commands.ClientEmailAccounts.EditClientEmailAccount;
-using Betalish.Application.Commands.ClientEmailAccounts.RemoveClientEmailAccount;
-
-namespace Betalish.Web.Pages.Clients.ClientEmailAccounts;
+﻿namespace Betalish.Web.Pages.Clients.ClientEmailAccounts;
 
 public class ShowClientEmailAccountModel(
     IUserToken userToken,
-    IDatabaseService database,
-    IEditClientEmailAccountCommand editClientEmailAccountCommand,
-    IRemoveClientEmailAccountCommand removeClientEmailAccountCommand) : ClientPageModel(userToken)
+    IDatabaseService database) : ClientPageModel(userToken)
 {
     public ClientEmailAccount ClientEmailAccount { get; set; }
-
-    public bool CanEditClientEmailAccount { get; set; }
-    public bool CanRemoveClientEmailAccount { get; set; }
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -26,12 +18,6 @@ public class ShowClientEmailAccountModel(
                     x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
-
-            CanEditClientEmailAccount = 
-                await editClientEmailAccountCommand.IsPermitted(userToken);
-
-            CanRemoveClientEmailAccount = 
-                await removeClientEmailAccountCommand.IsPermitted(userToken);
 
             return Page();
         }

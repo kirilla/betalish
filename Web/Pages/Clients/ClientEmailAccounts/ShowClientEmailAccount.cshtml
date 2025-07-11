@@ -44,19 +44,13 @@
     </div>
 
     <p>
-        @if (Model.CanEditClientEmailAccount)
-        {
-            <a class="button" href="/edit-client-email-account/@(Model.ClientEmailAccount.Id)">
-                Redigera
-            </a>
-        }
+        <a class="button" href="/edit-client-email-account/@(Model.ClientEmailAccount.Id)">
+            Redigera
+        </a>
 
-        @if (Model.CanRemoveClientEmailAccount)
-        {
-            <a class="button" href="/remove-client-email-account/@(Model.ClientEmailAccount.Id)">
-                Ta bort kontot
-            </a>
-        }
+        <a class="button" href="/remove-client-email-account/@(Model.ClientEmailAccount.Id)">
+            Ta bort
+        </a>
     </p>
 
 </main>
