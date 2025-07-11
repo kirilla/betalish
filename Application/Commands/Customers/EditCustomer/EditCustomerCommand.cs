@@ -18,15 +18,17 @@ public class EditCustomerCommand(IDatabaseService database) : IEditCustomerComma
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (await database.Customers
-            .AnyAsync(x =>
-                x.Address == model.Address &&
-                x.ClientId == userToken.ClientId!.Value &&
-                x.Id != model.Id))
-            throw new BlockedByAddressException();
+        //if (await database.Customers
+        //    .AnyAsync(x =>
+        //        x.EmailAddress == model.EmailAddress &&
+        //        x.ClientId == userToken.ClientId!.Value &&
+        //        x.Id != model.Id))
+        //    throw new BlockedByAddressException();
+
+        // KEEP FOR SSN/ORGNUM
 
         customer.Name = model.Name;
-        customer.Address = model.Address;
+        customer.EmailAddress = model.EmailAddress;
 
         await database.SaveAsync(userToken);
     }

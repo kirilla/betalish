@@ -51,14 +51,6 @@ public class AddCustomerModel(
 
             return Redirect($"/show-customer/{id}");
         }
-        catch (BlockedByAddressException)
-        {
-            ModelState.AddModelError(
-                nameof(CommandModel.Address),
-                "Det finns en annan kund med samma adress.");
-
-            return Page();
-        }
         catch
         {
             return Redirect("/help/notpermitted");

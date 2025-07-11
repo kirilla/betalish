@@ -13,7 +13,7 @@ public class Customer : IValidateOnSave
     public string? Ssn10 { get; set; }
     public string? Orgnum { get; set; }
 
-    public string Address { get; set; }
+    public string? EmailAddress { get; set; }
 
     public int ClientId { get; set; }
     public Client Client { get; set; }

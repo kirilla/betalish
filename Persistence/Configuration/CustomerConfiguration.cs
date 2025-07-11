@@ -16,8 +16,7 @@ class CustomerConfiguration : IEntityTypeConfiguration<Customer>
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.Customer.Name);
 
-        builder.Property(p => p.Address)
-            .IsRequired()
-            .HasMaxLength(MaxLengths.Domain.Customer.Address);
+        builder.Property(p => p.EmailAddress)
+            .HasMaxLength(MaxLengths.Domain.Customer.EmailAddress);
     }
 }

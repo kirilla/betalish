@@ -11,16 +11,18 @@ public class AddCustomerCommand(IDatabaseService database) : IAddCustomerCommand
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        if (await database.Customers
-            .AnyAsync(x => 
-                x.Address == model.Address &&
-                x.ClientId == userToken.ClientId!.Value))
-            throw new BlockedByAddressException();
+        //if (await database.Customers
+        //    .AnyAsync(x => 
+        //        x.EmailAddress == model.EmailAddress &&
+        //        x.ClientId == userToken.ClientId!.Value))
+        //    throw new BlockedByAddressException();
+
+        // KEEP FOR SSN/ORGNUM
 
         var customer = new Customer()
         {
             Name = model.Name,
-            Address = model.Address,
+            EmailAddress = model.EmailAddress,
             ClientId = userToken.ClientId!.Value,
         };
 

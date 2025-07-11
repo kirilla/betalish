@@ -35,7 +35,7 @@ public class EditCustomerModel(
             {
                 Id = Customer.Id,
                 Name = Customer.Name,
-                Address = Customer.Address,
+                EmailAddress = Customer.EmailAddress,
             };
 
             return Page();
@@ -75,14 +75,6 @@ public class EditCustomerModel(
             await command.Execute(UserToken, CommandModel);
 
             return Redirect($"/show-customer/{id}");
-        }
-        catch (BlockedByAddressException)
-        {
-            ModelState.AddModelError(
-                nameof(CommandModel.Address),
-                "Det finns en annan kund med samma adress.");
-
-            return Page();
         }
         catch
         {

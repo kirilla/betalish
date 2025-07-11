@@ -18,7 +18,7 @@
     <h4>
         Redigera kund:
         @(Model.Customer.Name)
-        @(Model.Customer.Address)
+        @(Model.Customer.EmailAddress)
     </h4>
 
     <form method="post">
@@ -30,10 +30,10 @@
         </label>
         <input asp-for="CommandModel.Name" />
 
-        <label asp-for="CommandModel.Address">
+        <label asp-for="CommandModel.EmailAddress">
             Epostadress
         </label>
-        <input asp-for="CommandModel.Address" />
+        <input asp-for="CommandModel.EmailAddress" />
 
         <div asp-validation-summary="All"></div>
 

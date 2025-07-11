@@ -14,9 +14,8 @@ public class EditCustomerCommandModel
     public string Name { get; set; }
 
     [RegularExpression(Pattern.Common.Email.Address)]
-    [Required(ErrorMessage = "Ange epostadress.")]
     [StringLength(
-        MaxLengths.Domain.Customer.Address,
+        MaxLengths.Domain.Customer.EmailAddress,
         ErrorMessage = "Skriv kortare.")]
-    public string Address { get; set; }
+    public string? EmailAddress { get; set; }
 }

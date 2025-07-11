@@ -137,7 +137,7 @@ public static class MaxLengths
         public static class Customer
         {
             public const int Name = Common.Person.FullName;
-            public const int Address = Common.Email.Address;
+            public const int EmailAddress = Common.Email.Address;
         }
 
         public static class EmailAccount

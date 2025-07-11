@@ -29,7 +29,7 @@ public class ShowCustomersModel(
             Customers = await database.Customers
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
-                .OrderBy(x => x.Address)
+                .OrderBy(x => x.EmailAddress)
                 .ThenBy(x => x.Name)
                 .ToListAsync();
 
