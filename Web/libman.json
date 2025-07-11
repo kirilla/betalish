@@ -3,7 +3,7 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "library": "jquery@3.6.3",
+      "library": "jquery@3.7.1",
       "destination": "wwwroot/lib/jquery/",
       "files": [
         "jquery.min.js",
@@ -37,7 +37,7 @@
     },
     {
       "provider": "jsdelivr",
-      "library": "alpinejs@3.14.1",
+      "library": "alpinejs@3.14.9",
       "destination": "wwwroot/lib/alpinejs/",
       "files": [
         "dist/cdn.js",
