@@ -32,13 +32,6 @@ public class EditClientEmailAccountCommandModel
         ErrorMessage = "Skriv kortare.")]
     public string? ReplyToAddress { get; set; }
 
-    [RegularExpression(Pattern.Common.Anything)]
-    [Required(ErrorMessage = "Ange lösenord.")]
-    [StringLength(
-        MaxLengths.Domain.ClientEmailAccount.Password,
-        ErrorMessage = "Skriv kortare.")]
-    public string Password { get; set; }
-
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange SMTP-server.")]
     [StringLength(

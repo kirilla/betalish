@@ -23,7 +23,6 @@ public class EditClientEmailAccountCommand(IDatabaseService database) : IEditCli
         account.FromAddress = model.FromAddress;
         account.ReplyToName = model.ReplyToName;
         account.ReplyToAddress = model.ReplyToAddress;
-        account.Password = model.Password;
         account.SmtpHost = model.SmtpHost;
         account.SmtpPort = model.SmtpPort;
 

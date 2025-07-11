@@ -31,7 +31,6 @@ public class EditClientEmailAccountModel(
                 FromAddress = ClientEmailAccount.FromAddress,
                 ReplyToName = ClientEmailAccount.ReplyToName,
                 ReplyToAddress = ClientEmailAccount.ReplyToAddress,
-                Password = ClientEmailAccount.Password,
                 SmtpHost = ClientEmailAccount.SmtpHost,
                 SmtpPort = ClientEmailAccount.SmtpPort,
             };
