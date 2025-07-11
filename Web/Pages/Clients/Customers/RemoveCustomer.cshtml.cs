@@ -19,11 +19,6 @@ public class RemoveCustomerModel(
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             Customer = await database.Customers
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
@@ -52,11 +47,6 @@ public class RemoveCustomerModel(
         {
             if (!await command.IsPermitted(UserToken))
                 throw new NotPermittedException();
-
-            Client = await database.Clients
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
 
             Customer = await database.Customers
                 .Where(x => x.Id == id)
