@@ -42,19 +42,13 @@
     </div>
 
     <p>
-        @if (Model.CanEditClient)
-        {
-            <a class="button" href="/edit-client/@(Model.Client.Id)">
-                Redigera
-            </a>
-        }
+        <a class="button" href="/edit-client/@(Model.Client.Id)">
+            Redigera
+        </a>
 
-        @if (Model.CanRemoveClient)
-        {
-            <a class="button" href="/remove-client/@(Model.Client.Id)">
-                Ta bort
-            </a>
-        }
+        <a class="button" href="/remove-client/@(Model.Client.Id)">
+            Ta bort
+        </a>
     </p>
 
 </main>

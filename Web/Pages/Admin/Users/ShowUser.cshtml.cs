@@ -1,27 +1,13 @@
-﻿using Betalish.Application.Commands.ClientAuths.GrantClientAuth;
-using Betalish.Application.Commands.ClientAuths.RevokeClientAuth;
-using Betalish.Application.Commands.Users.MakeUserAdmin;
-using Betalish.Application.Commands.Users.StripUserAdmin;
-
-namespace Betalish.Web.Pages.Admin.Users;
+﻿namespace Betalish.Web.Pages.Admin.Users;
 
 public class ShowUserModel(
     IUserToken userToken,
-    IDatabaseService database,
-    IMakeUserAdminCommand makeUserAdminCommand,
-    IStripUserAdminCommand stripUserAdminCommand,
-    IGrantClientAuthCommand grantClientAuthCommand,
-    IRevokeClientAuthCommand revokeClientAuthCommand) : AdminPageModel(userToken)
+    IDatabaseService database) : AdminPageModel(userToken)
 {
     public new User User { get; set; }
 
     public List<Client> Clients { get; set; }
     public List<UserEmail> UserEmails { get; set; }
-
-    public bool CanMakeUserAdmin { get; set; }
-    public bool CanStripUserAdmin { get; set; }
-    public bool CanGrantClientAuth { get; set; }
-    public bool CanRevokeClientAuth { get; set; }
 
     public bool IsAdmin { get; set; }
 
@@ -45,11 +31,6 @@ public class ShowUserModel(
                 .Select(x => x.Client)
                 .OrderBy(x => x.Name)
                 .ToListAsync();
-
-            CanMakeUserAdmin = await makeUserAdminCommand.IsPermitted(userToken);
-            CanStripUserAdmin = await stripUserAdminCommand.IsPermitted(userToken);
-            CanGrantClientAuth = await grantClientAuthCommand.IsPermitted(userToken);
-            CanRevokeClientAuth = await revokeClientAuthCommand.IsPermitted(userToken);
 
             IsAdmin = await database.AdminAuths.AnyAsync(x => x.UserId == id);
 

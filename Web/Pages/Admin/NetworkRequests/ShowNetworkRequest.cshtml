@@ -44,12 +44,9 @@
     </dl>
 
     <p>
-        @if (Model.CanRemoveNetworkRequest)
-        {
-            <a class="button" href="/remove-network-request/@(Model.NetworkRequest.Id)">
-                Ta bort
-            </a>
-        }
+        <a class="button" href="/remove-network-request/@(Model.NetworkRequest.Id)">
+            Ta bort
+        </a>
     </p>
 
 </main>

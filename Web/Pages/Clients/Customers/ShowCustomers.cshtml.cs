@@ -1,15 +1,10 @@
-using Betalish.Application.Commands.Customers.AddCustomerPerson;
-
 namespace Betalish.Web.Pages.Clients.Customers;
 
 public class ShowCustomersModel(
     IUserToken userToken,
-    IDatabaseService database,
-    IAddCustomerPersonCommand addCustomerCommand) : ClientPageModel(userToken)
+    IDatabaseService database) : ClientPageModel(userToken)
 {
     public List<Customer> Customers { get; set; }
-
-    public bool CanAddCustomer { get; set; }
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -27,8 +22,6 @@ public class ShowCustomersModel(
                 .ThenBy(x => x.Ssn10)
                 .ThenBy(x => x.Orgnum)
                 .ToListAsync();
-
-            CanAddCustomer = await addCustomerCommand.IsPermitted(userToken);
 
             return Page();
         }

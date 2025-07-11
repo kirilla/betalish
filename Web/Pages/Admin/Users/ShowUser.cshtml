@@ -93,14 +93,14 @@
     </p>
 
     <p>
-        @if (Model.CanMakeUserAdmin && !Model.IsAdmin)
+        @if (!Model.IsAdmin)
         {
             <a class="button" href="/make-user-admin/@(Model.User.Id)">
                 Gör till admin
             </a>
         }
 
-        @if (Model.CanStripUserAdmin && Model.IsAdmin)
+        @if (Model.IsAdmin)
         {
             <a class="button" href="/strip-user-admin/@(Model.User.Id)">
                 Ta bort som admin
@@ -109,19 +109,13 @@
     </p>
 
     <p>
-        @if (Model.CanGrantClientAuth)
-        {
-            <a class="button" href="/grant-user-client-auth/@(Model.User.Id)">
-                Gör till admin för klient ...
-            </a>
-        }
+        <a class="button" href="/grant-user-client-auth/@(Model.User.Id)">
+            Gör till admin för klient ...
+        </a>
 
-        @if (Model.CanRevokeClientAuth)
-        {
-            <a class="button" href="/revoke-user-client-auth/@(Model.User.Id)">
-                Ta bort som admin för klient ...
-            </a>
-        }
+        <a class="button" href="/revoke-user-client-auth/@(Model.User.Id)">
+            Ta bort som admin för klient ...
+        </a>
     </p>
 
     <p>
