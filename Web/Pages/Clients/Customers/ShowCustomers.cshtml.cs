@@ -20,12 +20,6 @@ public class ShowCustomersModel(
 
             await AssertClientAuthorization(database);
 
-            Client = await database.Clients
-                .AsNoTracking()
-                .Where(x => x.Id == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
             Customers = await database.Customers
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
