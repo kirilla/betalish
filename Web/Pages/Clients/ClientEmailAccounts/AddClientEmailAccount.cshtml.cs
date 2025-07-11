@@ -49,7 +49,7 @@ public class AddClientEmailAccountModel(
         {
             ModelState.AddModelError(
                 nameof(CommandModel.FromAddress),
-                "Det finns ett annat konto med samma adress.");
+                "Det finns redan ett epostkonto.");
 
             return Page();
         }

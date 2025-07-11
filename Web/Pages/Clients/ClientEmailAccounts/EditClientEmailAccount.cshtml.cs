@@ -69,14 +69,6 @@ public class EditClientEmailAccountModel(
 
             return Redirect($"/show-client-email-account/{ClientEmailAccount.Id}");
         }
-        catch (BlockedByNameException)
-        {
-            ModelState.AddModelError(
-                nameof(CommandModel.FromAddress),
-                "Det finns ett annat konto med samma adress.");
-
-            return Page();
-        }
         catch (NotFoundException)
         {
             return Redirect("/help/notfound");

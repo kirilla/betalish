@@ -19,12 +19,6 @@ public class EditClientEmailAccountCommand(IDatabaseService database) : IEditCli
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (await database.ClientEmailAccounts
-            .AnyAsync(x =>
-                x.FromName == model.FromName &&
-                x.Id != model.ClientEmailAccountId))
-            throw new BlockedByNameException();
-
         account.FromName = model.FromName;
         account.FromAddress = model.FromAddress;
         account.ReplyToName = model.ReplyToName;
