@@ -1,0 +1,53 @@
+﻿@page "/edit-customer-organization/{id:int}"
+@model EditCustomerOrganizationModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera organisation -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera organisation:
+        @(Model.Customer.Name)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.Orgnum">
+            Organisationsnummer
+        </label>
+        <input asp-for="CommandModel.Orgnum" placeholder="123456-7890" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.EmailAddress">
+            Epostadress
+        </label>
+        <input asp-for="CommandModel.EmailAddress" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-customer/@(Model.Customer.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>
