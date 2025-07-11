@@ -13,17 +13,42 @@
 
 <main>
 
-    <h4>
-        👤
-        @(Model.Customer.Name)
-    </h4>
+    @if (Model.Customer.CustomerKind == CustomerKind.Person)
+    {
+        <h4>
+            👤 @(Model.Customer.Name)
+        </h4>
+    }
+    @if (Model.Customer.CustomerKind == CustomerKind.Organization)
+    {
+        <h4>
+            🏢 @(Model.Customer.Name)
+        </h4>
+    }
 
     <div class="notice">
-        <ul>
-            <li>
-                @(Model.Customer.EmailAddress)
-            </li>
-        </ul>
+        @if (Model.Customer.CustomerKind == CustomerKind.Person)
+        {
+            <ul>
+                <li>
+                    @(Model.Customer.Ssn10?.ToSsnWithDash() ?? "Okänt personnummer")
+                </li>
+                <li>
+                    @(Model.Customer.EmailAddress)
+                </li>
+            </ul>
+        }
+        @if (Model.Customer.CustomerKind == CustomerKind.Organization)
+        {
+            <ul>
+                <li>
+                    @(Model.Customer.Orgnum?.ToOrgnumWithDash() ?? "Okänt organisationsnr")
+                </li>
+                <li>
+                    @(Model.Customer.EmailAddress)
+                </li>
+            </ul>
+        }
     </div>
 
     <p>

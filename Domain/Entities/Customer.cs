@@ -1,6 +1,6 @@
 ﻿namespace Betalish.Domain.Entities;
 
-public class Customer : IValidateOnSave
+public class Customer : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
@@ -18,9 +18,20 @@ public class Customer : IValidateOnSave
     public int ClientId { get; set; }
     public Client Client { get; set; }
 
+    public void FormatOnSave()
+    {
+        Ssn10 = Ssn10?.StripNonNumeric();
+        Orgnum = Orgnum?.StripNonNumeric();
+
+        EmailAddress = EmailAddress?.Trim().ToLowerInvariant();
+    }
+
     public void ValidateOnSave()
     {
         Guid.AssertValid();
+
+        if (!Enum.IsDefined(CustomerKind))
+            throw new InvalidEnumException();
 
         Ssn10?.AssertSsn10Valid();
         Orgnum?.AssertOrgnumValid();

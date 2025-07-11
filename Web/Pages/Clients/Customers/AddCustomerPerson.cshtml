@@ -1,0 +1,50 @@
+﻿@page "/add-customer-person"
+@model AddCustomerPersonModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till kund -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till en kund
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.Ssn10">
+            Personnummer
+        </label>
+        <input asp-for="CommandModel.Ssn10" placeholder="ÅÅMMDD-NNNN" />
+
+        <label asp-for="CommandModel.EmailAddress">
+            Epostadress
+        </label>
+        <input asp-for="CommandModel.EmailAddress" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-customers">
+            Avbryt
+        </a>
+    </form>
+
+</main>

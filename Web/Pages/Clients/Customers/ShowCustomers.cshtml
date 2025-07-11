@@ -25,13 +25,26 @@
         <ul>
             @foreach (var customer in Model.Customers)
             {
-                <li>
-                    👤
-                    &thinsp;
-                    <a href="/show-customer/@(customer.Id)">@(customer.Name)</a>
-                    &ensp;
-                    @(customer.EmailAddress)
-                </li>
+                @if (customer.CustomerKind == CustomerKind.Person)
+                {
+                    <li>
+                        <span>👤</span>
+                        &thinsp;
+                        <a href="/show-customer/@(customer.Id)">@(customer.Name)</a>
+                        &ensp;
+                        @(customer.EmailAddress)
+                    </li>
+                }
+                @if (customer.CustomerKind == CustomerKind.Organization)
+                {
+                    <li>
+                        <span>🏢</span>
+                        &thinsp;
+                        <a href="/show-customer/@(customer.Id)">@(customer.Name)</a>
+                        &ensp;
+                        @(customer.EmailAddress)
+                    </li>
+                }
             }
 
             @if (!Model.Customers.Any())

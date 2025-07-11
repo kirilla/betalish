@@ -1,11 +1,11 @@
-using Betalish.Application.Commands.Customers.AddCustomer;
+using Betalish.Application.Commands.Customers.AddCustomerPerson;
 
 namespace Betalish.Web.Pages.Clients.Customers;
 
 public class ShowCustomersModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAddCustomerCommand addCustomerCommand) : ClientPageModel(userToken)
+    IAddCustomerPersonCommand addCustomerCommand) : ClientPageModel(userToken)
 {
     public List<Customer> Customers { get; set; }
 

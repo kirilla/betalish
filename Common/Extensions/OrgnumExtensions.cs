@@ -14,7 +14,7 @@ public static class OrgnumExtensions
             throw new InvalidOrgnumException();
     }
 
-    public static string WithDash(this string orgnum)
+    public static string ToOrgnumWithDash(this string orgnum)
     {
         if (orgnum.Length == 10)
             return orgnum.Insert(6, "-");
