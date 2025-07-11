@@ -26,7 +26,7 @@ public class EditClientEmailAccountModel(
 
             CommandModel = new EditClientEmailAccountCommandModel()
             {
-                ClientEmailAccountId = ClientEmailAccount.Id,
+                Id = ClientEmailAccount.Id,
                 FromName = ClientEmailAccount.FromName,
                 FromAddress = ClientEmailAccount.FromAddress,
                 ReplyToName = ClientEmailAccount.ReplyToName,
@@ -56,7 +56,7 @@ public class EditClientEmailAccountModel(
 
             ClientEmailAccount = await database.ClientEmailAccounts
                 .Where(x => 
-                    x.Id == CommandModel.ClientEmailAccountId &&
+                    x.Id == CommandModel.Id &&
                     x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();

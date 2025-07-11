@@ -4,7 +4,7 @@ namespace Betalish.Application.Commands.ClientEmailAccounts.EditClientEmailAccou
 
 public class EditClientEmailAccountCommandModel
 {
-    public int ClientEmailAccountId { get; set; }
+    public int Id { get; set; }
 
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange avsändare.")]
