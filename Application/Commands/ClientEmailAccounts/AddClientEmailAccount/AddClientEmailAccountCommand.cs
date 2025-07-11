@@ -12,15 +12,8 @@ public class AddClientEmailAccountCommand(IDatabaseService database) : IAddClien
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        var client = await database.Clients
-            .Where(x => x.Id == userToken.ClientId!.Value)
-            .SingleOrDefaultAsync() ??
-            throw new NotFoundException();
-
         if (await database.ClientEmailAccounts
-            .AnyAsync(x => 
-                x.ClientId == userToken.ClientId!.Value &&
-                x.FromAddress == model.FromAddress))
+            .AnyAsync(x => x.ClientId == userToken.ClientId!.Value))
             throw new BlockedByExistingException();
 
         var account = new ClientEmailAccount()
@@ -32,7 +25,7 @@ public class AddClientEmailAccountCommand(IDatabaseService database) : IAddClien
             Password = model.Password,
             SmtpHost = model.SmtpHost,
             SmtpPort = model.SmtpPort,
-            ClientId = client.Id,
+            ClientId = userToken.ClientId!.Value,
         };
 
         database.ClientEmailAccounts.Add(account);
