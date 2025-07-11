@@ -35,5 +35,15 @@ public class Customer : IFormatOnSave, IValidateOnSave
 
         Ssn10?.AssertSsn10Valid();
         Orgnum?.AssertOrgnumValid();
+
+        if (CustomerKind == CustomerKind.Person &&
+            Orgnum.HasValue())
+            throw new ValidateOnSaveException(
+                $"Customer {Name} should not have an Orgnum.");
+
+        if (CustomerKind == CustomerKind.Organization &&
+            Ssn10.HasValue())
+            throw new ValidateOnSaveException(
+                $"Customer {Name} should not have an Ssn10.");
     }
 }
