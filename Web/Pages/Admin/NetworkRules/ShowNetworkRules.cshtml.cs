@@ -15,12 +15,10 @@ public class ShowNetworkRulesModel(
         {
             AssertIsAdmin();
 
-            NetworkRules = await database.NetworkRules.ToListAsync();
-
-            NetworkRules = NetworkRules
+            NetworkRules = await database.NetworkRules
                 .OrderByDescending(x => x.PrefixLength) // Higher specificity
                 .ThenBy(x => x.BaseAddress)
-                .ToList();
+                .ToListAsync();
 
             return Page();
         }
