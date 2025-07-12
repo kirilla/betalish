@@ -4,7 +4,7 @@ public class ShowLobbyModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public List<Client> Clients { get; set; }
+    public List<Client> Clients { get; set; } = null!;
 
     public bool IsAdmin { get; set; }
 

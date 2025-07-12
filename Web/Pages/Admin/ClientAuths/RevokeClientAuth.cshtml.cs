@@ -9,7 +9,7 @@ public class RevokeClientAuthModel(
 {
     public new User User { get; set; }
 
-    public List<Client> Clients { get; set; }
+    public List<Client> Clients { get; set; } = null!;
 
     [BindProperty]
     public RevokeClientAuthCommandModel CommandModel { get; set; } = new RevokeClientAuthCommandModel();

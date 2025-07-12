@@ -4,7 +4,7 @@ public class ShowClientEmailMessageModel(
     IUserToken userToken,
     IDatabaseService database) : ClientPageModel(userToken)
 {
-    public ClientEmailMessage ClientEmailMessage { get; set; }
+    public ClientEmailMessage ClientEmailMessage { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

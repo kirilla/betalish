@@ -7,7 +7,7 @@ public class EditClientModel(
     IDatabaseService database,
     IEditClientCommand command) : AdminPageModel(userToken)
 {
-    public Client Client { get; set; }
+    public Client Client { get; set; } = null!;
 
     [BindProperty]
     public EditClientCommandModel CommandModel { get; set; } = new EditClientCommandModel();

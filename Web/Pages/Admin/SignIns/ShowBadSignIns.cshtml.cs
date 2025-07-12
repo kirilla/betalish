@@ -4,7 +4,7 @@ public class ShowBadSignInsModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<BadSignIn> BadSignIns { get; set; }
+    public List<BadSignIn> BadSignIns { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync()
     {

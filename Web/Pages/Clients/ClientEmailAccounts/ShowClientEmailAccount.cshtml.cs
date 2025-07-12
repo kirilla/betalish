@@ -4,7 +4,7 @@ public class ShowClientEmailAccountModel(
     IUserToken userToken,
     IDatabaseService database) : ClientPageModel(userToken)
 {
-    public ClientEmailAccount ClientEmailAccount { get; set; }
+    public ClientEmailAccount ClientEmailAccount { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

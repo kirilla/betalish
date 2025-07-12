@@ -7,7 +7,7 @@ public class EditClientEmailAccountModel(
     IDatabaseService database,
     IEditClientEmailAccountCommand command) : ClientPageModel(userToken)
 {
-    public ClientEmailAccount ClientEmailAccount { get; set; }
+    public ClientEmailAccount ClientEmailAccount { get; set; } = null!;
 
     [BindProperty]
     public EditClientEmailAccountCommandModel CommandModel { get; set; }

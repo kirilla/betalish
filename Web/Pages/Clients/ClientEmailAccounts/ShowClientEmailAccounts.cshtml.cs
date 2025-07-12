@@ -4,7 +4,7 @@ public class ShowClientEmailAccountsModel(
     IUserToken userToken,
     IDatabaseService database) : ClientPageModel(userToken)
 {
-    public List<ClientEmailAccount> ClientEmailAccounts { get; set; }
+    public List<ClientEmailAccount> ClientEmailAccounts { get; set; } = null!;
 
     public bool CanAddClientEmailAccount { get; set; }
 

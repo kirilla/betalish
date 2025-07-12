@@ -4,9 +4,9 @@ public class ShowClientEventsForClientModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public Client Client { get; set; }
+    public Client Client { get; set; } = null!;
 
-    public List<ClientEvent> ClientEvents { get; set; }
+    public List<ClientEvent> ClientEvents { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

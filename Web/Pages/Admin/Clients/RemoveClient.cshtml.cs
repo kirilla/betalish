@@ -7,7 +7,7 @@ public class RemoveClientModel(
     IDatabaseService database,
     IRemoveClientCommand command) : AdminPageModel(userToken)
 {
-    public Client Client { get; set; }
+    public Client Client { get; set; } = null!;
 
     [BindProperty]
     public RemoveClientCommandModel CommandModel { get; set; } = new RemoveClientCommandModel();

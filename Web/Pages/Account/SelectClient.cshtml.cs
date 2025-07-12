@@ -7,7 +7,7 @@ public class SelectClientModel(
     IDatabaseService database,
     ISelectClientCommand command) : UserTokenPageModel(userToken)
 {
-    public Client Client { get; set; }
+    public Client Client { get; set; } = null!;
 
     [BindProperty]
     public SelectClientCommandModel CommandModel { get; set; } = new SelectClientCommandModel();

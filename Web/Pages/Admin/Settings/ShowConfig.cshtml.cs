@@ -18,11 +18,11 @@ public class ShowConfigModel(
     private readonly SignUpConfiguration _signupConfig = signupOptions.Value;
     private readonly SmtpConfiguration _smtpConfig = smtpOptions.Value;
 
-    public string BadSignInJson { get; set; }
-    public string FirewallJson { get; set; }
-    public string SignInJson { get; set; }
-    public string SignUpJson { get; set; }
-    public string SmtpJson { get; set; }
+    public string BadSignInJson { get; set; } = null!;
+    public string FirewallJson { get; set; } = null!;
+    public string SignInJson { get; set; } = null!;
+    public string SignUpJson { get; set; } = null!;
+    public string SmtpJson { get; set; } = null!;
 
     public IActionResult OnGet()
     {

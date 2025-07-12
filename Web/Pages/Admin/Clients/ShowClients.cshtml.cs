@@ -4,7 +4,7 @@ public class ShowClientsModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<Client> Clients { get; set; }
+    public List<Client> Clients { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync()
     {

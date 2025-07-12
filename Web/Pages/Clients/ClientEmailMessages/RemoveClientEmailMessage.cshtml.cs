@@ -7,7 +7,7 @@ public class RemoveClientEmailMessageModel(
     IDatabaseService database,
     IRemoveClientEmailMessageCommand command) : ClientPageModel(userToken)
 {
-    public ClientEmailMessage ClientEmailMessage { get; set; }
+    public ClientEmailMessage ClientEmailMessage { get; set; } = null!;
 
     [BindProperty]
     public RemoveClientEmailMessageCommandModel CommandModel { get; set; }

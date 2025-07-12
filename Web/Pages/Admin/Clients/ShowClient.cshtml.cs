@@ -4,7 +4,7 @@ public class ShowClientModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public Client Client { get; set; }
+    public Client Client { get; set; } = null!;
 
     public List<User> Users { get; set; }
 

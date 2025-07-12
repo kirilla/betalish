@@ -9,7 +9,7 @@ public class GrantClientAuthModel(
 {
     public new User User { get; set; }
 
-    public List<Client> Clients { get; set; }
+    public List<Client> Clients { get; set; } = null!;
 
     [BindProperty]
     public GrantClientAuthCommandModel CommandModel { get; set; } = new GrantClientAuthCommandModel();

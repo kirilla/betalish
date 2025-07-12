@@ -4,10 +4,10 @@ public class ShowUserModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public new User User { get; set; }
+    public new User User { get; set; } = null!;
 
-    public List<Client> Clients { get; set; }
-    public List<UserEmail> UserEmails { get; set; }
+    public List<Client> Clients { get; set; } = null!;
+    public List<UserEmail> UserEmails { get; set; } = null!;
 
     public bool IsAdmin { get; set; }
 

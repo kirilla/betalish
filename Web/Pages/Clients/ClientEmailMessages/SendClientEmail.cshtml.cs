@@ -7,7 +7,7 @@ public class SendClientEmailModel(
     IDatabaseService database,
     ISendClientEmailCommand command) : ClientPageModel(userToken)
 {
-    public ClientEmailMessage ClientEmailMessage { get; set; }
+    public ClientEmailMessage ClientEmailMessage { get; set; } = null!;
 
     [BindProperty]
     public SendClientEmailCommandModel CommandModel { get; set; }

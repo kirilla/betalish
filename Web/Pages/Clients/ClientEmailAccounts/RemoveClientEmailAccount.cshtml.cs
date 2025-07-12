@@ -7,7 +7,7 @@ public class RemoveClientEmailAccountModel(
     IDatabaseService database,
     IRemoveClientEmailAccountCommand command) : ClientPageModel(userToken)
 {
-    public ClientEmailAccount ClientEmailAccount { get; set; }
+    public ClientEmailAccount ClientEmailAccount { get; set; } = null!;
 
     [BindProperty]
     public RemoveClientEmailAccountCommandModel CommandModel { get; set; }

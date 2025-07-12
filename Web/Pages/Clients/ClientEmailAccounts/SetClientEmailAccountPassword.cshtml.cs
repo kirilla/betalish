@@ -7,7 +7,7 @@ public class SetClientEmailAccountPasswordModel(
     IDatabaseService database,
     ISetClientEmailAccountPasswordCommand command) : ClientPageModel(userToken)
 {
-    public ClientEmailAccount ClientEmailAccount { get; set; }
+    public ClientEmailAccount ClientEmailAccount { get; set; } = null!;
 
     [BindProperty]
     public SetClientEmailAccountPasswordCommandModel CommandModel { get; set; }
