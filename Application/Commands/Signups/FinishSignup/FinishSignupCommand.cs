@@ -64,7 +64,9 @@ public class FinishSignupCommand(
 
         var ssn = new UserSsn()
         {
-            Ssn12 = signup.Ssn12,
+            Ssn12 = signup.Ssn12.StripNonNumeric(),
+            Ssn10 = signup.Ssn12.ToSsn10(),
+            SsnDate = signup.Ssn12.ToDateOnly(),
             User = user,
         };
 

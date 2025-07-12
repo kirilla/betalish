@@ -5,8 +5,8 @@ public class UserSsn :
 {
     public int Id { get; set; }
 
-    public string Ssn12 { get; set; }
-    public string Ssn10 { get; set; }
+    public required string Ssn12 { get; set; }
+    public required string Ssn10 { get; set; }
 
     public DateOnly? SsnDate { get; set; }
 

@@ -59,7 +59,9 @@ public class RegisterAccountCommand(
 
         var ssn = new UserSsn()
         {
-            Ssn12 = model.Ssn12,
+            Ssn12 = model.Ssn12.StripNonNumeric(),
+            Ssn10 = model.Ssn12.ToSsn10(),
+            SsnDate = model.Ssn12.ToDateOnly(),
             User = user,
         };
 
