@@ -40,7 +40,7 @@ public class SendEmailCommand(
             message.EmailStatus = EmailStatus.Sent;
             message.Sent = dateService.GetDateTimeNow();
         }
-        catch (Exception e)
+        catch
         {
             message.EmailStatus = EmailStatus.SendFailed;
         }

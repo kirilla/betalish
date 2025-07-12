@@ -15,7 +15,7 @@ public class BadSignInLogger(IServiceProvider serviceProvider) : BackgroundServi
             {
                 await SaveEvents(stoppingToken);
             }
-            catch (Exception ex)
+            catch
             {
                 // TODO: Log event?
             }
