@@ -45,7 +45,7 @@ public class CookieValidator(
                 x.UserId,
                 x.User.Name,
                 x.ClientId,
-                ClientName = x.Client.Name,
+                ClientName = x.Client!.Name,
                 x.User.NoLogin,
                 x.User.NoSave,
                 IsAdmin = x.User.AdminAuths.Any(),
