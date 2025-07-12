@@ -4,7 +4,7 @@ public class ShowSessionModel(
     IUserToken userToken,
     IDatabaseService database) : UserTokenPageModel(userToken)
 {
-    public Session Session { get; set; }
+    public Session Session { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
