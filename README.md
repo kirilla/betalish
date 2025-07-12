@@ -19,6 +19,8 @@ Meaning unsophisticated. Using the simplest of web tech.
 
 Because why not.
 
-### Not18n
+## Inter-not-ionalization.
+
+It's meant for the Swedish market. You scale. Me not.
 
 And it's all in Swedish. Enjoy!
