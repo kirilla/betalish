@@ -26,6 +26,7 @@ public interface IDatabaseService
     DbSet<UserEmail> UserEmails { get; set; }
     DbSet<UserEvent> UserEvents { get; set; }
     DbSet<UserPhone> UserPhones { get; set; }
+    DbSet<UserSsn> UserSsns { get; set; }
 
     Task SaveAsync(IUserToken userToken);
 

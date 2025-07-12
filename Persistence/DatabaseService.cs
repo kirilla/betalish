@@ -31,6 +31,7 @@ public class DatabaseService(
     public DbSet<UserEmail> UserEmails { get; set; }
     public DbSet<UserEvent> UserEvents { get; set; }
     public DbSet<UserPhone> UserPhones { get; set; }
+    public DbSet<UserSsn> UserSsns { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -58,6 +59,7 @@ public class DatabaseService(
         new UserEmailConfiguration().Configure(builder.Entity<UserEmail>());
         new UserEventConfiguration().Configure(builder.Entity<UserEvent>());
         new UserPhoneConfiguration().Configure(builder.Entity<UserPhone>());
+        new UserSsnConfiguration().Configure(builder.Entity<UserSsn>());
     }
 
     public async Task SaveAsync(IUserToken userToken)

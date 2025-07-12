@@ -53,5 +53,9 @@ class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasMany(x => x.UserPhones)
             .WithOne(x => x.User)
             .HasForeignKey(x => x.UserId);
+
+        builder.HasMany(x => x.UserSsns)
+            .WithOne(x => x.User)
+            .HasForeignKey(x => x.UserId);
     }
 }

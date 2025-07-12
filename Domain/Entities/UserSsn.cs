@@ -1,10 +1,7 @@
 ﻿namespace Betalish.Domain.Entities;
 
-public class User : 
-    ICreatedDateTime, 
-    IUpdatedDateTime, 
-    IFormatOnSave, 
-    IValidateOnSave
+public class UserSsn : 
+    ICreatedDateTime, IUpdatedDateTime, IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
@@ -13,31 +10,17 @@ public class User :
 
     public DateOnly? SsnDate { get; set; }
 
-    public string Name { get; set; }
-
-    public string PasswordHash { get; set; }
-
-    public Guid? Guid { get; set; }
-
-    public bool NoLogin { get; set; }
-    public bool NoSave { get; set; }
-
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
 
-    public List<AdminAuth> AdminAuths { get; set; }
-    public List<ClientAuth> ClientAuths { get; set; }
-    public List<ClientEvent> ClientEvents { get; set; }
-    public List<Session> Sessions { get; set; }
-    public List<UserEmail> UserEmails { get; set; }
-    public List<UserEvent> UserEvents { get; set; }
-    public List<UserPhone> UserPhones { get; set; }
-    public List<UserSsn> UserSsns { get; set; }
+    public int UserId { get; set; }
+    public User User { get; set; }
 
     public void FormatOnSave()
     {
         Ssn12 = Ssn12.StripNonNumeric();
         Ssn10 = Ssn12.ToSsn10();
+
         SsnDate = Ssn12.ToDateOnly();
     }
 
@@ -45,6 +28,10 @@ public class User :
     {
         ValidateSsn10();
         ValidateSsn12();
+
+        // Ignore when SsnDate == null.
+        // Some SSN do not map to valid dates,
+        // e.g. samordningsnummer.
     }
 
     private void ValidateSsn10()
