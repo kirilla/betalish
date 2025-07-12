@@ -4,12 +4,9 @@ public class ClientPageModel(IUserToken userToken) : PageModel
 {
     public IUserToken UserToken { get; } = userToken;
 
-    public async Task AssertClientAuthorization(
-        IDatabaseService database)
+    public void AssertIsClient()
     {
-        if (!await database.ClientAuths.AnyAsync(x =>
-                x.ClientId == UserToken.ClientId!.Value &&
-                x.UserId == UserToken.UserId!.Value))
+        if (!UserToken.IsClient)
             throw new NotPermittedException();
     }
 }

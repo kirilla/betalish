@@ -14,7 +14,7 @@ public class ShowClientEmailQueueModel(
     {
         try
         {
-            await AssertClientAuthorization(database);
+            AssertIsClient();
 
             EmailHeaders = await database.ClientEmailMessages
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)

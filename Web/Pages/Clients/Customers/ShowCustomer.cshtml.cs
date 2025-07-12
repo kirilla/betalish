@@ -13,7 +13,7 @@ public class ShowCustomerModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            await AssertClientAuthorization(database);
+            AssertIsClient();
 
             Customer = await database.Customers
                 .Where(x => 

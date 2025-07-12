@@ -10,7 +10,7 @@ public class ShowClientEmailMessageModel(
     {
         try
         {
-            await AssertClientAuthorization(database);
+            AssertIsClient();
 
             ClientEmailMessage = await database.ClientEmailMessages
                 .Where(x => 

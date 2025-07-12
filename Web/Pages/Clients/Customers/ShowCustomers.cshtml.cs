@@ -13,7 +13,7 @@ public class ShowCustomersModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            await AssertClientAuthorization(database);
+            AssertIsClient();
 
             Customers = await database.Customers
                 .AsNoTracking()

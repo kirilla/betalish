@@ -12,7 +12,7 @@ public class ShowClientEmailAccountsModel(
     {
         try
         {
-            await AssertClientAuthorization(database);
+            AssertIsClient();
 
             ClientEmailAccounts = await database.ClientEmailAccounts
                 .AsNoTracking()

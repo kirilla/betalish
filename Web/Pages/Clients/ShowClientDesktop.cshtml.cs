@@ -11,7 +11,7 @@ public class ShowClientDesktopModel(
             if (!UserToken.IsAuthenticated)
                 throw new NotPermittedException();
 
-            await AssertClientAuthorization(database);
+            AssertIsClient();
 
             return Page();
         }
