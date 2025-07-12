@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Admin.Sessions;
 
 public class RemoveSessionRecordsModel(
     IUserToken userToken,
-    IDatabaseService database,
     IRemoveSessionRecordsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]

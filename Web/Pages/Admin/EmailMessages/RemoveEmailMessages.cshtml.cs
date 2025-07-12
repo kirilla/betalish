@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Admin.EmailMessages;
 
 public class RemoveEmailMessagesModel(
     IUserToken userToken,
-    IDatabaseService database,
     IRemoveEmailMessagesCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]

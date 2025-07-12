@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Admin.Sessions;
 
 public class TerminateSessionsModel(
     IUserToken userToken,
-    IDatabaseService database,
     ITerminateSessionsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]

@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Account;
 
 public class AddAccountEmailModel(
     IUserToken userToken,
-    IDatabaseService database,
     IAddAccountEmailCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]

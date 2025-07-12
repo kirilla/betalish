@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Clients.ClientEmailMessages;
 
 public class RemoveClientEmailMessagesModel(
     IUserToken userToken,
-    IDatabaseService database,
     IRemoveClientEmailMessagesCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]

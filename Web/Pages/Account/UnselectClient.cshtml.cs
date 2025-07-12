@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Account;
 
 public class UnselectClientModel(
     IUserToken userToken,
-    IDatabaseService database,
     IUnselectClientCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]

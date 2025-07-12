@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Clients.Customers;
 
 public class AddCustomerOrganizationModel(
     IUserToken userToken,
-    IDatabaseService database,
     IAddCustomerOrganizationCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]

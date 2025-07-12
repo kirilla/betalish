@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Account.AccountPhones;
 
 public class AddAccountPhoneModel(
     IUserToken userToken,
-    IDatabaseService database,
     IAddAccountPhoneCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]

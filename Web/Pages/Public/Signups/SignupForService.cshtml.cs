@@ -9,7 +9,6 @@ namespace Betalish.Web.Pages.Public.Signups;
 [AllowAnonymous]
 public class SignupForServiceModel(
     IUserToken userToken,
-    IDatabaseService database,
     IDateService dateService,
     IEndpointRateLimiter endpointRateLimiter,
     IIpAddressRateLimiter ipAddressRateLimiter,

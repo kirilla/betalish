@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Admin.NetworkRequests;
 
 public class RemoveNetworkRequestsModel(
     IUserToken userToken,
-    IDatabaseService database,
     IRemoveNetworkRequestsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]

@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Admin.UserEvents;
 
 public class RemoveUserEventsModel(
     IUserToken userToken,
-    IDatabaseService database,
     IRemoveUserEventsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]

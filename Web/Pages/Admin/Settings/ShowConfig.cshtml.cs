@@ -4,8 +4,6 @@ namespace Betalish.Web.Pages.Admin.Settings;
 
 public class ShowConfigModel(
     IUserToken userToken,
-    IDatabaseService database,
-    
     IOptions<BadSignInConfiguration> badSignOptions,
     IOptions<FirewallConfiguration> firewallOptions,
     IOptions<SignInConfiguration> signinOptions,

@@ -5,7 +5,6 @@ namespace Betalish.Web.Pages.Admin.NetworkRules;
 public class AddNetworkRuleModel(
     INetworkRuleCacheService cacheService,
     IUserToken userToken,
-    IDatabaseService database,
     IAddNetworkRuleCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]

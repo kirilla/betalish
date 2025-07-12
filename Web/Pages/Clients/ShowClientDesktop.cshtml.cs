@@ -1,8 +1,6 @@
 namespace Betalish.Web.Pages.Clients;
 
-public class ShowClientDesktopModel(
-    IUserToken userToken,
-    IDatabaseService database) : ClientPageModel(userToken)
+public class ShowClientDesktopModel(IUserToken userToken) : ClientPageModel(userToken)
 {
     public IActionResult OnGet()
     {

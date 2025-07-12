@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Clients.Customers;
 
 public class AddCustomerPersonModel(
     IUserToken userToken,
-    IDatabaseService database,
     IAddCustomerPersonCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]

@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Admin.Clients;
 
 public class AddClientModel(
     IUserToken userToken,
-    IDatabaseService database,
     IAddClientCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]

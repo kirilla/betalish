@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Admin.SignIns;
 
 public class RemoveBadSignInsModel(
     IUserToken userToken,
-    IDatabaseService database,
     IRemoveBadSignInsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]

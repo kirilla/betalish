@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Admin.LogItems;
 
 public class RemoveLogItemsModel(
     IUserToken userToken,
-    IDatabaseService database,
     IRemoveLogItemsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]

@@ -3,7 +3,6 @@
 namespace Betalish.Web.Pages.Admin.Tests;
 
 public class TestLogItemDedupModel(
-    IDatabaseService database,
     ITestLogItemDedupCommand command,
     IUserToken userToken) : AdminPageModel(userToken)
 {

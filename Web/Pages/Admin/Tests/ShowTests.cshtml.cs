@@ -1,8 +1,6 @@
 ﻿namespace Betalish.Web.Pages.Admin.Tests;
 
-public class ShowTestsModel(
-    IDatabaseService database,
-    IUserToken userToken) : AdminPageModel(userToken)
+public class ShowTestsModel(IUserToken userToken) : AdminPageModel(userToken)
 {
     public IActionResult OnGet()
     {

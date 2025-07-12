@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Admin.EmailMessages;
 
 public class SendTestEmailModel(
     IUserToken userToken,
-    IDatabaseService database,
     ISendTestEmailCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
