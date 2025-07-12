@@ -1,6 +1,7 @@
 ﻿using Betalish.Common.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using static Betalish.Common.Validation.MaxLengths.Common;
 
 namespace Betalish.Application.Commands.Sessions.SignInBySsn;
 
@@ -38,10 +39,15 @@ public class SignInBySsnCommand(
 
         var ssn10 = model.Ssn12.ToSsn10();
 
-        var user = await database.Users
+        var ssn = await database.UserSsns
             .Where(x =>
                 x.Ssn10 == ssn10 &&
                 x.Ssn12 == model.Ssn12)
+            .SingleOrDefaultAsync() ??
+            throw new UserNotFoundException();
+
+        var user = await database.Users
+            .Where(x => x.Id == ssn.UserId)
             .SingleOrDefaultAsync() ??
             throw new UserNotFoundException();
 

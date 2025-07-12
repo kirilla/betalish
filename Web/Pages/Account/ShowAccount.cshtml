@@ -29,10 +29,15 @@
             👤
             &ensp;
             @(Model.User.Name)
-            <br />
-            #️⃣
-            &ensp;
-            @(Model.User.Ssn12.ToSsnWithDash())
+            @foreach(var ssn in Model.UserSsns)
+            {
+                <span>
+                    <br />
+                    #️⃣
+                    &ensp;
+                    @(ssn.Ssn12.ToSsnWithDash())
+                </span>
+            }
         </p>
         
         <p>

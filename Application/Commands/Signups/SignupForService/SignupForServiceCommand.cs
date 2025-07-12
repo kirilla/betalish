@@ -37,7 +37,7 @@ public class SignupForServiceCommand(
         // Blocking data or conflicts?
         var ssn10 = model.Ssn12.ToSsn10();
 
-        if (await database.Users.AnyAsync(x => x.Ssn10 == ssn10))
+        if (await database.UserSsns.AnyAsync(x => x.Ssn10 == ssn10))
             throw new BlockedBySsnException();
 
         if (await database.UserEmails.AnyAsync(x => x.Address == model.EmailAddress))

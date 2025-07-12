@@ -37,15 +37,16 @@ public class RegisterAccountCommand(
         if (await database.UserEmails.AnyAsync(x => x.Address == model.EmailAddress))
             throw new EmailAlreadyTakenException();
 
+        var guid = Guid.NewGuid();
+
+        if (await database.Users.AnyAsync(x => x.Guid == guid))
+            throw new Exception("User.Guid collision.");
+
         var user = new User()
         {
-            Ssn12 = model.Ssn12,
             Name = model.Name,
-            Guid = Guid.NewGuid(),
+            Guid = guid,
         };
-
-        if (await database.Users.AnyAsync(x => x.Guid == user.Guid))
-            throw new Exception("User.Guid collision.");
 
         var hasher = new PasswordHasher<User>();
 
@@ -54,6 +55,14 @@ public class RegisterAccountCommand(
         user.PasswordHash = hash;
 
         database.Users.Add(user);
+
+        var ssn = new UserSsn()
+        {
+            Ssn12 = model.Ssn12,
+            User = user,
+        };
+
+        database.UserSsns.Add(ssn);
 
         var emailAddress = new UserEmail()
         {

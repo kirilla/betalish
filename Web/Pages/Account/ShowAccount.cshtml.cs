@@ -8,6 +8,7 @@ public class ShowAccountModel(
 
     public List<UserEmail> UserEmails { get; set; }
     public List<UserPhone> UserPhones { get; set; }
+    public List<UserSsn> UserSsns { get; set; }
 
     public bool CanAddUserEmail { get; set; }
     public bool CanRemoveUserEmail { get; set; }
@@ -33,6 +34,11 @@ public class ShowAccountModel(
                 .ToListAsync();
 
             UserPhones = await database.UserPhones
+                .AsNoTracking()
+                .Where(x => x.UserId == UserToken.UserId!.Value)
+                .ToListAsync();
+
+            UserSsns = await database.UserSsns
                 .AsNoTracking()
                 .Where(x => x.UserId == UserToken.UserId!.Value)
                 .ToListAsync();

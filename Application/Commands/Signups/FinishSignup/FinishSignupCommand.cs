@@ -36,21 +36,22 @@ public class FinishSignupCommand(
         // Create User
         var ssn10 = signup.Ssn12.ToSsn10();
 
-        if (await database.Users.AnyAsync(x => x.Ssn10 == ssn10))
+        if (await database.UserSsns.AnyAsync(x => x.Ssn10 == ssn10))
             throw new BlockedBySsnException();
 
         if (await database.UserEmails.AnyAsync(x => x.Address == signup.EmailAddress))
             throw new BlockedByEmailException();
 
+        var guid = Guid.NewGuid();
+
+        if (await database.Users.AnyAsync(x => x.Guid == guid))
+            throw new BlockedByGuidException();
+
         var user = new User()
         {
-            Guid = Guid.NewGuid(),
-            Ssn12 = signup.Ssn12,
+            Guid = guid,
             Name = signup.PersonName,
         };
-
-        if (await database.Users.AnyAsync(x => x.Guid == user.Guid))
-            throw new BlockedByGuidException();
 
         var hasher = new PasswordHasher<User>();
 
@@ -59,6 +60,14 @@ public class FinishSignupCommand(
         user.PasswordHash = hash;
 
         database.Users.Add(user);
+
+        var ssn = new UserSsn()
+        {
+            Ssn12 = signup.Ssn12,
+            User = user,
+        };
+
+        database.UserSsns.Add(ssn);
 
         var email = new UserEmail()
         {

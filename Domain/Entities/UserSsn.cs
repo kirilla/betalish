@@ -20,7 +20,6 @@ public class UserSsn :
     {
         Ssn12 = Ssn12.StripNonNumeric();
         Ssn10 = Ssn12.ToSsn10();
-
         SsnDate = Ssn12.ToDateOnly();
     }
 
