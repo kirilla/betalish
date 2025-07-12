@@ -4,7 +4,7 @@ public class ShowUserEventsForUserModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public User User { get; set; }
+    public new User User { get; set; }
 
     public List<UserEvent> UserEvents { get; set; }
 
