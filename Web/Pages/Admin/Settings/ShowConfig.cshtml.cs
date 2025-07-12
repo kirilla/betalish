@@ -30,20 +30,16 @@ public class ShowConfigModel(
         {
             AssertIsAdmin();
 
-            BadSignInJson = JsonSerializer.Serialize(
-                _badSignConfig, new JsonSerializerOptions { WriteIndented = true });
+            var options = new JsonSerializerOptions 
+            { 
+                WriteIndented = true 
+            };
 
-            FirewallJson = JsonSerializer.Serialize(
-                _firewallConfig, new JsonSerializerOptions { WriteIndented = true });
-
-            SignInJson = JsonSerializer.Serialize(
-                _signInConfig, new JsonSerializerOptions { WriteIndented = true });
-
-            SignUpJson = JsonSerializer.Serialize(
-                _signupConfig, new JsonSerializerOptions { WriteIndented = true });
-
-            SmtpJson = JsonSerializer.Serialize(
-                _smtpConfig, new JsonSerializerOptions { WriteIndented = true });
+            BadSignInJson = JsonSerializer.Serialize(_badSignConfig, options);
+            FirewallJson = JsonSerializer.Serialize(_firewallConfig, options);
+            SignInJson = JsonSerializer.Serialize(_signInConfig, options);
+            SignUpJson = JsonSerializer.Serialize(_signupConfig, options);
+            SmtpJson = JsonSerializer.Serialize(_smtpConfig, options);
 
             return Page();
         }
