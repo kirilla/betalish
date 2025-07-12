@@ -1,19 +1,17 @@
-﻿using Betalish.Common.Logic;
-
-namespace Betalish.Domain.Entities;
+﻿namespace Betalish.Domain.Entities;
 
 public class UserEmail : 
     ICreatedDateTime, IUpdatedDateTime, IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
-    public string Address { get; set; }
+    public required string Address { get; set; }
 
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
 
     public int UserId { get; set; }
-    public User User { get; set; }
+    public User User { get; set; } = null!;
 
     public void FormatOnSave()
     {

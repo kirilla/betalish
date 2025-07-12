@@ -12,7 +12,7 @@ public class ClientEvent : ICreatedDateTime, IFormatOnSave
     public DateTime? Created { get; set; }
 
     public int ClientId { get; set; }
-    public Client Client { get; set; }
+    public Client Client { get; set; } = null!;
 
     public int? UserId { get; set; }
     public User? User { get; set; }

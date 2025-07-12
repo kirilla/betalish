@@ -14,7 +14,7 @@ public class UserSsn :
     public DateTime? Updated { get; set; }
 
     public int UserId { get; set; }
-    public User User { get; set; }
+    public User User { get; set; } = null!;
 
     public void FormatOnSave()
     {

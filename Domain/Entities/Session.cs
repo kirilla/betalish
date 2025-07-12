@@ -15,7 +15,7 @@ public class Session :
     public DateTime? Updated { get; set; }
 
     public int UserId { get; set; }
-    public User User { get; set; }
+    public User User { get; set; } = null!;
 
     public int? ClientId { get; set; }
     public Client? Client { get; set; }

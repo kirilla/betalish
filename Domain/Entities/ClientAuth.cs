@@ -5,8 +5,8 @@ public class ClientAuth
     public int Id { get; set; }
 
     public int ClientId { get; set; }
-    public Client Client { get; set; }
+    public Client Client { get; set; } = null!;
 
     public int UserId { get; set; }
-    public User User { get; set; }
+    public User User { get; set; } = null!;
 }

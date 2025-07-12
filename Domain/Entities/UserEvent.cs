@@ -12,7 +12,7 @@ public class UserEvent : ICreatedDateTime, IFormatOnSave
     public DateTime? Created { get; set; }
 
     public int UserId { get; set; }
-    public User User { get; set; }
+    public User User { get; set; } = null!;
 
     public void FormatOnSave()
     {
