@@ -4,19 +4,19 @@ public class ClientEmailMessage : ICreatedDateTime
 {
     public int Id { get; set; }
 
-    public string ToName { get; set; }
-    public string ToAddress { get; set; }
+    public required string ToName { get; set; }
+    public required string ToAddress { get; set; }
 
-    public string FromName { get; set; }
-    public string FromAddress { get; set; }
+    public required string FromName { get; set; }
+    public required string FromAddress { get; set; }
 
     public string? ReplyToName { get; set; }
     public string? ReplyToAddress { get; set; }
 
-    public string Subject { get; set; }
+    public required string Subject { get; set; }
 
-    public string HtmlBody { get; set; }
-    public string TextBody { get; set; }
+    public required string HtmlBody { get; set; }
+    public required string TextBody { get; set; }
 
     public EmailStatus EmailStatus { get; set; }
 

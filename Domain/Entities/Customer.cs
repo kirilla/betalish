@@ -8,7 +8,7 @@ public class Customer : IFormatOnSave, IValidateOnSave
 
     public CustomerKind CustomerKind { get; set; }
 
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
     public string? Ssn10 { get; set; }
     public string? Orgnum { get; set; }

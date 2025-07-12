@@ -1,6 +1,4 @@
-﻿using Betalish.Common.Logic;
-
-namespace Betalish.Domain.Entities;
+﻿namespace Betalish.Domain.Entities;
 
 public class Signup :
     ICreatedDateTime, 
@@ -13,10 +11,10 @@ public class Signup :
     public Guid? Guid { get; set; }
 
     // Person
-    public string Ssn12 { get; set; }
-    public string PersonName { get; set; }
-    public string EmailAddress { get; set; }
-    public string PhoneNumber { get; set; }
+    public required string Ssn12 { get; set; }
+    public required string PersonName { get; set; }
+    public required string EmailAddress { get; set; }
+    public required string PhoneNumber { get; set; }
 
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
