@@ -9,7 +9,8 @@ public class NetworkRule :
 {
     public int Id { get; set; }
 
-    public string BaseAddress { get; set; }
+    public required string BaseAddress { get; set; }
+
     public int PrefixLength { get; set; }
 
     public bool Active { get; set; }
