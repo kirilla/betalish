@@ -24,5 +24,5 @@ public class ClientEmailMessage : ICreatedDateTime
     public DateTime? Sent { get; set; }
 
     public int ClientId { get; set; }
-    public Client Client { get; set; }
+    public Client Client { get; set; } = null!;
 }

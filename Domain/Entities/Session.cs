@@ -20,7 +20,7 @@ public class Session :
     public int? ClientId { get; set; }
     public Client? Client { get; set; }
 
-    public List<SessionActivity> SessionActivities { get; set; }
+    public List<SessionActivity> SessionActivities { get; set; } = [];
 
     public string DateSummary =>
         $"{Created.ToDateOnly().ToIso8601()} - " +

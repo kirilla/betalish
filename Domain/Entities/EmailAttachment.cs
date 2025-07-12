@@ -19,5 +19,5 @@ public class EmailAttachment
     public string ContentType { get; set; }
 
     public int EmailMessageId { get; set; }
-    public EmailMessage EmailMessage { get; set; }
+    public EmailMessage EmailMessage { get; set; } = null!;
 }

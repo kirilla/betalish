@@ -16,7 +16,7 @@ public class Customer : IFormatOnSave, IValidateOnSave
     public string? EmailAddress { get; set; }
 
     public int ClientId { get; set; }
-    public Client Client { get; set; }
+    public Client Client { get; set; } = null!;
 
     public void FormatOnSave()
     {

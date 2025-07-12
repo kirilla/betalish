@@ -5,7 +5,7 @@ public class UserPhone :
 {
     public int Id { get; set; }
 
-    public string Number { get; set; }
+    public required string Number { get; set; }
 
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }

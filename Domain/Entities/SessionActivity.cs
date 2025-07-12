@@ -7,5 +7,5 @@ public class SessionActivity : ICreatedDateTime
     public DateTime? Created { get; set; }
 
     public int SessionId { get; set; }
-    public Session Session { get; set; }
+    public Session Session { get; set; } = null!;
 }

@@ -23,6 +23,6 @@ public class EmailMessage : ICreatedDateTime
     public DateTime? Created { get; set; }
     public DateTime? Sent { get; set; }
 
-    public List<EmailAttachment> EmailAttachments { get; set; }
-    public List<EmailImage> EmailImages { get; set; }
+    public List<EmailAttachment> EmailAttachments { get; set; } = [];
+    public List<EmailImage> EmailImages { get; set; } = [];
 }
