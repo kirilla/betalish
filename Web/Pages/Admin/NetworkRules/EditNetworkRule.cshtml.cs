@@ -81,7 +81,7 @@ public class EditNetworkRuleModel(
 
             return Page();
         }
-        catch (FormatException ex)
+        catch (FormatException)
         {
             ModelState.AddModelError(
                 nameof(CommandModel.PrefixLength),

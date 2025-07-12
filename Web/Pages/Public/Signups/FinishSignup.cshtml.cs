@@ -59,7 +59,7 @@ public class FinishSignupModel(
         {
             return Redirect("/help/please-log-out");
         }
-        catch (Exception ex)
+        catch
         {
             return Redirect("/help/notpermitted");
         }

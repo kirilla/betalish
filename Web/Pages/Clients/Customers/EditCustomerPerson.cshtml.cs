@@ -83,7 +83,7 @@ public class EditCustomerPersonModel(
 
             return Page();
         }
-        catch (Exception ex)
+        catch
         {
             return Redirect("/help/notpermitted");
         }

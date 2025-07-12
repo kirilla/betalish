@@ -117,7 +117,7 @@ public class SignupForServiceModel(
         {
             return Redirect("/help/rate-limited");
         }
-        catch (Exception ex)
+        catch
         {
             return Redirect("/help/notpermitted");
         }
