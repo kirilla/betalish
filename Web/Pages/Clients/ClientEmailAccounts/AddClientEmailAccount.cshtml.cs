@@ -8,6 +8,7 @@ public class AddClientEmailAccountModel(
 {
     [BindProperty]
     public AddClientEmailAccountCommandModel CommandModel { get; set; }
+        = new AddClientEmailAccountCommandModel();
 
     public IActionResult OnGet()
     {

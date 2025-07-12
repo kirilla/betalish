@@ -8,6 +8,7 @@ public class RemoveBadSignInsModel(
 {
     [BindProperty]
     public RemoveBadSignInsCommandModel CommandModel { get; set; }
+        = new RemoveBadSignInsCommandModel();
 
     public async Task<IActionResult> OnGetAsync()
     {

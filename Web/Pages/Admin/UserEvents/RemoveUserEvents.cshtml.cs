@@ -8,6 +8,7 @@ public class RemoveUserEventsModel(
 {
     [BindProperty]
     public RemoveUserEventsCommandModel CommandModel { get; set; }
+        = new RemoveUserEventsCommandModel();
 
     public IActionResult OnGet()
     {

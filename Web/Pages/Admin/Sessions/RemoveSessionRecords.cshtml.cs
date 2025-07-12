@@ -8,6 +8,7 @@ public class RemoveSessionRecordsModel(
 {
     [BindProperty]
     public RemoveSessionRecordsCommandModel CommandModel { get; set; }
+        = new RemoveSessionRecordsCommandModel();
 
     public IActionResult OnGet()
     {

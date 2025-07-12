@@ -8,6 +8,7 @@ public class AddCustomerPersonModel(
 {
     [BindProperty]
     public AddCustomerPersonCommandModel CommandModel { get; set; }
+        = new AddCustomerPersonCommandModel();
 
     public IActionResult OnGet()
     {

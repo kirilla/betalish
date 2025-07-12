@@ -8,6 +8,7 @@ public class TestLogItemDedupModel(
 {
     [BindProperty]
     public TestLogItemDedupCommandModel CommandModel { get; set; }
+        = new TestLogItemDedupCommandModel();
 
     public IActionResult OnGet()
     {

@@ -8,6 +8,7 @@ public class TerminateSessionsModel(
 {
     [BindProperty]
     public TerminateSessionsCommandModel CommandModel { get; set; }
+        = new TerminateSessionsCommandModel();
 
     public IActionResult OnGet()
     {

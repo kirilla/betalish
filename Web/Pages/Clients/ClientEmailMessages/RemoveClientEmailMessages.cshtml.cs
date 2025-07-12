@@ -8,6 +8,7 @@ public class RemoveClientEmailMessagesModel(
 {
     [BindProperty]
     public RemoveClientEmailMessagesCommandModel CommandModel { get; set; }
+        = new RemoveClientEmailMessagesCommandModel();
 
     public IActionResult OnGet()
     {
