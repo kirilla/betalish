@@ -25,7 +25,7 @@ public class SelectClientModel(
             var auth = await database.ClientAuths
                 .Where(x =>
                     x.ClientId == id &&
-                    x.UserId == userToken.UserId!.Value)
+                    x.UserId == UserToken.UserId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotPermittedException();
 
@@ -67,7 +67,7 @@ public class SelectClientModel(
             var auth = await database.ClientAuths
                 .Where(x =>
                     x.ClientId == CommandModel.Id &&
-                    x.UserId == userToken.UserId!.Value)
+                    x.UserId == UserToken.UserId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotPermittedException();
 

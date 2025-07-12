@@ -16,7 +16,7 @@ public class RemoveBadSignInsModel(
         {
             AssertIsAdmin();
 
-            if (!userToken.IsAdmin)
+            if (!UserToken.IsAdmin)
                 throw new NotPermittedException();
 
             CommandModel = new RemoveBadSignInsCommandModel();

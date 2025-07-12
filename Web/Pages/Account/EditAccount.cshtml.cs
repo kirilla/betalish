@@ -14,7 +14,7 @@ public class EditAccountModel(
     {
         try
         {
-            if (!command.IsPermitted(userToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             var user = await database.Users
@@ -43,7 +43,7 @@ public class EditAccountModel(
     {
         try
         {
-            if (!command.IsPermitted(userToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             if (!ModelState.IsValid)

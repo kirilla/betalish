@@ -21,7 +21,7 @@ public class RegisterAccountModel(
             if (!_config.AllowRegisterAccount)
                 throw new FeatureTurnedOffException();
 
-            if (!command.IsPermitted(userToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             CommandModel = new RegisterAccountCommandModel();
@@ -45,7 +45,7 @@ public class RegisterAccountModel(
             if (!_config.AllowRegisterAccount)
                 throw new FeatureTurnedOffException();
 
-            if (!command.IsPermitted(userToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
             
             if (!ModelState.IsValid)
