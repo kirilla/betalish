@@ -10,8 +10,8 @@ public class SignInBySsnCommandModel
     [StringLength(
         MaxLengths.Common.Ssn.Ssn12Permissive,
         ErrorMessage = "12 siffror")]
-    public string Ssn12 { get; set; }
+    public string Ssn12 { get; set; } = string.Empty;
 
     [StringLength(MaxLengths.Common.Password.Clear)]
-    public string Password { get; set; }
+    public string Password { get; set; } = string.Empty;
 }

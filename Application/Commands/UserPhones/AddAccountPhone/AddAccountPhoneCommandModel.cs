@@ -9,5 +9,5 @@ public class AddAccountPhoneCommandModel
     [StringLength(
         MaxLengths.Common.Phone.Number,
         ErrorMessage = "Skriv kortare.")]
-    public string Number { get; set; }
+    public string Number { get; set; } = string.Empty;
 }

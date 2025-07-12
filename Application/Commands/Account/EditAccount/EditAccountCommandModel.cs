@@ -8,5 +8,5 @@ public class EditAccountCommandModel
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Skriv ditt namn.")]
     [StringLength(MaxLengths.Common.Person.FullName)]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 }

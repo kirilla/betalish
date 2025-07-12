@@ -9,5 +9,5 @@ public class AddAccountEmailCommandModel
     [StringLength(
         MaxLengths.Common.Email.Address,
         ErrorMessage = "Skriv kortare.")]
-    public string Address { get; set; }
+    public string Address { get; set; } = string.Empty;
 }

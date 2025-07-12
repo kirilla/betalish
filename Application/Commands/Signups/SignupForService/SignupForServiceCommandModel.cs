@@ -1,5 +1,4 @@
-﻿using Betalish.Common.Validation;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Betalish.Application.Commands.Signups.SignupForService;
 
@@ -14,7 +13,7 @@ public class SignupForServiceCommandModel
     [StringLength(
         MaxLengths.Common.Ssn.Ssn12Permissive,
         ErrorMessage = "Skriv kortare.")]
-    public string Ssn12 { get; set; }
+    public string Ssn12 { get; set; } = string.Empty;
 
     [RegularExpression(
         Pattern.Common.SomeContent,
@@ -24,7 +23,7 @@ public class SignupForServiceCommandModel
     [StringLength(
         MaxLengths.Common.Person.FullName,
         ErrorMessage = "Skriv kortare.")]
-    public string PersonName { get; set; }
+    public string PersonName { get; set; } = string.Empty;
 
     [RegularExpression(
         Pattern.Common.Email.Address,
@@ -34,7 +33,7 @@ public class SignupForServiceCommandModel
     [StringLength(
         MaxLengths.Common.Email.Address,
         ErrorMessage = "Skriv kortare.")]
-    public string EmailAddress { get; set; }
+    public string EmailAddress { get; set; } = string.Empty;
 
     [RegularExpression(
         Pattern.Common.Phone.Number,
@@ -44,5 +43,5 @@ public class SignupForServiceCommandModel
     [StringLength(
         MaxLengths.Common.Phone.Number,
         ErrorMessage = "Skriv kortare.")]
-    public string PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; } = string.Empty;
 }

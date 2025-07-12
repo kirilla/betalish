@@ -8,8 +8,8 @@ public class SignInByEmailCommandModel
         Pattern.Common.Email.Address,
         ErrorMessage = "Skriv din epostadress.")]
     [StringLength(MaxLengths.Common.Email.Address)]
-    public string EmailAddress { get; set; }
+    public string EmailAddress { get; set; } = string.Empty;
 
     [StringLength(MaxLengths.Common.Password.Clear)]
-    public string Password { get; set; }
+    public string Password { get; set; } = string.Empty;
 }

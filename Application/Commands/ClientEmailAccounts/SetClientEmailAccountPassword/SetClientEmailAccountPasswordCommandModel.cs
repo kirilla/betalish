@@ -11,5 +11,5 @@ public class SetClientEmailAccountPasswordCommandModel
     [StringLength(
         MaxLengths.Domain.ClientEmailAccount.Password,
         ErrorMessage = "Skriv kortare.")]
-    public string Password { get; set; }
+    public string Password { get; set; } = string.Empty;
 }

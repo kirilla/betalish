@@ -9,14 +9,14 @@ public class AddClientEmailAccountCommandModel
     [StringLength(
         MaxLengths.Domain.ClientEmailAccount.FromName,
         ErrorMessage = "Skriv kortare.")]
-    public string FromName { get; set; }
+    public string FromName { get; set; } = string.Empty;
 
     [RegularExpression(Pattern.Common.Email.Address)]
     [Required(ErrorMessage = "Ange epostadress.")]
     [StringLength(
         MaxLengths.Domain.ClientEmailAccount.FromAddress,
         ErrorMessage = "Skriv kortare.")]
-    public string FromAddress { get; set; }
+    public string FromAddress { get; set; } = string.Empty;
 
     [RegularExpression(Pattern.Common.SomeContent)]
     [StringLength(
@@ -35,14 +35,14 @@ public class AddClientEmailAccountCommandModel
     [StringLength(
         MaxLengths.Domain.ClientEmailAccount.Password,
         ErrorMessage = "Skriv kortare.")]
-    public string Password { get; set; }
+    public string Password { get; set; } = string.Empty;
 
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange SMTP-server.")]
     [StringLength(
         MaxLengths.Domain.ClientEmailAccount.SmtpHost,
         ErrorMessage = "Skriv kortare.")]
-    public string SmtpHost { get; set; }
+    public string SmtpHost { get; set; } = string.Empty;
 
     [Required(ErrorMessage = "Ange SMTP-port.")]
     [Range(Ranges.Smtp.Port.Min, Ranges.Smtp.Port.Max)]

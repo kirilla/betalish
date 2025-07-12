@@ -1,4 +1,4 @@
-using Betalish.Application.Commands.SessionRecords.RemoveSessionRecords;
+using Betalish.Application.Commands.Sessions.RemoveSessionRecords;
 
 namespace Betalish.Web.Pages.Admin.Sessions;
 

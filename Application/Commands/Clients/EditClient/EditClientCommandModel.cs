@@ -11,12 +11,12 @@ public class EditClientCommandModel
     [StringLength(
         MaxLengths.Domain.Client.Name,
         ErrorMessage = "Skriv kortare.")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [RegularExpression(Pattern.Common.Email.Address)]
     [Required(ErrorMessage = "Ange epostadress.")]
     [StringLength(
         MaxLengths.Domain.Client.Address,
         ErrorMessage = "Skriv kortare.")]
-    public string Address { get; set; }
+    public string Address { get; set; } = string.Empty;
 }

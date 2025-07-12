@@ -1,4 +1,4 @@
-﻿namespace Betalish.Application.Commands.SessionRecords.RemoveSessionRecords;
+﻿namespace Betalish.Application.Commands.Sessions.RemoveSessionRecords;
 
 public class RemoveSessionRecordsCommandModel
 {

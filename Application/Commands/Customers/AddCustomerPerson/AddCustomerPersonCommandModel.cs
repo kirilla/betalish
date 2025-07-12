@@ -17,7 +17,7 @@ public class AddCustomerPersonCommandModel
     [StringLength(
         MaxLengths.Domain.Customer.Name,
         ErrorMessage = "Skriv kortare.")]
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 
     [RegularExpression(Pattern.Common.Email.Address)]
     [StringLength(

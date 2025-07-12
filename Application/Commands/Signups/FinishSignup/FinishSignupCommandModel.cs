@@ -7,5 +7,5 @@ public class FinishSignupCommandModel
     public Guid? Guid { get; set; }
 
     [StringLength(MaxLengths.Common.Password.Clear)]
-    public string Password { get; set; }
+    public string Password { get; set; } = string.Empty;
 }

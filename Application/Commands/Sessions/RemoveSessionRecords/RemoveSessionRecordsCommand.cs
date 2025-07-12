@@ -1,4 +1,4 @@
-﻿namespace Betalish.Application.Commands.SessionRecords.RemoveSessionRecords;
+﻿namespace Betalish.Application.Commands.Sessions.RemoveSessionRecords;
 
 public class RemoveSessionRecordsCommand(IDatabaseService database) : IRemoveSessionRecordsCommand
 {
@@ -8,7 +8,7 @@ public class RemoveSessionRecordsCommand(IDatabaseService database) : IRemoveSes
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
-        var query = await database.SessionRecords.ExecuteDeleteAsync();
+        await database.SessionRecords.ExecuteDeleteAsync();
     }
 
     public bool IsPermitted(IUserToken userToken)
