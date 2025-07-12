@@ -6,7 +6,7 @@ public class EditClientEmailAccountCommand(IDatabaseService database) : IEditCli
         IUserToken userToken, 
         EditClientEmailAccountCommandModel model)
     {
-        if (! await IsPermitted(userToken))
+        if (! IsPermitted(userToken))
             throw new NotPermittedException();
 
         model.TrimStringProperties();
@@ -29,10 +29,8 @@ public class EditClientEmailAccountCommand(IDatabaseService database) : IEditCli
         await database.SaveAsync(userToken);
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken)
+    public bool IsPermitted(IUserToken userToken)
     {
-        return await database.ClientAuths.AnyAsync(x =>
-            x.ClientId == userToken.ClientId!.Value &&
-            x.UserId == userToken.UserId!.Value);
+        return userToken.IsClient;
     }
 }

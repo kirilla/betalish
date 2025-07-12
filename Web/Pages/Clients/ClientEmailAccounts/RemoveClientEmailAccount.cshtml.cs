@@ -16,7 +16,7 @@ public class RemoveClientEmailAccountModel(
     {
         try
         {
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             ClientEmailAccount = await database.ClientEmailAccounts
@@ -47,7 +47,7 @@ public class RemoveClientEmailAccountModel(
     {
         try
         {
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             ClientEmailAccount = await database.ClientEmailAccounts

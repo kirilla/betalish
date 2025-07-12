@@ -16,7 +16,7 @@ public class RemoveClientEmailMessagesModel(
         {
             await AssertClientAuthorization(database);
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             CommandModel = new RemoveClientEmailMessagesCommandModel();
@@ -39,7 +39,7 @@ public class RemoveClientEmailMessagesModel(
         {
             await AssertClientAuthorization(database);
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             if (!ModelState.IsValid)

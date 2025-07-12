@@ -5,7 +5,7 @@ public class AddCustomerOrganizationCommand(IDatabaseService database) : IAddCus
     public async Task<int> Execute(
         IUserToken userToken, AddCustomerOrganizationCommandModel model)
     {
-        if (!await IsPermitted(userToken))
+        if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
         model.TrimStringProperties();
@@ -46,10 +46,8 @@ public class AddCustomerOrganizationCommand(IDatabaseService database) : IAddCus
         return customer.Id;
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken)
+    public bool IsPermitted(IUserToken userToken)
     {
-        return await database.ClientAuths.AnyAsync(x =>
-            x.ClientId == userToken.ClientId!.Value &&
-            x.UserId == userToken.UserId!.Value);
+        return userToken.IsClient;
     }
 }

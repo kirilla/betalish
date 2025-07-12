@@ -14,7 +14,7 @@ public class AddClientEmailAccountModel(
     {
         try
         {
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             CommandModel = new AddClientEmailAccountCommandModel();
@@ -35,7 +35,7 @@ public class AddClientEmailAccountModel(
     {
         try
         {
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             if (!ModelState.IsValid)

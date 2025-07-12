@@ -4,5 +4,5 @@ public interface IAddCustomerPersonCommand
 {
     Task<int> Execute(IUserToken userToken, AddCustomerPersonCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

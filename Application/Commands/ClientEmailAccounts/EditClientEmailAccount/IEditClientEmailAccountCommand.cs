@@ -4,5 +4,5 @@ public interface IEditClientEmailAccountCommand
 {
     Task Execute(IUserToken userToken, EditClientEmailAccountCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

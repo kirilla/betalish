@@ -4,5 +4,5 @@ public interface IRemoveClientEmailMessagesCommand
 {
     Task Execute(IUserToken userToken, RemoveClientEmailMessagesCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

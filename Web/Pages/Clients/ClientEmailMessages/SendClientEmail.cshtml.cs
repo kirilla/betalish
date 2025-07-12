@@ -18,7 +18,7 @@ public class SendClientEmailModel(
         {
             await AssertClientAuthorization(database);
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             ClientEmailMessage = await database.ClientEmailMessages
@@ -51,7 +51,7 @@ public class SendClientEmailModel(
         {
             await AssertClientAuthorization(database);
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             ClientEmailMessage = await database.ClientEmailMessages

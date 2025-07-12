@@ -6,7 +6,7 @@ public class RemoveClientEmailMessagesCommand(IDatabaseService database) : IRemo
         IUserToken userToken, 
         RemoveClientEmailMessagesCommandModel model)
     {
-        if (!await IsPermitted(userToken))
+        if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
         var query = await database.ClientEmailMessages
@@ -16,10 +16,8 @@ public class RemoveClientEmailMessagesCommand(IDatabaseService database) : IRemo
             .ExecuteDeleteAsync();
     }
 
-    public async Task<bool> IsPermitted(IUserToken userToken)
+    public bool IsPermitted(IUserToken userToken)
     {
-        return await database.ClientAuths.AnyAsync(x =>
-            x.ClientId == userToken.ClientId!.Value &&
-            x.UserId == userToken.UserId!.Value);
+        return userToken.IsClient;
     }
 }

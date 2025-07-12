@@ -14,7 +14,7 @@ public class AddCustomerOrganizationModel(
     {
         try
         {
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             CommandModel = new AddCustomerOrganizationCommandModel();
@@ -31,7 +31,7 @@ public class AddCustomerOrganizationModel(
     {
         try
         {
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             if (!ModelState.IsValid)

@@ -2,7 +2,7 @@
 
 namespace Betalish.Application.Commands.Tests.TestLogItemDedup;
 
-public class TestLogItemDedupCommand(IDatabaseService database) : ITestLogItemDedupCommand
+public class TestLogItemDedupCommand() : ITestLogItemDedupCommand
 {
     public async Task Execute(
         IUserToken userToken, TestLogItemDedupCommandModel model)
@@ -46,10 +46,5 @@ public class TestLogItemDedupCommand(IDatabaseService database) : ITestLogItemDe
     public bool IsPermitted(IUserToken userToken)
     {
         return userToken.IsAdmin;
-    }
-
-    Task<bool> ITestLogItemDedupCommand.IsPermitted(IUserToken userToken)
-    {
-        throw new NotImplementedException();
     }
 }

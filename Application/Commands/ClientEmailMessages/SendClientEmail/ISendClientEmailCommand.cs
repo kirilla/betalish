@@ -4,5 +4,5 @@ public interface ISendClientEmailCommand
 {
     Task Execute(IUserToken userToken, SendClientEmailCommandModel model);
 
-    Task<bool> IsPermitted(IUserToken userToken);
+    bool IsPermitted(IUserToken userToken);
 }

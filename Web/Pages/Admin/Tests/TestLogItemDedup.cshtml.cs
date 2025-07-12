@@ -16,7 +16,7 @@ public class TestLogItemDedupModel(
         {
             AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             CommandModel = new TestLogItemDedupCommandModel();
@@ -39,7 +39,7 @@ public class TestLogItemDedupModel(
         {
             AssertIsAdmin();
 
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             if (!ModelState.IsValid)

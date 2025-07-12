@@ -16,7 +16,7 @@ public class EditCustomerPersonModel(
     {
         try
         {
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Customer = await database.Customers
@@ -50,7 +50,7 @@ public class EditCustomerPersonModel(
     {
         try
         {
-            if (!await command.IsPermitted(UserToken))
+            if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
             Customer = await database.Customers
