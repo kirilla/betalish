@@ -16,14 +16,14 @@ public class SendTestEmailModel(
         {
             AssertIsAdmin();
 
-            CommandModel = new SendTestEmailCommandModel();
+            CommandModel = new SendTestEmailCommandModel
+            {
+                FromName = "Betalish",
+                FromAddress = "hej@betalish.se",
 
-            CommandModel.FromName = "Betalish";
-            CommandModel.FromAddress = "hej@betalish.se";
+                Subject = "Testmeddelande",
 
-            CommandModel.Subject = "Testmeddelande";
-
-            CommandModel.HtmlBody = """
+                HtmlBody = """
                 <html>
                 <head>
                 <title>
@@ -36,11 +36,12 @@ public class SendTestEmailModel(
                 <h1>
                 </body>
                 </html>
-                """;
+                """,
 
-            CommandModel.TextBody = """
+                TextBody = """
                 Ett testmeddelande från Betalish.se
-                """;
+                """
+            };
 
             return Page();
         }
