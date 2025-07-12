@@ -10,7 +10,7 @@ public class RemoveBadSignInsModel(
     public RemoveBadSignInsCommandModel CommandModel { get; set; }
         = new RemoveBadSignInsCommandModel();
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {
