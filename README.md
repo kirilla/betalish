@@ -18,3 +18,7 @@ Now I want to build something dead simple.
 Meaning unsophisticated. Using the simplest of web tech.
 
 Because why not.
+
+### Not18n
+
+And it's all in Swedish. Enjoy!
