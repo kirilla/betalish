@@ -20,7 +20,7 @@ public class NetworkRuleCacheService(
         var list = new List<NetworkRule>();
 
         if (cache.TryGetValue(cacheKey, out list))
-            return list ?? new List<NetworkRule>();
+            return list ?? [];
 
         list = await database.NetworkRules
             .AsNoTracking()

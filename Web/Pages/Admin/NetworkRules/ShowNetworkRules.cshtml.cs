@@ -7,7 +7,7 @@ public class ShowNetworkRulesModel(
 {
     public readonly FirewallConfiguration IpFilterConfiguration = firewallOptions.Value;
 
-    public List<NetworkRule> NetworkRules { get; set; }
+    public List<NetworkRule> NetworkRules { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {

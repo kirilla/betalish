@@ -22,7 +22,7 @@ public class NetworkRule :
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
 
-    private Lazy<IPNetwork> _ipNetwork;
+    private readonly Lazy<IPNetwork> _ipNetwork;
 
     public IPNetwork IPNetwork => _ipNetwork.Value;
 
