@@ -46,6 +46,7 @@ public class RegisterAccountCommand(
         {
             Name = model.Name,
             Guid = guid,
+            PasswordHash = string.Empty,
         };
 
         var hasher = new PasswordHasher<User>();

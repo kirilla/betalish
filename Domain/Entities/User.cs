@@ -11,6 +11,8 @@ public class User :
     public string Name { get; set; }
 
     public string PasswordHash { get; set; }
+    public required string Name { get; set; }
+    public required string PasswordHash { get; set; }
 
     public Guid? Guid { get; set; }
 
@@ -35,5 +37,7 @@ public class User :
 
     public void ValidateOnSave()
     {
+        if (string.IsNullOrWhiteSpace(PasswordHash))
+            throw new MissingPasswordHashException();
     }
 }
