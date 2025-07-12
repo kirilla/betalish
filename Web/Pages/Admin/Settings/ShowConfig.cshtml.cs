@@ -30,9 +30,9 @@ public class ShowConfigModel(
         {
             AssertIsAdmin();
 
-            var options = new JsonSerializerOptions 
-            { 
-                WriteIndented = true 
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
             };
 
             BadSignInJson = JsonSerializer.Serialize(_badSignConfig, options);
