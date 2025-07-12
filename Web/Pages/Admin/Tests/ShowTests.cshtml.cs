@@ -4,7 +4,7 @@ public class ShowTestsModel(
     IDatabaseService database,
     IUserToken userToken) : AdminPageModel(userToken)
 {
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

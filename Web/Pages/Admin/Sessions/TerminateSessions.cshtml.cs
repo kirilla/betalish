@@ -10,7 +10,7 @@ public class TerminateSessionsModel(
     [BindProperty]
     public TerminateSessionsCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

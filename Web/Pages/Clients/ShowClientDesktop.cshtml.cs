@@ -4,7 +4,7 @@ public class ShowClientDesktopModel(
     IUserToken userToken,
     IDatabaseService database) : ClientPageModel(userToken)
 {
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

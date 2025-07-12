@@ -10,7 +10,7 @@ public class RemoveUserEventsModel(
     [BindProperty]
     public RemoveUserEventsCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

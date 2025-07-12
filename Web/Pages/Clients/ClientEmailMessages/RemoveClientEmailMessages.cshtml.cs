@@ -10,7 +10,7 @@ public class RemoveClientEmailMessagesModel(
     [BindProperty]
     public RemoveClientEmailMessagesCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

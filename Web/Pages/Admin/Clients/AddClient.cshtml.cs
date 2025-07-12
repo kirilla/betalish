@@ -10,7 +10,7 @@ public class AddClientModel(
     [BindProperty]
     public AddClientCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

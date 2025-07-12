@@ -11,7 +11,7 @@ public class AddNetworkRuleModel(
     [BindProperty]
     public AddNetworkRuleCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

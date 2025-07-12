@@ -10,7 +10,7 @@ public class SendTestEmailModel(
     [BindProperty]
     public SendTestEmailCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

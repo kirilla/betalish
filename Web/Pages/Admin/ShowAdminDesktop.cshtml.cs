@@ -4,7 +4,7 @@ public class ShowAdminDesktopModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

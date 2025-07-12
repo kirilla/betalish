@@ -10,7 +10,7 @@ public class RemoveSessionRecordsModel(
     [BindProperty]
     public RemoveSessionRecordsCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

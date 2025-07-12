@@ -24,7 +24,7 @@ public class ShowConfigModel(
     public string SignUpJson { get; set; }
     public string SmtpJson { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

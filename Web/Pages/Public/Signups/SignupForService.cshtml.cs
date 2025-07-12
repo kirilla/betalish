@@ -21,7 +21,7 @@ public class SignupForServiceModel(
     [BindProperty]
     public SignupForServiceCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

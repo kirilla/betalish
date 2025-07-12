@@ -10,7 +10,7 @@ public class AddClientEmailAccountModel(
     [BindProperty]
     public AddClientEmailAccountCommandModel CommandModel { get; set; }
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {
