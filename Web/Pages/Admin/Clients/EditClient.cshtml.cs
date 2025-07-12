@@ -10,7 +10,7 @@ public class EditClientModel(
     public Client Client { get; set; }
 
     [BindProperty]
-    public EditClientCommandModel CommandModel { get; set; }
+    public EditClientCommandModel CommandModel { get; set; } = new EditClientCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

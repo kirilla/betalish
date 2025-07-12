@@ -19,7 +19,8 @@ public class SignupForServiceModel(
     private readonly SignUpConfiguration _config = options.Value;
 
     [BindProperty]
-    public SignupForServiceCommandModel CommandModel { get; set; }
+    public SignupForServiceCommandModel CommandModel { get; set; } 
+        = new SignupForServiceCommandModel();
 
     public IActionResult OnGet()
     {

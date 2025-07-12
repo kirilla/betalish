@@ -9,6 +9,7 @@ public class AddAccountPhoneModel(
 {
     [BindProperty]
     public AddAccountPhoneCommandModel CommandModel { get; set; }
+        = new AddAccountPhoneCommandModel();
 
     public IActionResult OnGet()
     {

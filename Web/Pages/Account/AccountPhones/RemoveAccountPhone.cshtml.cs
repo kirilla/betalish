@@ -11,6 +11,7 @@ public class RemoveAccountPhoneModel(
 
     [BindProperty]
     public RemoveAccountPhoneCommandModel CommandModel { get; set; }
+        = new RemoveAccountPhoneCommandModel();
 
     public async Task<IActionResult> OnGetAsync()
     {

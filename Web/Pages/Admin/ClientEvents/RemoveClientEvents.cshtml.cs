@@ -8,7 +8,7 @@ public class RemoveClientEventsModel(
     IRemoveClientEventsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public RemoveClientEventsCommandModel CommandModel { get; set; }
+    public RemoveClientEventsCommandModel CommandModel { get; set; } = new RemoveClientEventsCommandModel();
 
     public IActionResult OnGet()
     {

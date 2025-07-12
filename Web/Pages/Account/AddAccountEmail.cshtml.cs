@@ -8,7 +8,8 @@ public class AddAccountEmailModel(
     IAddAccountEmailCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]
-    public AddAccountEmailCommandModel CommandModel { get; set; }
+    public AddAccountEmailCommandModel CommandModel { get; set; } 
+        = new AddAccountEmailCommandModel();
 
     public IActionResult OnGet()
     {

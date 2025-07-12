@@ -10,7 +10,7 @@ public class EndSessionModel(
     public Session Session { get; set; }
 
     [BindProperty]
-    public EndSessionCommandModel CommandModel { get; set; }
+    public EndSessionCommandModel CommandModel { get; set; } = new EndSessionCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

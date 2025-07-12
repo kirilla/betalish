@@ -8,7 +8,7 @@ public class EditAccountModel(
     IEditAccountCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]
-    public EditAccountCommandModel CommandModel { get; set; }
+    public EditAccountCommandModel CommandModel { get; set; } = new EditAccountCommandModel();
 
     public async Task<IActionResult> OnGetAsync()
     {

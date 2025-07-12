@@ -9,7 +9,8 @@ public class AddNetworkRuleModel(
     IAddNetworkRuleCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public AddNetworkRuleCommandModel CommandModel { get; set; }
+    public AddNetworkRuleCommandModel CommandModel { get; set; } 
+        = new AddNetworkRuleCommandModel();
 
     public IActionResult OnGet()
     {
