@@ -28,7 +28,9 @@ public interface IDatabaseService
     DbSet<UserPhone> UserPhones { get; set; }
     DbSet<UserSsn> UserSsns { get; set; }
 
-    Task SaveAsync(IUserToken userToken);
+    Task SaveAsync(
+        IUserToken userToken,
+        CancellationToken cancellation = default);
 
     ChangeTracker ChangeTracker { get; }
 }

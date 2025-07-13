@@ -62,7 +62,9 @@ public class DatabaseService(
         new UserSsnConfiguration().Configure(builder.Entity<UserSsn>());
     }
 
-    public async Task SaveAsync(IUserToken userToken)
+    public async Task SaveAsync(
+        IUserToken userToken,
+        CancellationToken cancellation = default)
     {
         if (userToken.NoSave)
             throw new UserNoSaveException();
@@ -78,6 +80,6 @@ public class DatabaseService(
         formatter.Format(entries);
         validator.Validate(entries);
 
-        await base.SaveChangesAsync();
+        await base.SaveChangesAsync(cancellation);
     }
 }
