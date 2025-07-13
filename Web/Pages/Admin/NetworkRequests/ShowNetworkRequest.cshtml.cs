@@ -4,7 +4,7 @@ public class ShowNetworkRequestModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public NetworkRequest NetworkRequest { get; set; }
+    public NetworkRequest NetworkRequest { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

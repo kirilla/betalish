@@ -4,7 +4,7 @@ public class ShowSignupsModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<Signup> Signups { get; set; }
+    public List<Signup> Signups { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {

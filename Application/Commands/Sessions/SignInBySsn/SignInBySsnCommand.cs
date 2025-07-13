@@ -26,7 +26,7 @@ public class SignInBySsnCommand(
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        model.Ssn12 = model.Ssn12?.StripNonNumeric();
+        model.Ssn12 = model.Ssn12.StripNonNumeric();
 
         if (string.IsNullOrWhiteSpace(model.Ssn12))
             throw new NotPermittedException();

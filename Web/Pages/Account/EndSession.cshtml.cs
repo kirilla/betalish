@@ -7,10 +7,11 @@ public class EndSessionModel(
     IDatabaseService database,
     IEndSessionCommand command) : UserTokenPageModel(userToken)
 {
-    public Session Session { get; set; }
+    public Session Session { get; set; } = null!;
 
     [BindProperty]
-    public EndSessionCommandModel CommandModel { get; set; } = new EndSessionCommandModel();
+    public EndSessionCommandModel CommandModel { get; set; } 
+        = new EndSessionCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

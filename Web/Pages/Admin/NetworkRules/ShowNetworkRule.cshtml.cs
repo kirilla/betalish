@@ -4,7 +4,7 @@ public class ShowNetworkRuleModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public NetworkRule NetworkRule { get; set; }
+    public NetworkRule NetworkRule { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

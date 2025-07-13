@@ -15,7 +15,7 @@ public class AddNetworkRuleCommand(
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        IPAddress.Parse(model.BaseAddress);
+        IPAddress.Parse(model.BaseAddress!);
 
         var network = $"{model.BaseAddress}/{model.PrefixLength}";
 
@@ -27,7 +27,7 @@ public class AddNetworkRuleCommand(
 
         var rule = new NetworkRule()
         {
-            BaseAddress = model.BaseAddress,
+            BaseAddress = model.BaseAddress!,
             PrefixLength = model.PrefixLength!.Value,
             Active = model.Active,
             Block = model.Block,

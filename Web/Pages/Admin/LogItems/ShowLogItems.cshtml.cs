@@ -4,7 +4,7 @@ public class ShowLogItemsModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<LogItem> LogItems { get; set; }
+    public List<LogItem> LogItems { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {

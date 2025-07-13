@@ -4,7 +4,7 @@ public class ShowNetworkRequestUrlsModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<string> URLs { get; set; }
+    public List<string> URLs { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {

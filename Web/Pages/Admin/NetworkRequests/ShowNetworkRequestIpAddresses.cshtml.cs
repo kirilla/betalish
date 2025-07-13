@@ -4,7 +4,7 @@ public class ShowNetworkRequestIpAddressesModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<string> IpAddresses { get; set; }
+    public List<string> IpAddresses { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {

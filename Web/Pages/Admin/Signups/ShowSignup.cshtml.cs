@@ -4,7 +4,7 @@ public class SignupModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public Signup Signup { get; set; }
+    public Signup Signup { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

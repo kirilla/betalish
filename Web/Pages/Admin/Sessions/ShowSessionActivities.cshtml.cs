@@ -1,12 +1,10 @@
-using Betalish.Persistence.Migrations;
-
 namespace Betalish.Web.Pages.Admin.Sessions;
 
 public class ShowSessionActivitiesModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<SessionActivity> SessionActivities { get; set; }
+    public List<SessionActivity> SessionActivities { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {

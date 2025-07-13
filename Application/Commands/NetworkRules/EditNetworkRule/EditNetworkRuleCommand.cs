@@ -15,7 +15,7 @@ public class EditNetworkRuleCommand(
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        IPAddress.Parse(model.BaseAddress);
+        IPAddress.Parse(model.BaseAddress!);
 
         var network = $"{model.BaseAddress}/{model.PrefixLength}";
 
@@ -32,7 +32,7 @@ public class EditNetworkRuleCommand(
                 x.Id != model.Id))
             throw new BlockedByExistingException();
 
-        rule.BaseAddress = model.BaseAddress;
+        rule.BaseAddress = model.BaseAddress!;
         rule.PrefixLength = model.PrefixLength!.Value;
         rule.Active = model.Active;
         rule.Block = model.Block;

@@ -4,7 +4,7 @@ public class ShowSessionRecordsModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<SessionRecord> SessionRecords { get; set; }
+    public List<SessionRecord> SessionRecords { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {

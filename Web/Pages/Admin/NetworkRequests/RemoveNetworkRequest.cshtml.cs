@@ -7,7 +7,7 @@ public class RemoveNetworkRequestModel(
     IDatabaseService database,
     IRemoveNetworkRequestCommand command) : AdminPageModel(userToken)
 {
-    public NetworkRequest NetworkRequest { get; set; }
+    public NetworkRequest NetworkRequest { get; set; } = null!;
 
     [BindProperty]
     public RemoveNetworkRequestCommandModel CommandModel { get; set; } 
