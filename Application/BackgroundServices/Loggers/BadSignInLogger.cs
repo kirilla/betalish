@@ -1,19 +1,18 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Betalish.Application.Queues.BadSignIns;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Betalish.Application.Queues.BadSignIns;
-using Betalish.Application.Auth;
 
 namespace Betalish.Application.BackgroundServices.Loggers;
 
 public class BadSignInLogger(IServiceProvider serviceProvider) : BackgroundService
 {
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken cancellation)
     {
-        while (!stoppingToken.IsCancellationRequested)
+        while (!cancellation.IsCancellationRequested)
         {
             try
             {
-                await SaveEvents(stoppingToken);
+                await SaveEvents(cancellation);
             }
             catch
             {
@@ -21,7 +20,7 @@ public class BadSignInLogger(IServiceProvider serviceProvider) : BackgroundServi
             }
 
             await Task
-                .Delay(TimeSpan.FromSeconds(30), stoppingToken)
+                .Delay(TimeSpan.FromSeconds(30), cancellation)
                 .ConfigureAwait(false);
 
             // NOTE: Should we ConfigureAwait(false)?
@@ -30,7 +29,7 @@ public class BadSignInLogger(IServiceProvider serviceProvider) : BackgroundServi
         }
     }
 
-    private async Task SaveEvents(CancellationToken stoppingToken)
+    private async Task SaveEvents(CancellationToken cancellation)
     {
         using var scope = serviceProvider.CreateScope();
 
@@ -47,6 +46,6 @@ public class BadSignInLogger(IServiceProvider serviceProvider) : BackgroundServi
 
         database.BadSignIns.AddRange(signIns);
 
-        await database.SaveAsync(new NoUserToken());
+        await database.SaveAsync(new NoUserToken(), cancellation);
     }
 }

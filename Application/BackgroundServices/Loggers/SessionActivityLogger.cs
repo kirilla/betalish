@@ -1,19 +1,18 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Betalish.Application.Queues.SessionActivities;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Betalish.Application.Queues.SessionActivities;
-using Betalish.Application.Auth;
 
 namespace Betalish.Application.BackgroundServices.Loggers;
 
 public class SessionActivityLogger(IServiceProvider serviceProvider) : BackgroundService
 {
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken cancellation)
     {
-        while (!stoppingToken.IsCancellationRequested)
+        while (!cancellation.IsCancellationRequested)
         {
             try
             {
-                await SaveEvents(stoppingToken);
+                await SaveEvents(cancellation);
             }
             catch
             {
@@ -21,7 +20,7 @@ public class SessionActivityLogger(IServiceProvider serviceProvider) : Backgroun
             }
 
             await Task
-                .Delay(TimeSpan.FromSeconds(30), stoppingToken)
+                .Delay(TimeSpan.FromSeconds(30), cancellation)
                 .ConfigureAwait(false);
 
             // NOTE: Should we ConfigureAwait(false)?
@@ -30,7 +29,7 @@ public class SessionActivityLogger(IServiceProvider serviceProvider) : Backgroun
         }
     }
 
-    private async Task SaveEvents(CancellationToken stoppingToken)
+    private async Task SaveEvents(CancellationToken cancellation)
     {
         using var scope = serviceProvider.CreateScope();
 
@@ -42,12 +41,13 @@ public class SessionActivityLogger(IServiceProvider serviceProvider) : Backgroun
         if (activeSessionIds.Count == 0)
             return;
 
-        var database = scope.ServiceProvider.GetRequiredService<IDatabaseService>();
+        var database = scope.ServiceProvider
+            .GetRequiredService<IDatabaseService>();
 
         var storedSessionId = await database.Sessions
             .Select(x => x.Id)
             .Distinct()
-            .ToListAsync();
+            .ToListAsync(cancellation);
 
         var idsToLog = storedSessionId
             .Intersect(activeSessionIds)
@@ -63,6 +63,6 @@ public class SessionActivityLogger(IServiceProvider serviceProvider) : Backgroun
 
         database.SessionActivities.AddRange(sessionActivities);
 
-        await database.SaveAsync(new NoUserToken());
+        await database.SaveAsync(new NoUserToken(), cancellation);
     }
 }

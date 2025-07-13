@@ -7,13 +7,13 @@ namespace Betalish.Application.BackgroundServices.Reapers
         IDateService dateService,
         IServiceProvider serviceProvider) : BackgroundService
     {
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellation)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            while (!cancellation.IsCancellationRequested)
             {
                 try
                 {
-                    await Reap(stoppingToken);
+                    await Reap(cancellation);
                 }
                 catch
                 {
@@ -21,7 +21,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
                 }
 
                 await Task
-                    .Delay(TimeSpan.FromMinutes(5), stoppingToken)
+                    .Delay(TimeSpan.FromMinutes(5), cancellation)
                     .ConfigureAwait(false);
 
                 // NOTE: Should we ConfigureAwait(false)?
@@ -30,7 +30,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
             }
         }
 
-        private async Task Reap(CancellationToken stoppingToken)
+        private async Task Reap(CancellationToken cancellation)
         {
             using var scope = serviceProvider.CreateScope();
 
@@ -43,7 +43,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
                 .Where(x =>
                     x.Created < yesterday &&
                     !x.SessionActivities.Any(y => y.Created > yesterday))
-                .ToListAsync(stoppingToken);
+                .ToListAsync(cancellation);
 
             var records = staleSessions
                 .Select(x => new SessionRecord()
@@ -61,7 +61,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
 
             database.Sessions.RemoveRange(staleSessions);
 
-            await database.SaveAsync(new NoUserToken());
+            await database.SaveAsync(new NoUserToken(), cancellation);
         }
     }
 }

@@ -4,16 +4,15 @@ using Microsoft.Extensions.Hosting;
 namespace Betalish.Application.BackgroundServices.Reapers
 {
     public class SessionActivityReaper(
-        IDateService dateService,
         IServiceProvider serviceProvider) : BackgroundService
     {
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellation)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            while (!cancellation.IsCancellationRequested)
             {
                 try
                 {
-                    await Reap(stoppingToken);
+                    await Reap(cancellation);
                 }
                 catch
                 {
@@ -21,7 +20,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
                 }
 
                 await Task
-                    .Delay(TimeSpan.FromMinutes(3), stoppingToken)
+                    .Delay(TimeSpan.FromMinutes(3), cancellation)
                     .ConfigureAwait(false);
 
                 // NOTE: Should we ConfigureAwait(false)?
@@ -30,7 +29,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
             }
         }
 
-        private async Task Reap(CancellationToken stoppingToken)
+        private async Task Reap(CancellationToken cancellation)
         {
             using var scope = serviceProvider.CreateScope();
 
@@ -39,7 +38,11 @@ namespace Betalish.Application.BackgroundServices.Reapers
 
             var activitiesToRemove = new List<SessionActivity>();
 
-            var activities = await database.SessionActivities.ToListAsync();
+            var activities = await database.SessionActivities
+                .ToListAsync(cancellation);
+
+            if (activities.Count == 0)
+                return;
 
             var groups = activities
                 .GroupBy(x => x.SessionId)
@@ -58,7 +61,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
 
             database.SessionActivities.RemoveRange(activitiesToRemove);
 
-            await database.SaveAsync(new NoUserToken());
+            await database.SaveAsync(new NoUserToken(), cancellation);
         }
     }
 }

@@ -6,13 +6,13 @@ namespace Betalish.Application.BackgroundServices.Loggers;
 
 public class NetworkRequestLogger(IServiceProvider serviceProvider) : BackgroundService
 {
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken cancellation)
     {
-        while (!stoppingToken.IsCancellationRequested)
+        while (!cancellation.IsCancellationRequested)
         {
             try
             {
-                await SaveEvents(stoppingToken);
+                await SaveEvents(cancellation);
             }
             catch
             {
@@ -20,7 +20,7 @@ public class NetworkRequestLogger(IServiceProvider serviceProvider) : Background
             }
 
             await Task
-                .Delay(TimeSpan.FromSeconds(20), stoppingToken)
+                .Delay(TimeSpan.FromSeconds(20), cancellation)
                 .ConfigureAwait(false);
 
             // NOTE: Should we ConfigureAwait(false)?
@@ -29,11 +29,12 @@ public class NetworkRequestLogger(IServiceProvider serviceProvider) : Background
         }
     }
 
-    private async Task SaveEvents(CancellationToken stoppingToken)
+    private async Task SaveEvents(CancellationToken cancellation)
     {
         using var scope = serviceProvider.CreateScope();
 
-        var networkRequestList = scope.ServiceProvider.GetRequiredService<INetworkRequestList>();
+        var networkRequestList = scope.ServiceProvider
+            .GetRequiredService<INetworkRequestList>();
 
         var requests = networkRequestList.Take();
 
@@ -42,16 +43,17 @@ public class NetworkRequestLogger(IServiceProvider serviceProvider) : Background
 
         requests = Dedup(requests);
 
-        var database = scope.ServiceProvider.GetRequiredService<IDatabaseService>();
+        var database = scope.ServiceProvider
+            .GetRequiredService<IDatabaseService>();
 
         database.NetworkRequests.AddRange(requests);
 
-        await database.SaveAsync(new NoUserToken());
+        await database.SaveAsync(new NoUserToken(), cancellation);
     }
 
     public static List<NetworkRequest> Dedup(List<NetworkRequest> requests)
     {
-        return requests
+        return [.. requests
             .GroupBy(x => new
             {
                 x.Url,
@@ -70,7 +72,6 @@ public class NetworkRequestLogger(IServiceProvider serviceProvider) : Background
                 Blocked = x.Key.Blocked,
                 RepeatCount = x.Count() == 1 ? null : x.Count(),
                 //RepeatedUntil = x.Count() == 1 ? null : x.Max(x => x.Created),
-            })
-            .ToList();
+            })];
     }
 }

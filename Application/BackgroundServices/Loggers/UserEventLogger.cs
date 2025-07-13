@@ -6,13 +6,13 @@ namespace Betalish.Application.BackgroundServices.Loggers;
 
 public class UserEventLogger(IServiceProvider serviceProvider) : BackgroundService
 {
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken cancellation)
     {
-        while (!stoppingToken.IsCancellationRequested)
+        while (!cancellation.IsCancellationRequested)
         {
             try
             {
-                await Store(stoppingToken);
+                await Store(cancellation);
             }
             catch
             {
@@ -20,7 +20,7 @@ public class UserEventLogger(IServiceProvider serviceProvider) : BackgroundServi
             }
 
             await Task
-                .Delay(TimeSpan.FromMinutes(1), stoppingToken)
+                .Delay(TimeSpan.FromMinutes(1), cancellation)
                 .ConfigureAwait(false);
 
             // NOTE: Should we ConfigureAwait(false)?
@@ -29,7 +29,7 @@ public class UserEventLogger(IServiceProvider serviceProvider) : BackgroundServi
         }
     }
 
-    private async Task Store(CancellationToken stoppingToken)
+    private async Task Store(CancellationToken cancellation)
     {
         using var scope = serviceProvider.CreateScope();
 
@@ -44,6 +44,6 @@ public class UserEventLogger(IServiceProvider serviceProvider) : BackgroundServi
 
         database.UserEvents.AddRange(events);
 
-        await database.SaveAsync(new NoUserToken());
+        await database.SaveAsync(new NoUserToken(), cancellation);
     }
 }

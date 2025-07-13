@@ -1,23 +1,19 @@
-﻿using Betalish.Application.Queues.LogItems;
-using Betalish.Application.Queues.SignInRateLimiting;
+﻿using Betalish.Application.Queues.SignInRateLimiting;
 using Microsoft.Extensions.Hosting;
 
 namespace Betalish.Application.BackgroundServices.Reapers
 {
     public class SignInRateLimitReaper(
-        IDateService dateService,
-        ILogItemList logItemList,
-        ISignInRateLimiter rateLimiter,
-        IServiceProvider serviceProvider) : BackgroundService
+        ISignInRateLimiter rateLimiter) : BackgroundService
     {
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellation)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            while (!cancellation.IsCancellationRequested)
             {
                 Reap();
 
                 await Task
-                    .Delay(TimeSpan.FromMinutes(1), stoppingToken)
+                    .Delay(TimeSpan.FromMinutes(1), cancellation)
                     .ConfigureAwait(false);
 
                 // NOTE: Should we ConfigureAwait(false)?

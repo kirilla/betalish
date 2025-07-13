@@ -6,13 +6,13 @@ namespace Betalish.Application.BackgroundServices.Loggers;
 
 public class LogItemLogger(IServiceProvider serviceProvider) : BackgroundService
 {
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken cancellation)
     {
-        while (!stoppingToken.IsCancellationRequested)
+        while (!cancellation.IsCancellationRequested)
         {
             try
             {
-                await SaveEvents(stoppingToken);
+                await SaveEvents(cancellation);
             }
             catch
             {
@@ -20,7 +20,7 @@ public class LogItemLogger(IServiceProvider serviceProvider) : BackgroundService
             }
 
             await Task
-                .Delay(TimeSpan.FromSeconds(20), stoppingToken)
+                .Delay(TimeSpan.FromSeconds(20), cancellation)
                 .ConfigureAwait(false);
 
             // NOTE: Should we ConfigureAwait(false)?
@@ -29,7 +29,7 @@ public class LogItemLogger(IServiceProvider serviceProvider) : BackgroundService
         }
     }
 
-    private async Task SaveEvents(CancellationToken stoppingToken)
+    private async Task SaveEvents(CancellationToken cancellation)
     {
         using var scope = serviceProvider.CreateScope();
 
@@ -46,12 +46,12 @@ public class LogItemLogger(IServiceProvider serviceProvider) : BackgroundService
 
         database.LogItems.AddRange(logItems);
 
-        await database.SaveAsync(new NoUserToken());
+        await database.SaveAsync(new NoUserToken(), cancellation);
     }
 
     public static List<LogItem> Dedup(List<LogItem> logItems)
     {
-        return logItems
+        return [.. logItems
             .GroupBy(x => new
             {
                 x.Error,
@@ -74,7 +74,6 @@ public class LogItemLogger(IServiceProvider serviceProvider) : BackgroundService
                 IpAddress = x.Key.IpAddress,
                 RepeatCount = x.Count() == 1 ? null : x.Count(),
                 RepeatedUntil = x.Count() == 1 ? null : x.Max(x => x.Created),
-            })
-            .ToList();
+            })];
     }
 }

@@ -9,14 +9,14 @@ namespace Betalish.Application.BackgroundServices.Reapers
         ILogItemList logItemList,
         IServiceProvider serviceProvider) : BackgroundService
     {
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellation)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            while (!cancellation.IsCancellationRequested)
             {
-                await ReapSignups(stoppingToken);
+                await ReapSignups(cancellation);
 
                 await Task
-                    .Delay(TimeSpan.FromMinutes(28), stoppingToken)
+                    .Delay(TimeSpan.FromMinutes(28), cancellation)
                     .ConfigureAwait(false);
 
                 // NOTE: Should we ConfigureAwait(false)?
@@ -25,7 +25,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
             }
         }
 
-        private async Task ReapSignups(CancellationToken stoppingToken)
+        private async Task ReapSignups(CancellationToken cancellation)
         {
             using var scope = serviceProvider.CreateScope();
 
@@ -36,7 +36,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
 
             var signups = await database.Signups
                .Where(x => x.Created < timeInThePast)
-               .ToListAsync();
+               .ToListAsync(cancellation);
 
             if (signups.Count == 0)
                 return;
@@ -49,7 +49,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
 
             database.Signups.RemoveRange(signups);
             
-            await database.SaveAsync(new NoUserToken());
+            await database.SaveAsync(new NoUserToken(), cancellation);
         }
     }
 }

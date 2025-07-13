@@ -7,20 +7,19 @@ using Microsoft.Extensions.Options;
 namespace Betalish.Application.BackgroundServices.Reapers
 {
     public class NetworkRequestReaper(
-        IDateService dateService,
         ILogItemList logItemList,
         IServiceProvider serviceProvider,
         IOptions<FirewallConfiguration> firewallOptions) : BackgroundService
     {
         private readonly int _historySize = firewallOptions.Value.HistorySize;
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellation)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            while (!cancellation.IsCancellationRequested)
             {
                 try
                 {
-                    await Reap(stoppingToken);
+                    await Reap(cancellation);
                 }
                 catch (Exception ex)
                 {
@@ -31,7 +30,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
                 }
 
                 await Task
-                    .Delay(TimeSpan.FromSeconds(10), stoppingToken)
+                    .Delay(TimeSpan.FromSeconds(10), cancellation)
                     .ConfigureAwait(false);
 
                 // NOTE: Should we ConfigureAwait(false)?
@@ -40,7 +39,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
             }
         }
 
-        private async Task Reap(CancellationToken stoppingToken)
+        private async Task Reap(CancellationToken cancellation)
         {
             using var scope = serviceProvider.CreateScope();
 
@@ -50,7 +49,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
             var count = await database.NetworkRequests
                 .OrderByDescending(x => x.Created)
                 .Skip(_historySize)
-                .CountAsync();
+                .CountAsync(cancellation);
 
             if (count == 0)
                 return;
@@ -58,7 +57,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
             await database.NetworkRequests
                 .OrderByDescending(x => x.Created)
                 .Skip(_historySize)
-                .ExecuteDeleteAsync();
+                .ExecuteDeleteAsync(cancellation);
 
             logItemList.AddLogItem(new LogItem()
             {

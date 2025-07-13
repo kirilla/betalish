@@ -14,15 +14,15 @@ public class EmailSender(
 {
     private readonly SmtpConfiguration _config = options.Value;
 
-    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken cancellation)
     {
-        while (!stoppingToken.IsCancellationRequested)
+        while (!cancellation.IsCancellationRequested)
         {
             if (_config.Active)
-                await SendBatch(stoppingToken);
+                await SendBatch(cancellation);
 
             await Task
-                .Delay(TimeSpan.FromMinutes(1), stoppingToken)
+                .Delay(TimeSpan.FromMinutes(1), cancellation)
                 .ConfigureAwait(false);
 
             // NOTE: Should we ConfigureAwait(false)?
@@ -31,7 +31,7 @@ public class EmailSender(
         }
     }
 
-    private async Task SendBatch(CancellationToken stoppingToken)
+    private async Task SendBatch(CancellationToken cancellation)
     {
         using var scope = serviceProvider.CreateScope();
 
@@ -49,12 +49,12 @@ public class EmailSender(
             .CountAsync(x =>
                 x.EmailStatus == EmailStatus.Sent &&
                 x.Sent > anHourAgo,
-                stoppingToken);
+                cancellation);
 
         var unsentEmails = await database.EmailMessages
             .Where(x => x.EmailStatus == EmailStatus.NotSent)
             .Take(hourlyRateLimit - sentLastHour)
-            .ToListAsync(stoppingToken);
+            .ToListAsync(cancellation);
 
         foreach (var email in unsentEmails)
         {
@@ -75,10 +75,10 @@ public class EmailSender(
                 email.EmailStatus = EmailStatus.SendFailed;
             }
 
-            if (stoppingToken.IsCancellationRequested)
+            if (cancellation.IsCancellationRequested)
                 break;
         }
 
-        await database.SaveAsync(new NoUserToken());
+        await database.SaveAsync(new NoUserToken(), cancellation);
     }
 }
