@@ -11,6 +11,7 @@ public class SetClientEmailAccountPasswordModel(
 
     [BindProperty]
     public SetClientEmailAccountPasswordCommandModel CommandModel { get; set; }
+        = new SetClientEmailAccountPasswordCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

@@ -11,6 +11,7 @@ public class RemoveClientEmailAccountModel(
 
     [BindProperty]
     public RemoveClientEmailAccountCommandModel CommandModel { get; set; }
+        = new RemoveClientEmailAccountCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

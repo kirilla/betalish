@@ -6,12 +6,13 @@ public class SmtpConfiguration
 {
     public bool Active { get; set; }
 
-    public string FromName { get; set; }
-    public string FromAddress { get; set; }
+    public required string FromName { get; set; }
+    public required string FromAddress { get; set; }
 
     [JsonIgnore]
-    public string Password { get; set; }
-    public string SmtpHost { get; set; }
+    public required string Password { get; set; }
+
+    public required string SmtpHost { get; set; }
 
     public int SmtpPort { get; set; }
 }

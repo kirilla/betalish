@@ -7,10 +7,11 @@ public class MakeUserAdminModel(
     IMakeUserAdminCommand command,
     IUserToken userToken) : AdminPageModel(userToken)
 {
-    public new User User { get; set; }
+    public new User User { get; set; } = null!;
 
     [BindProperty]
     public MakeUserAdminCommandModel CommandModel { get; set; }
+        = new MakeUserAdminCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

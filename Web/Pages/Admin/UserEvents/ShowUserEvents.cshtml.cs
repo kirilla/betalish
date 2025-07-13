@@ -4,7 +4,7 @@ public class ShowUserEventsModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<UserEvent> UserEvents { get; set; }
+    public List<UserEvent> UserEvents { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {

@@ -13,6 +13,7 @@ public class RegisterAccountModel(
 
     [BindProperty]
     public RegisterAccountCommandModel CommandModel { get; set; }
+        = new RegisterAccountCommandModel();
 
     public IActionResult OnGet()
     {

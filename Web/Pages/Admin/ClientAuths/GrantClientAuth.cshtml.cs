@@ -7,9 +7,9 @@ public class GrantClientAuthModel(
     IGrantClientAuthCommand command,
     IUserToken userToken) : AdminPageModel(userToken)
 {
-    public new User User { get; set; }
+    public new User User { get; set; } = null!;
 
-    public List<Client> Clients { get; set; } = null!;
+    public List<Client> Clients { get; set; } = [];
 
     [BindProperty]
     public GrantClientAuthCommandModel CommandModel { get; set; } = new GrantClientAuthCommandModel();

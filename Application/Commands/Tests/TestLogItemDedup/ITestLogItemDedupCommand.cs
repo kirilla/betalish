@@ -2,7 +2,7 @@
 
 public interface ITestLogItemDedupCommand
 {
-    Task Execute(IUserToken userToken, TestLogItemDedupCommandModel model);
+    void Execute(IUserToken userToken, TestLogItemDedupCommandModel model);
 
     bool IsPermitted(IUserToken userToken);
 }

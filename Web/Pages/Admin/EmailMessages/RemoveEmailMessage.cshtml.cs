@@ -7,10 +7,11 @@ public class RemoveEmailMessageModel(
     IDatabaseService database,
     IRemoveEmailMessageCommand command) : AdminPageModel(userToken)
 {
-    public EmailMessage EmailMessage { get; set; }
+    public EmailMessage EmailMessage { get; set; } = null!;
 
     [BindProperty]
-    public RemoveEmailMessageCommandModel CommandModel { get; set; } = new RemoveEmailMessageCommandModel();
+    public RemoveEmailMessageCommandModel CommandModel { get; set; }
+        = new RemoveEmailMessageCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

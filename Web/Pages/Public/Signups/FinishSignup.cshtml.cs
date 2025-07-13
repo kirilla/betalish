@@ -12,10 +12,11 @@ public class FinishSignupModel(
 {
     private readonly SignUpConfiguration _config = options.Value;
 
-    public Signup Signup { get; set; }
+    public Signup Signup { get; set; } = null!;
 
     [BindProperty]
     public FinishSignupCommandModel CommandModel { get; set; }
+        = new FinishSignupCommandModel();
 
     public async Task<IActionResult> OnGetAsync(Guid guid)
     {

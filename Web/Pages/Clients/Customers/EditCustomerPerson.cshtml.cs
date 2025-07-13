@@ -7,10 +7,11 @@ public class EditCustomerPersonModel(
     IDatabaseService database,
     IEditCustomerPersonCommand command) : ClientPageModel(userToken)
 {
-    public Customer Customer { get; set; }
+    public Customer Customer { get; set; } = null!;
 
     [BindProperty]
     public EditCustomerPersonCommandModel CommandModel { get; set; }
+        = new EditCustomerPersonCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

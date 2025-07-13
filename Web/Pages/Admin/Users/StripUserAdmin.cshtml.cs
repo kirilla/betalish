@@ -7,10 +7,11 @@ public class StripUserAdminModel(
     IStripUserAdminCommand command,
     IUserToken userToken) : AdminPageModel(userToken)
 {
-    public new User User { get; set; }
+    public new User User { get; set; } = null!;
 
     [BindProperty]
     public StripUserAdminCommandModel CommandModel { get; set; }
+        = new StripUserAdminCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

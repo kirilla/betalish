@@ -33,7 +33,7 @@ public class TestLogItemDedupModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public IActionResult OnPost()
     {
         try
         {
@@ -45,7 +45,7 @@ public class TestLogItemDedupModel(
             if (!ModelState.IsValid)
                 return Page();
 
-            await command.Execute(UserToken, CommandModel);
+            command.Execute(UserToken, CommandModel);
 
             return Redirect("/show-tests");
         }

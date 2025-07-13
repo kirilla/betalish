@@ -7,7 +7,7 @@ public class RemoveAccountPhoneModel(
     IDatabaseService database,
     IRemoveAccountPhoneCommand command) : UserTokenPageModel(userToken)
 {
-    public List<UserPhone> UserPhones { get; set; }
+    public List<UserPhone> UserPhones { get; set; } = [];
 
     [BindProperty]
     public RemoveAccountPhoneCommandModel CommandModel { get; set; }

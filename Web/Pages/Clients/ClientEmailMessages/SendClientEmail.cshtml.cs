@@ -11,6 +11,7 @@ public class SendClientEmailModel(
 
     [BindProperty]
     public SendClientEmailCommandModel CommandModel { get; set; }
+        = new SendClientEmailCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

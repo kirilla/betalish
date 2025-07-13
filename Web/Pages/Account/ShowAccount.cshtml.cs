@@ -4,11 +4,11 @@ public class ShowAccountModel(
     IDatabaseService database,
     IUserToken userToken) : UserTokenPageModel(userToken)
 {
-    public new User User { get; set; }
+    public new User User { get; set; } = null!;
 
-    public List<UserEmail> UserEmails { get; set; }
-    public List<UserPhone> UserPhones { get; set; }
-    public List<UserSsn> UserSsns { get; set; }
+    public List<UserEmail> UserEmails { get; set; } = [];
+    public List<UserPhone> UserPhones { get; set; } = [];
+    public List<UserSsn> UserSsns { get; set; } = [];
 
     public bool CanAddUserEmail { get; set; }
     public bool CanRemoveUserEmail { get; set; }

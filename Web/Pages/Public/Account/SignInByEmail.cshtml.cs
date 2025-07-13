@@ -26,6 +26,7 @@ public class SignInByEmailModel(
 
     [BindProperty]
     public SignInByEmailCommandModel CommandModel { get; set; }
+        = new SignInByEmailCommandModel();
 
     public IActionResult OnGet()
     {
@@ -96,8 +97,8 @@ public class SignInByEmailModel(
 
             var claims = new List<Claim>
             {
-                new Claim("UserGuid", loginResult.UserGuid.ToString()),
-                new Claim("SessionGuid", loginResult.SessionGuid.ToString()),
+                new("UserGuid", loginResult.UserGuid.ToString()),
+                new("SessionGuid", loginResult.SessionGuid.ToString()),
             };
 
             var claimsIdentity = new ClaimsIdentity(

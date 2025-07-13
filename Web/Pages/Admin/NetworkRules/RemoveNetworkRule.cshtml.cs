@@ -8,10 +8,11 @@ public class RemoveNetworkRuleModel(
     IDatabaseService database,
     IRemoveNetworkRuleCommand command) : AdminPageModel(userToken)
 {
-    public NetworkRule NetworkRule { get; set; }
+    public NetworkRule NetworkRule { get; set; } = null!;
 
     [BindProperty]
     public RemoveNetworkRuleCommandModel CommandModel { get; set; }
+        = new RemoveNetworkRuleCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

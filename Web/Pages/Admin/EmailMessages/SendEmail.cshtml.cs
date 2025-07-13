@@ -7,7 +7,7 @@ public class SendEmailModel(
     IDatabaseService database,
     ISendEmailCommand command) : AdminPageModel(userToken)
 {
-    public EmailMessage EmailMessage { get; set; }
+    public EmailMessage EmailMessage { get; set; } = null!;
 
     [BindProperty]
     public SendEmailCommandModel CommandModel { get; set; } 

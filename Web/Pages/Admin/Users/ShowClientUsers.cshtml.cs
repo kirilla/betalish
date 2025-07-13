@@ -4,7 +4,7 @@ public class ShowClientUsersModel(
     IDatabaseService database,
     IUserToken userToken) : AdminPageModel(userToken)
 {
-    public List<User> Users { get; set; }
+    public List<User> Users { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {

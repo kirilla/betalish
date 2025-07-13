@@ -4,7 +4,7 @@ public class ShowNetworkRequestUserAgentsModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<string> UserAgents { get; set; }
+    public List<string> UserAgents { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {

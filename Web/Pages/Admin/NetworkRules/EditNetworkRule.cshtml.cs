@@ -8,10 +8,11 @@ public class EditNetworkRuleModel(
     IDatabaseService database,
     IEditNetworkRuleCommand command) : AdminPageModel(userToken)
 {
-    public NetworkRule NetworkRule { get; set; }
+    public NetworkRule NetworkRule { get; set; } = null!;
 
     [BindProperty]
     public EditNetworkRuleCommandModel CommandModel { get; set; }
+        = new EditNetworkRuleCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

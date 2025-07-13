@@ -12,11 +12,11 @@ public class ShowRateLimitingModel(
     ISignInRateLimiter signInRateLimiter,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<LogItem> RateLimitLogItems { get; set; }
+    public List<LogItem> RateLimitLogItems { get; set; } = [];
 
-    public List<IpAddressEndpointHit> IpAddressEndpointHits { get; set; }
-    public List<SignInAttempt> SignInAttempts { get; set; }
-    public List<EndpointHit> EndpointHits { get; set; }
+    public List<IpAddressEndpointHit> IpAddressEndpointHits { get; set; } = [];
+    public List<SignInAttempt> SignInAttempts { get; set; } = [];
+    public List<EndpointHit> EndpointHits { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -32,20 +32,17 @@ public class ShowRateLimitingModel(
                 .OrderByDescending(x => x.Created)
                 .ToListAsync();
 
-            IpAddressEndpointHits = ipAddressRateLimiter
+            IpAddressEndpointHits = [.. ipAddressRateLimiter
                 .ToList()
-                .OrderBy(x => x.DateTime)
-                .ToList();
+                .OrderBy(x => x.DateTime)];
 
-            SignInAttempts = signInRateLimiter
+            SignInAttempts = [.. signInRateLimiter
                 .ToList()
-                .OrderBy(x => x.DateTime)
-                .ToList();
+                .OrderBy(x => x.DateTime)];
 
-            EndpointHits = endpointRateLimiter
+            EndpointHits = [.. endpointRateLimiter
                 .ToList()
-                .OrderBy(x => x.DateTime)
-                .ToList();
+                .OrderBy(x => x.DateTime)];
 
             return Page();
         }

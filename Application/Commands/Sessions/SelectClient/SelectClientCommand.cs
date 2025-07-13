@@ -1,7 +1,6 @@
 ﻿namespace Betalish.Application.Commands.Sessions.SelectClient;
 
 public class SelectClientCommand(
-    IDateService dateService,
     IDatabaseService database) : ISelectClientCommand
 {
     public async Task Execute(

@@ -7,10 +7,11 @@ public class RemoveCustomerModel(
     IDatabaseService database,
     IRemoveCustomerCommand command) : ClientPageModel(userToken)
 {
-    public Customer Customer { get; set; }
+    public Customer Customer { get; set; } = null!;
 
     [BindProperty]
     public RemoveCustomerCommandModel CommandModel { get; set; }
+        = new RemoveCustomerCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

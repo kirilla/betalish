@@ -7,10 +7,11 @@ public class RemoveSignupModel(
     IDatabaseService database,
     IRemoveSignupCommand command) : AdminPageModel(userToken)
 {
-    public Signup Signup { get; set; }
+    public Signup Signup { get; set; } = null!;
 
     [BindProperty]
     public RemoveSignupCommandModel CommandModel { get; set; }
+        = new RemoveSignupCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

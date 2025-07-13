@@ -4,7 +4,7 @@ namespace Betalish.Application.Commands.Tests.TestLogItemDedup;
 
 public class TestLogItemDedupCommand() : ITestLogItemDedupCommand
 {
-    public async Task Execute(
+    public void Execute(
         IUserToken userToken, TestLogItemDedupCommandModel model)
     {
         if (!IsPermitted(userToken))

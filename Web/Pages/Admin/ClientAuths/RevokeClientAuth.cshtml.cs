@@ -7,9 +7,9 @@ public class RevokeClientAuthModel(
     IRevokeClientAuthCommand command,
     IUserToken userToken) : AdminPageModel(userToken)
 {
-    public new User User { get; set; }
+    public new User User { get; set; } = null!;
 
-    public List<Client> Clients { get; set; } = null!;
+    public List<Client> Clients { get; set; } = [];
 
     [BindProperty]
     public RevokeClientAuthCommandModel CommandModel { get; set; } = new RevokeClientAuthCommandModel();

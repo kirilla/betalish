@@ -26,6 +26,7 @@ public class SignInBySsnModel(
 
     [BindProperty]
     public SignInBySsnCommandModel CommandModel { get; set; }
+        = new SignInBySsnCommandModel();
 
     public IActionResult OnGet()
     {
@@ -96,8 +97,8 @@ public class SignInBySsnModel(
 
             var claims = new List<Claim>
             {
-                new Claim("UserGuid", loginResult.UserGuid.ToString()),
-                new Claim("SessionGuid", loginResult.SessionGuid.ToString()),
+                new("UserGuid", loginResult.UserGuid.ToString()),
+                new("SessionGuid", loginResult.SessionGuid.ToString()),
             };
 
             var claimsIdentity = new ClaimsIdentity(

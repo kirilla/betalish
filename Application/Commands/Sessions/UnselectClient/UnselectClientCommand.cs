@@ -1,7 +1,6 @@
 ﻿namespace Betalish.Application.Commands.Sessions.UnselectClient;
 
 public class UnselectClientCommand(
-    IDateService dateService,
     IDatabaseService database) : IUnselectClientCommand
 {
     public async Task Execute(

@@ -11,6 +11,7 @@ public class EditClientEmailAccountModel(
 
     [BindProperty]
     public EditClientEmailAccountCommandModel CommandModel { get; set; }
+        = new EditClientEmailAccountCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

@@ -4,7 +4,7 @@ public class ShowEmailQueueModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public List<EmailHeader> EmailHeaders { get; set; }
+    public List<EmailHeader> EmailHeaders { get; set; } = [];
 
     public int NotSent { get; set; }
     public int Failed { get; set; }

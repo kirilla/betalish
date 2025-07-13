@@ -7,10 +7,11 @@ public class DeleteUserModel(
     IDeleteUserCommand command,
     IUserToken userToken) : AdminPageModel(userToken)
 {
-    public new User User { get; set; }
+    public new User User { get; set; } = null!;
 
     [BindProperty]
     public DeleteUserCommandModel CommandModel { get; set; }
+        = new DeleteUserCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

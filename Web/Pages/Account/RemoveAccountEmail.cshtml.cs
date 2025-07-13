@@ -7,10 +7,11 @@ public class RemoveAccountEmailModel(
     IDatabaseService database,
     IRemoveAccountEmailCommand command) : UserTokenPageModel(userToken)
 {
-    public List<UserEmail> UserEmails { get; set; }
+    public List<UserEmail> UserEmails { get; set; } = [];
 
     [BindProperty]
-    public RemoveAccountEmailCommandModel CommandModel { get; set; } = new RemoveAccountEmailCommandModel();
+    public RemoveAccountEmailCommandModel CommandModel { get; set; } 
+        = new RemoveAccountEmailCommandModel();
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -59,7 +60,7 @@ public class RemoveAccountEmailModel(
         {
             ModelState.AddModelError(
                 nameof(CommandModel.Confirmed),
-                "Bekräfta att du verkligen vill ta bort adressen.");
+                "Bekrï¿½fta att du verkligen vill ta bort adressen.");
 
             return Page();
         }

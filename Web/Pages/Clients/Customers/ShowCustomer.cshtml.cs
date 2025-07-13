@@ -4,7 +4,7 @@ public class ShowCustomerModel(
     IUserToken userToken,
     IDatabaseService database) : ClientPageModel(userToken)
 {
-    public Customer Customer { get; set; }
+    public Customer Customer { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

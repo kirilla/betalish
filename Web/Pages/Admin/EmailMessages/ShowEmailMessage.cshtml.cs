@@ -4,7 +4,7 @@ public class ShowEmailMessageModel(
     IUserToken userToken,
     IDatabaseService database) : AdminPageModel(userToken)
 {
-    public EmailMessage EmailMessage { get; set; }
+    public EmailMessage EmailMessage { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

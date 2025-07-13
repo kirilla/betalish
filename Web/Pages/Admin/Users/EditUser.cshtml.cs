@@ -9,6 +9,7 @@ public class EditUserModel(
 {
     [BindProperty]
     public EditUserCommandModel CommandModel { get; set; }
+        = new EditUserCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

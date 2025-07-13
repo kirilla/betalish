@@ -6,7 +6,7 @@ public class ShowClientModel(
 {
     public Client Client { get; set; } = null!;
 
-    public List<User> Users { get; set; }
+    public List<User> Users { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
