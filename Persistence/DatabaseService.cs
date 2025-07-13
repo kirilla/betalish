@@ -79,10 +79,5 @@ public class DatabaseService(
         validator.Validate(entries);
 
         await base.SaveChangesAsync();
-
-        if (ChangeTracker.HasChanges())
-        {
-            await base.SaveChangesAsync();
-        }
     }
 }
