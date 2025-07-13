@@ -16,6 +16,8 @@ public class User :
     public bool NoLogin { get; set; }
     public bool NoSave { get; set; }
 
+    public UserPurpose UserPurpose { get; set; }
+
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
 
@@ -36,5 +38,8 @@ public class User :
     {
         if (string.IsNullOrWhiteSpace(PasswordHash))
             throw new MissingPasswordHashException();
+
+        if (!Enum.IsDefined(UserPurpose))
+            throw new InvalidEnumException();
     }
 }
