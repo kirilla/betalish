@@ -66,6 +66,11 @@ public static class MaxLengths
             public const int Hash = 128;
         }
 
+        public static class Percent
+        {
+            public const int ShortWithDecimals = 7;
+        }
+
         public static class Person
         {
             public const int FullName = 50;
@@ -98,7 +103,7 @@ public static class MaxLengths
         public static class Article
         {
             public const int Name = 50;
-            public const int Unit = 20;
+            public const int UnitName = 20;
         }
 
         public static class BadSignIn

@@ -16,7 +16,7 @@ class ArticleConfiguration : IEntityTypeConfiguration<Article>
             .HasPrecision(18, 2);
 
         builder.Property(p => p.UnitName)
-            .HasMaxLength(MaxLengths.Domain.Article.Unit);
+            .HasMaxLength(MaxLengths.Domain.Article.UnitName);
 
         builder.Property(p => p.Account)
             .HasMaxLength(MaxLengths.Common.Bookkeeping.Account);

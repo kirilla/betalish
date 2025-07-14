@@ -1,0 +1,83 @@
+﻿@page "/add-article"
+@model AddArticleModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till artikel -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till en artikel
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.ArticleKind">
+            Typ
+        </label>
+        <select asp-for="CommandModel.ArticleKind">
+            <option value="">–</option>
+            <option value="@(ArticleKind.Goods)">
+                Vara
+            </option>
+            <option value="@(ArticleKind.Service)">
+                Tjänst
+            </option>
+        </select>
+
+        <label asp-for="CommandModel.Number">
+            Artikelnummer
+        </label>
+        <input asp-for="CommandModel.Number" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <label asp-for="CommandModel.UnitPrice">
+            Pris
+        </label>
+        <input asp-for="CommandModel.UnitPrice" />
+
+        <label asp-for="CommandModel.UnitName">
+            Enhet
+        </label>
+        <input asp-for="CommandModel.UnitName" />
+
+        <label asp-for="CommandModel.VatValue">
+            Momssats
+        </label>
+        <input asp-for="CommandModel.VatValue" />
+
+        <label asp-for="CommandModel.Account">
+            Bokföringskonto
+        </label>
+        <input asp-for="CommandModel.Account" />
+
+        <label asp-for="CommandModel.VatAccount">
+            Momskonto
+        </label>
+        <input asp-for="CommandModel.VatAccount" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-articles">
+            Avbryt
+        </a>
+    </form>
+
+</main>

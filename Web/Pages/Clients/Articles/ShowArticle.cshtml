@@ -1,0 +1,60 @@
+﻿@page "/show-article/{id:int}"
+@model ShowArticleModel
+@{
+}
+
+@section Meta {
+    <title>Artikel - @(Model.Article.Name) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        📦
+        @(Model.Article.Name)
+    </h4>
+
+    <div class="notice">
+        <ul>
+            <li>
+                @(Model.Article.ArticleKind)
+            </li>
+            <li>
+                @(Model.Article.Number)
+            </li>
+            <li>
+                @(Model.Article.Name)
+            </li>
+            <li>
+                @(Model.Article.UnitPrice.ToString("N2", Swedish.CultureInfo))
+            </li>
+            <li>
+                @(Model.Article.UnitName)
+            </li>
+            <li>
+                @(Model.Article.VatValue.ToString("N2", Swedish.CultureInfo))
+            </li>
+            <li>
+                @(Model.Article.Account)
+            </li>
+            <li>
+                @(Model.Article.VatAccount)
+            </li>
+        </ul>
+    </div>
+
+    <p>
+        <a class="button" href="/edit-article/@(Model.Article.Id)">
+            Redigera
+        </a>
+
+        <a class="button" href="/remove-article/@(Model.Article.Id)">
+            Ta bort
+        </a>
+    </p>
+
+</main>

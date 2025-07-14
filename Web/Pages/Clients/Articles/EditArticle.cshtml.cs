@@ -1,0 +1,89 @@
+﻿using Betalish.Application.Commands.Articles.EditArticle;
+
+namespace Betalish.Web.Pages.Clients.Articles;
+
+public class EditArticleModel(
+    IUserToken userToken,
+    IDatabaseService database,
+    IEditArticleCommand command) : ClientPageModel(userToken)
+{
+    public Article Article { get; set; } = null!;
+
+    [BindProperty]
+    public EditArticleCommandModel CommandModel { get; set; }
+        = new EditArticleCommandModel();
+
+    public async Task<IActionResult> OnGetAsync(int id)
+    {
+        try
+        {
+            if (!command.IsPermitted(UserToken))
+                throw new NotPermittedException();
+
+            Article = await database.Articles
+                .Where(x =>
+                    x.Id == id &&
+                    x.ClientId == UserToken.ClientId!.Value)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            CommandModel = new EditArticleCommandModel()
+            {
+                Id = Article.Id,
+                ArticleKind = Article.ArticleKind,
+                Number = Article.Number,
+                Name = Article.Name,
+                UnitPrice = Article.UnitPrice.ToString("N2", Swedish.CultureInfo),
+                UnitName = Article.UnitName,
+                VatValue = Article.VatValue.ToString("N2", Swedish.CultureInfo),
+                Account = Article.Account,
+                VatAccount = Article.VatAccount,
+            };
+
+            return Page();
+        }
+        catch (NotFoundException)
+        {
+            return Redirect("/help/notfound");
+        }
+        catch
+        {
+            return Redirect("/help/notpermitted");
+        }
+    }
+
+    public async Task<IActionResult> OnPostAsync(int id)
+    {
+        try
+        {
+            if (!command.IsPermitted(UserToken))
+                throw new NotPermittedException();
+
+            Article = await database.Articles
+                .Where(x =>
+                    x.Id == id &&
+                    x.ClientId == UserToken.ClientId!.Value)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            if (!ModelState.IsValid)
+                return Page();
+
+            await command.Execute(UserToken, CommandModel);
+
+            return Redirect($"/show-article/{id}");
+        }
+        catch (BlockedByNumberException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Number),
+                "Det finns en annan artikel med samma nummer.");
+
+            return Page();
+        }
+        catch
+        {
+            return Redirect("/help/notpermitted");
+        }
+    }
+}

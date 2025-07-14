@@ -12,9 +12,9 @@ public class Article : IFormatOnSave, IValidateOnSave
 
     public decimal UnitPrice { get; set; }
 
-    public decimal VatValue { get; set; }
-
     public required string UnitName { get; set; }
+
+    public decimal VatValue { get; set; }
 
     public required string Account { get; set; }
     public required string VatAccount { get; set; }

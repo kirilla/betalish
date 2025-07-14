@@ -8,6 +8,28 @@ public static class Pattern
         public const string AnythingMultiLine = @"^(\n|\r|.)*$";
         public const string SomeContent = @"^.*[\S].*$";
 
+        public static class Bookkeeping
+        {
+            public const string Account = @"^\d{4}$";
+        }
+
+        public static class Decimal
+        {
+            public static class Signed
+            {
+                public const string TwoOptionalDecimals = @"^-?[\d\s]*\d(,\d{0,2})?$";
+                public const string FourOptionalDecimals = @"^-?[\d\s]*\d(,\d{0,4})?$";
+                public const string SixOptionalDecimals = @"^-?[\d\s]*\d(,\d{0,6})?$";
+            }
+
+            public static class Unsigned
+            {
+                public const string TwoOptionalDecimals = @"^[\d\s]*\d(,\d{0,2})?$";
+                public const string FourOptionalDecimals = @"^[\d\s]*\d(,\d{0,4})?$";
+                public const string SixOptionalDecimals = @"^[\d\s]*\d(,\d{0,6})?$";
+            }
+        }
+
         public static class Email
         {
             public const string Address =
@@ -24,6 +46,19 @@ public static class Pattern
         {
             public const string Orgnum = @"^\d{10}$";
             public const string OrgnumPermissive = @"\d{6}.?\d{4}"; // open-ended
+        }
+
+        public static class Percentage
+        {
+            public static class Signed
+            {
+                public const string Percent = @"^-?\d+(,\d+)?$";
+            }
+
+            public static class Unsigned
+            {
+                public const string Percent = @"^\d+(,\d+)?$";
+            }
         }
 
         public static class Phone
