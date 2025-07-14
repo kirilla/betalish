@@ -33,7 +33,7 @@ public class EditArticleCommand(IDatabaseService database) : IEditArticleCommand
         article.Number = model.Number!.Value;
         article.Name = model.Name!;
         article.UnitPrice = model.UnitPrice!.TryParseDecimal()!.Value;
-        article.VatValue = model.UnitPrice!.TryParseDecimal()!.Value;
+        article.VatValue = model.VatValue!.TryParseDecimal()!.Value;
         article.UnitName = model.UnitName!;
         article.Account = model.Account!;
         article.VatAccount = model.VatAccount!;
