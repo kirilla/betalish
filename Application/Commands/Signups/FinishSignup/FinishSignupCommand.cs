@@ -52,6 +52,7 @@ public class FinishSignupCommand(
             Guid = guid,
             Name = signup.PersonName,
             PasswordHash = string.Empty,
+            UserPurpose = UserPurpose.Client,
         };
 
         var hasher = new PasswordHasher<User>();
