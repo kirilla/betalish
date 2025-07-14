@@ -23,6 +23,8 @@ public class StripUserAdminCommand(IDatabaseService database) : IStripUserAdminC
 
         database.AdminAuths.Remove(auth);
 
+        user.UserPurpose = UserPurpose.Client;
+
         await database.SaveAsync(userToken);
     }
 

@@ -27,6 +27,8 @@ public class MakeUserAdminCommand(IDatabaseService database) : IMakeUserAdminCom
 
         database.AdminAuths.Add(auth);
 
+        user.UserPurpose = UserPurpose.Admin;
+
         await database.SaveAsync(userToken);
     }
 
