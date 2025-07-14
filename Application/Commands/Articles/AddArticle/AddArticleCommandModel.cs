@@ -38,14 +38,18 @@ public class AddArticleCommandModel
         ErrorMessage = "Skriv kortare.")]
     public string? UnitName { get; set; }
 
-    [RegularExpression(Pattern.Common.Bookkeeping.Account)]
+    [RegularExpression(
+        Pattern.Common.Bookkeeping.Account,
+        ErrorMessage = "Bokföringskonto anges med fyra siffror")]
     [Required(ErrorMessage = "Ange bokföringskonto.")]
     [StringLength(
         MaxLengths.Common.Bookkeeping.Account,
         ErrorMessage = "Skriv kortare.")]
     public string? Account { get; set; }
 
-    [RegularExpression(Pattern.Common.Bookkeeping.Account)]
+    [RegularExpression(
+        Pattern.Common.Bookkeeping.Account,
+        ErrorMessage = "Momskonto anges med fyra siffror")]
     [Required(ErrorMessage = "Ange momskonto.")]
     [StringLength(
         MaxLengths.Common.Bookkeeping.Account,
