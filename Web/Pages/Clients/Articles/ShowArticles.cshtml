@@ -1,0 +1,53 @@
+﻿@page "/show-articles"
+@model ShowArticlesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Artiklar -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Artiklar
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var article in Model.Articles)
+            {
+                <li>
+                    <span>📦</span>
+                    &thinsp;
+                    <a href="/show-article/@(article.Id)">@(article.Name)</a>
+                </li>
+            }
+
+            @if (!Model.Articles.Any())
+            {
+                <li>
+                    📦
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    <p>
+        <a class="button" href="/add-article">
+            Lägg till
+        </a>
+    </p>
+
+</main>
