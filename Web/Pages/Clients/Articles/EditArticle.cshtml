@@ -24,53 +24,55 @@
 
         <input type="hidden" asp-for="CommandModel.Id" />
 
+        <label asp-for="CommandModel.Number">
+            Artikelnummer
+        </label>
+        <input asp-for="CommandModel.Number" placeholder="10" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name"
+               placeholder="Varans eller tjänstens namn" />
+
+        <label asp-for="CommandModel.UnitPrice">
+            Pris
+        </label>
+        <input asp-for="CommandModel.UnitPrice" placeholder="20,00" />
+
+        <label asp-for="CommandModel.UnitName">
+            Per enhet
+        </label>
+        <input asp-for="CommandModel.UnitName"
+               placeholder="kilogram, liter, styck, ..." />
+
+        <label asp-for="CommandModel.VatValue">
+            Momssats %
+        </label>
+        <input asp-for="CommandModel.VatValue" placeholder="25,00" />
+
         <label asp-for="CommandModel.ArticleKind">
             Typ
         </label>
         <select asp-for="CommandModel.ArticleKind">
             <option value="">–</option>
             <option value="@(ArticleKind.Goods)">
-                Vara
+                📦 Vara
             </option>
             <option value="@(ArticleKind.Service)">
-                Tjänst
+                💪 Tjänst
             </option>
         </select>
-
-        <label asp-for="CommandModel.Number">
-            Artikelnummer
-        </label>
-        <input asp-for="CommandModel.Number" />
-
-        <label asp-for="CommandModel.Name">
-            Namn
-        </label>
-        <input asp-for="CommandModel.Name" />
-
-        <label asp-for="CommandModel.UnitPrice">
-            Pris
-        </label>
-        <input asp-for="CommandModel.UnitPrice" />
-
-        <label asp-for="CommandModel.UnitName">
-            Enhet
-        </label>
-        <input asp-for="CommandModel.UnitName" />
-
-        <label asp-for="CommandModel.VatValue">
-            Momssats
-        </label>
-        <input asp-for="CommandModel.VatValue" />
 
         <label asp-for="CommandModel.Account">
             Bokföringskonto
         </label>
-        <input asp-for="CommandModel.Account" />
+        <input asp-for="CommandModel.Account" placeholder="0000" />
 
         <label asp-for="CommandModel.VatAccount">
             Momskonto
         </label>
-        <input asp-for="CommandModel.VatAccount" />
+        <input asp-for="CommandModel.VatAccount" placeholder="0000" />
 
         <div asp-validation-summary="All"></div>
 

@@ -6,9 +6,6 @@ public class EditArticleCommandModel
 {
     public int Id { get; set; }
 
-    [Required(ErrorMessage = "Ange typ av artikel.")]
-    public ArticleKind? ArticleKind { get; set; }
-
     [Range(1, int.MaxValue)]
     [Required(ErrorMessage = "Ange artikelnummer.")]
     public int? Number { get; set; }
@@ -26,6 +23,13 @@ public class EditArticleCommandModel
     [Required(ErrorMessage = "Ange pris.")]
     public string? UnitPrice { get; set; }
 
+    [RegularExpression(Pattern.Common.SomeContent)]
+    [Required(ErrorMessage = "Ange enhet.")]
+    [StringLength(
+        MaxLengths.Domain.Article.UnitName,
+        ErrorMessage = "Skriv kortare.")]
+    public string? UnitName { get; set; }
+
     [RegularExpression(
         Pattern.Common.Percentage.Unsigned.Percent,
         ErrorMessage = "Ange momssats med siffror")]
@@ -33,12 +37,8 @@ public class EditArticleCommandModel
     [StringLength(MaxLengths.Common.Percent.ShortWithDecimals)]
     public string? VatValue { get; set; }
 
-    [RegularExpression(Pattern.Common.SomeContent)]
-    [Required(ErrorMessage = "Ange enhet.")]
-    [StringLength(
-        MaxLengths.Domain.Article.UnitName,
-        ErrorMessage = "Skriv kortare.")]
-    public string? UnitName { get; set; }
+    [Required(ErrorMessage = "Ange typ av artikel.")]
+    public ArticleKind? ArticleKind { get; set; }
 
     [RegularExpression(
         Pattern.Common.Bookkeeping.Account,

@@ -28,29 +28,69 @@
         Artiklar
     </h4>
 
-    <div class="notice">
-
-        <ul>
+    <figure>
+        <table>
+            <tr>
+                <th>Nr</th>
+                <th>Namn</th>
+                <th>Pris</th>
+                <th>Enhet</th>
+                <th>Moms</th>
+                <th>Typ</th>
+                <th>Bokf.konto</th>
+                <th>Momskonto</th>
+            </tr>
             @foreach (var article in Model.Articles)
             {
-                <li>
-                    @(article.Number)
-                    @* 📦 *@
-                    <a href="/show-article/@(article.Id)">@(article.Name)</a>
-                </li>
+                <tr>
+                    <td>
+                        @(article.Number)
+                    </td>
+                    <td>
+                        <a href="/show-article/@(article.Id)">
+                            @(article.Name)
+                        </a>
+                    </td>
+                    <td>
+                        @(article.UnitPrice.ToString("N2", Swedish.CultureInfo)) 
+                        @(Swedish.Currency.Short)
+                    </td>
+                    <td>
+                        @(article.UnitName)
+                    </td>
+                    <td>
+                        @(article.VatValue.ToString("N2", Swedish.CultureInfo))
+                    </td>
+                    <td>
+                        @if (article.ArticleKind == ArticleKind.Goods)
+                        {
+                            <span>Vara 📦</span>
+                        }
+                        @if (article.ArticleKind == ArticleKind.Service)
+                        {
+                            <span>Tjänst 💪</span>
+                        }
+                    </td>
+                    <td>
+                        @(article.Account)
+                    </td>
+                    <td>
+                        @(article.VatAccount)
+                    </td>
+                </tr>
             }
-
             @if (!Model.Articles.Any())
             {
-                <li>
-                    📦
-                    &thinsp;
-                    &ndash;
-                </li>
+                <tr>
+                    <td colspan="8">
+                        Inga
+                    </td>
+                </tr>
             }
-        </ul>
+        </table>
+    </figure>
 
-    </div>
+    <br />
 
     <p>
         <a class="button" href="/add-article">
