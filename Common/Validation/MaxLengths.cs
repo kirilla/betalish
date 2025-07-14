@@ -17,6 +17,11 @@ public static class MaxLengths
 
         public const int DbSuperSize = 16_000;
 
+        public static class Bookkeeping
+        {
+            public const int Account = 4;
+        }
+
         public static class Email
         {
             public const int Address = 70;
@@ -90,6 +95,12 @@ public static class MaxLengths
 
     public static class Domain
     {
+        public static class Article
+        {
+            public const int Name = 50;
+            public const int Unit = 20;
+        }
+
         public static class BadSignIn
         {
             public const int Name = 200;
