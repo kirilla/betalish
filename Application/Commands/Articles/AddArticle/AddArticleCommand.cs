@@ -23,7 +23,7 @@ public class AddArticleCommand(IDatabaseService database) : IAddArticleCommand
             Number = model.Number!.Value,
             Name = model.Name!,
             UnitPrice = model.UnitPrice!.TryParseDecimal()!.Value,
-            VatValue = model.UnitPrice!.TryParseDecimal()!.Value,
+            VatValue = model.VatValue!.TryParseDecimal()!.Value,
             UnitName = model.UnitName!.ToLowerInvariant(),
             Account = model.Account!,
             VatAccount = model.VatAccount!,
