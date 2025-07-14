@@ -14,38 +14,57 @@
 <main>
 
     <h4>
-        📦
-        @(Model.Article.Name)
+        Artikel
     </h4>
 
-    <div class="notice">
-        <ul>
-            <li>
-                @(Model.Article.ArticleKind)
-            </li>
-            <li>
-                @(Model.Article.Number)
-            </li>
-            <li>
-                @(Model.Article.Name)
-            </li>
-            <li>
-                @(Model.Article.UnitPrice.ToString("N2", Swedish.CultureInfo))
-            </li>
-            <li>
-                @(Model.Article.UnitName)
-            </li>
-            <li>
-                @(Model.Article.VatValue.ToString("N2", Swedish.CultureInfo))
-            </li>
-            <li>
-                @(Model.Article.Account)
-            </li>
-            <li>
-                @(Model.Article.VatAccount)
-            </li>
-        </ul>
-    </div>
+    <figure>
+        <table>
+            <tr>
+                <th>Nr</th>
+                <th>Namn</th>
+                <th>Pris</th>
+                <th>Enhet</th>
+                <th>Moms</th>
+                <th>Typ</th>
+                <th>Bokf.konto</th>
+                <th>Momskonto</th>
+            </tr>
+            <tr>
+                <td>
+                    @(Model.Article.Number)
+                </td>
+                <td>
+                    @(Model.Article.Name)
+                </td>
+                <td>
+                    @(Model.Article.UnitPrice.ToString("N2", Swedish.CultureInfo))
+                    @(Swedish.Currency.Short)
+                </td>
+                <td>
+                    @(Model.Article.UnitName)
+                </td>
+                <td>
+                    @(Model.Article.VatValue.ToString("N2", Swedish.CultureInfo))
+                </td>
+                <td>
+                    @if (Model.Article.ArticleKind == ArticleKind.Goods)
+                    {
+                        <span>Vara 📦</span>
+                    }
+                    @if (Model.Article.ArticleKind == ArticleKind.Service)
+                    {
+                        <span>Tjänst 💪</span>
+                    }
+                </td>
+                <td>
+                    @(Model.Article.Account)
+                </td>
+                <td>
+                    @(Model.Article.VatAccount)
+                </td>
+            </tr>
+        </table>
+    </figure>
 
     <p>
         <a class="button" href="/edit-article/@(Model.Article.Id)">
