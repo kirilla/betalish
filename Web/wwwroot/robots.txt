@@ -1,2 +1,7 @@
 ﻿User-agent: *
 Disallow: /
+Disallow: /zebra/cauliflower/vanguard/rooster
+
+User-agent: googlebot
+Disallow: /logs/cantaloup.*
+Allow: /happy/happy/joy/joy
