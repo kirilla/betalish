@@ -18,6 +18,8 @@ public class Customer : IFormatOnSave, IValidateOnSave
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
 
+    public List<InvoiceDraft> InvoiceDrafts { get; set; } = [];
+
     public void FormatOnSave()
     {
         Ssn10 = Ssn10?.StripNonNumeric();

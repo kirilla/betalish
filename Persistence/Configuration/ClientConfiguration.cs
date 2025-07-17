@@ -32,19 +32,23 @@ class ClientConfiguration : IEntityTypeConfiguration<Client>
 
         builder.HasMany(x => x.Customers)
             .WithOne(x => x.Client)
-            .HasForeignKey(x => x.ClientId);
+            .HasForeignKey(x => x.ClientId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasMany(x => x.Invoices)
             .WithOne(x => x.Client)
-            .HasForeignKey(x => x.ClientId);
+            .HasForeignKey(x => x.ClientId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasMany(x => x.InvoiceDrafts)
             .WithOne(x => x.Client)
-            .HasForeignKey(x => x.ClientId);
+            .HasForeignKey(x => x.ClientId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasMany(x => x.InvoiceTemplates)
             .WithOne(x => x.Client)
-            .HasForeignKey(x => x.ClientId);
+            .HasForeignKey(x => x.ClientId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder.HasMany(x => x.LedgerAccounts)
             .WithOne(x => x.Client)
