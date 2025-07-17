@@ -4,6 +4,9 @@ public class InvoiceTemplateRow : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
+    public int ArticleId { get; set; }
+    public Article Article { get; set; } = null!;
+
     public int InvoiceTemplateId { get; set; }
     public InvoiceTemplate InvoiceTemplate { get; set; } = null!;
 

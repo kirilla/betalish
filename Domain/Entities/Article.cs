@@ -23,6 +23,7 @@ public class Article : IFormatOnSave, IValidateOnSave
     public Client Client { get; set; } = null!;
 
     public List<InvoiceDraftRow> InvoiceDraftRows { get; set; } = [];
+    public List<InvoiceTemplateRow> InvoiceTemplateRows { get; set; } = [];
 
     public void FormatOnSave()
     {
