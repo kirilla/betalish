@@ -21,7 +21,9 @@ public class RemoveArticleModel(
                 throw new NotPermittedException();
 
             Article = await database.Articles
-                .Where(x => x.Id == id)
+                .Where(x =>
+                    x.ClientId == UserToken.ClientId!.Value &&
+                    x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -50,7 +52,9 @@ public class RemoveArticleModel(
                 throw new NotPermittedException();
 
             Article = await database.Articles
-                .Where(x => x.Id == id)
+                .Where(x =>
+                    x.ClientId == UserToken.ClientId!.Value &&
+                    x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
