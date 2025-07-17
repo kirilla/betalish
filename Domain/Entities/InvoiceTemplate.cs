@@ -7,6 +7,8 @@ public class InvoiceTemplate : IFormatOnSave, IValidateOnSave
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
 
+    public List<InvoiceTemplateRow> InvoiceTemplateRows { get; set; } = [];
+
     public void FormatOnSave()
     {
     }

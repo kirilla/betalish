@@ -17,8 +17,11 @@ public interface IDatabaseService
     DbSet<EmailImage> EmailImages { get; set; }
     DbSet<EmailMessage> EmailMessages { get; set; }
     DbSet<Invoice> Invoices { get; set; }
+    DbSet<InvoiceRow> InvoiceRows { get; set; }
     DbSet<InvoiceDraft> InvoiceDrafts { get; set; }
+    DbSet<InvoiceDraftRow> InvoiceDraftRows { get; set; }
     DbSet<InvoiceTemplate> InvoiceTemplates { get; set; }
+    DbSet<InvoiceTemplateRow> InvoiceTemplateRows { get; set; }
     DbSet<LedgerAccount> LedgerAccounts { get; set; }
     DbSet<LogItem> LogItems { get; set; }
     DbSet<NetworkRequest> NetworkRequests { get; set; }
