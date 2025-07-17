@@ -21,6 +21,9 @@ public class DatabaseService(
     public DbSet<EmailAttachment> EmailAttachments { get; set; }
     public DbSet<EmailImage> EmailImages { get; set; }
     public DbSet<EmailMessage> EmailMessages { get; set; }
+    public DbSet<Invoice> Invoices { get; set; }
+    public DbSet<InvoiceDraft> InvoiceDrafts { get; set; }
+    public DbSet<InvoiceTemplate> InvoiceTemplates { get; set; }
     public DbSet<LedgerAccount> LedgerAccounts { get; set; }
     public DbSet<LogItem> LogItems { get; set; }
     public DbSet<NetworkRequest> NetworkRequests { get; set; }
@@ -51,6 +54,9 @@ public class DatabaseService(
         new EmailAttachmentConfiguration().Configure(builder.Entity<EmailAttachment>());
         new EmailImageConfiguration().Configure(builder.Entity<EmailImage>());
         new EmailMessageConfiguration().Configure(builder.Entity<EmailMessage>());
+        new InvoiceConfiguration().Configure(builder.Entity<Invoice>());
+        new InvoiceDraftConfiguration().Configure(builder.Entity<InvoiceDraft>());
+        new InvoiceTemplateConfiguration().Configure(builder.Entity<InvoiceTemplate>());
         new LedgerAccountConfiguration().Configure(builder.Entity<LedgerAccount>());
         new LogItemConfiguration().Configure(builder.Entity<LogItem>());
         new NetworkRequestConfiguration().Configure(builder.Entity<NetworkRequest>());
