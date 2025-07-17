@@ -205,3 +205,8 @@ main h4 + form,
 main h5 + form {
     margin-top: 1rem;
 }
+
+main h4 + figure,
+main h5 + figure {
+    margin-top: 1rem;
+}
