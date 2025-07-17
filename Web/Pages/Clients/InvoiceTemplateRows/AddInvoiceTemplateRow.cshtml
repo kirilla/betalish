@@ -1,5 +1,5 @@
-﻿@page "/add-invoice-draft-row/{id:int}"
-@model AddInvoiceDraftRowModel
+﻿@page "/add-invoice-template-row/{id:int}"
+@model AddInvoiceTemplateRowModel
 @{
 }
 
@@ -21,7 +21,7 @@
 
     <form method="post">
 
-        <input type="hidden" asp-for="CommandModel.InvoiceDraftId" />
+        <input type="hidden" asp-for="CommandModel.InvoiceTemplateId" />
 
         <label asp-for="CommandModel.ArticleId">
             Artikel
@@ -47,7 +47,7 @@
             Lägg till
         </button>
 
-        <a class="button" href="/show-invoice-drafts">
+        <a class="button" href="/show-invoice-templates">
             Avbryt
         </a>
     </form>

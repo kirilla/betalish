@@ -4,6 +4,8 @@ public class InvoiceDraftRow : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
+    public decimal Quantity { get; set; }
+
     public int ArticleId { get; set; }
     public Article Article { get; set; } = null!;
 

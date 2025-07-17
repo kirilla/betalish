@@ -1,9 +1,9 @@
-﻿namespace Betalish.Application.Commands.InvoiceDraftRows.AddInvoiceDraftRow;
+﻿namespace Betalish.Application.Commands.InvoiceTemplateRows.AddInvoiceTemplateRow;
 
-public class AddInvoiceDraftRowCommand(IDatabaseService database) : IAddInvoiceDraftRowCommand
+public class AddInvoiceTemplateRowCommand(IDatabaseService database) : IAddInvoiceTemplateRowCommand
 {
     public async Task Execute(
-        IUserToken userToken, AddInvoiceDraftRowCommandModel model)
+        IUserToken userToken, AddInvoiceTemplateRowCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -11,10 +11,10 @@ public class AddInvoiceDraftRowCommand(IDatabaseService database) : IAddInvoiceD
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        var draft = await database.InvoiceDrafts
+        var template = await database.InvoiceTemplates
             .Where(x =>
                 x.ClientId == userToken.ClientId!.Value &&
-                x.Id == model.InvoiceDraftId)
+                x.Id == model.InvoiceTemplateId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
@@ -25,21 +25,21 @@ public class AddInvoiceDraftRowCommand(IDatabaseService database) : IAddInvoiceD
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (await database.InvoiceDraftRows
+        if (await database.InvoiceTemplateRows
             .AnyAsync(x =>
-                x.InvoiceDraft.ClientId == userToken.ClientId!.Value &&
-                x.InvoiceDraftId == model.InvoiceDraftId &&
+                x.InvoiceTemplate.ClientId == userToken.ClientId!.Value &&
+                x.InvoiceTemplateId == model.InvoiceTemplateId &&
                 x.ArticleId == model.ArticleId!.Value))
             throw new BlockedByExistingException();
 
-        var row = new InvoiceDraftRow()
+        var row = new InvoiceTemplateRow()
         {
             ArticleId = article.Id,
-            InvoiceDraftId = draft.Id,
+            InvoiceTemplateId = template.Id,
             Quantity = model.Quantity!.TryParseDecimal()!.Value,
         };
 
-        database.InvoiceDraftRows.Add(row);
+        database.InvoiceTemplateRows.Add(row);
 
         await database.SaveAsync(userToken);
     }
