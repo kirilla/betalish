@@ -1,0 +1,61 @@
+﻿@page "/add-invoice-draft"
+@model AddInvoiceDraftModel
+@{
+}
+
+@section Meta {
+    <title>
+        Skapa utkast -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Skapa utkast
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.CustomerId">
+            Kund
+        </label>
+        <select asp-for="CommandModel.CustomerId">
+            <option value="">–</option>
+            @foreach (var customer in Model.Customers)
+            {
+                <option value="@(customer.Id)">
+                    @(customer.Name)
+                </option>
+            }
+        </select>
+
+        <label asp-for="CommandModel.InvoiceTemplateId">
+            Fakturamall
+        </label>
+        <select asp-for="CommandModel.InvoiceTemplateId">
+            <option value="">–</option>
+            @foreach (var template in Model.InvoiceTemplates)
+            {
+                <option value="@(template.Id)">
+                    @(template.Id) @* NAME *@
+                </option>
+            }
+        </select>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-invoice-drafts">
+            Avbryt
+        </a>
+    </form>
+
+</main>

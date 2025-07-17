@@ -1,0 +1,88 @@
+﻿@page "/show-invoice-draft/{id:int}"
+@model ShowInvoiceDraftModel
+@{
+}
+
+@section Meta {
+    <title>Utkast - @(Model.InvoiceDraft.Id) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Utkast
+    </h4>
+
+    <h5>Artiklar</h5>
+
+    <figure>
+        <table>
+            <tr>
+                <th>Nr</th>
+                <th>Kund</th>
+                <th>Pris</th>
+                <th>Enhet</th>
+                <th>Moms</th>
+                <th>Typ</th>
+                <th>Bokf.konto</th>
+                <th>Momskonto</th>
+            </tr>
+            @foreach (var row in Model.InvoiceDraftRows)
+            {
+                <tr>
+                    <td>
+                        @(row.Article.Number)
+                    </td>
+                    <td>
+                        @(row.Article.Name)
+                    </td>
+                    <td>
+                        @(row.Article.UnitPrice.ToString("N2", Swedish.CultureInfo))
+                        @(Swedish.Currency.Short)
+                    </td>
+                    <td>
+                        @(row.Article.UnitName)
+                    </td>
+                    <td>
+                        @(row.Article.VatValue.ToString("N2", Swedish.CultureInfo))
+                    </td>
+                    <td>
+                        @if (row.Article.ArticleKind == ArticleKind.Goods)
+                        {
+                            <span>Vara</span>
+                        }
+                        @if (row.Article.ArticleKind == ArticleKind.Service)
+                        {
+                            <span>Tjänst</span>
+                        }
+                    </td>
+                    <td>
+                        @(row.Article.Account)
+                    </td>
+                    <td>
+                        @(row.Article.VatAccount)
+                    </td>
+                </tr>
+            }
+        </table>
+    </figure>
+
+    <p>
+        <a class="button" href="/add-invoice-draft-row/@(Model.InvoiceDraft.Id)">
+            Lägg till rad
+        </a>
+
+        <a class="button" href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
+            Redigera
+        </a>
+
+        <a class="button" href="/remove-invoice-draft/@(Model.InvoiceDraft.Id)">
+            Ta bort
+        </a>
+    </p>
+
+</main>

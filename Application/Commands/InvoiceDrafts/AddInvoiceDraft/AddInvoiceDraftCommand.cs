@@ -1,0 +1,65 @@
+﻿namespace Betalish.Application.Commands.InvoiceDrafts.AddInvoiceDraft;
+
+public class AddInvoiceDraftCommand(IDatabaseService database) : IAddInvoiceDraftCommand
+{
+    public async Task<int> Execute(
+        IUserToken userToken, AddInvoiceDraftCommandModel model)
+    {
+        if (!IsPermitted(userToken))
+            throw new NotPermittedException();
+
+        model.TrimStringProperties();
+        model.SetEmptyStringsToNull();
+
+        var customer = await database.Customers
+            .AsNoTracking()
+            .Where(x =>
+                x.ClientId == userToken.ClientId!.Value &&
+                x.Id == model.CustomerId!.Value)
+            .SingleOrDefaultAsync() ??
+            throw new NotFoundException();
+
+        var draft = new InvoiceDraft()
+        {
+            ClientId = userToken.ClientId!.Value,
+            CustomerId = model.CustomerId!.Value,
+        };
+
+        database.InvoiceDrafts.Add(draft);
+
+        if (model.InvoiceTemplateId.HasValue)
+        {
+            var template = await database.InvoiceTemplates
+                .AsNoTracking()
+                .Where(x =>
+                    x.ClientId == userToken.ClientId!.Value &&
+                    x.Id == model.InvoiceTemplateId!.Value)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            var templateRows = await database.InvoiceTemplateRows
+                .AsNoTracking()
+                .Where(x =>
+                    x.InvoiceTemplate.ClientId == userToken.ClientId!.Value &&
+                    x.InvoiceTemplateId == model.InvoiceTemplateId!.Value)
+                .ToListAsync();
+
+            var draftRows = templateRows
+                .Select(x => new InvoiceDraftRow()
+                {
+                    //TODO: ArticleId = x.ArticleId,
+                    InvoiceDraft = draft,
+                })
+                .ToList();
+        }
+
+        await database.SaveAsync(userToken);
+
+        return draft.Id;
+    }
+
+    public bool IsPermitted(IUserToken userToken)
+    {
+        return userToken.IsClient;
+    }
+}

@@ -1,0 +1,43 @@
+﻿@page "/edit-invoice-draft/{id:int}"
+@model EditInvoiceDraftModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera utkast -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera utkast:
+        @(Model.InvoiceDraft.Id)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        @* <label asp-for="CommandModel.TODO">
+            Todo
+        </label>
+        <input asp-for="CommandModel.TODO" placeholder="TODO" /> *@
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-invoice-draft/@(Model.InvoiceDraft.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

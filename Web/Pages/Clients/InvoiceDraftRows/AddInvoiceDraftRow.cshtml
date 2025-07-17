@@ -1,0 +1,50 @@
+﻿@page "/add-invoice-draft-row/{id:int}"
+@model AddInvoiceDraftRowModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till rad i utkast -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till en rad i utkast
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.InvoiceDraftId" />
+
+        <label asp-for="CommandModel.ArticleId">
+            Artikel
+        </label>
+        <select asp-for="CommandModel.ArticleId">
+            <option value="">–</option>
+            @foreach (var article in Model.Articles)
+            {
+                <option value="@(article.Id)">
+                    @(article.Name)
+                </option>
+            }
+        </select>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-invoice-drafts">
+            Avbryt
+        </a>
+    </form>
+
+</main>
