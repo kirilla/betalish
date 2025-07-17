@@ -22,8 +22,8 @@ public class EditArticleModel(
 
             Article = await database.Articles
                 .Where(x =>
-                    x.Id == id &&
-                    x.ClientId == UserToken.ClientId!.Value)
+                    x.ClientId == UserToken.ClientId!.Value &&
+                    x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -61,8 +61,8 @@ public class EditArticleModel(
 
             Article = await database.Articles
                 .Where(x =>
-                    x.Id == id &&
-                    x.ClientId == UserToken.ClientId!.Value)
+                    x.ClientId == UserToken.ClientId!.Value &&
+                    x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

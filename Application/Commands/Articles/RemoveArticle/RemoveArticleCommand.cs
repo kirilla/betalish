@@ -12,9 +12,9 @@ public class RemoveArticleCommand(IDatabaseService database) : IRemoveArticleCom
             throw new ConfirmationRequiredException();
 
         var article = await database.Articles
-            .Where(x => 
-                x.Id == model.Id &&
-                x.ClientId == userToken.ClientId!.Value)
+            .Where(x =>
+                x.ClientId == userToken.ClientId!.Value &&
+                x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 

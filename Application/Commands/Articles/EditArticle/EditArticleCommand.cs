@@ -24,8 +24,8 @@ public class EditArticleCommand(IDatabaseService database) : IEditArticleCommand
 
         var article = await database.Articles
             .Where(x =>
-                x.Id == model.Id &&
-                x.ClientId == userToken.ClientId!.Value)
+                x.ClientId == userToken.ClientId!.Value &&
+                x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
