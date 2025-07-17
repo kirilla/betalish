@@ -14,7 +14,10 @@
 <main>
 
     <h4>
-        Utkast
+        Fakturautkast till 
+        <a href="/show-customer/@(Model.Customer.Id)">
+            @(Model.Customer.Name)
+        </a>
     </h4>
 
     <h5>Artiklar</h5>
@@ -23,13 +26,12 @@
         <table>
             <tr>
                 <th>Nr</th>
-                <th>Kund</th>
+                <th>Artikel</th>
+                <th>Kvantitet</th>
                 <th>Pris</th>
                 <th>Enhet</th>
                 <th>Moms</th>
-                <th>Typ</th>
-                <th>Bokf.konto</th>
-                <th>Momskonto</th>
+                <th></th>
             </tr>
             @foreach (var row in Model.InvoiceDraftRows)
             {
@@ -41,7 +43,14 @@
                         @(row.Article.Name)
                     </td>
                     <td>
-                        @(row.Article.UnitPrice.ToString("N2", Swedish.CultureInfo))
+                        <a href="/edit-invoice-draft-row/@(row.Id)">
+                            @(row.Quantity.ToString("N2", Swedish.CultureInfo))
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/edit-invoice-draft-row/@(row.Id)">@(
+                            row.Article.UnitPrice.ToString("N2", Swedish.CultureInfo)
+                        )</a>
                         @(Swedish.Currency.Short)
                     </td>
                     <td>
@@ -51,20 +60,9 @@
                         @(row.Article.VatValue.ToString("N2", Swedish.CultureInfo))
                     </td>
                     <td>
-                        @if (row.Article.ArticleKind == ArticleKind.Goods)
-                        {
-                            <span>Vara</span>
-                        }
-                        @if (row.Article.ArticleKind == ArticleKind.Service)
-                        {
-                            <span>Tjänst</span>
-                        }
-                    </td>
-                    <td>
-                        @(row.Article.Account)
-                    </td>
-                    <td>
-                        @(row.Article.VatAccount)
+                        <a href="/remove-invoice-draft-row/@(row.Id)" class="nolink">
+                            ❌
+                        </a>
                     </td>
                 </tr>
             }

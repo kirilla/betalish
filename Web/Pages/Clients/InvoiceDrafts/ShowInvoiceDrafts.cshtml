@@ -32,6 +32,7 @@
         <table>
             <tr>
                 <th>Id</th>
+                <th>Kund</th>
             </tr>
             @foreach (var draft in Model.InvoiceDrafts)
             {
@@ -41,12 +42,15 @@
                             @(draft.Id)
                         </a>
                     </td>
+                    <td>
+                        @(draft.Customer.Name)
+                    </td>
                 </tr>
             }
             @if (!Model.InvoiceDrafts.Any())
             {
                 <tr>
-                    <td colspan="1">
+                    <td colspan="2">
                         Inga
                     </td>
                 </tr>

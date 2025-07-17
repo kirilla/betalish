@@ -17,6 +17,7 @@ public class ShowInvoiceDraftsModel(
 
             InvoiceDrafts = await database.InvoiceDrafts
                 .AsNoTracking()
+                .Include(x => x.Customer)
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .OrderBy(x => x.Id)
                 .ToListAsync();
