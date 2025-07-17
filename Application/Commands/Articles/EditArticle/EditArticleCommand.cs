@@ -37,7 +37,6 @@ public class EditArticleCommand(IDatabaseService database) : IEditArticleCommand
         article.UnitName = model.UnitName!;
         article.Account = model.Account!;
         article.VatAccount = model.VatAccount!;
-        article.ClientId = userToken.ClientId!.Value;
 
         await database.SaveAsync(userToken);
     }
