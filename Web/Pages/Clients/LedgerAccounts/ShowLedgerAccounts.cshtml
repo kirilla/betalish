@@ -1,0 +1,58 @@
+﻿@page "/show-ledger-accounts"
+@model ShowLedgerAccountsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Bokföringskonton -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        📒
+        Bokföringskonton
+    </h4>
+
+    <figure>
+        <table>
+            <tr>
+                <th>Konto</th>
+                <th>Beskrivning</th>
+            </tr>
+            @foreach (var account in Model.LedgerAccounts)
+            {
+                <tr>
+                    <td>
+                        @(account.Account)
+                    </td>
+                    <td>
+                        @(account.Description)
+                    </td>
+                </tr>
+            }
+            @if (!Model.LedgerAccounts.Any())
+            {
+                <tr>
+                    <td colspan="2">
+                        Inga
+                    </td>
+                </tr>
+            }
+        </table>
+    </figure>
+
+    <p>
+        <a class="button" href="/add-ledger-account">
+            Lägg till
+        </a>
+    </p>
+
+</main>

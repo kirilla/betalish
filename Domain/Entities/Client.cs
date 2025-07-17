@@ -13,6 +13,7 @@ public class Client
     public List<ClientEmailMessage> ClientEmailMessages { get; set; } = [];
     public List<ClientEvent> ClientEvents { get; set; } = [];
     public List<Customer> Customers { get; set; } = [];
+    public List<LedgerAccount> LedgerAccounts { get; set; } = [];
     public List<Session> Sessions { get; set; } = [];
     public List<SessionRecord> SessionRecords { get; set; } = [];
 }

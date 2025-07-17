@@ -20,6 +20,7 @@ public static class MaxLengths
         public static class Bookkeeping
         {
             public const int Account = 4;
+            public const int Description = 70;
         }
 
         public static class Email

@@ -1,0 +1,47 @@
+﻿@page "/add-ledger-account"
+@model AddLedgerAccountModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till bokföringskonto -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till ett bokföringskonto
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.Account">
+            Konto
+        </label>
+        <input asp-for="CommandModel.Account"
+               placeholder="0000" />
+
+        <label asp-for="CommandModel.Description">
+            Beskrivning
+        </label>
+        <input asp-for="CommandModel.Description"
+               placeholder="" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-ledger-accounts">
+            Avbryt
+        </a>
+    </form>
+
+</main>

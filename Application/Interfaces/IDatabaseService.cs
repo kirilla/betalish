@@ -16,6 +16,7 @@ public interface IDatabaseService
     DbSet<EmailAttachment> EmailAttachments { get; set; }
     DbSet<EmailImage> EmailImages { get; set; }
     DbSet<EmailMessage> EmailMessages { get; set; }
+    DbSet<LedgerAccount> LedgerAccounts { get; set; }
     DbSet<LogItem> LogItems { get; set; }
     DbSet<NetworkRequest> NetworkRequests { get; set; }
     DbSet<NetworkRule> NetworkRules { get; set; }

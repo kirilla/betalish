@@ -1,0 +1,50 @@
+﻿@page "/edit-ledger-account/{id:int}"
+@model EditLedgerAccountModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera bokföringskonto -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera bokföringskonto:
+        @(Model.LedgerAccount.Account)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.Account">
+            Konto
+        </label>
+        <input asp-for="CommandModel.Account"
+               placeholder="0000" />
+
+        <label asp-for="CommandModel.Description">
+            Beskrivning
+        </label>
+        <input asp-for="CommandModel.Description"
+               placeholder="" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-ledger-account/@(Model.LedgerAccount.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>
