@@ -32,7 +32,6 @@
                 <th>Artikel</th>
                 <th>Kvantitet</th>
                 <th>Pris</th>
-                <th>Enhet</th>
                 <th>Moms</th>
                 <th></th>
             </tr>
@@ -46,18 +45,16 @@
                         @(row.Article.Name)
                     </td>
                     <td>
-                        <a href="/edit-invoice-draft-row/@(row.Id)">
-                            @(row.Quantity.ToString("N2", Swedish.CultureInfo))
-                        </a>
+                        <a href="/edit-invoice-draft-row/@(row.Id)">@(
+                            row.Quantity.ToString("N2", Swedish.CultureInfo)
+                        )</a>
+                        @(row.Article.UnitName)
                     </td>
                     <td>
                         <a href="/edit-invoice-draft-row/@(row.Id)">@(
                             row.Article.UnitPrice.ToString("N2", Swedish.CultureInfo)
                         )</a>
                         @(Swedish.Currency.Short)
-                    </td>
-                    <td>
-                        @(row.Article.UnitName)
                     </td>
                     <td>
                         @(row.Article.VatValue.ToString("N2", Swedish.CultureInfo))
