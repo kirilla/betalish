@@ -1,0 +1,90 @@
+﻿@page "/show-invoice-template/{id:int}"
+@model ShowInvoiceTemplateModel
+@{
+}
+
+@section Meta {
+    <title>Fakturamall - @(Model.InvoiceTemplate.Id) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Fakturamall
+    </h4>
+
+    <figure>
+        <table>
+            <tr>
+                <th>Nr</th>
+                <th>Artikel</th>
+                <th>Kvantitet</th>
+                <th>Pris</th>
+                <th>Enhet</th>
+                <th>Moms</th>
+                <th></th>
+            </tr>
+            @foreach (var row in Model.InvoiceTemplateRows)
+            {
+                <tr>
+                    <td>
+                        @(row.Article.Number)
+                    </td>
+                    <td>
+                        @(row.Article.Name)
+                    </td>
+                    <td>
+                        <a href="/edit-invoice-template-row/@(row.Id)">
+                            @(row.Quantity.ToString("N2", Swedish.CultureInfo))
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/edit-invoice-template-row/@(row.Id)">
+                            @(
+                            row.Article.UnitPrice.ToString("N2", Swedish.CultureInfo)
+                        )</a>
+                        @(Swedish.Currency.Short)
+                    </td>
+                    <td>
+                        @(row.Article.UnitName)
+                    </td>
+                    <td>
+                        @(row.Article.VatValue.ToString("N2", Swedish.CultureInfo))
+                    </td>
+                    <td>
+                        <a href="/remove-invoice-template-row/@(row.Id)" class="nolink">
+                            ❌
+                        </a>
+                    </td>
+                </tr>
+            }
+            @if (!Model.InvoiceTemplateRows.Any())
+            {
+                <tr>
+                    <td colspan="7">
+                        Inga artiklar
+                    </td>
+                </tr>
+            }
+        </table>
+    </figure>
+
+    <p>
+        <a class="button" href="/add-invoice-template-row/@(Model.InvoiceTemplate.Id)">
+            Lägg till rad
+        </a>
+
+        <a class="button" href="/edit-invoice-template/@(Model.InvoiceTemplate.Id)">
+            Redigera
+        </a>
+
+        <a class="button" href="/remove-invoice-template/@(Model.InvoiceTemplate.Id)">
+            Ta bort
+        </a>
+    </p>
+
+</main>

@@ -1,0 +1,45 @@
+﻿@page "/remove-invoice-template/{id:int}"
+@model RemoveInvoiceTemplateModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort fakturamall -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Ta bort fakturamall:
+        @(Model.InvoiceTemplate.Id)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Ta bort
+        </button>
+
+        <a class="button" href="/show-invoice-template/@(Model.CommandModel.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

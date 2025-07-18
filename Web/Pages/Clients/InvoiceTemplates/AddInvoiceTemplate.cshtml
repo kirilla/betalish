@@ -1,0 +1,35 @@
+﻿@page "/add-invoice-template"
+@model AddInvoiceTemplateModel
+@{
+}
+
+@section Meta {
+    <title>
+        Skapa fakturamall -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Skapa fakturamall
+    </h4>
+
+    <form method="post">
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-invoice-templates">
+            Avbryt
+        </a>
+    </form>
+
+</main>
