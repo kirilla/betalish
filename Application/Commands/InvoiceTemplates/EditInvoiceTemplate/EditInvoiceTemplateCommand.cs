@@ -18,7 +18,7 @@ public class EditInvoiceTemplateCommand(IDatabaseService database) : IEditInvoic
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        // template.TODO = model.TODO;
+        template.Name = model.Name!;
 
         await database.SaveAsync(userToken);
     }

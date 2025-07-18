@@ -31,13 +31,13 @@
     <figure>
         <table>
             <tr>
-                <th>Id</th>
+                <th>Namn</th>
             </tr>
             @foreach (var template in Model.InvoiceTemplates)
             {
                 <tr>
                     <td>
-                        @(template.Id)
+                        <a href="/show-invoice-template/@(template.Id)">@(template.Name)</a>
                     </td>
                 </tr>
             }

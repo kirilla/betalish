@@ -30,7 +30,7 @@ public class EditInvoiceTemplateModel(
             CommandModel = new EditInvoiceTemplateCommandModel()
             {
                 Id = InvoiceTemplate.Id,
-                //TODO = InvoiceTemplate.TODO,
+                Name = InvoiceTemplate.Name,
             };
 
             return Page();

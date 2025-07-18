@@ -14,6 +14,7 @@ public class AddInvoiceTemplateCommand(IDatabaseService database) : IAddInvoiceT
         var template = new InvoiceTemplate()
         {
             ClientId = userToken.ClientId!.Value,
+            Name = model.Name!,
         };
 
         database.InvoiceTemplates.Add(template);

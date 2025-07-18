@@ -196,6 +196,11 @@ public static class MaxLengths
             public const int TextBody = Common.DbSuperSize;
         }
 
+        public static class InvoiceTemplate
+        {
+            public const int Name = 50;
+        }
+
         public static class LogItem
         {
             public const int Description = 200;

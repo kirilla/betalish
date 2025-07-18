@@ -6,6 +6,9 @@ class InvoiceTemplateConfiguration : IEntityTypeConfiguration<InvoiceTemplate>
     {
         builder.HasKey(p => p.Id);
 
+        builder.Property(p => p.Name)
+            .HasMaxLength(MaxLengths.Domain.InvoiceTemplate.Name);
+
         builder.HasMany(x => x.InvoiceTemplateRows)
             .WithOne(x => x.InvoiceTemplate)
             .HasForeignKey(x => x.InvoiceTemplateId);

@@ -1,8 +1,15 @@
-﻿namespace Betalish.Application.Commands.InvoiceTemplates.EditInvoiceTemplate;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Betalish.Application.Commands.InvoiceTemplates.EditInvoiceTemplate;
 
 public class EditInvoiceTemplateCommandModel
 {
     public int Id { get; set; }
 
-    //TODO
+    [RegularExpression(Pattern.Common.SomeContent)]
+    [Required(ErrorMessage = "Ge mallen ett kort beskrivande namn.")]
+    [StringLength(
+        MaxLengths.Domain.InvoiceTemplate.Name,
+        ErrorMessage = "Skriv kortare.")]
+    public string? Name { get; set; }
 }

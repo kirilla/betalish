@@ -21,6 +21,12 @@
 
     <form method="post">
 
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name"
+               placeholder="Månadsavgift" />
+
         <div asp-validation-summary="All"></div>
 
         <button type="submit">

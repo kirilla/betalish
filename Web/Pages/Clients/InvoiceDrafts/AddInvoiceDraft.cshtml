@@ -42,7 +42,7 @@
             @foreach (var template in Model.InvoiceTemplates)
             {
                 <option value="@(template.Id)">
-                    @(template.Id) @* NAME *@
+                    @(template.Name)
                 </option>
             }
         </select>

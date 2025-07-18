@@ -4,6 +4,8 @@ public class InvoiceTemplate : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
+    public required string Name { get; set; }
+
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
 
