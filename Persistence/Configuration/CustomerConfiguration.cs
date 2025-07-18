@@ -19,6 +19,10 @@ class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.Property(p => p.EmailAddress)
             .HasMaxLength(MaxLengths.Domain.Customer.EmailAddress);
 
+        builder.HasMany(x => x.CustomerTags)
+            .WithOne(x => x.Customer)
+            .HasForeignKey(x => x.CustomerId);
+
         builder.HasMany(x => x.InvoiceDrafts)
             .WithOne(x => x.Customer)
             .HasForeignKey(x => x.CustomerId);

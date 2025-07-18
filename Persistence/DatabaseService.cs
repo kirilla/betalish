@@ -18,6 +18,7 @@ public class DatabaseService(
     public DbSet<ClientEmailMessage> ClientEmailMessages { get; set; }
     public DbSet<ClientEvent> ClientEvents { get; set; }
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<CustomerTag> CustomerTags { get; set; }
     public DbSet<EmailAttachment> EmailAttachments { get; set; }
     public DbSet<EmailImage> EmailImages { get; set; }
     public DbSet<EmailMessage> EmailMessages { get; set; }
@@ -54,6 +55,7 @@ public class DatabaseService(
         new ClientEmailMessageConfiguration().Configure(builder.Entity<ClientEmailMessage>());
         new ClientEventConfiguration().Configure(builder.Entity<ClientEvent>());
         new CustomerConfiguration().Configure(builder.Entity<Customer>());
+        new CustomerTagConfiguration().Configure(builder.Entity<CustomerTag>());
         new EmailAttachmentConfiguration().Configure(builder.Entity<EmailAttachment>());
         new EmailImageConfiguration().Configure(builder.Entity<EmailImage>());
         new EmailMessageConfiguration().Configure(builder.Entity<EmailMessage>());

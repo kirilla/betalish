@@ -102,6 +102,12 @@ public static class MaxLengths
             public const int Ssn10Permissive = 11;
             public const int Ssn12Permissive = 13;
         }
+
+        public static class Tag
+        {
+            public const int Key = 30;
+            public const int Value = 30;
+        }
     }
 
     public static class Domain

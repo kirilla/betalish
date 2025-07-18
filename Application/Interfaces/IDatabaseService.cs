@@ -13,6 +13,7 @@ public interface IDatabaseService
     DbSet<ClientEmailMessage> ClientEmailMessages { get; set; }
     DbSet<ClientEvent> ClientEvents { get; set; }
     DbSet<Customer> Customers { get; set; }
+    DbSet<CustomerTag> CustomerTags { get; set; }
     DbSet<EmailAttachment> EmailAttachments { get; set; }
     DbSet<EmailImage> EmailImages { get; set; }
     DbSet<EmailMessage> EmailMessages { get; set; }
