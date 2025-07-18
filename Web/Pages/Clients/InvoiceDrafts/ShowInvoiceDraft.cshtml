@@ -14,16 +14,19 @@
 <main>
 
     <h4>
-        Fakturautkast
+        Fakturautkast: 
+        <a href="/show-customer/@(Model.Customer.Id)">
+            @(Model.Customer.Name)
+        </a>
     </h4>
 
-    <div class="notice">
-        <p>
-            <a href="/show-customer/@(Model.Customer.Id)">
-                @(Model.Customer.Name)
+    <ul class="notice">
+        <li>
+            <a href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
+                @(Model.InvoiceDraft.About)
             </a>
-        </p>
-    </div>
+        </li>
+    </ul>
 
     <figure>
         <table>

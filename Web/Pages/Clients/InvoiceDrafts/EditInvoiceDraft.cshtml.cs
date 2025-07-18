@@ -38,7 +38,7 @@ public class EditInvoiceDraftModel(
             CommandModel = new EditInvoiceDraftCommandModel()
             {
                 Id = InvoiceDraft.Id,
-                //TODO = InvoiceDraft.TODO,
+                About = InvoiceDraft.About,
             };
 
             return Page();

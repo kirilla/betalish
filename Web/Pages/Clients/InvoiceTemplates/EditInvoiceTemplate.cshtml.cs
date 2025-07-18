@@ -31,6 +31,7 @@ public class EditInvoiceTemplateModel(
             {
                 Id = InvoiceTemplate.Id,
                 Name = InvoiceTemplate.Name,
+                About = InvoiceTemplate.About,
             };
 
             return Page();

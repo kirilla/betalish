@@ -19,6 +19,7 @@ public class EditInvoiceTemplateCommand(IDatabaseService database) : IEditInvoic
             throw new NotFoundException();
 
         template.Name = model.Name!;
+        template.About = model.About!;
 
         await database.SaveAsync(userToken);
     }

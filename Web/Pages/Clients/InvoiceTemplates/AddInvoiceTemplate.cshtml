@@ -25,7 +25,13 @@
             Namn
         </label>
         <input asp-for="CommandModel.Name"
-               placeholder="Månadsavgift" />
+               placeholder="Internt namn" />
+
+        <label asp-for="CommandModel.Name">
+            Sammanfattning
+        </label>
+        <input asp-for="CommandModel.Name"
+               placeholder="Sammanfattning åt fakturamottagaren" />
 
         <div asp-validation-summary="All"></div>
 

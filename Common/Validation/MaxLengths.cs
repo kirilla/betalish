@@ -35,6 +35,11 @@ public static class MaxLengths
             public const int UserAgent = 150;
         }
 
+        public static class Invoice
+        {
+            public const int About = 50;
+        }
+
         public static class Ip
         {
             public static class Address

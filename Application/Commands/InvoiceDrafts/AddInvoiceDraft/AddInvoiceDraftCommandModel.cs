@@ -8,4 +8,11 @@ public class AddInvoiceDraftCommandModel
     public int? CustomerId { get; set; }
 
     public int? InvoiceTemplateId { get; set; }
+
+    [RegularExpression(Pattern.Common.SomeContent)]
+    [Required(ErrorMessage = "Ange sammanfattning.")]
+    [StringLength(
+        MaxLengths.Common.Invoice.About,
+        ErrorMessage = "Skriv kortare.")]
+    public string? About { get; set; }
 }

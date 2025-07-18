@@ -18,6 +18,12 @@
         @(Model.InvoiceTemplate.Name)
     </h4>
 
+    <ul class="notice">
+        <li>
+            @(Model.InvoiceTemplate.About)
+        </li>
+    </ul>
+
     @if (!Model.InvoiceTemplateRows.Any())
     {
         <div class="notice">

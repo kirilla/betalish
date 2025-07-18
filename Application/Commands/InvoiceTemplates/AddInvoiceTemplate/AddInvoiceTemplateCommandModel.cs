@@ -10,4 +10,11 @@ public class AddInvoiceTemplateCommandModel
         MaxLengths.Domain.InvoiceTemplate.Name,
         ErrorMessage = "Skriv kortare.")]
     public string? Name { get; set; }
+
+    [RegularExpression(Pattern.Common.SomeContent)]
+    [Required(ErrorMessage = "Ange sammanfattning.")]
+    [StringLength(
+        MaxLengths.Common.Invoice.About,
+        ErrorMessage = "Skriv kortare.")]
+    public string? About { get; set; }
 }

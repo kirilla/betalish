@@ -24,10 +24,11 @@
 
         <input type="hidden" asp-for="CommandModel.Id" />
 
-        @* <label asp-for="CommandModel.TODO">
-            Todo
+        <label asp-for="CommandModel.About">
+            Sammanfattning
         </label>
-        <input asp-for="CommandModel.TODO" placeholder="TODO" /> *@
+        <input asp-for="CommandModel.About"
+               placeholder="Ex: köp, medlemsavgift, hyra, datum från-till" />
 
         <div asp-validation-summary="All"></div>
 

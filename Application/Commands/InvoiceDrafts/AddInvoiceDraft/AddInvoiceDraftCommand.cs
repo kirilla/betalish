@@ -23,6 +23,7 @@ public class AddInvoiceDraftCommand(IDatabaseService database) : IAddInvoiceDraf
         {
             ClientId = userToken.ClientId!.Value,
             CustomerId = model.CustomerId!.Value,
+            About = model.About!,
         };
 
         database.InvoiceDrafts.Add(draft);

@@ -18,7 +18,7 @@ public class EditInvoiceDraftCommand(IDatabaseService database) : IEditInvoiceDr
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        // draft.TODO = model.TODO;
+        draft.About = model.About!;
 
         await database.SaveAsync(userToken);
     }
