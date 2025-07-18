@@ -18,7 +18,7 @@ public class ShowInvoiceTemplatesModel(
             InvoiceTemplates = await database.InvoiceTemplates
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
-                .OrderBy(x => x.Id)
+                .OrderBy(x => x.Name)
                 .ToListAsync();
 
             return Page();

@@ -14,43 +14,31 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
-@* @section Style {
-    <style>
-        body {
-            grid-template-columns: 1fr min(70rem, 90%) 1fr;
-        }
-    </style>
-} *@
-
 <main>
 
     <h4>
         Fakturamallar
     </h4>
 
-    <figure>
-        <table>
-            <tr>
-                <th>Namn</th>
-            </tr>
+    @if (!Model.InvoiceTemplates.Any())
+    {
+        <div class="notice">
+            Det finns inga mallar.
+        </div>
+    }
+
+    @if (Model.InvoiceTemplates.Any())
+    {
+        <ul class="notice">
+            
             @foreach (var template in Model.InvoiceTemplates)
             {
-                <tr>
-                    <td>
-                        <a href="/show-invoice-template/@(template.Id)">@(template.Name)</a>
-                    </td>
-                </tr>
+                <li>
+                    <a href="/show-invoice-template/@(template.Id)">@(template.Name)</a>
+                </li>
             }
-            @if (!Model.InvoiceTemplates.Any())
-            {
-                <tr>
-                    <td colspan="1">
-                        Inga
-                    </td>
-                </tr>
-            }
-        </table>
-    </figure>
+        </ul>
+    }
 
     <p>
         <a class="button" href="/add-invoice-template">
