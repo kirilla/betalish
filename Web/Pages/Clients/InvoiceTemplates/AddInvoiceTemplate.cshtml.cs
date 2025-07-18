@@ -4,14 +4,13 @@ namespace Betalish.Web.Pages.Clients.InvoiceTemplates;
 
 public class AddInvoiceTemplateModel(
     IUserToken userToken,
-    IDatabaseService database,
     IAddInvoiceTemplateCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
     public AddInvoiceTemplateCommandModel CommandModel { get; set; }
         = new AddInvoiceTemplateCommandModel();
 
-    public async Task<IActionResult> OnGet()
+    public IActionResult OnGet()
     {
         try
         {

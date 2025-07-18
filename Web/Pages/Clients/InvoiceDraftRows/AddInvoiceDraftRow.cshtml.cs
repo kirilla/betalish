@@ -65,7 +65,7 @@ public class AddInvoiceDraftRowModel(
 
             return Page();
         }
-        catch (Exception ex)
+        catch
         {
             return Redirect("/help/notpermitted");
         }
