@@ -7,6 +7,7 @@ public class RemoveInvoiceDraftModel(
     IDatabaseService database,
     IRemoveInvoiceDraftCommand command) : ClientPageModel(userToken)
 {
+    public Customer Customer { get; set; } = null!;
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 
     [BindProperty]
@@ -24,6 +25,13 @@ public class RemoveInvoiceDraftModel(
                 .Where(x => 
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            Customer = await database.Customers
+                .Where(x =>
+                    x.ClientId == UserToken.ClientId!.Value &&
+                    x.Id == InvoiceDraft.CustomerId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -55,6 +63,13 @@ public class RemoveInvoiceDraftModel(
                 .Where(x =>
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
+
+            Customer = await database.Customers
+                .Where(x =>
+                    x.ClientId == UserToken.ClientId!.Value &&
+                    x.Id == InvoiceDraft.CustomerId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
