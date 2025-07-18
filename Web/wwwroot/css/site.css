@@ -69,7 +69,7 @@ main h6 {
     /*background-color: blue;*/
 }
 
-main > h1,
+/*main > h1,
 main > h2,
 main > h3,
 main > h4,
@@ -77,8 +77,7 @@ main > h5,
 main > h6 {
     margin-block-start: 0.3rem;
     margin-inline-start: 1rem;
-    /*background-color: red;*/
-}
+}*/
 
 main > .notice {
     margin-top: 1rem;
