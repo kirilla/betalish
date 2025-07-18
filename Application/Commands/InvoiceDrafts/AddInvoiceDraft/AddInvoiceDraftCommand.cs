@@ -47,10 +47,13 @@ public class AddInvoiceDraftCommand(IDatabaseService database) : IAddInvoiceDraf
             var draftRows = templateRows
                 .Select(x => new InvoiceDraftRow()
                 {
-                    //TODO: ArticleId = x.ArticleId,
                     InvoiceDraft = draft,
+                    ArticleId = x.ArticleId,
+                    Quantity = x.Quantity,
                 })
                 .ToList();
+
+            database.InvoiceDraftRows.AddRange(draftRows);
         }
 
         await database.SaveAsync(userToken);
