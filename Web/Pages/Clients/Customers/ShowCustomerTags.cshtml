@@ -1,0 +1,47 @@
+﻿@page "/show-customer-tags"
+@model ShowCustomerTagsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Kunder -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Etiketter
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var tag in Model.CustomerTags)
+            {
+                <li>
+                    🏷️
+                    &thinsp;
+                    <a href="/show-customer-tag/@(tag.Id)">@(tag.Key)</a>
+                </li>
+            }
+
+            @if (!Model.CustomerTags.Any())
+            {
+                <li>
+                    🏷️
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+</main>
