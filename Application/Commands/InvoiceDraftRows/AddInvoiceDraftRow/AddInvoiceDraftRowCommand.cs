@@ -34,9 +34,22 @@ public class AddInvoiceDraftRowCommand(IDatabaseService database) : IAddInvoiceD
 
         var row = new InvoiceDraftRow()
         {
-            ArticleId = article.Id,
             InvoiceDraftId = draft.Id,
+
+            IsCredit = draft.IsCredit,
+
+            ArticleId = article.Id,
+            ArticleNumber = article.Number,
+            ArticleName = article.Name,
+            UnitPrice = article.UnitPrice,
+            Unit = article.UnitName,
+            VatPercentage = article.VatValue,
+
             Quantity = model.Quantity!.TryParseDecimal()!.Value,
+
+            NetAmount = 0,
+            VatAmount = 0,
+            TotalAmount = 0,
         };
 
         database.InvoiceDraftRows.Add(row);

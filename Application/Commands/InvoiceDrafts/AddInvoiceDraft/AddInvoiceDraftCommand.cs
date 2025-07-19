@@ -23,6 +23,7 @@ public class AddInvoiceDraftCommand(IDatabaseService database) : IAddInvoiceDraf
         {
             ClientId = userToken.ClientId!.Value,
             CustomerId = model.CustomerId!.Value,
+            IsCredit = model.IsCredit,
             About = model.About!,
         };
 
@@ -40,6 +41,7 @@ public class AddInvoiceDraftCommand(IDatabaseService database) : IAddInvoiceDraf
 
             var templateRows = await database.InvoiceTemplateRows
                 .AsNoTracking()
+                .Include(x => x.Article)
                 .Where(x =>
                     x.InvoiceTemplate.ClientId == userToken.ClientId!.Value &&
                     x.InvoiceTemplateId == model.InvoiceTemplateId!.Value)
@@ -49,8 +51,21 @@ public class AddInvoiceDraftCommand(IDatabaseService database) : IAddInvoiceDraf
                 .Select(x => new InvoiceDraftRow()
                 {
                     InvoiceDraft = draft,
+
+                    IsCredit = model.IsCredit,
+
                     ArticleId = x.ArticleId,
+                    ArticleNumber = x.Article.Number,
+                    ArticleName = x.Article.Name,
+                    UnitPrice = x.Article.UnitPrice,
+                    Unit = x.Article.UnitName,
+                    VatPercentage = x.Article.VatValue,
+
                     Quantity = x.Quantity,
+
+                    NetAmount = 0,
+                    VatAmount = 0,
+                    TotalAmount = 0,
                 })
                 .ToList();
 
