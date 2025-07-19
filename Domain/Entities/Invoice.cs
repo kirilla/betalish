@@ -4,6 +4,8 @@ public class Invoice : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
+    public int? InvoiceNumber { get; set; }
+
     public bool IsCredit { get; set; }
 
     public required string About { get; set; }

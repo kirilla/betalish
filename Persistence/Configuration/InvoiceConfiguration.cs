@@ -6,6 +6,8 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
     {
         builder.HasKey(p => p.Id);
 
+        builder.HasIndex(p => p.InvoiceNumber);
+
         builder.Property(p => p.About)
             .HasMaxLength(MaxLengths.Common.Invoice.About);
 
