@@ -4,6 +4,8 @@ public class Invoice : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
+    public InvoiceStatus InvoiceStatus { get; set; }
+
     public int? InvoiceNumber { get; set; }
 
     public bool IsCredit { get; set; }
@@ -21,5 +23,13 @@ public class Invoice : IFormatOnSave, IValidateOnSave
 
     public void ValidateOnSave()
     {
+        if (!Enum.IsDefined(InvoiceStatus))
+            throw new ValidateOnSaveException(
+                $"Undefined InvoiceStatus: {(int)InvoiceStatus}");
+
+        if (InvoiceStatus == InvoiceStatus.Issued &&
+            InvoiceNumber == null)
+            throw new ValidateOnSaveException(
+                "Issued invoice missing InvoiceNumber.");
     }
 }
