@@ -6,4 +6,9 @@ public static class DecimalExtensions
     {
         return decimal.TryParse(s, out var num) ? num : (decimal?)null;
     }
+
+    public static decimal RoundToEven(this decimal d)
+    {
+        return Math.Round(d, 2, MidpointRounding.ToEven);
+    }
 }
