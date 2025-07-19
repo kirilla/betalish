@@ -9,8 +9,6 @@ public class AddInvoiceDraftCommandModel
 
     public int? InvoiceTemplateId { get; set; }
 
-    public bool IsCredit { get; set; }
-
     [RegularExpression(Pattern.Common.SomeContent)]
     [Required(ErrorMessage = "Ange sammanfattning.")]
     [StringLength(

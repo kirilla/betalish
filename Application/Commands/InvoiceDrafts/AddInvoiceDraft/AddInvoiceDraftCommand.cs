@@ -23,7 +23,7 @@ public class AddInvoiceDraftCommand(IDatabaseService database) : IAddInvoiceDraf
         {
             ClientId = userToken.ClientId!.Value,
             CustomerId = model.CustomerId!.Value,
-            IsCredit = model.IsCredit,
+            IsCredit = false,
             About = model.About!,
         };
 
@@ -52,7 +52,7 @@ public class AddInvoiceDraftCommand(IDatabaseService database) : IAddInvoiceDraf
                 {
                     InvoiceDraft = draft,
 
-                    IsCredit = model.IsCredit,
+                    IsCredit = false,
 
                     ArticleId = x.ArticleId,
                     ArticleNumber = x.Article.Number,
