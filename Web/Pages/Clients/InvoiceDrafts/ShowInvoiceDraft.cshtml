@@ -28,6 +28,16 @@
         </li>
     </ul>
 
+    <p>
+        <a class="button" href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
+            Redigera
+        </a>
+
+        <a class="button" href="/remove-invoice-draft/@(Model.InvoiceDraft.Id)">
+            Ta bort
+        </a>
+    </p>
+
     <figure>
         <table>
             <tr>
@@ -75,16 +85,6 @@
     <p>
         <a class="button" href="/add-invoice-draft-row/@(Model.InvoiceDraft.Id)">
             Lägg till rad
-        </a>
-    </p>
-
-    <p>
-        <a class="button" href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
-            Redigera
-        </a>
-
-        <a class="button" href="/remove-invoice-draft/@(Model.InvoiceDraft.Id)">
-            Ta bort
         </a>
     </p>
 
