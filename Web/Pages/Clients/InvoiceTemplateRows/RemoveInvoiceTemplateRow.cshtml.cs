@@ -107,7 +107,7 @@ public class RemoveInvoiceTemplateRowModel(
         {
             return Redirect("/help/notfound");
         }
-        catch (Exception ex)
+        catch
         {
             return Redirect("/help/notpermitted");
         }
