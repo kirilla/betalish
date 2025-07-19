@@ -7,11 +7,13 @@ public class AddInvoiceDraftRowModel(
     IDatabaseService database,
     IAddInvoiceDraftRowCommand command) : ClientPageModel(userToken)
 {
+    public InvoiceDraft InvoiceDraft { get; set; } = null!;
+
+    public List<Article> Articles { get; set; } = [];
+
     [BindProperty]
     public AddInvoiceDraftRowCommandModel CommandModel { get; set; }
         = new AddInvoiceDraftRowCommandModel();
-
-    public List<Article> Articles { get; set; } = [];
 
     public async Task<IActionResult> OnGet(int id)
     {
@@ -19,6 +21,13 @@ public class AddInvoiceDraftRowModel(
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
+
+            InvoiceDraft = await database.InvoiceDrafts
+                .Where(x =>
+                    x.ClientId == UserToken.ClientId!.Value &&
+                    x.Id == id)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
 
             Articles = await database.Articles
                 .AsNoTracking()
@@ -44,6 +53,13 @@ public class AddInvoiceDraftRowModel(
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
+
+            InvoiceDraft = await database.InvoiceDrafts
+                .Where(x =>
+                    x.ClientId == UserToken.ClientId!.Value &&
+                    x.Id == CommandModel.InvoiceDraftId)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
 
             Articles = await database.Articles
                 .AsNoTracking()
