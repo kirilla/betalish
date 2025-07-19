@@ -2,6 +2,14 @@
 
 public static class Limits
 {
+    public static class Customer
+    {
+        public static class Tag
+        {
+            public const int Max = 10;
+        }
+    }
+
     public static class NetworkRule
     {
         public static class PrefixLength

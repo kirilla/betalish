@@ -1,0 +1,43 @@
+﻿@page "/show-customer-tag/{id:int}"
+@model ShowCustomerTagModel
+@{
+}
+
+@section Meta {
+    <title>🏷️ @(Model.CustomerTag.Key) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        🏷️ Etikett: 
+        @(Model.CustomerTag.Key)
+    </h4>
+
+    <div class="notice">
+        <ul>
+            @foreach (var tag in Model.CustomerTags)
+            {
+                <li>
+                    👤
+                    &thinsp;
+                    <a href="/show-customer/@(tag.Customer.Id)">@(tag.Customer.Name)</a>
+                    @if (tag.Value.HasValue())
+                    {
+                        <span>
+                            &ensp;
+                            <span class="muted">
+                                @(tag.Value)
+                            </span>
+                        </span>
+                    }
+                </li>
+            }
+        </ul>
+    </div>
+
+</main>

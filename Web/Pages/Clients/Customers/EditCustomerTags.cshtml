@@ -1,0 +1,44 @@
+﻿@page "/edit-customer-tags/{id:int}"
+@model EditCustomerTagsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera etiketter -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera etiketter:
+        @(Model.Customer.Name)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.Tags">
+            Etiketter
+        </label>
+        <textarea asp-for="CommandModel.Tags" rows="3"
+                  placeholder="max @(Limits.Customer.Tag.Max) ord"></textarea>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-customer/@(Model.Customer.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

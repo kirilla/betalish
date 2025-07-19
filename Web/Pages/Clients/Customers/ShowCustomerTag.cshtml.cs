@@ -1,10 +1,10 @@
 ﻿namespace Betalish.Web.Pages.Clients.Customers;
 
-public class ShowCustomerModel(
+public class ShowCustomerTagModel(
     IUserToken userToken,
     IDatabaseService database) : ClientPageModel(userToken)
 {
-    public Customer Customer { get; set; } = null!;
+    public CustomerTag CustomerTag { get; set; } = null!;
 
     public List<CustomerTag> CustomerTags { get; set; } = [];
 
@@ -17,18 +17,19 @@ public class ShowCustomerModel(
 
             AssertIsClient();
 
-            Customer = await database.Customers
-                .Where(x => 
-                    x.Id == id &&
-                    x.ClientId == UserToken.ClientId!.Value)
+            CustomerTag = await database.CustomerTags
+                .Where(x =>
+                    x.Customer.ClientId == UserToken.ClientId!.Value &&
+                    x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             CustomerTags = await database.CustomerTags
+                .AsNoTracking()
+                .Include(x => x.Customer)
                 .Where(x =>
                     x.Customer.ClientId == UserToken.ClientId!.Value &&
-                    x.CustomerId == id)
-                .OrderBy(x => x.Key)
+                    x.Key == CustomerTag.Key)
                 .ToListAsync();
 
             return Page();

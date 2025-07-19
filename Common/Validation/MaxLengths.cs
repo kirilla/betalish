@@ -107,6 +107,9 @@ public static class MaxLengths
         {
             public const int Key = 30;
             public const int Value = 30;
+
+            public const int Multiple = 400;
+            public const int Multitude = 1000;
         }
     }
 

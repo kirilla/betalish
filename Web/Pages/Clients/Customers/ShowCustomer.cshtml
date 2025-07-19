@@ -64,6 +64,7 @@
                 Redigera
             </a>
         }
+
         @if (Model.Customer.CustomerKind == CustomerKind.Organization)
         {
             <a class="button" href="/edit-customer-organization/@(Model.Customer.Id)">
@@ -73,6 +74,43 @@
 
         <a class="button" href="/remove-customer/@(Model.Customer.Id)">
             Ta bort
+        </a>
+    </p>
+
+    <h5>
+        Etiketter
+    </h5>
+
+    <ul class="notice">
+        @foreach (var keyword in Model.CustomerTags)
+        {
+            <li>
+                🏷️
+                &ensp;
+                <a href="/show-customer-tag/@(keyword.Id)">@(keyword.Key)</a>
+                @if (keyword.Value != null)
+                {
+                    <span>
+                        &ensp;
+                        <span class="muted">@(keyword.Value)</span>
+                    </span>
+                }
+            </li>
+        }
+
+        @if (!Model.CustomerTags.Any())
+        {
+            <li>
+                🏷️
+                &ensp;
+                &ndash;
+            </li>
+        }
+    </ul>
+
+    <p>
+        <a class="button" href="/edit-customer-tags/@(Model.Customer.Id)">
+            Redigera
         </a>
     </p>
 

@@ -1,6 +1,6 @@
 ﻿namespace Betalish.Domain.Entities;
 
-public class CustomerTag
+public class CustomerTag : IFormatOnSave
 {
     public int Id { get; set; }
 
@@ -10,4 +10,14 @@ public class CustomerTag
 
     public int CustomerId { get; set; }
     public Customer Customer { get; set; } = null!;
+
+    public void FormatOnSave()
+    {
+        Key = Key.Trim();
+
+        Value = Value?.Trim();
+
+        if (string.IsNullOrWhiteSpace(Value))
+            Value = null;
+    }
 }
