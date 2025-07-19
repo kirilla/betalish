@@ -4,6 +4,8 @@ public class InvoiceRow : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
+    public bool IsCredit { get; set; }
+
     public int ArticleNumber { get; set; }
 
     public required string ArticleName { get; set; }
@@ -12,8 +14,6 @@ public class InvoiceRow : IFormatOnSave, IValidateOnSave
     public decimal UnitPrice { get; set; }
 
     public required string Unit { get; set; }
-
-    public bool IsCredit { get; set; }
 
     public decimal VatPercentage { get; set; }
 
