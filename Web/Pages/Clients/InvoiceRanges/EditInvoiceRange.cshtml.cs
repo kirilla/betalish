@@ -68,7 +68,7 @@ public class EditInvoiceRangeModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-invoice-range/{id}");
+            return Redirect($"/show-invoice-ranges");
         }
         catch (BlockedByDateException)
         {

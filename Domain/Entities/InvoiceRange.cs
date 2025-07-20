@@ -62,4 +62,6 @@ public class InvoiceRange : IFormatOnSave, IValidateOnSave
             number >= StartNumber &&
             number <= EndNumber;
     }
+
+    public int Numbers => EndNumber - StartNumber + 1;
 }

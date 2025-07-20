@@ -41,9 +41,9 @@ public class AddInvoiceRangeModel(
             if (!ModelState.IsValid)
                 return Page();
 
-            var id = await command.Execute(UserToken, CommandModel);
+            await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-invoice-range/{id}");
+            return Redirect($"/show-invoice-ranges");
         }
         catch (BlockedByDateException)
         {

@@ -31,9 +31,10 @@
     <figure>
         <table>
             <tr>
-                <th>Fakturanummer</th>
-                <th>Startdatum</th>
-                <th>Slutdatum</th>
+                <th>Serie</th>
+                <th>Antal</th>
+                <th>Från</th>
+                <th>Till</th>
                 <th>Anteckning</th>
                 <th></th>
             </tr>
@@ -41,23 +42,37 @@
             {
                 <tr>
                     <td>
-                        <a href="/edit-invoice-range/@(range.Id)">
-                            @(range.StartNumber)-
-                            @(range.EndNumber)
+                        <a href="/edit-invoice-range/@(range.Id)" class="nolink">
+                            @(range.StartNumber)-@(range.EndNumber)
                         </a>
                     </td>
                     <td>
-                        @(range.StartDate?.ToIso8601() ?? "*")
+                        @(range.Numbers)
                     </td>
                     <td>
-                        @(range.EndDate?.ToIso8601() ?? "*")
+                        <a href="/edit-invoice-range/@(range.Id)" class="nolink">
+                            @(range.StartDate?.ToIso8601() ?? "*")
+                        </a>
                     </td>
                     <td>
-                        @(range.Comment ?? "-")
+                        <a href="/edit-invoice-range/@(range.Id)" class="nolink">
+                            @(range.EndDate?.ToIso8601() ?? "*")
+                        </a>
                     </td>
                     <td>
-                        <a href="/show-invoice-range/@(range.Id)">
-                            visa mer
+                        <a href="/edit-invoice-range/@(range.Id)" class="nolink">
+                            @(range.Comment ?? "-")
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/show-invoice-range/@(range.Id)" class="nolink">
+                            ℹ️
+                        </a>
+                        <a href="/edit-invoice-range/@(range.Id)" class="nolink">
+                            ✏️
+                        </a>
+                        <a href="/remove-invoice-range/@(range.Id)" class="nolink">
+                            ❌
                         </a>
                     </td>
                 </tr>
