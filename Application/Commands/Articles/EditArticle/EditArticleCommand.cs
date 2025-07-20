@@ -1,8 +1,4 @@
-﻿using System.Security.Principal;
-using System.Xml.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace Betalish.Application.Commands.Articles.EditArticle;
+﻿namespace Betalish.Application.Commands.Articles.EditArticle;
 
 public class EditArticleCommand(IDatabaseService database) : IEditArticleCommand
 {
