@@ -28,6 +28,7 @@ public interface IDatabaseService
     DbSet<LogItem> LogItems { get; set; }
     DbSet<NetworkRequest> NetworkRequests { get; set; }
     DbSet<NetworkRule> NetworkRules { get; set; }
+    DbSet<OnboardingStep> OnboardingSteps { get; set; }
     DbSet<Session> Sessions { get; set; }
     DbSet<SessionActivity> SessionActivities { get; set; }
     DbSet<SessionRecord> SessionRecords { get; set; }
