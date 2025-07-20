@@ -48,7 +48,7 @@ namespace Betalish.Application.BackgroundServices.Reapers
 
             var count = await database.NetworkRequests
                 .OrderByDescending(x => x.Created)
-                .Skip(_historySize)
+                .Skip(_historySize * 2)
                 .CountAsync(cancellation);
 
             if (count == 0)
