@@ -20,14 +20,14 @@ public class AddInvoiceRangeCommand(IDatabaseService database) : IAddInvoiceRang
             .ToListAsync();
 
         if (ranges.Any(x =>
-            x.ContainsDate(startDate ?? DateOnly.MinValue) ||
-            x.ContainsDate(endDate ?? DateOnly.MaxValue)))
-            throw new BlockedByDateException();
-
-        if (ranges.Any(x =>
             x.ContainsNumber(model.StartNumber) ||
             x.ContainsNumber(model.EndNumber)))
             throw new BlockedByNumberException();
+
+        if (ranges.Any(x =>
+            x.ContainsDate(startDate ?? DateOnly.MinValue) ||
+            x.ContainsDate(endDate ?? DateOnly.MaxValue)))
+            throw new BlockedByDateException();
 
         var range = new InvoiceRange()
         {

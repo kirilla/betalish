@@ -29,14 +29,14 @@ public class EditInvoiceRangeCommand(IDatabaseService database) : IEditInvoiceRa
             .ToListAsync();
 
         if (ranges.Any(x =>
-            x.ContainsDate(startDate ?? DateOnly.MinValue) ||
-            x.ContainsDate(endDate ?? DateOnly.MaxValue)))
-            throw new BlockedByDateException();
-
-        if (ranges.Any(x =>
             x.ContainsNumber(model.StartNumber) ||
             x.ContainsNumber(model.EndNumber)))
             throw new BlockedByNumberException();
+
+        if (ranges.Any(x =>
+            x.ContainsDate(startDate ?? DateOnly.MinValue) ||
+            x.ContainsDate(endDate ?? DateOnly.MaxValue)))
+            throw new BlockedByDateException();
 
         range.StartNumber = model.StartNumber;
         range.EndNumber = model.EndNumber;
