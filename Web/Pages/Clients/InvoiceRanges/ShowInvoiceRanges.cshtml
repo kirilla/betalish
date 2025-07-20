@@ -31,11 +31,10 @@
     <figure>
         <table>
             <tr>
-                <th>Första nr</th>
-                <th>Sista nr</th>
-                <th>Anteckning</th>
+                <th>Fakturanummer</th>
                 <th>Startdatum</th>
                 <th>Slutdatum</th>
+                <th>Anteckning</th>
                 <th></th>
             </tr>
             @foreach (var range in Model.InvoiceRanges)
@@ -43,22 +42,18 @@
                 <tr>
                     <td>
                         <a href="/edit-invoice-range/@(range.Id)">
-                            @(range.StartNumber)
-                        </a>
-                    </td>
-                    <td>
-                        <a href="/edit-invoice-range/@(range.Id)">
+                            @(range.StartNumber)-
                             @(range.EndNumber)
                         </a>
                     </td>
                     <td>
+                        @(range.StartDate?.ToIso8601() ?? "*")
+                    </td>
+                    <td>
+                        @(range.EndDate?.ToIso8601() ?? "*")
+                    </td>
+                    <td>
                         @(range.Comment ?? "-")
-                    </td>
-                    <td>
-                        @(range.StartDate?.ToIso8601() ?? "-")
-                    </td>
-                    <td>
-                        @(range.EndDate?.ToIso8601() ?? "-")
                     </td>
                     <td>
                         <a href="/show-invoice-range/@(range.Id)">
