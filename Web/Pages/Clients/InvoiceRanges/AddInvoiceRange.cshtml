@@ -1,0 +1,62 @@
+﻿@page "/add-invoice-range"
+@model AddInvoiceRangeModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till en nummerserie -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till en nummerserie
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.StartNumber">
+            Första fakturanummer
+        </label>
+        <input asp-for="CommandModel.StartNumber" />
+
+        <label asp-for="CommandModel.EndNumber">
+            Sista fakturanummer
+        </label>
+        <input asp-for="CommandModel.EndNumber" />
+
+        <label asp-for="CommandModel.StartDate">
+            Startdatum
+        </label>
+        <input asp-for="CommandModel.StartDate"
+               placeholder="Lämna tomt för öppet intervall." />
+
+        <label asp-for="CommandModel.EndDate">
+            Slutdatum
+        </label>
+        <input asp-for="CommandModel.EndDate"
+               placeholder="Lämna tomt för öppet intervall." />
+
+        <label asp-for="CommandModel.Comment">
+            Anteckning
+        </label>
+        <input asp-for="CommandModel.Comment" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-invoice-ranges">
+            Avbryt
+        </a>
+    </form>
+
+</main>

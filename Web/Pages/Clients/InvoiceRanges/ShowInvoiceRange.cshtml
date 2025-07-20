@@ -1,0 +1,40 @@
+﻿@page "/show-invoice-range/{id:int}"
+@model ShowInvoiceRangeModel
+@{
+}
+
+@section Meta {
+    <title>
+        Nummerserie -
+        @(Model.InvoiceRange.StartNumber)-
+        @(Model.InvoiceRange.EndNumber) - @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Nummerserie:
+        @(Model.InvoiceRange.StartNumber)-
+        @(Model.InvoiceRange.EndNumber)
+    </h4>
+
+    <div class="notice">
+        Antal fakturor i serien: @(Model.InvoiceCount)
+    </div>
+
+    <p>
+        <a class="button" href="/edit-invoice-range/@(Model.InvoiceRange.Id)">
+            Redigera
+        </a>
+
+        <a class="button" href="/remove-invoice-range/@(Model.InvoiceRange.Id)">
+            Ta bort
+        </a>
+    </p>
+
+</main>

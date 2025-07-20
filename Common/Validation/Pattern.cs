@@ -13,6 +13,12 @@ public static class Pattern
             public const string Account = @"^\d{4}$";
         }
 
+        public static class Date
+        {
+            public const string Iso8601 = @"^\d{4}-[0-1][0-9]-[0-3][0-9]$";
+            public const string Iso8601Permissive = @"^\s*\d{4}[-−][0-1][0-9][-−][0-3][0-9]\s*$";
+        }
+
         public static class Decimal
         {
             public static class Signed

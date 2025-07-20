@@ -1,0 +1,66 @@
+﻿@page "/edit-invoice-range/{id:int}"
+@model EditInvoiceRangeModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera nummerserie -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Redigera nummerserie:
+        @(Model.InvoiceRange.StartNumber)-
+        @(Model.InvoiceRange.EndNumber)
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.StartNumber">
+            Första fakturanummer
+        </label>
+        <input asp-for="CommandModel.StartNumber" />
+
+        <label asp-for="CommandModel.EndNumber">
+            Sista fakturanummer
+        </label>
+        <input asp-for="CommandModel.EndNumber" />
+
+        <label asp-for="CommandModel.StartDate">
+            Startdatum
+        </label>
+        <input asp-for="CommandModel.StartDate"
+               placeholder="Lämna tomt för öppet intervall." />
+
+        <label asp-for="CommandModel.EndDate">
+            Slutdatum
+        </label>
+        <input asp-for="CommandModel.EndDate"
+               placeholder="Lämna tomt för öppet intervall." />
+
+        <label asp-for="CommandModel.Comment">
+            Anteckning
+        </label>
+        <input asp-for="CommandModel.Comment" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-invoice-range/@(Model.InvoiceRange.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>
