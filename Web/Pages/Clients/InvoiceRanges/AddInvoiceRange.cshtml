@@ -16,8 +16,55 @@
 
 <main>
     <h4>
-        Lägg till en nummerserie
+        Lägg till nummerserie
     </h4>
+
+    @if (Model.InvoiceRanges.Any())
+    {
+        <div class="notice">
+            Serier får inte överlappa.
+        </div>
+
+        <figure>
+            <table>
+                <tr>
+                    <th>Serie</th>
+                    <th>Antal</th>
+                    <th>Från</th>
+                    <th>Till</th>
+                    <th>Anteckning</th>
+                    <th></th>
+                </tr>
+                @foreach (var range in Model.InvoiceRanges)
+                {
+                    <tr>
+                        <td>
+                            @(range.StartNumber)-@(range.EndNumber)
+                        </td>
+                        <td>
+                            @(range.Numbers)
+                        </td>
+                        <td>
+                            @(range.StartDate?.ToIso8601() ?? "*")
+                        </td>
+                        <td>
+                            @(range.EndDate?.ToIso8601() ?? "*")
+                        </td>
+                        <td>
+                            @(range.Comment ?? "-")
+                        </td>
+                        <td>
+                            <a href="/edit-invoice-range/@(range.Id)" class="nolink">
+                                ✏️
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </figure>
+
+        <br />
+    }
 
     <form method="post">
 
