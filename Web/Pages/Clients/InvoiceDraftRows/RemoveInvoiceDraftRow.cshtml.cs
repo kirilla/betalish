@@ -53,7 +53,7 @@ public class RemoveInvoiceDraftRowModel(
 
             CommandModel = new RemoveInvoiceDraftRowCommandModel()
             {
-                Id = InvoiceDraft.Id,
+                Id = id,
             };
 
             return Page();
@@ -108,7 +108,7 @@ public class RemoveInvoiceDraftRowModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-invoice-drafts");
+            return Redirect($"/show-invoice-draft/{InvoiceDraft.Id}");
         }
         catch (ConfirmationRequiredException)
         {
@@ -117,6 +117,10 @@ public class RemoveInvoiceDraftRowModel(
                 "Bekräfta att du verkligen vill ta bort.");
 
             return Page();
+        }
+        catch (NotFoundException)
+        {
+            return Redirect("/help/notfound");
         }
         catch
         {
