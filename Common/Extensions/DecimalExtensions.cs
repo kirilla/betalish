@@ -13,4 +13,9 @@ public static class DecimalExtensions
     {
         return Math.Round(d, 2, MidpointRounding.ToEven);
     }
+
+    public static string ToSwedish(this decimal value)
+    {
+        return value.ToString("N2", Swedish.CultureInfo);
+    }
 }

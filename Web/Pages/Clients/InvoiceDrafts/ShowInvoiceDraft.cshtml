@@ -38,6 +38,8 @@
         </a>
     </p>
 
+    <h5>Artiklar</h5>
+
     <figure>
         <table>
             <tr>
@@ -97,5 +99,31 @@
             Lägg till rad
         </a>
     </p>
+
+    <h5>Summering</h5>
+
+    <figure>
+        <table>
+            <tr>
+                <th>Netto</th>
+                <th>Moms</th>
+                <th>Avrundning</th>
+                <th>Totalt</th>
+            </tr>
+            <tr>
+                <td>
+                    @(Model.InvoiceDraft.NetAmount.ToSwedish())
+                </td>
+                <td>
+                    @(Model.InvoiceDraft.VatAmount.ToSwedish())
+                </td>
+                <td style="text-align:end">
+                    @(Model.InvoiceDraft.TotalRounding.ToSwedish())
+                </td>
+                <td>
+                    @(Model.InvoiceDraft.Total.ToSwedish())
+                </td>
+        </table>
+    </figure>
 
 </main>
