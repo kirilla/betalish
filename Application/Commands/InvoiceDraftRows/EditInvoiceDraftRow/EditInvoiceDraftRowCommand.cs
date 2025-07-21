@@ -1,6 +1,10 @@
-﻿namespace Betalish.Application.Commands.InvoiceDraftRows.EditInvoiceDraftRow;
+﻿using Betalish.Application.Routines.UpdateInvoiceDraftSummary;
 
-public class EditInvoiceDraftRowCommand(IDatabaseService database) : IEditInvoiceDraftRowCommand
+namespace Betalish.Application.Commands.InvoiceDraftRows.EditInvoiceDraftRow;
+
+public class EditInvoiceDraftRowCommand(
+    IDatabaseService database,
+    IUpdateInvoiceDraftSummaryRoutine updateSummaryRoutine) : IEditInvoiceDraftRowCommand
 {
     public async Task Execute(
         IUserToken userToken, EditInvoiceDraftRowCommandModel model)
@@ -23,6 +27,8 @@ public class EditInvoiceDraftRowCommand(IDatabaseService database) : IEditInvoic
         row.UnitPrice = model.UnitPrice!.TryParseDecimal()!.Value;
         
         await database.SaveAsync(userToken);
+
+        await updateSummaryRoutine.Execute(userToken, row.InvoiceDraftId);
     }
 
     public bool IsPermitted(IUserToken userToken)

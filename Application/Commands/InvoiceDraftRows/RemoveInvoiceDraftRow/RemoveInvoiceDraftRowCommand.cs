@@ -1,6 +1,10 @@
-﻿namespace Betalish.Application.Commands.InvoiceDraftRows.RemoveInvoiceDraftRow;
+﻿using Betalish.Application.Routines.UpdateInvoiceDraftSummary;
 
-public class RemoveInvoiceDraftRowCommand(IDatabaseService database) : IRemoveInvoiceDraftRowCommand
+namespace Betalish.Application.Commands.InvoiceDraftRows.RemoveInvoiceDraftRow;
+
+public class RemoveInvoiceDraftRowCommand(
+    IDatabaseService database,
+    IUpdateInvoiceDraftSummaryRoutine updateSummaryRoutine) : IRemoveInvoiceDraftRowCommand
 {
     public async Task Execute(
         IUserToken userToken, RemoveInvoiceDraftRowCommandModel model)
@@ -18,9 +22,13 @@ public class RemoveInvoiceDraftRowCommand(IDatabaseService database) : IRemoveIn
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.InvoiceDraftRows.Remove(row);
+        var draftId = row.InvoiceDraftId;
 
+        database.InvoiceDraftRows.Remove(row);
+        
         await database.SaveAsync(userToken);
+
+        await updateSummaryRoutine.Execute(userToken, draftId);
     }
 
     public bool IsPermitted(IUserToken userToken)

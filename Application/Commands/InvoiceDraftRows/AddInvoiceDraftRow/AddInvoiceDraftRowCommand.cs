@@ -1,6 +1,10 @@
-﻿namespace Betalish.Application.Commands.InvoiceDraftRows.AddInvoiceDraftRow;
+﻿using Betalish.Application.Routines.UpdateInvoiceDraftSummary;
 
-public class AddInvoiceDraftRowCommand(IDatabaseService database) : IAddInvoiceDraftRowCommand
+namespace Betalish.Application.Commands.InvoiceDraftRows.AddInvoiceDraftRow;
+
+public class AddInvoiceDraftRowCommand(
+    IDatabaseService database,
+    IUpdateInvoiceDraftSummaryRoutine updateSummaryRoutine) : IAddInvoiceDraftRowCommand
 {
     public async Task Execute(
         IUserToken userToken, AddInvoiceDraftRowCommandModel model)
@@ -50,6 +54,8 @@ public class AddInvoiceDraftRowCommand(IDatabaseService database) : IAddInvoiceD
         database.InvoiceDraftRows.Add(row);
 
         await database.SaveAsync(userToken);
+
+        await updateSummaryRoutine.Execute(userToken, draft.Id);
     }
 
     public bool IsPermitted(IUserToken userToken)

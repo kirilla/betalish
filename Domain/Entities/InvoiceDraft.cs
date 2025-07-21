@@ -8,6 +8,12 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
 
     public required string About { get; set; }
 
+    // Summary
+    public decimal NetAmount { get; set; }
+    public decimal VatAmount { get; set; }
+    public decimal Total { get; set; }
+    public decimal TotalRounding { get; set; }
+
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
 
