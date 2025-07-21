@@ -1,0 +1,32 @@
+﻿@page "/show-onboarding"
+@model ShowOnboardingModel
+@{
+}
+
+@section Meta {
+    <title>
+        Kom igång -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Kom igång!
+    </h4>
+
+    <ul class="notice">
+        <li>
+            1.
+            <a href="/show-invoice-ranges">
+                Planera fakturanummer
+            </a>
+        </li>
+    </ul>
+
+</main>
