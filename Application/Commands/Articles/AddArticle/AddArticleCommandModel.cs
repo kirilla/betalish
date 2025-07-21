@@ -33,7 +33,7 @@ public class AddArticleCommandModel
         ErrorMessage = "Ange momssats med siffror")]
     [Required(ErrorMessage = "Ange momssats.")]
     [StringLength(MaxLengths.Common.Percent.ShortWithDecimals)]
-    public string? VatValue { get; set; }
+    public string? VatRate { get; set; }
 
     [Required(ErrorMessage = "Ange typ av artikel.")]
     public ArticleKind? ArticleKind { get; set; }

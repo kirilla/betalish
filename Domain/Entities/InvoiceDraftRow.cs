@@ -15,7 +15,7 @@ public class InvoiceDraftRow : IFormatOnSave, IValidateOnSave
 
     public required string Unit { get; set; }
 
-    public decimal VatPercentage { get; set; }
+    public decimal VatRate { get; set; }
 
     public decimal NetAmount { get; set; }
     public decimal VatAmount { get; set; }
@@ -52,7 +52,7 @@ public class InvoiceDraftRow : IFormatOnSave, IValidateOnSave
     {
         get
         {
-            return (_NetAmount * (VatPercentage / 100)).RoundToEven();
+            return (_NetAmount * (VatRate / 100)).RoundToEven();
         }
     }
 

@@ -44,7 +44,7 @@
                     @(Model.Article.UnitName)
                 </td>
                 <td>
-                    @(Model.Article.VatValue.ToString("N2", Swedish.CultureInfo))
+                    @(Model.Article.VatRate.ToString("N2", Swedish.CultureInfo))
                 </td>
                 <td>
                     @if (Model.Article.ArticleKind == ArticleKind.Goods)

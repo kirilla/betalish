@@ -58,7 +58,7 @@ public class AddInvoiceDraftCommand(IDatabaseService database) : IAddInvoiceDraf
                     ArticleName = x.Article.Name,
                     UnitPrice = x.Article.UnitPrice,
                     Unit = x.Article.UnitName,
-                    VatPercentage = x.Article.VatValue,
+                    VatRate = x.Article.VatRate,
 
                     Quantity = x.Quantity,
 

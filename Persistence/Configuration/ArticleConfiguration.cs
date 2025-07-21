@@ -12,7 +12,7 @@ class ArticleConfiguration : IEntityTypeConfiguration<Article>
         builder.Property(p => p.UnitPrice)
             .HasPrecision(18, 2);
 
-        builder.Property(p => p.VatValue)
+        builder.Property(p => p.VatRate)
             .HasPrecision(18, 2);
 
         builder.Property(p => p.UnitName)

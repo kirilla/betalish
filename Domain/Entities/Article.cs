@@ -14,7 +14,7 @@ public class Article : IFormatOnSave, IValidateOnSave
 
     public required string UnitName { get; set; }
 
-    public decimal VatValue { get; set; }
+    public decimal VatRate { get; set; }
 
     public required string RevenueAccount { get; set; }
     public string? VatAccount { get; set; }

@@ -39,7 +39,7 @@ public class AddInvoiceDraftRowCommand(
             ArticleName = article.Name,
             UnitPrice = article.UnitPrice,
             Unit = article.UnitName,
-            VatPercentage = article.VatValue,
+            VatRate = article.VatRate,
 
             Quantity = model.Quantity!.TryParseDecimal()!.Value,
 

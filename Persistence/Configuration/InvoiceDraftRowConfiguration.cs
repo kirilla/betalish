@@ -18,7 +18,7 @@ class InvoiceDraftRowConfiguration : IEntityTypeConfiguration<InvoiceDraftRow>
         builder.Property(p => p.Unit)
             .HasMaxLength(MaxLengths.Domain.Article.UnitName);
 
-        builder.Property(p => p.VatPercentage)
+        builder.Property(p => p.VatRate)
             .HasPrecision(18, 2);
 
         builder.Property(p => p.NetAmount)

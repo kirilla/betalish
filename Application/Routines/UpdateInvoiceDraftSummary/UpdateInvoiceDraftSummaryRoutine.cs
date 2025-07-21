@@ -35,8 +35,8 @@ public class UpdateInvoiceDraftSummaryRoutine(
         /*
         var groups = rows
             .GroupBy(x => new {
-                //VatRate = x.VatRate ?? VatRate.Vat4,
-                x.VatPercentage,
+                //VatClass = x.VatClass ?? VatClass.Vat4,
+                x.VatRate,
             })
             .ToList();
 
@@ -44,8 +44,8 @@ public class UpdateInvoiceDraftSummaryRoutine(
             .Select(x => new InvoiceDraftVatRow()
             {
                 InvoiceDraftId = draft.Id,
-                //VatRate = x.Key.VatRate,
-                VatPercentage = x.Key.VatPercentage,
+                //VatClass = x.Key.VatClass,
+                VatRate = x.Key.VatRate,
                 NetAmount = x.Sum(y => y.NetAmount),
                 VatAmount = x.Sum(y => y.VatAmount),
                 TotalAmount =
