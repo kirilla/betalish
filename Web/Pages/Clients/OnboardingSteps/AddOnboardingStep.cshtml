@@ -1,0 +1,47 @@
+﻿@page "/add-onboarding-step"
+@model AddOnboardingStepModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till onboarding-steg -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till ett onboarding-steg
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.OnboardingStepKind">
+            Steg
+        </label>
+        <select asp-for="CommandModel.OnboardingStepKind">
+            <option value="">–</option>
+            <option value="@(OnboardingStepKind.InvoiceRange)">
+                Fakturanummer
+            </option>
+        </select>
+
+
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-onboarding-steps">
+            Avbryt
+        </a>
+    </form>
+
+</main>
