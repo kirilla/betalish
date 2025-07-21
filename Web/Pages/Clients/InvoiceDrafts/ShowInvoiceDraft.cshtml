@@ -47,6 +47,8 @@
                 <th>Pris</th>
                 <th>Moms</th>
                 <th></th>
+                <th>Intäktskonto</th>
+                <th>Moms-konto</th>
             </tr>
             @foreach (var row in Model.InvoiceDraftRows)
             {
@@ -69,7 +71,7 @@
                         <a href="/edit-invoice-draft-row/@(row.Id)">
                             @(row.UnitPrice.ToString("N2", Swedish.CultureInfo))
                             @(Swedish.Currency.Short)
-                    </a>    
+                        </a>
                     </td>
                     <td>
                         @(row.VatPercentage.ToString("N2", Swedish.CultureInfo))
@@ -77,6 +79,16 @@
                     <td>
                         <a href="/remove-invoice-draft-row/@(row.Id)" class="nolink">
                             ❌
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/edit-invoice-draft-row/@(row.Id)">
+                            @(row.RevenueAccount)
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/edit-invoice-draft-row/@(row.Id)">
+                            @(row.VatAccount)
                         </a>
                     </td>
                 </tr>

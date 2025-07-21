@@ -50,6 +50,9 @@ public class AddInvoiceDraftRowCommand(IDatabaseService database) : IAddInvoiceD
             NetAmount = 0,
             VatAmount = 0,
             TotalAmount = 0,
+
+            RevenueAccount = article.RevenueAccount,
+            VatAccount = article.VatAccount,
         };
 
         database.InvoiceDraftRows.Add(row);

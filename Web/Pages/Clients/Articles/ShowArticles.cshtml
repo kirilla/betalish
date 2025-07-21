@@ -37,8 +37,8 @@
                 <th>Enhet</th>
                 <th>Moms</th>
                 <th>Typ</th>
-                <th>Bokf.konto</th>
-                <th>Momskonto</th>
+                <th>Intäktskonto</th>
+                <th>Moms-konto</th>
             </tr>
             @foreach (var article in Model.Articles)
             {
@@ -72,7 +72,7 @@
                         }
                     </td>
                     <td>
-                        @(article.Account)
+                        @(article.RevenueAccount)
                     </td>
                     <td>
                         @(article.VatAccount)

@@ -21,6 +21,9 @@ public class InvoiceDraftRow : IFormatOnSave, IValidateOnSave
     public decimal VatAmount { get; set; }
     public decimal TotalAmount { get; set; }
 
+    public required string RevenueAccount { get; set; }
+    public required string VatAccount { get; set; }
+
     public int ArticleId { get; set; }
     public Article Article { get; set; } = null!;
 

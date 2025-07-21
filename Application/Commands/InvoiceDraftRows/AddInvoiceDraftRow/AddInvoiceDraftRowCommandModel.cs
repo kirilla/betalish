@@ -14,7 +14,4 @@ public class AddInvoiceDraftRowCommandModel
         ErrorMessage = "Ange kvantitet med siffror")]
     [Required(ErrorMessage = "Ange kvantitet.")]
     public string? Quantity { get; set; }
-
-    // TODO: UnitPrice
-    // for per-customer changes at draft-time
 }

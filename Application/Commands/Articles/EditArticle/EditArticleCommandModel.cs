@@ -42,17 +42,17 @@ public class EditArticleCommandModel
 
     [RegularExpression(
         Pattern.Common.Bookkeeping.Account,
-        ErrorMessage = "Bokföringskonto anges med fyra siffror")]
-    [Required(ErrorMessage = "Ange bokföringskonto.")]
+        ErrorMessage = "Intäktskonto anges med fyra siffror")]
+    [Required(ErrorMessage = "Ange intäktskonto.")]
     [StringLength(
         MaxLengths.Common.Bookkeeping.Account,
         ErrorMessage = "Skriv kortare.")]
-    public string? Account { get; set; }
+    public string? RevenueAccount { get; set; }
 
     [RegularExpression(
         Pattern.Common.Bookkeeping.Account,
-        ErrorMessage = "Momskonto anges med fyra siffror")]
-    [Required(ErrorMessage = "Ange momskonto.")]
+        ErrorMessage = "Moms-konto anges med fyra siffror")]
+    [Required(ErrorMessage = "Ange moms-konto.")]
     [StringLength(
         MaxLengths.Common.Bookkeeping.Account,
         ErrorMessage = "Skriv kortare.")]

@@ -36,7 +36,7 @@ public class EditArticleModel(
                 UnitPrice = Article.UnitPrice.ToString("N2", Swedish.CultureInfo),
                 UnitName = Article.UnitName,
                 VatValue = Article.VatValue.ToString("N2", Swedish.CultureInfo),
-                Account = Article.Account,
+                RevenueAccount = Article.RevenueAccount,
                 VatAccount = Article.VatAccount,
             };
 

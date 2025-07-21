@@ -66,6 +66,9 @@ public class AddInvoiceDraftCommand(IDatabaseService database) : IAddInvoiceDraf
                     NetAmount = 0,
                     VatAmount = 0,
                     TotalAmount = 0,
+
+                    RevenueAccount = x.Article.RevenueAccount,
+                    VatAccount = x.Article.VatAccount,
                 })
                 .ToList();
 

@@ -59,6 +59,8 @@ public class EditInvoiceDraftRowModel(
                     .ToString("N2", Swedish.CultureInfo),
                 UnitPrice = InvoiceDraftRow.UnitPrice
                     .ToString("N2", Swedish.CultureInfo),
+                RevenueAccount = InvoiceDraftRow.RevenueAccount,
+                VatAccount = InvoiceDraftRow.VatAccount,
             };
 
             return Page();

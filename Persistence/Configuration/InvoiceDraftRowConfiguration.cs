@@ -29,5 +29,11 @@ class InvoiceDraftRowConfiguration : IEntityTypeConfiguration<InvoiceDraftRow>
 
         builder.Property(p => p.TotalAmount)
             .HasPrecision(18, 2);
+
+        builder.Property(p => p.RevenueAccount)
+            .HasMaxLength(MaxLengths.Common.Bookkeeping.Account);
+
+        builder.Property(p => p.VatAccount)
+            .HasMaxLength(MaxLengths.Common.Bookkeeping.Account);
     }
 }
