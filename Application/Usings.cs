@@ -1,5 +1,6 @@
 ﻿global using Betalish.Application.Auth;
 global using Betalish.Application.Interfaces;
+global using Betalish.Application.Locks;
 global using Betalish.Application.Models;
 global using Betalish.Common.Enums;
 global using Betalish.Common.Exceptions;
