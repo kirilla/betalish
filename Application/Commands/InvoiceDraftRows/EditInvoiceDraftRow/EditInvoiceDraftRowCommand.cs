@@ -18,8 +18,10 @@ public class EditInvoiceDraftRowCommand(IDatabaseService database) : IEditInvoic
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
+        row.ArticleName = model.ArticleName!;
         row.Quantity = model.Quantity!.TryParseDecimal()!.Value;
-
+        row.UnitPrice = model.UnitPrice!.TryParseDecimal()!.Value;
+        
         await database.SaveAsync(userToken);
     }
 

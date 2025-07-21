@@ -24,10 +24,20 @@
 
         <input type="hidden" asp-for="CommandModel.Id" />
 
+        <label asp-for="CommandModel.ArticleName">
+            Artikel
+        </label>
+        <input asp-for="CommandModel.ArticleName" />
+
         <label asp-for="CommandModel.Quantity">
             Kvantitet
         </label>
-        <input asp-for="CommandModel.Quantity" placeholder="123,00" />
+        <input asp-for="CommandModel.Quantity" />
+
+        <label asp-for="CommandModel.UnitPrice">
+            Pris
+        </label>
+        <input asp-for="CommandModel.UnitPrice" />
 
         <div asp-validation-summary="All"></div>
 

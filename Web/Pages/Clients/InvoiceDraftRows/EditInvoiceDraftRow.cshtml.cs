@@ -54,7 +54,10 @@ public class EditInvoiceDraftRowModel(
             CommandModel = new EditInvoiceDraftRowCommandModel()
             {
                 Id = InvoiceDraftRow.Id,
+                ArticleName = InvoiceDraftRow.ArticleName,
                 Quantity = InvoiceDraftRow.Quantity
+                    .ToString("N2", Swedish.CultureInfo),
+                UnitPrice = InvoiceDraftRow.UnitPrice
                     .ToString("N2", Swedish.CultureInfo),
             };
 
