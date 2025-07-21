@@ -24,9 +24,6 @@ public class InvoiceDraftRow : IFormatOnSave, IValidateOnSave
     public required string RevenueAccount { get; set; }
     public required string VatAccount { get; set; }
 
-    public int ArticleId { get; set; }
-    public Article Article { get; set; } = null!;
-
     public int InvoiceDraftId { get; set; }
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 

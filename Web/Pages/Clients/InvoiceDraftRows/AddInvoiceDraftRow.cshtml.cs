@@ -73,14 +73,6 @@ public class AddInvoiceDraftRowModel(
 
             return Redirect($"/show-invoice-draft/{CommandModel.InvoiceDraftId}");
         }
-        catch (BlockedByExistingException)
-        {
-            ModelState.AddModelError(
-                nameof(CommandModel.ArticleId),
-                "Det finns redan en rad för artikeln.");
-
-            return Page();
-        }
         catch
         {
             return Redirect("/help/notpermitted");

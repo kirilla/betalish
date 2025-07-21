@@ -54,7 +54,6 @@ public class AddInvoiceDraftCommand(IDatabaseService database) : IAddInvoiceDraf
 
                     IsCredit = false,
 
-                    ArticleId = x.ArticleId,
                     ArticleNumber = x.Article.Number,
                     ArticleName = x.Article.Name,
                     UnitPrice = x.Article.UnitPrice,

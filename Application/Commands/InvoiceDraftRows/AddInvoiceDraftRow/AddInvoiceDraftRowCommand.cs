@@ -25,20 +25,12 @@ public class AddInvoiceDraftRowCommand(IDatabaseService database) : IAddInvoiceD
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (await database.InvoiceDraftRows
-            .AnyAsync(x =>
-                x.InvoiceDraft.ClientId == userToken.ClientId!.Value &&
-                x.InvoiceDraftId == model.InvoiceDraftId &&
-                x.ArticleId == model.ArticleId!.Value))
-            throw new BlockedByExistingException();
-
         var row = new InvoiceDraftRow()
         {
             InvoiceDraftId = draft.Id,
 
             IsCredit = draft.IsCredit,
 
-            ArticleId = article.Id,
             ArticleNumber = article.Number,
             ArticleName = article.Name,
             UnitPrice = article.UnitPrice,

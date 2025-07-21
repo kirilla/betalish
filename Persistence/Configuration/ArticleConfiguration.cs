@@ -24,10 +24,6 @@ class ArticleConfiguration : IEntityTypeConfiguration<Article>
         builder.Property(p => p.VatAccount)
             .HasMaxLength(MaxLengths.Common.Bookkeeping.Account);
 
-        builder.HasMany(x => x.InvoiceDraftRows)
-            .WithOne(x => x.Article)
-            .HasForeignKey(x => x.ArticleId);
-
         builder.HasMany(x => x.InvoiceTemplateRows)
             .WithOne(x => x.Article)
             .HasForeignKey(x => x.ArticleId);

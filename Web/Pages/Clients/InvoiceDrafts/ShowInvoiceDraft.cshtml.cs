@@ -34,11 +34,11 @@ public class ShowInvoiceDraftModel(
 
             InvoiceDraftRows = await database.InvoiceDraftRows
                 .AsNoTracking()
-                .Include(x => x.Article)
                 .Where(x =>
                     x.InvoiceDraft.ClientId == UserToken.ClientId!.Value &&
                     x.InvoiceDraftId == id)
-                .OrderBy(x => x.Article.Number)
+                .OrderBy(x => x.ArticleNumber)
+                .ThenBy(x => x.ArticleName)
                 .ToListAsync();
 
             return Page();
