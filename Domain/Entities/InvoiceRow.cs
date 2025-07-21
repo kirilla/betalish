@@ -22,7 +22,7 @@ public class InvoiceRow : IFormatOnSave, IValidateOnSave
     public decimal TotalAmount { get; set; }
 
     public required string RevenueAccount { get; set; }
-    public required string VatAccount { get; set; }
+    public string? VatAccount { get; set; }
 
     public int InvoiceId { get; set; }
     public Invoice Invoice { get; set; } = null!;

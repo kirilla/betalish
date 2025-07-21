@@ -32,7 +32,7 @@ public class EditArticleCommand(IDatabaseService database) : IEditArticleCommand
         article.VatValue = model.VatValue!.TryParseDecimal()!.Value;
         article.UnitName = model.UnitName!;
         article.RevenueAccount = model.RevenueAccount!;
-        article.VatAccount = model.VatAccount!;
+        article.VatAccount = model.VatAccount;
 
         await database.SaveAsync(userToken);
     }

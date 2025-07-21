@@ -50,7 +50,6 @@ public class AddArticleCommandModel
     [RegularExpression(
         Pattern.Common.Bookkeeping.Account,
         ErrorMessage = "Moms-konto anges med fyra siffror")]
-    [Required(ErrorMessage = "Ange moms-konto.")]
     [StringLength(
         MaxLengths.Common.Bookkeeping.Account,
         ErrorMessage = "Skriv kortare.")]
