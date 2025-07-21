@@ -1,0 +1,112 @@
+﻿@page "/show-invoice/{id:int}"
+@model ShowInvoiceModel
+@{
+}
+
+@section Meta {
+    <title>Faktura - @(Model.Invoice.Id) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Faktura
+    </h4>
+
+    <ul class="notice">
+        <li>
+            Till:
+            &thinsp;
+            xxxxxxxxxxxxxxxxx
+        </li>
+        <li>
+            Rubrik:
+            &thinsp;
+            @(Model.Invoice.About)
+        </li>
+    </ul>
+
+    <h5>Artiklar</h5>
+
+    <figure>
+        <table>
+            <tr>
+                <th>Nr</th>
+                <th>Artikel</th>
+                <th>Kvantitet</th>
+                <th>Pris</th>
+                <th>Moms</th>
+                <th>Intäktskonto</th>
+                <th>Moms-konto</th>
+            </tr>
+            @foreach (var row in Model.InvoiceRows)
+            {
+                <tr>
+                    <td>
+                        @(row.ArticleNumber)
+                    </td>
+                    <td>
+                        @(row.ArticleName)
+                    </td>
+                    <td>
+                        @(row.Quantity.ToString("N2", Swedish.CultureInfo))
+                        @(row.Unit)
+                    </td>
+                    <td>
+                        @(row.UnitPrice.ToString("N2", Swedish.CultureInfo))
+                        @(Swedish.Currency.Short)
+                    </td>
+                    <td>
+                        @(row.VatRate.ToString("N2", Swedish.CultureInfo))
+                    </td>
+                    <td>
+                        @(row.RevenueAccount)
+                    </td>
+                    <td>
+                        @(row.VatAccount ?? "-")
+                    </td>
+                </tr>
+            }
+        </table>
+    </figure>
+
+    <br />
+
+    <h5>Summering</h5>
+
+    <figure>
+        <table>
+            <tr>
+                <th>Netto</th>
+                <th>Moms</th>
+                <th>Avrundning</th>
+                <th>Totalt</th>
+            </tr>
+            @* <tr>
+                <td>
+                    @(Model.Invoice.NetAmount.ToSwedish())
+                </td>
+                <td>
+                    @(Model.Invoice.VatAmount.ToSwedish())
+                </td>
+                <td style="text-align:end">
+                    @(Model.Invoice.TotalRounding.ToSwedish())
+                </td>
+                <td>
+                    @(Model.Invoice.Total.ToSwedish())
+                </td>
+            </tr> *@
+        </table>
+    </figure>
+
+    @* <p>
+        <a class="button" href="/foo-invoice-draft/@(Model.Invoice.Id)">
+            Foo
+        </a>
+    </p> *@
+
+</main>

@@ -28,28 +28,38 @@
         Fakturor
     </h4>
 
-    <figure>
-        <table>
-            <tr>
-                <th>Id</th>
-            </tr>
-            @foreach (var invoice in Model.Invoices)
-            {
+    @if (!Model.Invoices.Any())
+    {
+        <div class="notice">
+            Det finns inga fakturor.
+        </div>
+    }
+
+    @if (Model.Invoices.Any())
+    {
+        <figure>
+            <table>
                 <tr>
-                    <td>
-                        @(invoice.Id)
-                    </td>
+                    <th>Nummer</th>
+                    <th>Mottagare</th>
                 </tr>
-            }
-            @if (!Model.Invoices.Any())
-            {
-                <tr>
-                    <td colspan="1">
-                        Inga
-                    </td>
-                </tr>
-            }
-        </table>
-    </figure>
+                @foreach (var invoice in Model.Invoices)
+                {
+                    <tr>
+                        <td>
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.InvoiceNumber?.ToSwedish() ?? "-")
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice/@(invoice.Id)">
+                                xxxxxxxxxxxxxxx
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </figure>
+    }
 
 </main>
