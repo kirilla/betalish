@@ -21,8 +21,6 @@ public class EditInvoiceDraftRowCommand(IDatabaseService database) : IEditInvoic
         row.ArticleName = model.ArticleName!;
         row.Quantity = model.Quantity!.TryParseDecimal()!.Value;
         row.UnitPrice = model.UnitPrice!.TryParseDecimal()!.Value;
-        row.RevenueAccount = model.RevenueAccount!;
-        row.VatAccount = model.VatAccount!;
         
         await database.SaveAsync(userToken);
     }

@@ -23,22 +23,4 @@ public class EditInvoiceDraftRowCommandModel
         ErrorMessage = "Ange pris.")]
     [Required(ErrorMessage = "Ange pris.")]
     public string? UnitPrice { get; set; }
-
-    [RegularExpression(
-        Pattern.Common.Bookkeeping.Account,
-        ErrorMessage = "Intäktskonto anges med fyra siffror")]
-    [Required(ErrorMessage = "Ange intäktskonto.")]
-    [StringLength(
-        MaxLengths.Common.Bookkeeping.Account,
-        ErrorMessage = "Skriv kortare.")]
-    public string? RevenueAccount { get; set; }
-
-    [RegularExpression(
-        Pattern.Common.Bookkeeping.Account,
-        ErrorMessage = "Moms-konto anges med fyra siffror")]
-    [Required(ErrorMessage = "Ange moms-konto.")]
-    [StringLength(
-        MaxLengths.Common.Bookkeeping.Account,
-        ErrorMessage = "Skriv kortare.")]
-    public string? VatAccount { get; set; }
 }
