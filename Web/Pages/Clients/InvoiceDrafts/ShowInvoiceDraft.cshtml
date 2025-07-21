@@ -52,25 +52,27 @@
             {
                 <tr>
                     <td>
-                        @(row.Article.Number)
+                        @(row.ArticleNumber)
                     </td>
                     <td>
-                        @(row.Article.Name)
+                        <a href="/edit-invoice-draft-row/@(row.Id)">
+                            @(row.ArticleName)
+                        </a>
                     </td>
                     <td>
-                        <a href="/edit-invoice-draft-row/@(row.Id)">@(
-                            row.Quantity.ToString("N2", Swedish.CultureInfo)
-                        )</a>
-                        @(row.Article.UnitName)
+                        <a href="/edit-invoice-draft-row/@(row.Id)">
+                            @(row.Quantity.ToString("N2", Swedish.CultureInfo))
+                            @(row.Unit)
+                        </a>
                     </td>
                     <td>
-                        <a href="/edit-invoice-draft-row/@(row.Id)">@(
-                            row.Article.UnitPrice.ToString("N2", Swedish.CultureInfo)
-                        )</a>
-                        @(Swedish.Currency.Short)
+                        <a href="/edit-invoice-draft-row/@(row.Id)">
+                            @(row.UnitPrice.ToString("N2", Swedish.CultureInfo))
+                            @(Swedish.Currency.Short)
+                    </a>    
                     </td>
                     <td>
-                        @(row.Article.VatValue.ToString("N2", Swedish.CultureInfo))
+                        @(row.VatPercentage.ToString("N2", Swedish.CultureInfo))
                     </td>
                     <td>
                         <a href="/remove-invoice-draft-row/@(row.Id)" class="nolink">
