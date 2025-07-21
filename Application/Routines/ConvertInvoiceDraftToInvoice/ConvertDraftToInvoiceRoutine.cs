@@ -33,10 +33,10 @@ public class ConvertDraftToInvoiceRoutine(
 
             About = draft.About,
 
-            //NetAmount = draft.NetAmount,
-            //VatAmount = draft.VatAmount,
-            //Total = draft.Total,
-            //TotalRounding = draft.TotalRounding,
+            NetAmount = draft.NetAmount,
+            VatAmount = draft.VatAmount,
+            Total = draft.Total,
+            TotalRounding = draft.TotalRounding,
 
             ClientId = draft.ClientId,
             //CustomerId = draft.CustomerId,

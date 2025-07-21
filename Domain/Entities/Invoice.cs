@@ -12,6 +12,12 @@ public class Invoice : IFormatOnSave, IValidateOnSave
 
     public required string About { get; set; }
 
+    // Summary
+    public required decimal NetAmount { get; set; }
+    public required decimal VatAmount { get; set; }
+    public required decimal Total { get; set; }
+    public required decimal TotalRounding { get; set; }
+
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
 
