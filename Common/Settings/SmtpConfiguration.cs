@@ -10,7 +10,7 @@ public class SmtpConfiguration
     public required string FromAddress { get; set; }
 
     [JsonIgnore]
-    public required string Password { get; set; }
+    public string Password { get; set; } = null!;
 
     public required string SmtpHost { get; set; }
 
