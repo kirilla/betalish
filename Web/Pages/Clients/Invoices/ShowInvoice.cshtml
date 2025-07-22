@@ -18,10 +18,30 @@
     </h4>
 
     <ul class="notice">
+        @if (Model.Invoice.Customer_Address1.HasValue())
+        {
+            <li>
+                @(Model.Invoice.Customer_Address1)
+            </li>
+        }
+        @if (Model.Invoice.Customer_Address2.HasValue())
+        {
+            <li>
+                @(Model.Invoice.Customer_Address2)
+            </li>
+        }
         <li>
-            Till:
-            &thinsp;
-            xxxxxxxxxxxxxxxxx
+            @(Model.Invoice.Customer_ZipCode)
+            @(Model.Invoice.Customer_City)
+        </li>
+        @if (Model.Invoice.Customer_Country.HasValue())
+        {
+            <li>
+                @(Model.Invoice.Customer_Country)
+            </li>
+        }
+        <li>
+            &nbsp;
         </li>
         <li>
             Rubrik:

@@ -28,6 +28,34 @@
             </a> *@
         </li>
         <li>
+            &nbsp;
+        </li>
+        @if (Model.InvoiceDraft.Customer_Address1.HasValue())
+        {
+            <li>
+                @(Model.InvoiceDraft.Customer_Address1)
+            </li>
+        }
+        @if (Model.InvoiceDraft.Customer_Address2.HasValue())
+        {
+            <li>
+                @(Model.InvoiceDraft.Customer_Address2)
+            </li>
+        }
+        <li>
+            @(Model.InvoiceDraft.Customer_ZipCode)
+            @(Model.InvoiceDraft.Customer_City)
+        </li>
+        @if (Model.InvoiceDraft.Customer_Country.HasValue())
+        {
+            <li>
+                @(Model.InvoiceDraft.Customer_Country)
+            </li>
+        }
+        <li>
+            &nbsp;
+        </li>
+        <li>
             Rubrik:
             &thinsp;
             <a href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
