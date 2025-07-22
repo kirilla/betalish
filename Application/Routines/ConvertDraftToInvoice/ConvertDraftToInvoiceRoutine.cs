@@ -12,9 +12,7 @@ public class ConvertDraftToInvoiceRoutine(
             .Where(x =>
                 x.Id == invoiceDraftId &&
                 x.ClientId == userToken.ClientId!.Value)
-            .SingleOrDefaultAsync();
-
-        if (draft == null)
+            .SingleOrDefaultAsync() ?? 
             throw new NotFoundException();
 
         var draftRows = await database.InvoiceDraftRows

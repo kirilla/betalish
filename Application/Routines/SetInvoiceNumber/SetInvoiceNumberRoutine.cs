@@ -14,9 +14,7 @@ public class SetInvoiceNumberRoutine(
                 x.ClientId == userToken.ClientId!.Value && 
                 x.InvoiceStatus == InvoiceStatus.Draft &&
                 x.InvoiceNumber == null)
-            .SingleOrDefaultAsync();
-
-        if (invoice == null)
+            .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         await InvoiceNumberAsyncLock.ExecuteAsync(async () =>
