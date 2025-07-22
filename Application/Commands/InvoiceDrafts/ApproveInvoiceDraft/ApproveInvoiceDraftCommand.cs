@@ -1,4 +1,4 @@
-﻿using Betalish.Application.Routines.ConvertDraftToInvoiceRoutine;
+﻿using Betalish.Application.Routines.ConvertDraftToInvoice;
 using Betalish.Application.Routines.SetInvoiceNumber;
 
 namespace Betalish.Application.Commands.InvoiceDrafts.ApproveInvoiceDraft;

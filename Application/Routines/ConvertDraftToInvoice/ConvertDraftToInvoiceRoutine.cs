@@ -1,4 +1,4 @@
-﻿namespace Betalish.Application.Routines.ConvertDraftToInvoiceRoutine;
+﻿namespace Betalish.Application.Routines.ConvertDraftToInvoice;
 
 public class ConvertDraftToInvoiceRoutine(
     IDatabaseService database) : IConvertDraftToInvoiceRoutine
@@ -28,9 +28,10 @@ public class ConvertDraftToInvoiceRoutine(
             DateOnly.FromDateTime(DateTime.Today);
 
         var dueDate =
-            (draft.DueDate ??
-            DateOnly.FromDateTime(DateTime.Today))
-            .AddDays(Defaults.Invoice.DueDays.Default);
+            invoiceDate
+            .AddDays(
+                draft.PaymentTermDays ??
+                Defaults.Invoice.DueDays.Default);
 
         var invoice = new Invoice()
         {

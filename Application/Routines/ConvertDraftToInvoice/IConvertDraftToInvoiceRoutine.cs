@@ -1,4 +1,4 @@
-﻿namespace Betalish.Application.Routines.ConvertDraftToInvoiceRoutine;
+﻿namespace Betalish.Application.Routines.ConvertDraftToInvoice;
 
 public interface IConvertDraftToInvoiceRoutine
 {
