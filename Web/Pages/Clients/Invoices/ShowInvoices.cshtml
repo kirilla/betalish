@@ -42,6 +42,8 @@
                 <tr>
                     <th>Nummer</th>
                     <th>Mottagare</th>
+                    <th>Fakturadatum</th>
+                    <th>Sammanfattning</th>
                 </tr>
                 @foreach (var invoice in Model.Invoices)
                 {
@@ -54,6 +56,16 @@
                         <td>
                             <a href="/show-invoice/@(invoice.Id)">
                                 xxxxxxxxxxxxxxx
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.InvoiceDate.ToIso8601())
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.About)
                             </a>
                         </td>
                     </tr>
