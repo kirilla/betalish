@@ -21,6 +21,14 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
     public decimal Total { get; set; }
     public decimal TotalRounding { get; set; }
 
+    // Customer identity
+    public required string Customer_Name { get; set; }
+
+    public required CustomerKind CustomerKind { get; set; }
+
+    public required string? Customer_Ssn10 { get; set; }
+    public required string? Customer_Orgnum { get; set; }
+
     // Customer address
     public required string? Customer_Address1 { get; set; }
     public required string? Customer_Address2 { get; set; }
@@ -45,5 +53,7 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
 
     public void ValidateOnSave()
     {
+        if (!Enum.IsDefined(CustomerKind))
+            throw new InvalidEnumException(nameof(CustomerKind));
     }
 }

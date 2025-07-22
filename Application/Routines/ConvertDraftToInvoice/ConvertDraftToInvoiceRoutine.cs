@@ -63,23 +63,34 @@ public class ConvertDraftToInvoiceRoutine(
 
             About = draft.About,
 
+            // Dates
             InvoiceDate = invoiceDate,
             DueDate = dueDate,
 
+            // Terms
             PaymentTermDays = draft.PaymentTermDays,
             PaymentTerms = paymentTerms,
 
+            // Summary
             NetAmount = draft.NetAmount,
             VatAmount = draft.VatAmount,
             Total = draft.Total,
             TotalRounding = draft.TotalRounding,
 
+            // Customer identity
+            Customer_Name = draft.Customer_Name,
+            CustomerKind = draft.CustomerKind,
+            Customer_Ssn10 = draft.Customer_Ssn10,
+            Customer_Orgnum = draft.Customer_Orgnum,
+
+            // Customer address
             Customer_Address1 = draft.Customer_Address1,
             Customer_Address2 = draft.Customer_Address2,
             Customer_ZipCode = draft.Customer_ZipCode,
             Customer_City = draft.Customer_City,
             Customer_Country = draft.Customer_Country,
 
+            // Customer email
             Customer_Email = draft.Customer_Email,
 
             ClientId = draft.ClientId,

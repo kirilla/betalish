@@ -1,4 +1,6 @@
-﻿namespace Betalish.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Betalish.Domain.Entities;
 
 public class Invoice : IFormatOnSave, IValidateOnSave
 {
@@ -26,6 +28,14 @@ public class Invoice : IFormatOnSave, IValidateOnSave
     public required decimal Total { get; set; }
     public required decimal TotalRounding { get; set; }
 
+    // Customer identity
+    public required string Customer_Name { get; set; }
+
+    public required CustomerKind CustomerKind { get; set; }
+
+    public required string? Customer_Ssn10 { get; set; }
+    public required string? Customer_Orgnum { get; set; }
+
     // Customer address
     public required string? Customer_Address1 { get; set; }
     public required string? Customer_Address2 { get; set; }
@@ -47,9 +57,11 @@ public class Invoice : IFormatOnSave, IValidateOnSave
 
     public void ValidateOnSave()
     {
+        if (!Enum.IsDefined(CustomerKind))
+            throw new InvalidEnumException(nameof(CustomerKind));
+
         if (!Enum.IsDefined(InvoiceStatus))
-            throw new ValidateOnSaveException(
-                $"Undefined InvoiceStatus: {(int)InvoiceStatus}");
+            throw new InvalidEnumException(nameof(InvoiceStatus));
 
         if (InvoiceStatus == InvoiceStatus.Issued &&
             InvoiceNumber == null)

@@ -6,7 +6,7 @@ public class Customer : IFormatOnSave, IValidateOnSave
 
     public Guid? Guid { get; set; }
 
-    public CustomerKind CustomerKind { get; set; }
+    public required CustomerKind CustomerKind { get; set; }
 
     public required string Name { get; set; }
 
@@ -49,7 +49,7 @@ public class Customer : IFormatOnSave, IValidateOnSave
         Guid.AssertValid();
 
         if (!Enum.IsDefined(CustomerKind))
-            throw new InvalidEnumException();
+            throw new InvalidEnumException(nameof(CustomerKind));
 
         Ssn10?.AssertSsn10Valid();
         Orgnum?.AssertOrgnumValid();

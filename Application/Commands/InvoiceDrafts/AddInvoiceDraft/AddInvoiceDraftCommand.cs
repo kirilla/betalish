@@ -32,17 +32,27 @@ public class AddInvoiceDraftCommand(
 
             About = model.About!,
 
+            // Dates
             InvoiceDate = null,
 
+            // Terms
             PaymentTermDays = Defaults.Invoice.PaymentTermDays.Default,
             PaymentTerms = null,
 
+            // Customer identity
+            Customer_Name = customer.Name,
+            CustomerKind = customer.CustomerKind,
+            Customer_Ssn10 = customer.Ssn10,
+            Customer_Orgnum = customer.Orgnum,
+
+            // Customer address
             Customer_Address1 = customer.Address1,
             Customer_Address2 = customer.Address2,
             Customer_ZipCode = customer.ZipCode,
             Customer_City = customer.City,
             Customer_Country = customer.Country,
 
+            // Customer email
             Customer_Email = customer.EmailAddress,
         };
 

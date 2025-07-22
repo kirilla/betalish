@@ -30,6 +30,16 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
         builder.Property(p => p.TotalRounding)
             .HasPrecision(18, 2);
 
+        // Customer identity
+        builder.Property(p => p.Customer_Name)
+            .HasMaxLength(MaxLengths.Common.Person.FullName);
+
+        builder.Property(p => p.Customer_Ssn10)
+            .HasMaxLength(MaxLengths.Common.Ssn.Ssn10);
+
+        builder.Property(p => p.Customer_Orgnum)
+            .HasMaxLength(MaxLengths.Common.Organization.Orgnum);
+
         // Customer address
         builder.Property(p => p.Customer_Address1)
             .HasMaxLength(MaxLengths.Common.Address.Address1);
