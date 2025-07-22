@@ -15,9 +15,15 @@
 
     <h4>
         Faktura
+        <span class="muted">
+            @(Model.Invoice.InvoiceNumber?.ToSwedish() ?? "fakturanummer saknas")
+        </span>
     </h4>
 
     <ul class="notice">
+        <li>
+            @(Model.Invoice.Customer_Name)
+        </li>
         @if (Model.Invoice.Customer_Address1.HasValue())
         {
             <li>
