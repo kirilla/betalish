@@ -12,6 +12,10 @@ public class Invoice : IFormatOnSave, IValidateOnSave
 
     public required string About { get; set; }
 
+    // Dates
+    public required DateOnly InvoiceDate { get; set; }
+    public required DateOnly DueDate { get; set; }
+
     // Summary
     public required decimal NetAmount { get; set; }
     public required decimal VatAmount { get; set; }

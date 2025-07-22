@@ -23,6 +23,15 @@ public class ConvertDraftToInvoiceRoutine(
                 x.InvoiceDraft.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
+        var invoiceDate =
+            draft.InvoiceDate ??
+            DateOnly.FromDateTime(DateTime.Today);
+
+        var dueDate =
+            (draft.DueDate ??
+            DateOnly.FromDateTime(DateTime.Today))
+            .AddDays(Defaults.Invoice.DueDays.Default);
+
         var invoice = new Invoice()
         {
             InvoiceStatus = InvoiceStatus.Draft,
@@ -32,6 +41,9 @@ public class ConvertDraftToInvoiceRoutine(
             IsCredit = draft.IsCredit,
 
             About = draft.About,
+
+            InvoiceDate = invoiceDate,
+            DueDate = dueDate,
 
             NetAmount = draft.NetAmount,
             VatAmount = draft.VatAmount,

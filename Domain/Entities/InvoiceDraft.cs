@@ -8,6 +8,10 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
 
     public required string About { get; set; }
 
+    // Dates
+    public DateOnly? InvoiceDate { get; set; }
+    public DateOnly? DueDate { get; set; }
+
     // Summary
     public decimal NetAmount { get; set; }
     public decimal VatAmount { get; set; }

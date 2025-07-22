@@ -28,6 +28,16 @@
             &thinsp;
             @(Model.Invoice.About)
         </li>
+        <li>
+            Fakturadatum:
+            &thinsp;
+            @(Model.Invoice.InvoiceDate.ToIso8601())
+        </li>
+        <li>
+            Förfallodatum:
+            &thinsp;
+            @(Model.Invoice.InvoiceDate.ToIso8601())
+        </li>
     </ul>
 
     <h5>Artiklar</h5>

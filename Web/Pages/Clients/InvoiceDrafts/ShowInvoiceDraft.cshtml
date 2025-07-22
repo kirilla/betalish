@@ -21,9 +21,11 @@
         <li>
             Till:
             &thinsp;
-            <a href="/show-customer/@(Model.Customer.Id)">
-                @(Model.Customer.Name)
-            </a>
+            <a href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
+                @(Model.Customer.Name)</a>
+            @* <a href="/show-customer/@(Model.Customer.Id)" class="nolink">
+                ↗️
+            </a> *@
         </li>
         <li>
             Rubrik:
@@ -31,6 +33,43 @@
             <a href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
                 @(Model.InvoiceDraft.About)
             </a>
+        </li>
+        <li>
+            Fakturadatum:
+            &thinsp;
+            @if (Model.InvoiceDraft.InvoiceDate == null)
+            {
+                <a href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)" class="nolink">
+                    <span>-</span>
+                </a>
+            }
+            else
+            {
+                <a href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
+                    @(Model.InvoiceDraft.InvoiceDate?.ToIso8601())
+                </a>
+            }
+        </li>
+        <li>
+            Förfallodatum:
+            &thinsp;
+            @if (Model.InvoiceDraft.DueDate == null)
+            {
+                <a href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)" class="nolink">
+                    <span>-</span>
+                </a>
+            }
+            else
+            {
+                <a href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
+                    @(Model.InvoiceDraft.DueDate?.ToIso8601())
+                </a>
+            }
+        </li>
+        <li>
+            Betalvillkor:
+            &thinsp;
+            @($"{Defaults.Invoice.DueDays.Default} dagar netto")
         </li>
     </ul>
 
