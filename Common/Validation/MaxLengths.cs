@@ -17,6 +17,16 @@ public static class MaxLengths
 
         public const int DbSuperSize = 16_000;
 
+        public static class Address
+        {
+            public const int Address1 = 50;
+            public const int Address2 = 50;
+            public const int City = 30;
+            public const int Country = 50;
+            public const int CountryCode = 3;
+            public const int ZipCode = 10;
+        }
+
         public static class Bookkeeping
         {
             public const int Account = 4;

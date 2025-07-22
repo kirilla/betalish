@@ -32,6 +32,13 @@ public class EditCustomerOrganizationModel(
                 Id = Customer.Id,
                 Name = Customer.Name,
                 Orgnum = Customer.Orgnum?.ToOrgnumWithDash(),
+
+                Address1 = Customer.Address1,
+                Address2 = Customer.Address2,
+                ZipCode = Customer.ZipCode,
+                City = Customer.City,
+                Country = Customer.Country,
+
                 EmailAddress = Customer.EmailAddress,
             };
 

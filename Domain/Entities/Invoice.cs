@@ -26,6 +26,16 @@ public class Invoice : IFormatOnSave, IValidateOnSave
     public required decimal Total { get; set; }
     public required decimal TotalRounding { get; set; }
 
+    // Customer address
+    public required string? Customer_Address1 { get; set; }
+    public required string? Customer_Address2 { get; set; }
+    public required string Customer_ZipCode { get; set; }
+    public required string Customer_City { get; set; }
+    public required string? Customer_Country { get; set; }
+
+    // Customer email
+    public required string? Customer_Email { get; set; }
+
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
 

@@ -13,6 +13,14 @@ public class Customer : IFormatOnSave, IValidateOnSave
     public string? Ssn10 { get; set; }
     public string? Orgnum { get; set; }
 
+    // Address
+    public required string? Address1 { get; set; }
+    public required string? Address2 { get; set; }
+    public required string ZipCode { get; set; }
+    public required string City { get; set; }
+    public required string? Country { get; set; }
+
+    // Email
     public string? EmailAddress { get; set; }
 
     public int ClientId { get; set; }
@@ -27,6 +35,13 @@ public class Customer : IFormatOnSave, IValidateOnSave
         Orgnum = Orgnum?.StripNonNumeric();
 
         EmailAddress = EmailAddress?.Trim().ToLowerInvariant();
+
+        if (string.IsNullOrWhiteSpace(Address1) &&
+            !string.IsNullOrWhiteSpace(Address2))
+        {
+            Address1 = Address2;
+            Address2 = null;
+        }
     }
 
     public void ValidateOnSave()

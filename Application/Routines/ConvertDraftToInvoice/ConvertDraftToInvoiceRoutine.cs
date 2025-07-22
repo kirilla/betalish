@@ -74,6 +74,14 @@ public class ConvertDraftToInvoiceRoutine(
             Total = draft.Total,
             TotalRounding = draft.TotalRounding,
 
+            Customer_Address1 = draft.Customer_Address1,
+            Customer_Address2 = draft.Customer_Address2,
+            Customer_ZipCode = draft.Customer_ZipCode,
+            Customer_City = draft.Customer_City,
+            Customer_Country = draft.Customer_Country,
+
+            Customer_Email = draft.Customer_Email,
+
             ClientId = draft.ClientId,
             //CustomerId = draft.CustomerId,
         };

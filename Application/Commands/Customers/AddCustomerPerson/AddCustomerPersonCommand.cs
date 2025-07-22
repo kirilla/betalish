@@ -33,6 +33,11 @@ public class AddCustomerPersonCommand(IDatabaseService database) : IAddCustomerP
         {
             Ssn10 = model.Ssn10,
             Name = model.Name,
+            Address1 = model.Address1,
+            Address2 = model.Address2,
+            ZipCode = model.ZipCode!,
+            City = model.City!,
+            Country = model.Country,
             EmailAddress = model.EmailAddress,
             Guid = guid,
             CustomerKind = CustomerKind.Person,

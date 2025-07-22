@@ -33,6 +33,13 @@ public class EditCustomerOrganizationCommand(IDatabaseService database) : IEditC
 
         customer.Orgnum = model.Orgnum;
         customer.Name = model.Name;
+
+        customer.Address1 = model.Address1;
+        customer.Address2 = model.Address2;
+        customer.ZipCode = model.ZipCode!;
+        customer.City = model.City!;
+        customer.Country = model.Country;
+
         customer.EmailAddress = model.EmailAddress;
 
         await database.SaveAsync(userToken);
