@@ -38,6 +38,7 @@ public static class MaxLengths
         public static class Invoice
         {
             public const int About = 50;
+            public const int PaymentTerms = 30;
         }
 
         public static class Ip

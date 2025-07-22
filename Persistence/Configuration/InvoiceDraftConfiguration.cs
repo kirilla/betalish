@@ -9,6 +9,9 @@ class InvoiceDraftConfiguration : IEntityTypeConfiguration<InvoiceDraft>
         builder.Property(p => p.About)
             .HasMaxLength(MaxLengths.Common.Invoice.About);
 
+        builder.Property(p => p.PaymentTerms)
+            .HasMaxLength(MaxLengths.Common.Invoice.PaymentTerms);
+
         // Summary
         builder.Property(p => p.NetAmount)
             .HasPrecision(18, 2);

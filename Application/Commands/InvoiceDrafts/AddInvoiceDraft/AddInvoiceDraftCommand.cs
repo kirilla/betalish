@@ -27,8 +27,15 @@ public class AddInvoiceDraftCommand(
         {
             ClientId = userToken.ClientId!.Value,
             CustomerId = model.CustomerId!.Value,
+            
             IsCredit = false,
+
             About = model.About!,
+
+            InvoiceDate = null,
+
+            PaymentTermDays = Defaults.Invoice.PaymentTermDays.Default,
+            PaymentTerms = null,
         };
 
         database.InvoiceDrafts.Add(draft);

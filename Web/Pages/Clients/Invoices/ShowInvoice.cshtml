@@ -33,11 +33,29 @@
             &thinsp;
             @(Model.Invoice.InvoiceDate.ToIso8601())
         </li>
-        <li>
-            Förfallodatum:
-            &thinsp;
-            @(Model.Invoice.InvoiceDate.ToIso8601())
-        </li>
+        @if (Model.Invoice.DueDate.HasValue)
+        {
+            <li>
+                Förfallodatum:
+                &thinsp;
+                @(Model.Invoice.DueDate.ToIso8601())
+            </li>
+        }
+        @if (Model.Invoice.PaymentTerms.HasValue())
+        {
+            <li>
+                @if (Model.Invoice.IsCredit)
+                {
+                    <span>Villkor</span>
+                }
+                else
+                {
+                    <span>Betalvillkor</span>
+                }
+                &thinsp;
+                @(Model.Invoice.PaymentTerms)
+            </li>
+        }
     </ul>
 
     <h5>Artiklar</h5>

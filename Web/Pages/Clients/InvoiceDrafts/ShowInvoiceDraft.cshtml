@@ -50,27 +50,23 @@
                 </a>
             }
         </li>
-        <li>
-            Förfallodatum:
-            &thinsp;
-            @if (Model.InvoiceDraft.DueDate == null)
-            {
-                <a href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)" class="nolink">
-                    <span>-</span>
-                </a>
-            }
-            else
-            {
-                <a href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
-                    @(Model.InvoiceDraft.DueDate?.ToIso8601())
-                </a>
-            }
-        </li>
-        <li>
-            Betalvillkor:
-            &thinsp;
-            @($"{Defaults.Invoice.DueDays.Default} dagar netto")
-        </li>
+        @if (Model.InvoiceDraft.IsCredit)
+        {
+            <li>
+                Villkor
+                &thinsp;
+                @(Model.InvoiceDraft.PaymentTerms ?? "-")
+            </li>
+        }
+        else
+        {
+            <li>
+                Betalvillkor
+                &thinsp;
+                @(Model.InvoiceDraft.PaymentTerms ??
+                    $"{Defaults.Invoice.PaymentTermDays.Default} dagar netto")
+            </li>
+        }
     </ul>
 
     <p>

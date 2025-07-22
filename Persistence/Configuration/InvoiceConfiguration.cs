@@ -14,6 +14,9 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
         builder.Property(p => p.About)
             .HasMaxLength(MaxLengths.Common.Invoice.About);
 
+        builder.Property(p => p.PaymentTerms)
+            .HasMaxLength(MaxLengths.Common.Invoice.PaymentTerms);
+
         builder.HasMany(x => x.InvoiceRows)
             .WithOne(x => x.Invoice)
             .HasForeignKey(x => x.InvoiceId);

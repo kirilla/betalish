@@ -4,7 +4,7 @@ public static class Defaults
 {
     public static class Invoice
     {
-        public static class DueDays
+        public static class PaymentTermDays
         {
             public const int Min = 8;
             public const int Max = 120;

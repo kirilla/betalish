@@ -21,15 +21,37 @@ public class ConvertDraftToInvoiceRoutine(
                 x.InvoiceDraft.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
-        var invoiceDate =
+        DateOnly invoiceDate =
             draft.InvoiceDate ??
             DateOnly.FromDateTime(DateTime.Today);
 
-        var dueDate =
-            invoiceDate
-            .AddDays(
+        DateOnly? dueDate;
+        int? paymentTermDays;
+        string paymentTerms;
+
+        if (draft.IsCredit)
+        {
+            dueDate = null;
+            paymentTermDays = null;
+            paymentTerms = 
+                draft.PaymentTerms ??
+                    $"{paymentTermDays} dagar netto";
+        }
+        else
+        {
+            dueDate = 
+                invoiceDate.AddDays(
+                    draft.PaymentTermDays ??
+                    Defaults.Invoice.PaymentTermDays.Default);
+
+            paymentTermDays = 
                 draft.PaymentTermDays ??
-                Defaults.Invoice.DueDays.Default);
+                    Defaults.Invoice.PaymentTermDays.Default;
+
+            paymentTerms =
+                draft.PaymentTerms ??
+                    $"{paymentTermDays} dagar netto";
+        }
 
         var invoice = new Invoice()
         {
@@ -43,6 +65,9 @@ public class ConvertDraftToInvoiceRoutine(
 
             InvoiceDate = invoiceDate,
             DueDate = dueDate,
+
+            PaymentTermDays = draft.PaymentTermDays,
+            PaymentTerms = paymentTerms,
 
             NetAmount = draft.NetAmount,
             VatAmount = draft.VatAmount,
