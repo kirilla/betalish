@@ -1,4 +1,4 @@
-﻿namespace Betalish.Application.Commands.Customers.EditCustomerTags;
+﻿namespace Betalish.Application.Commands.CustomerTags.EditCustomerTags;
 
 public interface IEditCustomerTagsCommand
 {

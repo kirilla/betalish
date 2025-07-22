@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Betalish.Application.Commands.Customers.EditCustomerTags;
+namespace Betalish.Application.Commands.CustomerTags.EditCustomerTags;
 
 public class EditCustomerTagsCommandModel
 {

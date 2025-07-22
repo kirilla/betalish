@@ -1,6 +1,6 @@
-﻿using Betalish.Application.Commands.Customers.EditCustomerTags;
+﻿using Betalish.Application.Commands.CustomerTags.EditCustomerTags;
 
-namespace Betalish.Web.Pages.Clients.Customers;
+namespace Betalish.Web.Pages.Clients.CustomerTags;
 
 public class EditCustomerTagsModel(
     IUserToken userToken,
