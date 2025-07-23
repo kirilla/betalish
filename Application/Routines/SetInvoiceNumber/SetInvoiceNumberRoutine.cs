@@ -1,7 +1,10 @@
-﻿namespace Betalish.Application.Routines.SetInvoiceNumber;
+﻿using Betalish.Application.Queues.LogItems;
+
+namespace Betalish.Application.Routines.SetInvoiceNumber;
 
 public class SetInvoiceNumberRoutine(
-    IDatabaseService database) : ISetInvoiceNumberRoutine
+    IDatabaseService database,
+    ILogItemList logItemList) : ISetInvoiceNumberRoutine
 {
     public async Task Execute(
         IUserToken userToken, int invoiceId)
@@ -19,27 +22,59 @@ public class SetInvoiceNumberRoutine(
 
         await InvoiceNumberAsyncLock.ExecuteAsync(async () =>
         {
-            var ranges = await database.InvoiceRanges
-                .AsNoTracking()
-                .Where(x => x.ClientId == userToken.ClientId!.Value)
-                .ToListAsync();
+            try
+            {
+                var ranges = await database.InvoiceRanges
+                    .AsNoTracking()
+                    .Where(x => x.ClientId == userToken.ClientId!.Value)
+                    .ToListAsync();
 
-            // TODO: A global lock, a per-client lock ?
+                // Find the InvoiceDate
+                var invoiceDate = invoice.InvoiceDate;
 
-            // TODO:
-            //
-            // 1. Find the InvoiceDate of the invoice.
-            // 2. Find the range for the invoice date. 
-            // 3. Find all invoice numbers within the range.
-            // 4. Find the top invoice number
-            // 5. Increment +1
-            // 6. Assert still within range.
+                // Find the InvoiceRange for the date
+                var range = ranges.Where(x =>
+                    x.EffectiveStartDate <= invoiceDate &&
+                    x.EffectiveEndDate >= invoiceDate)
+                    .SingleOrDefault() ??
+                    throw new NotFoundException(
+                        $"No suitable InvoiceRange for invoice " +
+                        $"'{invoice.Id}', client '{userToken.ClientName}'.");
+
+                // Find the top invoice number used, within the range
+                int highestTakenNumber = await database.Invoices
+                    .Where(x =>
+                        x.ClientId == invoice.ClientId &&
+                        x.InvoiceNumber >= range.StartNumber &&
+                        x.InvoiceNumber <= range.EndNumber)
+                    .Select(x => x.InvoiceNumber)
+                    .Where(x => x != null)
+                    .OrderByDescending(x => x)
+                    .Cast<int>()
+                    .Take(1)
+                    .SingleOrDefaultAsync();
+
+                // Increment
+                int nextNumber = highestTakenNumber + 1;
+
+                // Assert still within range
+                if (nextNumber < range.StartNumber ||
+                    nextNumber > range.EndNumber)
+                    throw new OutOfRangeException(
+                        $"Invoice: {invoice.Id}, InvoiceRange: {range.Id}.");
+
+                invoice.InvoiceNumber = nextNumber;
+                invoice.InvoiceStatus = InvoiceStatus.Issued;
+
+                await database.SaveAsync(userToken);
+            }
+            catch (Exception ex)
+            {
+                logItemList.AddLogItem(new LogItem(ex)
+                {
+                    LogItemKind = LogItemKind.SetInvoiceNumberRoutineFailed,
+                });
+            }
         });
-
-        throw new NotImplementedException();
-
-        invoice.InvoiceStatus = InvoiceStatus.Issued;
-
-        await database.SaveAsync(userToken);
     }
 }

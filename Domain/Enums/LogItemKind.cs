@@ -2,6 +2,8 @@
 
 public enum LogItemKind
 {
+
+
     NetworkRequestReaped = 644146724,
     NetworkRequestReaperFailed = 997229645,
 
@@ -12,6 +14,8 @@ public enum LogItemKind
     IpAddressRateLimited = 820643908,
     SignInRateLimited = 864697948,
     EndpointRateLimited = 291390178,
+
+    SetInvoiceNumberRoutineFailed = 331095278,
 
     Test = 94729107,
 }
