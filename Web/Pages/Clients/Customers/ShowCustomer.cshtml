@@ -11,7 +11,7 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
-@await Html.PartialAsync("_Customers", Model.UserToken)
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Customers.cshtml", Model.UserToken)
 
 <main>
 
