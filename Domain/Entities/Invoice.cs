@@ -67,5 +67,10 @@ public class Invoice : IFormatOnSave, IValidateOnSave
             InvoiceNumber == null)
             throw new ValidateOnSaveException(
                 "Issued invoice missing InvoiceNumber.");
+
+        if (InvoiceNumber.HasValue &&
+            InvoiceNumber < 0)
+            throw new ValidateOnSaveException(
+                $"Negative InvoiceNumber: {InvoiceNumber}.");
     }
 }
