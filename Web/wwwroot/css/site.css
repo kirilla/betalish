@@ -209,3 +209,13 @@ main h4 + figure,
 main h5 + figure {
     margin-top: 1rem;
 }
+
+.page-menu {
+    margin-inline-start: 1rem;
+    margin-top: 0.5rem;
+}
+
+.page-menu a {
+    margin-inline-end: 0.7rem;
+    text-decoration: none;
+}

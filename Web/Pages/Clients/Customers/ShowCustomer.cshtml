@@ -11,6 +11,8 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
+@await Html.PartialAsync("_Customers", Model.UserToken)
+
 <main>
 
     @if (Model.Customer.CustomerKind == CustomerKind.Person)
