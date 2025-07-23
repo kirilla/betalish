@@ -211,7 +211,7 @@ main h5 + figure {
 }
 
 .page-menu {
-    margin-inline-start: 1rem;
+    /*margin-inline-start: 1rem;*/
     margin-top: 0.5rem;
 }
 
