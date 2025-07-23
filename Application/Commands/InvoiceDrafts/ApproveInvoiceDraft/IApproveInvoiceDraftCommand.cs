@@ -2,7 +2,7 @@
 
 public interface IApproveInvoiceDraftCommand
 {
-    Task Execute(IUserToken userToken, ApproveInvoiceDraftCommandModel model);
+    Task<int> Execute(IUserToken userToken, ApproveInvoiceDraftCommandModel model);
 
     bool IsPermitted(IUserToken userToken);
 }

@@ -76,9 +76,9 @@ public class ApproveInvoiceDraftModel(
             if (!ModelState.IsValid)
                 return Page();
 
-            await command.Execute(UserToken, CommandModel);
+            var invoiceId = await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-invoice-draft/{id}");
+            return Redirect($"/show-invoice/{invoiceId}");
         }
         catch
         {

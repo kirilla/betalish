@@ -8,7 +8,7 @@ public class ApproveInvoiceDraftCommand(
     IConvertDraftToInvoiceRoutine convertToInvoiceRoutine,
     ISetInvoiceNumberRoutine setInvoiceNumberRoutine) : IApproveInvoiceDraftCommand
 {
-    public async Task Execute(
+    public async Task<int> Execute(
         IUserToken userToken, ApproveInvoiceDraftCommandModel model)
     {
         if (!IsPermitted(userToken))
@@ -32,6 +32,8 @@ public class ApproveInvoiceDraftCommand(
         int invoiceId = await convertToInvoiceRoutine.Execute(userToken, draft.Id);
 
         await setInvoiceNumberRoutine.Execute(userToken, invoiceId);
+
+        return invoiceId;
     }
 
     public bool IsPermitted(IUserToken userToken)
