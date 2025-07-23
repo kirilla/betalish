@@ -19,7 +19,6 @@
 <main>
 
     <h4>
-        📒
         Bokföringskonton
     </h4>
 
@@ -28,15 +27,28 @@
             <tr>
                 <th>Konto</th>
                 <th>Beskrivning</th>
+                <th></th>
             </tr>
             @foreach (var account in Model.LedgerAccounts)
             {
                 <tr>
                     <td>
-                        @(account.Account)
+                        <a href="/edit-ledger-account/@(account.Id)" class="nolink">
+                            @(account.Account)
+                        </a>
                     </td>
                     <td>
-                        @(account.Description)
+                        <a href="/edit-ledger-account/@(account.Id)" class="nolink">
+                            @(account.Description)
+                        </a>
+                    </td>
+                    <td>
+                        <a href="/edit-ledger-account/@(account.Id)" class="nolink">
+                            ✏️
+                        </a>
+                        <a href="/remove-ledger-account/@(account.Id)" class="nolink">
+                            ❌
+                        </a>
                     </td>
                 </tr>
             }

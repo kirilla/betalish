@@ -39,7 +39,7 @@ public class AddLedgerAccountModel(
 
             var id = await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-ledger-account/{id}");
+            return Redirect($"/show-ledger-accounts");
         }
         catch (BlockedByExistingException)
         {
