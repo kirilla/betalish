@@ -22,47 +22,58 @@
         Artiklar
     </h4>
 
-    <figure>
-        <table>
-            <tr>
-                <th>Nr</th>
-                <th>Namn</th>
-                <th>Pris</th>
-                <th>Enhet</th>
-                <th>Moms</th>
-            </tr>
-            @foreach (var article in Model.Articles)
-            {
+    @if (!Model.Articles.Any())
+    {
+        <div class="notice">
+            Det finns inga artiklar.
+        </div>
+    }
+
+    @if (Model.Articles.Any())
+    {
+        <figure>
+            <table>
                 <tr>
-                    <td>
-                        @(article.Number)
-                    </td>
-                    <td>
-                        <a href="/edit-article/@(article.Id)">
-                            @(article.Name)
-                        </a>
-                    </td>
-                    <td>
-                        @(article.UnitPrice.ToString("N2", Swedish.CultureInfo)) 
-                        @(Swedish.Currency.Short)
-                    </td>
-                    <td>
-                        @(article.UnitName)
-                    </td>
-                    <td>
-                        @(article.VatRate.ToString("N2", Swedish.CultureInfo))
-                    </td>
+                    <th>Nr</th>
+                    <th>Namn</th>
+                    <th>Pris</th>
+                    <th>Enhet</th>
+                    <th>Moms</th>
+                    <th></th>
                 </tr>
-            }
-            @if (!Model.Articles.Any())
-            {
-                <tr>
-                    <td colspan="8">
-                        Inga
-                    </td>
-                </tr>
-            }
-        </table>
-    </figure>
+                @foreach (var article in Model.Articles)
+                {
+                    <tr>
+                        <td>
+                            @(article.Number)
+                        </td>
+                        <td>
+                            <a href="/edit-article/@(article.Id)">
+                                @(article.Name)
+                            </a>
+                        </td>
+                        <td>
+                            @(article.UnitPrice.ToString("N2", Swedish.CultureInfo))
+                            @(Swedish.Currency.Short)
+                        </td>
+                        <td>
+                            @(article.UnitName)
+                        </td>
+                        <td>
+                            @(article.VatRate.ToString("N2", Swedish.CultureInfo))
+                        </td>
+                        <td>
+                            <a href="/edit-article/@(article.Id)" class="nolink">
+                                ✏️
+                            </a>
+                            <a href="/remove-article/@(article.Id)" class="nolink">
+                                ❌
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </figure>
+    }
 
 </main>

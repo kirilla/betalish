@@ -1,11 +1,11 @@
-﻿@page "/edit-ledger-account/{id:int}"
-@model EditLedgerAccountModel
+﻿@page "/edit-article-accounting/{id:int}"
+@model EditArticleAccountingModel
 @{
 }
 
 @section Meta {
     <title>
-        Redigera bokföringskonto -
+        Redigera kontering -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -21,21 +21,26 @@
         Redigera
     </h4>
 
+    <h5>
+        @(Model.Article.Number)
+        @(Model.Article.Name)
+        <br />
+        @(Model.Article.VatRate.ToSwedish()) %
+    </h5>
+
     <form method="post">
 
         <input type="hidden" asp-for="CommandModel.Id" />
 
-        <label asp-for="CommandModel.Account">
-            Konto
+        <label asp-for="CommandModel.RevenueAccount">
+            Intäktskonto
         </label>
-        <input asp-for="CommandModel.Account"
-               placeholder="0000" />
+        <input asp-for="CommandModel.RevenueAccount" />
 
-        <label asp-for="CommandModel.Description">
-            Beskrivning
+        <label asp-for="CommandModel.VatAccount">
+            Moms-konto
         </label>
-        <input asp-for="CommandModel.Description"
-               placeholder="" />
+        <input asp-for="CommandModel.VatAccount" />
 
         <div asp-validation-summary="All"></div>
 
@@ -43,7 +48,7 @@
             Spara
         </button>
 
-        <a class="button" href="/show-ledger-accounts">
+        <a class="button" href="/show-article-accounting">
             Avbryt
         </a>
     </form>

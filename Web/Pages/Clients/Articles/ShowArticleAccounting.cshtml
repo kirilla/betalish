@@ -22,57 +22,54 @@
         Kontering
     </h4>
 
-    <figure>
-        <table>
-            <tr>
-                <th>Nr</th>
-                <th>Namn</th>
-                <th>Moms</th>
-                <th>Typ</th>
-                <th>Intäktskonto</th>
-                <th>Moms-konto</th>
-            </tr>
-            @foreach (var article in Model.Articles)
-            {
+    @if (!Model.Articles.Any())
+    {
+        <div class="notice">
+            Det finns inga bokföringskonton.
+        </div>
+    }
+
+    @if (Model.Articles.Any())
+    {
+        <figure>
+            <table>
                 <tr>
-                    <td>
-                        @(article.Number)
-                    </td>
-                    <td>
-                        <a href="/edit-article/@(article.Id)">
-                            @(article.Name)
-                        </a>
-                    </td>
-                    <td>
-                        @(article.VatRate.ToString("N2", Swedish.CultureInfo))
-                    </td>
-                    <td>
-                        @if (article.ArticleKind == ArticleKind.Goods)
-                        {
-                            <span>Vara</span>
-                        }
-                        @if (article.ArticleKind == ArticleKind.Service)
-                        {
-                            <span>Tjänst</span>
-                        }
-                    </td>
-                    <td>
-                        @(article.RevenueAccount)
-                    </td>
-                    <td>
-                        @(article.VatAccount ?? "-")
-                    </td>
+                    <th>Nr</th>
+                    <th>Namn</th>
+                    <th>Moms</th>
+                    <th>Intäktskonto</th>
+                    <th>Moms-konto</th>
+                    <th></th>
                 </tr>
-            }
-            @if (!Model.Articles.Any())
-            {
-                <tr>
-                    <td colspan="8">
-                        Inga
-                    </td>
-                </tr>
-            }
-        </table>
-    </figure>
+                @foreach (var article in Model.Articles)
+                {
+                    <tr>
+                        <td>
+                            @(article.Number)
+                        </td>
+                        <td>
+                            <a href="/edit-article-accounting/@(article.Id)">
+                                @(article.Name)
+                            </a>
+                        </td>
+                        <td>
+                            @(article.VatRate.ToString("N2", Swedish.CultureInfo))
+                        </td>
+                        <td>
+                            @(article.RevenueAccount)
+                        </td>
+                        <td>
+                            @(article.VatAccount ?? "-")
+                        </td>
+                        <td>
+                            <a href="/edit-article-accounting/@(article.Id)" class="nolink">
+                                ✏️
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </figure>
+    }
 
 </main>

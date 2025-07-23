@@ -22,51 +22,47 @@
         Bokföringskonton
     </h4>
 
-    <figure>
-        <table>
-            <tr>
-                <th>Konto</th>
-                <th>Beskrivning</th>
-                <th></th>
-            </tr>
-            @foreach (var account in Model.LedgerAccounts)
-            {
-                <tr>
-                    <td>
-                        <a href="/edit-ledger-account/@(account.Id)" class="nolink">
-                            @(account.Account)
-                        </a>
-                    </td>
-                    <td>
-                        <a href="/edit-ledger-account/@(account.Id)" class="nolink">
-                            @(account.Description)
-                        </a>
-                    </td>
-                    <td>
-                        <a href="/edit-ledger-account/@(account.Id)" class="nolink">
-                            ✏️
-                        </a>
-                        <a href="/remove-ledger-account/@(account.Id)" class="nolink">
-                            ❌
-                        </a>
-                    </td>
-                </tr>
-            }
-            @if (!Model.LedgerAccounts.Any())
-            {
-                <tr>
-                    <td colspan="2">
-                        Inga
-                    </td>
-                </tr>
-            }
-        </table>
-    </figure>
+    @if (!Model.LedgerAccounts.Any())
+    {
+        <div class="notice">
+            Det finns inga konton.
+        </div>
+    }
 
-    <p>
-        <a class="button" href="/add-ledger-account">
-            Lägg till
-        </a>
-    </p>
+    @if (Model.LedgerAccounts.Any())
+    {
+        <figure>
+            <table>
+                <tr>
+                    <th>Konto</th>
+                    <th>Beskrivning</th>
+                    <th></th>
+                </tr>
+                @foreach (var account in Model.LedgerAccounts)
+                {
+                    <tr>
+                        <td>
+                            <a href="/edit-ledger-account/@(account.Id)">
+                                @(account.Account)
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/edit-ledger-account/@(account.Id)">
+                                @(account.Description)
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/edit-ledger-account/@(account.Id)" class="nolink">
+                                ✏️
+                            </a>
+                            <a href="/remove-ledger-account/@(account.Id)" class="nolink">
+                                ❌
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </figure>
+    }
 
 </main>

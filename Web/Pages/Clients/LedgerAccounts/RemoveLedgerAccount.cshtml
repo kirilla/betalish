@@ -5,7 +5,7 @@
 
 @section Meta {
     <title>
-        Ta bort artikel -
+        Ta bort bokföringskonto -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -18,9 +18,13 @@
 
 <main>
     <h4>
-        Ta bort artikel:
-        @(Model.LedgerAccount.Description)
+        Ta bort
     </h4>
+
+    <h5>
+        @(Model.LedgerAccount.Account)
+        @(Model.LedgerAccount.Description)
+    </h5>
 
     <form method="post">
 
