@@ -42,4 +42,9 @@ public static class StringExtensions
     {
         return !string.IsNullOrWhiteSpace(s);
     }
+
+    public static bool IsMissingValue(this string? s)
+    {
+        return string.IsNullOrWhiteSpace(s);
+    }
 }

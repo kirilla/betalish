@@ -1,4 +1,5 @@
 ﻿using Betalish.Application.Commands.InvoiceDrafts.ApproveInvoiceDraft;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Betalish.Web.Pages.Clients.InvoiceDrafts;
 
@@ -79,6 +80,20 @@ public class ApproveInvoiceDraftModel(
             var invoiceId = await command.Execute(UserToken, CommandModel);
 
             return Redirect($"/show-invoice/{invoiceId}");
+        }
+        catch (UserFeedbackException ex)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Id),
+                ex.Message);
+
+            // Note:
+            //
+            // We're exposing internals here, taking a calculated risk,
+            // to give the user a meaningful error message without 
+            // having to add a specific exception type for every assertion.
+
+            return Page();
         }
         catch
         {

@@ -2,7 +2,7 @@
 
 public enum LogItemKind
 {
-
+    Assertion = 621921758,
 
     NetworkRequestReaped = 644146724,
     NetworkRequestReaperFailed = 997229645,
