@@ -33,8 +33,6 @@
                         <span>👤</span>
                         &thinsp;
                         <a href="/show-customer/@(customer.Id)">@(customer.Name)</a>
-                        &ensp;
-                        @(customer.EmailAddress)
                     </li>
                 }
                 @if (customer.CustomerKind == CustomerKind.Organization)
@@ -43,8 +41,6 @@
                         <span>🏢</span>
                         &thinsp;
                         <a href="/show-customer/@(customer.Id)">@(customer.Name)</a>
-                        &ensp;
-                        @(customer.EmailAddress)
                     </li>
                 }
             }
@@ -60,11 +56,5 @@
         </ul>
 
     </div>
-
-    <p>
-        <a class="button" href="/add-customer">
-            Lägg till
-        </a>
-    </p>
 
 </main>
