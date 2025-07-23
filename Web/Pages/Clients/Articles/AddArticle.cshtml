@@ -5,7 +5,7 @@
 
 @section Meta {
     <title>
-        Lägg till artikel -
+        Ny artikel -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -18,7 +18,7 @@
 
 <main>
     <h4>
-        Lägg till en artikel
+        Ny artikel
     </h4>
 
     <form method="post">
@@ -26,29 +26,27 @@
         <label asp-for="CommandModel.Number">
             Artikelnummer
         </label>
-        <input asp-for="CommandModel.Number" placeholder="10" />
+        <input asp-for="CommandModel.Number" />
 
         <label asp-for="CommandModel.Name">
             Namn
         </label>
-        <input asp-for="CommandModel.Name" 
-            placeholder="Varans eller tjänstens namn" />
+        <input asp-for="CommandModel.Name" />
 
         <label asp-for="CommandModel.UnitPrice">
             Pris
         </label>
-        <input asp-for="CommandModel.UnitPrice" placeholder="20,00" />
+        <input asp-for="CommandModel.UnitPrice" />
 
         <label asp-for="CommandModel.UnitName">
-            Per enhet
+            Enhet (pris per ...)
         </label>
-        <input asp-for="CommandModel.UnitName" 
-            placeholder="kilogram, liter, styck, ..." />
+        <input asp-for="CommandModel.UnitName" />
 
         <label asp-for="CommandModel.VatRate">
             Momssats %
         </label>
-        <input asp-for="CommandModel.VatRate" placeholder="25,00" />
+        <input asp-for="CommandModel.VatRate" />
 
         <label asp-for="CommandModel.ArticleKind">
             Typ
@@ -66,12 +64,12 @@
         <label asp-for="CommandModel.RevenueAccount">
             Intäktskonto
         </label>
-        <input asp-for="CommandModel.RevenueAccount" placeholder="0000" />
+        <input asp-for="CommandModel.RevenueAccount" />
 
         <label asp-for="CommandModel.VatAccount">
             Moms-konto
         </label>
-        <input asp-for="CommandModel.VatAccount" placeholder="0000" />
+        <input asp-for="CommandModel.VatAccount" />
 
         <div asp-validation-summary="All"></div>
 

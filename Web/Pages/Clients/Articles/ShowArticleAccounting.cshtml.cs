@@ -1,12 +1,12 @@
-﻿namespace Betalish.Web.Pages.Clients.Articles;
+namespace Betalish.Web.Pages.Clients.Articles;
 
-public class ShowArticleModel(
+public class ShowArticleAccountingModel(
     IUserToken userToken,
     IDatabaseService database) : ClientPageModel(userToken)
 {
-    public Article Article { get; set; } = null!;
+    public List<Article> Articles { get; set; } = [];
 
-    public async Task<IActionResult> OnGetAsync(int id)
+    public async Task<IActionResult> OnGetAsync()
     {
         try
         {
@@ -15,12 +15,12 @@ public class ShowArticleModel(
 
             AssertIsClient();
 
-            Article = await database.Articles
-                .Where(x => 
-                    x.Id == id &&
-                    x.ClientId == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
+            Articles = await database.Articles
+                .AsNoTracking()
+                .Where(x => x.ClientId == UserToken.ClientId!.Value)
+                .OrderBy(x => x.Number)
+                .ThenBy(x => x.Name)
+                .ToListAsync();
 
             return Page();
         }

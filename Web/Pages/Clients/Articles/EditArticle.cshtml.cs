@@ -71,7 +71,7 @@ public class EditArticleModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-article/{id}");
+            return Redirect("/show-articles");
         }
         catch (BlockedByNumberException)
         {

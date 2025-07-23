@@ -1,11 +1,11 @@
-﻿@page "/show-articles"
-@model ShowArticlesModel
+﻿@page "/show-article-accounting"
+@model ShowArticleAccountingModel
 @{
 }
 
 @section Meta {
     <title>
-        Artiklar -
+        Kontering -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -19,7 +19,7 @@
 <main>
 
     <h4>
-        Artiklar
+        Kontering
     </h4>
 
     <figure>
@@ -27,9 +27,10 @@
             <tr>
                 <th>Nr</th>
                 <th>Namn</th>
-                <th>Pris</th>
-                <th>Enhet</th>
                 <th>Moms</th>
+                <th>Typ</th>
+                <th>Intäktskonto</th>
+                <th>Moms-konto</th>
             </tr>
             @foreach (var article in Model.Articles)
             {
@@ -43,14 +44,23 @@
                         </a>
                     </td>
                     <td>
-                        @(article.UnitPrice.ToString("N2", Swedish.CultureInfo)) 
-                        @(Swedish.Currency.Short)
-                    </td>
-                    <td>
-                        @(article.UnitName)
-                    </td>
-                    <td>
                         @(article.VatRate.ToString("N2", Swedish.CultureInfo))
+                    </td>
+                    <td>
+                        @if (article.ArticleKind == ArticleKind.Goods)
+                        {
+                            <span>Vara</span>
+                        }
+                        @if (article.ArticleKind == ArticleKind.Service)
+                        {
+                            <span>Tjänst</span>
+                        }
+                    </td>
+                    <td>
+                        @(article.RevenueAccount)
+                    </td>
+                    <td>
+                        @(article.VatAccount ?? "-")
                     </td>
                 </tr>
             }
