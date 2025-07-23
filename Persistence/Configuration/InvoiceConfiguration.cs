@@ -7,9 +7,12 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
         builder.HasKey(p => p.Id);
 
         builder
-            .HasIndex(p => p.InvoiceNumber)
-           .IsUnique()
-           .HasFilter("[InvoiceNumber] IS NOT NULL");
+            .HasIndex(e => new { e.ClientId, e.InvoiceNumber })
+            .IsUnique()
+            .HasFilter("[InvoiceNumber] IS NOT NULL");
+
+        builder
+            .HasIndex(e => e.ClientId); // Make EF keep the FK index
 
         builder.Property(p => p.About)
             .HasMaxLength(MaxLengths.Common.Invoice.About);
