@@ -37,9 +37,6 @@ public class EditArticleCommandModel
     [StringLength(MaxLengths.Common.Percent.ShortWithDecimals)]
     public string? VatRate { get; set; }
 
-    [Required(ErrorMessage = "Ange typ av artikel.")]
-    public ArticleKind? ArticleKind { get; set; }
-
     [RegularExpression(
         Pattern.Common.Bookkeeping.Account,
         ErrorMessage = "Intäktskonto anges med fyra siffror")]

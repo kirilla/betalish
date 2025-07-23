@@ -30,7 +30,6 @@ public class EditArticleModel(
             CommandModel = new EditArticleCommandModel()
             {
                 Id = Article.Id,
-                ArticleKind = Article.ArticleKind,
                 Number = Article.Number,
                 Name = Article.Name,
                 UnitPrice = Article.UnitPrice.ToString("N2", Swedish.CultureInfo),

@@ -19,7 +19,6 @@ public class AddArticleCommand(IDatabaseService database) : IAddArticleCommand
 
         var article = new Article()
         {
-            ArticleKind = model.ArticleKind!.Value,
             Number = model.Number!.Value,
             Name = model.Name!,
             UnitPrice = model.UnitPrice!.TryParseDecimal()!.Value,

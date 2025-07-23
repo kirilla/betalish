@@ -25,7 +25,6 @@ public class EditArticleCommand(IDatabaseService database) : IEditArticleCommand
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        article.ArticleKind = model.ArticleKind!.Value;
         article.Number = model.Number!.Value;
         article.Name = model.Name!;
         article.UnitPrice = model.UnitPrice!.TryParseDecimal()!.Value;

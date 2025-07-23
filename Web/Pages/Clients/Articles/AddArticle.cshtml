@@ -48,19 +48,6 @@
         </label>
         <input asp-for="CommandModel.VatRate" />
 
-        <label asp-for="CommandModel.ArticleKind">
-            Typ
-        </label>
-        <select asp-for="CommandModel.ArticleKind">
-            <option value="">–</option>
-            <option value="@(ArticleKind.Goods)">
-                Vara
-            </option>
-            <option value="@(ArticleKind.Service)">
-                Tjänst
-            </option>
-        </select>
-
         <label asp-for="CommandModel.RevenueAccount">
             Intäktskonto
         </label>

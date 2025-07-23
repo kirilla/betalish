@@ -4,8 +4,6 @@ public class Article : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
-    public ArticleKind ArticleKind { get; set; }
-
     public int Number { get; set; }
 
     public required string Name { get; set; }
@@ -30,7 +28,5 @@ public class Article : IFormatOnSave, IValidateOnSave
 
     public void ValidateOnSave()
     {
-        if (!Enum.IsDefined(ArticleKind))
-            throw new InvalidEnumException();
     }
 }
