@@ -93,8 +93,12 @@ public class ConvertDraftToInvoiceRoutine(
             // Customer email
             Customer_Email = draft.Customer_Email,
 
+            // Hints
+            CustomerId = draft.CustomerId,
+            CustomerGuid = draft.CustomerGuid,
+
+            // Relations
             ClientId = draft.ClientId,
-            //CustomerId = draft.CustomerId,
         };
 
         database.Invoices.Add(invoice);

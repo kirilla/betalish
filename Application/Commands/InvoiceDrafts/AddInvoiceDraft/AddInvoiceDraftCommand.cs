@@ -25,9 +25,6 @@ public class AddInvoiceDraftCommand(
 
         var draft = new InvoiceDraft()
         {
-            ClientId = userToken.ClientId!.Value,
-            CustomerId = model.CustomerId!.Value,
-            
             IsCredit = false,
 
             About = model.About!,
@@ -54,6 +51,13 @@ public class AddInvoiceDraftCommand(
 
             // Customer email
             Customer_Email = customer.EmailAddress,
+
+            // Hints
+            CustomerGuid = customer.Guid,
+
+            // Relations
+            CustomerId = customer.Id,
+            ClientId = userToken.ClientId!.Value,
         };
 
         database.InvoiceDrafts.Add(draft);
