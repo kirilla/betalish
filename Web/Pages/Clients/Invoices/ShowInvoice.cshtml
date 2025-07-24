@@ -50,11 +50,6 @@
             &nbsp;
         </li>
         <li>
-            Rubrik:
-            &thinsp;
-            @(Model.Invoice.About)
-        </li>
-        <li>
             Fakturadatum:
             &thinsp;
             @(Model.Invoice.InvoiceDate.ToIso8601())
@@ -82,6 +77,15 @@
                 @(Model.Invoice.PaymentTerms)
             </li>
         }
+        @if (Model.Invoice.About.HasValue())
+        {
+            <li>
+                &nbsp;
+            </li>
+            <li>
+                Sammanfattning: @(Model.Invoice.About)
+            </li>
+        }
     </ul>
 
     <h5>Artiklar</h5>
@@ -93,9 +97,10 @@
                 <th>Artikel</th>
                 <th>Kvantitet</th>
                 <th>Pris</th>
-                <th>Moms</th>
-                <th>Intäktskonto</th>
-                <th>Moms-konto</th>
+                <th>Moms-sats</th>
+                @* <th>Netto</th>
+                <th>Moms</th> *@
+                <th>Totalt</th>
             </tr>
             @foreach (var row in Model.InvoiceRows)
             {
@@ -107,21 +112,24 @@
                         @(row.ArticleName)
                     </td>
                     <td>
-                        @(row.Quantity.ToString("N2", Swedish.CultureInfo))
+                        @(row.Quantity.ToOptionalDecimals())
                         @(row.Unit)
                     </td>
                     <td>
-                        @(row.UnitPrice.ToString("N2", Swedish.CultureInfo))
+                        @(row.UnitPrice.ToSwedish())
                         @(Swedish.Currency.Short)
                     </td>
                     <td>
-                        @(row.VatRate.ToString("N2", Swedish.CultureInfo))
+                        @(row.VatRate.ToOptionalDecimals()) %
+                    </td>
+                    @* <td>
+                        @(row.NetAmount)
                     </td>
                     <td>
-                        @(row.RevenueAccount)
-                    </td>
+                        @(row.VatAmount)
+                    </td> *@
                     <td>
-                        @(row.VatAccount ?? "-")
+                        @(row.TotalAmount)
                     </td>
                 </tr>
             }

@@ -18,4 +18,9 @@ public static class DecimalExtensions
     {
         return value.ToString("N2", Swedish.CultureInfo);
     }
+
+    public static string ToOptionalDecimals(this decimal value)
+    {
+        return value.ToString("0.##", Swedish.CultureInfo);
+    }
 }

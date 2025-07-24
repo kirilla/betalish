@@ -19,13 +19,7 @@
 
     <ul class="notice">
         <li>
-            Till:
-            &thinsp;
-            <a href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
-                @(Model.InvoiceDraft.Customer_Name)</a>
-        </li>
-        <li>
-            &nbsp;
+            @(Model.InvoiceDraft.Customer_Name)
         </li>
         @if (Model.InvoiceDraft.Customer_Address1.HasValue())
         {
@@ -51,13 +45,6 @@
         }
         <li>
             &nbsp;
-        </li>
-        <li>
-            Rubrik:
-            &thinsp;
-            <a href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
-                @(Model.InvoiceDraft.About)
-            </a>
         </li>
         <li>
             Fakturadatum:
@@ -92,6 +79,15 @@
                     $"{Defaults.Invoice.PaymentTermDays.Default} dagar netto")
             </li>
         }
+        @if (Model.InvoiceDraft.About.HasValue())
+        {
+            <li>
+                &nbsp;
+            </li>
+            <li>
+                Sammanfattning: @(Model.InvoiceDraft.About)
+            </li>
+        }
     </ul>
 
     <p>
@@ -113,10 +109,11 @@
                 <th>Artikel</th>
                 <th>Kvantitet</th>
                 <th>Pris</th>
-                <th>Moms</th>
+                <th>Moms-sats</th>
+                @* <th>Netto</th>
+                <th>Moms</th> *@
+                <th>Totalt</th>
                 <th></th>
-                <th>Intäktskonto</th>
-                <th>Moms-konto</th>
             </tr>
             @foreach (var row in Model.InvoiceDraftRows)
             {
@@ -131,29 +128,32 @@
                     </td>
                     <td>
                         <a href="/edit-invoice-draft-row/@(row.Id)">
-                            @(row.Quantity.ToString("N2", Swedish.CultureInfo))
+                            @(row.Quantity.ToOptionalDecimals())
                             @(row.Unit)
                         </a>
                     </td>
                     <td>
                         <a href="/edit-invoice-draft-row/@(row.Id)">
-                            @(row.UnitPrice.ToString("N2", Swedish.CultureInfo))
+                            @(row.UnitPrice.ToSwedish())
                             @(Swedish.Currency.Short)
                         </a>
                     </td>
                     <td>
-                        @(row.VatRate.ToString("N2", Swedish.CultureInfo))
+                        @(row.VatRate.ToOptionalDecimals()) %
+                    </td>
+                    @* <td>
+                        @(row.NetAmount)
+                    </td>
+                    <td>
+                        @(row.VatAmount)
+                    </td> *@
+                    <td>
+                        @(row.TotalAmount)
                     </td>
                     <td>
                         <a href="/remove-invoice-draft-row/@(row.Id)" class="nolink">
                             ❌
                         </a>
-                    </td>
-                    <td>
-                        @(row.RevenueAccount)
-                    </td>
-                    <td>
-                        @(row.VatAccount ?? "-")
                     </td>
                 </tr>
             }
