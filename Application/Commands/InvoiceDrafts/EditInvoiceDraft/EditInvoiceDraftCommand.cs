@@ -11,14 +11,37 @@ public class EditInvoiceDraftCommand(IDatabaseService database) : IEditInvoiceDr
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
+        if (model.Customer_Country.IsMissingValue())
+        {
+            model.Customer_ZipCode = 
+                model.Customer_ZipCode.StripNonNumeric();
+        }
+
         var draft = await database.InvoiceDrafts
             .Where(x =>
-                x.ClientId == userToken.ClientId!.Value &&
-                x.Id == model.Id)
+                x.Id == model.Id &&
+                x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
         draft.About = model.About!;
+
+        // Dates
+        draft.InvoiceDate = model.InvoiceDate?.ToIso8601DateOnly();
+
+        // Terms
+        draft.PaymentTermDays = model.PaymentTermDays;
+        draft.PaymentTerms = model.PaymentTerms;
+
+        // Customer address
+        draft.Customer_Address1 = model.Customer_Address1;
+        draft.Customer_Address2 = model.Customer_Address2;
+        draft.Customer_ZipCode = model.Customer_ZipCode;
+        draft.Customer_City = model.Customer_City;
+        draft.Customer_Country = model.Customer_Country;
+
+        // Customer email
+        draft.Customer_Email = model.Customer_Email?.ToLowerInvariant();
 
         await database.SaveAsync(userToken);
     }

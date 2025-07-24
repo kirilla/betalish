@@ -24,11 +24,65 @@
 
         <input type="hidden" asp-for="CommandModel.Id" />
 
-        <label asp-for="CommandModel.About">
-            Sammanfattning
-        </label>
-        <input asp-for="CommandModel.About"
-               placeholder="Ex: köp, medlemsavgift, hyra, datum från-till" />
+        <p>
+            <label asp-for="CommandModel.About" class="required">
+                Sammanfattning
+            </label>
+            <input asp-for="CommandModel.About"
+                   placeholder="Ex: köp, medlemsavgift, hyra, datum från-till" />
+        </p>
+
+        <p>
+            <label asp-for="CommandModel.InvoiceDate">
+                Fakturadatum
+            </label>
+            <input asp-for="CommandModel.InvoiceDate" />
+
+            <label asp-for="CommandModel.PaymentTermDays">
+                Antal dagar till förfallodatum
+            </label>
+            <input asp-for="CommandModel.PaymentTermDays" />
+
+            <label asp-for="CommandModel.PaymentTerms">
+                Betalvillkor
+            </label>
+            <input asp-for="CommandModel.PaymentTerms"
+                   placeholder="30 dagar netto" />
+        </p>
+
+        <p>
+            <label asp-for="CommandModel.Customer_Address1">
+                Adress
+            </label>
+            <input asp-for="CommandModel.Customer_Address1" />
+
+            <label asp-for="CommandModel.Customer_Address2">
+                Adress, extra rad
+            </label>
+            <input asp-for="CommandModel.Customer_Address2" />
+
+            <label asp-for="CommandModel.Customer_ZipCode" class="required">
+                Postnummer
+            </label>
+            <input asp-for="CommandModel.Customer_ZipCode" />
+
+            <label asp-for="CommandModel.Customer_City" class="required">
+                Postort
+            </label>
+            <input asp-for="CommandModel.Customer_City" />
+
+            <label asp-for="CommandModel.Customer_Country">
+                Land
+            </label>
+            <input asp-for="CommandModel.Customer_Country" />
+        </p>
+
+        <p>
+            <label asp-for="CommandModel.Customer_Email">
+                E-post
+            </label>
+            <input asp-for="CommandModel.Customer_Email" />
+        </p>
 
         <div asp-validation-summary="All"></div>
 

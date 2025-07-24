@@ -10,8 +10,7 @@ public class EditInvoiceDraftModel(
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 
     [BindProperty]
-    public EditInvoiceDraftCommandModel CommandModel { get; set; }
-        = new EditInvoiceDraftCommandModel();
+    public EditInvoiceDraftCommandModel CommandModel { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -31,6 +30,23 @@ public class EditInvoiceDraftModel(
             {
                 Id = InvoiceDraft.Id,
                 About = InvoiceDraft.About,
+
+                // Dates
+                InvoiceDate = InvoiceDraft.InvoiceDate.ToIso8601(),
+
+                // Terms
+                PaymentTermDays = InvoiceDraft.PaymentTermDays,
+                PaymentTerms = InvoiceDraft.PaymentTerms,
+
+                // Customer address
+                Customer_Address1 = InvoiceDraft.Customer_Address1,
+                Customer_Address2 = InvoiceDraft.Customer_Address2,
+                Customer_ZipCode = InvoiceDraft.Customer_ZipCode,
+                Customer_City = InvoiceDraft.Customer_City,
+                Customer_Country = InvoiceDraft.Customer_Country,
+
+                // Customer email
+                Customer_Email = InvoiceDraft.Customer_Email,
             };
 
             return Page();

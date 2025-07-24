@@ -218,3 +218,9 @@ main h5 + figure {
     margin-inline-end: 0.7rem;
     text-decoration: none;
 }
+
+label.required {
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
+    text-decoration-color: var(--accent);
+}

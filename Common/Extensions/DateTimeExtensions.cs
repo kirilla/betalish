@@ -35,6 +35,21 @@ public static class DateTimeExtensions
         return date;
     }
 
+    public static DateOnly? ToIso8601DateOnly(this string input)
+    {
+        if (DateOnly.TryParseExact(
+                input,
+                "yyyy-MM-dd",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out var date))
+        {
+            return date;
+        }
+
+        return null;
+    }
+
     public static DateOnly ToDateOnly(this DateTime date)
     {
         return DateOnly.FromDateTime(date);

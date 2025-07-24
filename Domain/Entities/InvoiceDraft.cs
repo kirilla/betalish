@@ -51,6 +51,14 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
 
     public void FormatOnSave()
     {
+        Customer_Email = Customer_Email?.Trim().ToLowerInvariant();
+
+        if (string.IsNullOrWhiteSpace(Customer_Address1) &&
+            !string.IsNullOrWhiteSpace(Customer_Address2))
+        {
+            Customer_Address1 = Customer_Address2;
+            Customer_Address2 = null;
+        }
     }
 
     public void ValidateOnSave()
