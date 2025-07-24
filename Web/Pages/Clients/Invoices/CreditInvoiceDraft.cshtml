@@ -1,0 +1,44 @@
+﻿@page "/credit-invoice-draft/{id:int}"
+@model CreditInvoiceDraftModel
+@{
+}
+
+@section Meta {
+    <title>
+        Kreditera faktura -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Kreditera faktura
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Kreditera
+        </button>
+
+        <a class="button" href="/show-invoice/@(Model.Invoice.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

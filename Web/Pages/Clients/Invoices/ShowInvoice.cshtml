@@ -165,10 +165,13 @@
         </table>
     </figure>
 
-    @* <p>
-        <a class="button" href="/foo-invoice-draft/@(Model.Invoice.Id)">
-            Foo
-        </a>
-    </p> *@
-
+    @if (Model.Invoice.IsCredit == false)
+    {
+        <p>
+            <a class="button" href="/credit-invoice-draft/@(Model.Invoice.Id)">
+                Kreditera
+            </a>
+        </p>
+    }
+    
 </main>
