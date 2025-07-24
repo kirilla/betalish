@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Betalish.Domain.Entities;
+﻿namespace Betalish.Domain.Entities;
 
 public class Invoice : IFormatOnSave, IValidateOnSave
 {
@@ -55,6 +53,9 @@ public class Invoice : IFormatOnSave, IValidateOnSave
     public Client Client { get; set; } = null!;
 
     public List<InvoiceRow> InvoiceRows { get; set; } = [];
+
+    public List<BalanceRow> CreditBalanceRows { get; set; } = [];
+    public List<BalanceRow> DebetBalanceRows { get; set; } = [];
 
     public void FormatOnSave()
     {
