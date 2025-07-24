@@ -32,14 +32,32 @@
         <figure>
             <table>
                 <tr>
-                    <th>Kund</th>
+                    <th>Fakturadatum</th>
+                    <th>Mottagare</th>
+                    <th>Sammanfattning</th>
+                    <th>Belopp</th>
                 </tr>
                 @foreach (var draft in Model.InvoiceDrafts)
                 {
                     <tr>
                         <td>
                             <a href="/show-invoice-draft/@(draft.Id)">
-                                @(draft.Customer_Name)
+                                @(draft.InvoiceDate?.ToIso8601() ?? "-")
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice-draft/@(draft.Id)">
+                                @(draft.Customer_Name ?? "-")
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice-draft/@(draft.Id)">
+                                @(draft.About ?? "-")
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice-draft/@(draft.Id)">
+                                @(draft.Total.ToSwedish())
                             </a>
                         </td>
                     </tr>

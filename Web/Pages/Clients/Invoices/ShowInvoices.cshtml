@@ -41,9 +41,10 @@
             <table>
                 <tr>
                     <th>Nummer</th>
-                    <th>Mottagare</th>
                     <th>Fakturadatum</th>
+                    <th>Mottagare</th>
                     <th>Sammanfattning</th>
+                    <th>Belopp</th>
                 </tr>
                 @foreach (var invoice in Model.Invoices)
                 {
@@ -55,17 +56,22 @@
                         </td>
                         <td>
                             <a href="/show-invoice/@(invoice.Id)">
-                                @(invoice.Customer_Name ?? "-")
-                            </a>
-                        </td>
-                        <td>
-                            <a href="/show-invoice/@(invoice.Id)">
                                 @(invoice.InvoiceDate.ToIso8601())
                             </a>
                         </td>
                         <td>
                             <a href="/show-invoice/@(invoice.Id)">
-                                @(invoice.About)
+                                @(invoice.Customer_Name ?? "-")
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.About ?? "-")
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.Total.ToSwedish())
                             </a>
                         </td>
                     </tr>
