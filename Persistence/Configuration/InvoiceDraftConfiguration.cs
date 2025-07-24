@@ -56,7 +56,13 @@ class InvoiceDraftConfiguration : IEntityTypeConfiguration<InvoiceDraft>
             .HasMaxLength(MaxLengths.Common.Email.Address);
 
         // Relations
-        builder.HasMany(x => x.InvoiceDraftRows)
+        builder
+            .HasMany(x => x.InvoiceDraftRows)
+            .WithOne(x => x.InvoiceDraft)
+            .HasForeignKey(x => x.InvoiceDraftId);
+
+        builder
+            .HasMany(x => x.DraftBalanceRows)
             .WithOne(x => x.InvoiceDraft)
             .HasForeignKey(x => x.InvoiceDraftId);
 

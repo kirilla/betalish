@@ -86,5 +86,10 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
             .WithOne(x => x.DebetInvoice)
             .HasForeignKey(x => x.DebetInvoiceID)
             .OnDelete(DeleteBehavior.NoAction);
+
+        builder
+            .HasMany(x => x.DraftBalanceRows)
+            .WithOne(x => x.Invoice)
+            .HasForeignKey(x => x.InvoiceId);
     }
 }

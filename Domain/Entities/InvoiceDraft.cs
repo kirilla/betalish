@@ -47,7 +47,11 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
 
+    // Rows
     public List<InvoiceDraftRow> InvoiceDraftRows { get; set; } = [];
+
+    // Balance
+    public List<DraftBalanceRow> DraftBalanceRows { get; set; } = [];
 
     public void FormatOnSave()
     {
