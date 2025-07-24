@@ -1,7 +1,6 @@
 ﻿namespace Betalish.Domain.Entities;
 
-public class BalanceRow : 
-    IFormatOnSave, IValidateOnSave, ICreatedDateTime, IUpdatedDateTime
+public class BalanceRow : ICreatedDateTime, IUpdatedDateTime
 {
     public int Id { get; set; }
 
@@ -21,12 +20,4 @@ public class BalanceRow :
 
     public int DebetInvoiceID { get; set; }
     public Invoice DebetInvoice { get; set; } = null!;
-
-    public void FormatOnSave()
-    {
-    }
-
-    public void ValidateOnSave()
-    {
-    }
 }
