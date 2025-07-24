@@ -94,7 +94,7 @@ public class ConvertDraftToInvoiceRoutine(
             Customer_Email = draft.Customer_Email,
 
             // Hints
-            CustomerId = draft.CustomerId,
+            CustomerId_Hint = draft.CustomerId_Hint,
             CustomerGuid = draft.CustomerGuid,
 
             // Relations

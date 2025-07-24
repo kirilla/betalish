@@ -47,7 +47,7 @@ public class Invoice : IFormatOnSave, IValidateOnSave
     public required string? Customer_Email { get; set; }
 
     // Hints
-    public required int? CustomerId { get; set; }
+    public required int? CustomerId_Hint { get; set; }
     public required Guid? CustomerGuid { get; set; }
 
     // Relations

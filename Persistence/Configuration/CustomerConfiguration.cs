@@ -39,9 +39,5 @@ class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.HasMany(x => x.CustomerTags)
             .WithOne(x => x.Customer)
             .HasForeignKey(x => x.CustomerId);
-
-        builder.HasMany(x => x.InvoiceDrafts)
-            .WithOne(x => x.Customer)
-            .HasForeignKey(x => x.CustomerId);
     }
 }

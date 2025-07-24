@@ -1,5 +1,4 @@
 ﻿using Betalish.Application.Commands.InvoiceDrafts.ApproveInvoiceDraft;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Betalish.Web.Pages.Clients.InvoiceDrafts;
 
@@ -8,7 +7,6 @@ public class ApproveInvoiceDraftModel(
     IDatabaseService database,
     IApproveInvoiceDraftCommand command) : ClientPageModel(userToken)
 {
-    public Customer Customer { get; set; } = null!;
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 
     [BindProperty]
@@ -26,13 +24,6 @@ public class ApproveInvoiceDraftModel(
                 .Where(x =>
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == id)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
-            Customer = await database.Customers
-                .Where(x =>
-                    x.ClientId == UserToken.ClientId!.Value &&
-                    x.Id == InvoiceDraft.CustomerId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -64,13 +55,6 @@ public class ApproveInvoiceDraftModel(
                 .Where(x =>
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == id)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
-            Customer = await database.Customers
-                .Where(x =>
-                    x.ClientId == UserToken.ClientId!.Value &&
-                    x.Id == InvoiceDraft.CustomerId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

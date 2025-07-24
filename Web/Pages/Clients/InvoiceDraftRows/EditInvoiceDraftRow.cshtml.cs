@@ -7,7 +7,6 @@ public class EditInvoiceDraftRowModel(
     IDatabaseService database,
     IEditInvoiceDraftRowCommand command) : ClientPageModel(userToken)
 {
-    public Customer Customer { get; set; } = null!;
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
     public InvoiceDraftRow InvoiceDraftRow { get; set; } = null!;
 
@@ -33,13 +32,6 @@ public class EditInvoiceDraftRowModel(
                 .Where(x =>
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == InvoiceDraftRow.InvoiceDraftId)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
-            Customer = await database.Customers
-                .Where(x =>
-                    x.ClientId == UserToken.ClientId!.Value &&
-                    x.Id == InvoiceDraft.CustomerId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -85,14 +77,7 @@ public class EditInvoiceDraftRowModel(
                     x.Id == InvoiceDraftRow.InvoiceDraftId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
-
-            Customer = await database.Customers
-                .Where(x =>
-                    x.ClientId == UserToken.ClientId!.Value &&
-                    x.Id == InvoiceDraft.CustomerId)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
+            
             if (!ModelState.IsValid)
                 return Page();
 

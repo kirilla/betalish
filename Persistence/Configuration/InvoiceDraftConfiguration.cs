@@ -59,5 +59,8 @@ class InvoiceDraftConfiguration : IEntityTypeConfiguration<InvoiceDraft>
         builder.HasMany(x => x.InvoiceDraftRows)
             .WithOne(x => x.InvoiceDraft)
             .HasForeignKey(x => x.InvoiceDraftId);
+
+        // Indexes
+        builder.HasIndex(e => e.CustomerId_Hint);
     }
 }

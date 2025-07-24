@@ -53,10 +53,10 @@ public class AddInvoiceDraftCommand(
             Customer_Email = customer.EmailAddress,
 
             // Hints
+            CustomerId_Hint = customer.Id,
             CustomerGuid = customer.Guid,
 
             // Relations
-            CustomerId = customer.Id,
             ClientId = userToken.ClientId!.Value,
         };
 

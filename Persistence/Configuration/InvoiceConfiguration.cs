@@ -15,7 +15,7 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
             .HasIndex(e => e.ClientId); // Make EF keep the FK index
 
         builder
-            .HasIndex(e => e.CustomerId);
+            .HasIndex(e => e.CustomerId_Hint);
         // Not a FK. Merely a hint.
         // Customers come and go, but invoices are forever.
         // CustomerId is used in conjunction with CustomerGuid,

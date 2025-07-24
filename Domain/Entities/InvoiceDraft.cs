@@ -40,14 +40,12 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
     public required string? Customer_Email { get; set; }
 
     // Hints
+    public required int? CustomerId_Hint { get; set; }
     public required Guid? CustomerGuid { get; set; }
 
     // Relations
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
-
-    public int CustomerId { get; set; }
-    public Customer Customer { get; set; } = null!;
 
     public List<InvoiceDraftRow> InvoiceDraftRows { get; set; } = [];
 
