@@ -84,7 +84,7 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
         builder
             .HasMany(x => x.DebetBalanceRows)
             .WithOne(x => x.DebetInvoice)
-            .HasForeignKey(x => x.DebetInvoiceID)
+            .HasForeignKey(x => x.DebitInvoiceID)
             .OnDelete(DeleteBehavior.NoAction);
 
         builder
