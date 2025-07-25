@@ -21,6 +21,13 @@ public class ConvertDraftToInvoiceRoutine(
                 x.InvoiceDraft.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
+        var draftBalanceRows = await database.DraftBalanceRows
+            .Include(x => x.Invoice)
+            .Where(x =>
+                x.InvoiceDraftId == invoiceDraftId &&
+                x.InvoiceDraft.ClientId == userToken.ClientId!.Value)
+            .ToListAsync();
+
         DateOnly invoiceDate =
             draft.InvoiceDate ??
             DateOnly.FromDateTime(DateTime.Today);
@@ -124,8 +131,26 @@ public class ConvertDraftToInvoiceRoutine(
 
         database.InvoiceRows.AddRange(invoiceRows);
 
-        // TODO: BalanceRows, VatRows, etc
+        if (draft.IsCredit)
+        {
+            var balanceRows = draftBalanceRows
+                .Select(x => new BalanceRow()
+                {
+                    DebitInvoiceNumber = x.Invoice.InvoiceNumber!.Value,
+                    CreditInvoiceNumber = 0, 
+                        // TODO: The credit invoice does not yet have its number
+                    Amount = x.Amount,
+                    Date = invoiceDate,
+                    PaymentsCreated = false, // TODO: Check this.
+                    DebitInvoiceID = x.InvoiceId,
+                    CreditInvoice = invoice,
+                })
+                .ToList();
 
+            database.BalanceRows.AddRange(balanceRows);
+        }
+
+        // TODO: Payments, payment status, accounting?
 
         database.InvoiceDrafts.Remove(draft);
 
