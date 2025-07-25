@@ -65,6 +65,14 @@ public class CreditInvoiceDraftModel(
 
             return Redirect($"/show-invoice-draft/{draftId}");
         }
+        catch (ConfirmationRequiredException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Confirmed),
+                "Bekräfta att du verkligen vill kreditera fakturan.");
+
+            return Page();
+        }
         catch
         {
             return Redirect("/help/notpermitted");
