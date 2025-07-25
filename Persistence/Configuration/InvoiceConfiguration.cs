@@ -82,8 +82,8 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
             .OnDelete(DeleteBehavior.Cascade);
 
         builder
-            .HasMany(x => x.DebetBalanceRows)
-            .WithOne(x => x.DebetInvoice)
+            .HasMany(x => x.DebitBalanceRows)
+            .WithOne(x => x.DebitInvoice)
             .HasForeignKey(x => x.DebitInvoiceID)
             .OnDelete(DeleteBehavior.NoAction);
 

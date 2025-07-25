@@ -55,7 +55,7 @@ public class Invoice : IFormatOnSave, IValidateOnSave
     public List<InvoiceRow> InvoiceRows { get; set; } = [];
 
     public List<BalanceRow> CreditBalanceRows { get; set; } = [];
-    public List<BalanceRow> DebetBalanceRows { get; set; } = [];
+    public List<BalanceRow> DebitBalanceRows { get; set; } = [];
 
     public List<DraftBalanceRow> DraftBalanceRows { get; set; } = [];
 

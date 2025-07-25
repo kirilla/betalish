@@ -37,7 +37,7 @@ public class ShowInvoiceModel(
 
             BalanceRows = await database.BalanceRows
                 .Include(x => x.CreditInvoice)
-                .Include(x => x.DebetInvoice)
+                .Include(x => x.DebitInvoice)
                 .Where(x =>
                     x.CreditInvoiceID == id ||
                     x.DebitInvoiceID == id)
