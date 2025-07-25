@@ -17,6 +17,18 @@
 
     <h4>
         Utkast
+        @if (Model.InvoiceDraft.IsCredit)
+        {
+            <span class="muted">
+                Kreditering
+            </span>
+        }
+        else
+        {
+            <span class="muted">
+                Faktura
+            </span>
+        }
     </h4>
 
     <ul class="notice">
