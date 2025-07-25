@@ -7,6 +7,8 @@ public class ShowInvoiceModel(
     public Invoice Invoice { get; set; } = null!;
 
     public List<InvoiceRow> InvoiceRows { get; set; } = [];
+    public List<BalanceRow> BalanceRows { get; set; } = [];
+    public List<DraftBalanceRow> DraftBalanceRows { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -31,6 +33,18 @@ public class ShowInvoiceModel(
                     x.InvoiceId == id)
                 .OrderBy(x => x.ArticleNumber)
                 .ThenBy(x => x.ArticleName)
+                .ToListAsync();
+
+            BalanceRows = await database.BalanceRows
+                .Include(x => x.CreditInvoice)
+                .Include(x => x.DebetInvoice)
+                .Where(x =>
+                    x.CreditInvoiceID == id ||
+                    x.DebetInvoiceID == id)
+                .ToListAsync();
+
+            DraftBalanceRows = await database.DraftBalanceRows
+                .Where(x => x.InvoiceId == id)
                 .ToListAsync();
 
             return Page();
