@@ -18,8 +18,10 @@
 
 <main>
     <h4>
-        Ta bort rad i fakturautkast:<br />
-        @(Model.InvoiceTemplate.Name)
+        Ta bort rad
+        <span class="muted">
+            @(Model.InvoiceTemplate.Name)
+        </span>
     </h4>
 
     <form method="post">

@@ -7,7 +7,6 @@ public class RemoveInvoiceTemplateRowModel(
     IDatabaseService database,
     IRemoveInvoiceTemplateRowCommand command) : ClientPageModel(userToken)
 {
-    public Article Article { get; set; } = null!;
     public InvoiceTemplate InvoiceTemplate { get; set; } = null!;
     public InvoiceTemplateRow InvoiceTemplateRow { get; set; } = null!;
 
@@ -33,13 +32,6 @@ public class RemoveInvoiceTemplateRowModel(
                 .Where(x =>
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == InvoiceTemplateRow.InvoiceTemplateId)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
-            Article = await database.Articles
-                .Where(x =>
-                    x.ClientId == UserToken.ClientId!.Value &&
-                    x.Id == InvoiceTemplateRow.ArticleId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -78,13 +70,6 @@ public class RemoveInvoiceTemplateRowModel(
                 .Where(x =>
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == InvoiceTemplateRow.InvoiceTemplateId)
-                .SingleOrDefaultAsync() ??
-                throw new NotFoundException();
-
-            Article = await database.Articles
-                .Where(x =>
-                    x.ClientId == UserToken.ClientId!.Value &&
-                    x.Id == InvoiceTemplateRow.ArticleId)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 

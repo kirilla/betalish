@@ -16,8 +16,8 @@
 <main>
 
     <h4>
-        Fakturamall:
-        @(Model.InvoiceTemplate.Name)
+        Fakturamall
+        <span class="muted">@(Model.InvoiceTemplate.Name)</span>
     </h4>
 
     <ul class="notice">
@@ -39,7 +39,7 @@
     @if (!Model.InvoiceTemplateRows.Any())
     {
         <div class="notice">
-            Mallen saknar artikelrader.
+            Inga rader.
         </div>
     }
 

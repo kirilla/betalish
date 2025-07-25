@@ -5,7 +5,7 @@
 
 @section Meta {
     <title>
-        Lägg till rad i utkast -
+        Lägg till rad -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -18,7 +18,10 @@
 
 <main>
     <h4>
-        Lägg till en rad i utkast
+        Lägg till rad
+        <span class="muted">
+            @(Model.InvoiceTemplate.Name)
+        </span>
     </h4>
 
     <form method="post">

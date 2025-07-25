@@ -5,7 +5,7 @@
 
 @section Meta {
     <title>
-        Skapa fakturamall -
+        Ny mall -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -18,7 +18,7 @@
 
 <main>
     <h4>
-        Skapa fakturamall
+        Ny mall
     </h4>
 
     <form method="post">
@@ -27,18 +27,18 @@
             Namn
         </label>
         <input asp-for="CommandModel.Name"
-               placeholder="Internt namn" />
+               placeholder="Internt" />
 
         <label asp-for="CommandModel.About">
             Sammanfattning
         </label>
         <input asp-for="CommandModel.About"
-               placeholder="Sammanfattning åt fakturamottagaren" />
+               placeholder="Visas för mottagaren" />
 
         <div asp-validation-summary="All"></div>
 
         <button type="submit">
-            Lägg till
+            Skapa
         </button>
 
         <a class="button" href="/show-invoice-templates">

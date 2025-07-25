@@ -7,6 +7,8 @@ public class AddInvoiceTemplateRowModel(
     IDatabaseService database,
     IAddInvoiceTemplateRowCommand command) : ClientPageModel(userToken)
 {
+    public InvoiceTemplate InvoiceTemplate { get; set; } = null!;
+
     [BindProperty]
     public AddInvoiceTemplateRowCommandModel CommandModel { get; set; }
         = new AddInvoiceTemplateRowCommandModel();
@@ -19,6 +21,13 @@ public class AddInvoiceTemplateRowModel(
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
+
+            InvoiceTemplate = await database.InvoiceTemplates
+                .Where(x =>
+                    x.Id == id &&
+                    x.ClientId == UserToken.ClientId!.Value)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
 
             Articles = await database.Articles
                 .AsNoTracking()
@@ -38,12 +47,19 @@ public class AddInvoiceTemplateRowModel(
         }
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(int id)
     {
         try
         {
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
+
+            InvoiceTemplate = await database.InvoiceTemplates
+                .Where(x =>
+                    x.Id == id &&
+                    x.ClientId == UserToken.ClientId!.Value)
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
 
             Articles = await database.Articles
                 .AsNoTracking()
