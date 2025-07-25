@@ -14,9 +14,11 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
+@await Html.PartialAsync("/Pages/Clients/_Shared/_InvoiceRange.cshtml", Model.UserToken)
+
 <main>
     <h4>
-        Ta bort nummerserie:
+        Ta bort
         @(Model.InvoiceRange.StartNumber)-
         @(Model.InvoiceRange.EndNumber)
     </h4>

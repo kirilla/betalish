@@ -5,7 +5,7 @@
 
 @section Meta {
     <title>
-        Lägg till en nummerserie -
+        Ny serie -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -14,9 +14,11 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
+@await Html.PartialAsync("/Pages/Clients/_Shared/_InvoiceRange.cshtml", Model.UserToken)
+
 <main>
     <h4>
-        Lägg till nummerserie
+        Ny serie
     </h4>
 
     @if (Model.InvoiceRanges.Any())

@@ -5,7 +5,7 @@
 
 @section Meta {
     <title>
-        Nummerserie -
+        Serie
         @(Model.InvoiceRange.StartNumber)-
         @(Model.InvoiceRange.EndNumber) - @(Branding.WebsiteTitle)
     </title>
@@ -15,10 +15,12 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
+@await Html.PartialAsync("/Pages/Clients/_Shared/_InvoiceRange.cshtml", Model.UserToken)
+
 <main>
 
     <h4>
-        Nummerserie:
+        Serie
         @(Model.InvoiceRange.StartNumber)-
         @(Model.InvoiceRange.EndNumber)
     </h4>

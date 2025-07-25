@@ -5,7 +5,7 @@
 
 @section Meta {
     <title>
-        Redigera nummerserie -
+        Redigera serie -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -14,9 +14,11 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
+@await Html.PartialAsync("/Pages/Clients/_Shared/_InvoiceRange.cshtml", Model.UserToken)
+
 <main>
     <h4>
-        Redigera nummerserie:
+        Redigera
         @(Model.InvoiceRange.StartNumber)-
         @(Model.InvoiceRange.EndNumber)
     </h4>
