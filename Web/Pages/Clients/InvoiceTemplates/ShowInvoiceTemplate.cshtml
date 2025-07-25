@@ -26,6 +26,16 @@
         </li>
     </ul>
 
+    <p>
+        <a class="button" href="/edit-invoice-template/@(Model.InvoiceTemplate.Id)">
+            Redigera
+        </a>
+
+        <a class="button" href="/remove-invoice-template/@(Model.InvoiceTemplate.Id)">
+            Ta bort
+        </a>
+    </p>
+
     @if (!Model.InvoiceTemplateRows.Any())
     {
         <div class="notice">
@@ -83,17 +93,7 @@
 
     <p>
         <a class="button" href="/add-invoice-template-row/@(Model.InvoiceTemplate.Id)">
-            Lägg till artikel
-        </a>
-    </p>
-
-    <p>
-        <a class="button" href="/edit-invoice-template/@(Model.InvoiceTemplate.Id)">
-            Redigera
-        </a>
-
-        <a class="button" href="/remove-invoice-template/@(Model.InvoiceTemplate.Id)">
-            Ta bort
+            Lägg till rad
         </a>
     </p>
 
