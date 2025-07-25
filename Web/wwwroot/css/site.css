@@ -224,3 +224,7 @@ label.required {
     text-decoration-style: dashed;
     text-decoration-color: var(--accent);
 }
+
+.end-align {
+    text-align: end;
+}

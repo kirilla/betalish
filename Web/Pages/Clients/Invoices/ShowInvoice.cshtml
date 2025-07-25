@@ -97,12 +97,12 @@
             <tr>
                 <th>Nr</th>
                 <th>Artikel</th>
-                <th>Kvantitet</th>
-                <th>Pris</th>
-                <th>Moms-sats</th>
+                <th class="end-align">Kvantitet</th>
+                <th class="end-align">Pris</th>
+                <th class="end-align">Moms-sats</th>
                 @* <th>Netto</th>
                 <th>Moms</th> *@
-                <th>Totalt</th>
+                <th class="end-align">Totalt</th>
             </tr>
             @foreach (var row in Model.InvoiceRows)
             {
@@ -113,15 +113,15 @@
                     <td>
                         @(row.ArticleName)
                     </td>
-                    <td>
+                    <td class="end-align">
                         @(row.Quantity.ToOptionalDecimals())
                         @(row.Unit)
                     </td>
-                    <td>
+                    <td class="end-align">
                         @(row.UnitPrice.ToSwedish())
                         @(Swedish.Currency.Short)
                     </td>
-                    <td>
+                    <td class="end-align">
                         @(row.VatRate.ToOptionalDecimals()) %
                     </td>
                     @* <td>
@@ -130,7 +130,7 @@
                     <td>
                         @(row.VatAmount)
                     </td> *@
-                    <td>
+                    <td class="end-align">
                         @(row.TotalAmount)
                     </td>
                 </tr>
@@ -145,22 +145,22 @@
     <figure>
         <table>
             <tr>
-                <th>Netto</th>
-                <th>Moms</th>
-                <th>Avrundning</th>
-                <th>Totalt</th>
+                <th class="end-align">Netto</th>
+                <th class="end-align">Moms</th>
+                <th class="end-align">Avrundning</th>
+                <th class="end-align">Totalt</th>
             </tr>
             <tr>
-                <td>
+                <td class="end-align">
                     @(Model.Invoice.NetAmount.ToSwedish())
                 </td>
-                <td>
+                <td class="end-align">
                     @(Model.Invoice.VatAmount.ToSwedish())
                 </td>
-                <td style="text-align:end">
+                <td class="end-align">
                     @(Model.Invoice.TotalRounding.ToSwedish())
                 </td>
-                <td>
+                <td class="end-align">
                     @(Model.Invoice.Total.ToSwedish())
                 </td>
             </tr>

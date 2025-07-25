@@ -46,7 +46,7 @@
                     <th>Fakturadatum</th>
                     <th>Mottagare</th>
                     <th>Sammanfattning</th>
-                    <th>Belopp</th>
+                    <th class="end-align">Belopp</th>
                 </tr>
                 @foreach (var invoice in Model.Invoices)
                 {
@@ -71,7 +71,7 @@
                                 @(invoice.About ?? "-")
                             </a>
                         </td>
-                        <td>
+                        <td class="end-align">
                             <a href="/show-invoice/@(invoice.Id)">
                                 @(invoice.Total.ToSwedish())
                             </a>
