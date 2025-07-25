@@ -142,7 +142,7 @@ public class ConvertDraftToInvoiceRoutine(
                     Amount = x.Amount,
                     Date = invoiceDate,
                     PaymentsCreated = false, // TODO: Check this.
-                    DebitInvoiceID = x.InvoiceId,
+                    DebitInvoiceId = x.InvoiceId,
                     CreditInvoice = invoice,
                 })
                 .ToList();

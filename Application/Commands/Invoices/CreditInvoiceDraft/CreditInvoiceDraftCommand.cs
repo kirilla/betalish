@@ -36,7 +36,7 @@ public class CreditInvoiceDraftCommand(
         var balanceRows = await database.BalanceRows
             .AsNoTracking()
             .Where(x =>
-                (x.DebitInvoiceID == invoice.Id &&
+                (x.DebitInvoiceId == invoice.Id &&
                 x.DebitInvoice.ClientId == userToken.ClientId!.Value) ||
                 (x.CreditInvoiceId == invoice.Id &&
                 x.CreditInvoice.ClientId == userToken.ClientId!.Value))
