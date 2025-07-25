@@ -4,8 +4,9 @@ public class BalanceRow : ICreatedDateTime, IUpdatedDateTime
 {
     public int Id { get; set; }
 
-    public required int InvoiceNumber { get; set; }
-
+    public required int DebitInvoiceNumber { get; set; }
+    public required int CreditInvoiceNumber { get; set; }
+    
     public required decimal Amount { get; set; }
 
     public required DateOnly Date { get; set; }
