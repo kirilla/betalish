@@ -36,7 +36,14 @@ public class ApproveInvoiceDraftCommand(
                 x.InvoiceDraft.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
-        Assert(userToken, draft, draftRows);
+        var draftBalanceRows = await database.DraftBalanceRows
+            .AsNoTracking()
+            .Where(x =>
+                x.InvoiceDraftId == draft.Id &&
+                x.InvoiceDraft.ClientId == userToken.ClientId!.Value)
+            .ToListAsync();
+
+        Assert(userToken, draft, draftRows, draftBalanceRows);
 
         int invoiceId = await convertToInvoiceRoutine.Execute(userToken, draft.Id);
 
@@ -52,8 +59,9 @@ public class ApproveInvoiceDraftCommand(
 
     private void Assert(
         IUserToken userToken, 
-        InvoiceDraft draft, 
-        List<InvoiceDraftRow> draftRows)
+        InvoiceDraft draft,
+        List<InvoiceDraftRow> draftRows,
+        List<DraftBalanceRow> draftBalanceRows)
     {
         try
         {
@@ -73,10 +81,10 @@ public class ApproveInvoiceDraftCommand(
             AssertHasDraftRows(draft, draftRows);
 
             // Balance rows
-            // AssertCreditDraftHasBalanceRows();
+            AssertCreditDraftHasBalanceRows(draft, draftRows, draftBalanceRows);
 
             // Balance sum
-            // AssertBalanceSumTotalMatchesCreditDraftTotal();
+            AssertBalanceSumTotalMatchesCreditDraftTotal(draft, draftRows, draftBalanceRows);
         }
         catch (Exception ex)
         {
@@ -93,21 +101,24 @@ public class ApproveInvoiceDraftCommand(
         }
     }
 
-    private void AssertTotalNotZero(InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
+    private void AssertTotalNotZero(
+        InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
     {
         if (draft.Total == 0 && draft.TotalRounding == 0)
             throw new UserFeedbackException(
                 "Fakturabeloppet får inte vara noll.");
     }
 
-    private void AssertTotalNegativeForCreditInvoice(InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
+    private void AssertTotalNegativeForCreditInvoice(
+        InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
     {
         if (draft.IsCredit && draft.Total > 0)
             throw new UserFeedbackException(
                 "Belopp på kreditfaktura ska vara negativt.");
     }
 
-    private void AssertTotalPositiveForDebitInvoice(InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
+    private void AssertTotalPositiveForDebitInvoice(
+        InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
     {
         if (draft.IsCredit == false && draft.Total < 0)
             throw new UserFeedbackException(
@@ -128,41 +139,38 @@ public class ApproveInvoiceDraftCommand(
         }
     }
 
-    private void AssertHasDraftRows(InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
+    private void AssertHasDraftRows(
+        InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
     {
         if (draftRows.Count == 0)
             throw new UserFeedbackException(
                 "Utkastet saknar rader.");
     }
 
-    /*
     private void AssertCreditDraftHasBalanceRows(
-        InvoiceDraft draft, 
+        InvoiceDraft draft,
         List<InvoiceDraftRow> draftRows,
-        List<InvoiceDraftBalanceRow> balanceRows)
+        List<DraftBalanceRow> draftBalanceRows)
     {
-        if (draft.IsCredit && balanceRows.Count == 0)
+        if (draft.IsCredit && draftBalanceRows.Count == 0)
         {
             throw new UserFeedbackException(
                 "Utkastet saknar kvitteringsrader.");
         }
     }
-    */
 
-    /*
     private void AssertBalanceSumTotalMatchesCreditDraftTotal(
         InvoiceDraft draft,
         List<InvoiceDraftRow> draftRows,
-        List<InvoiceDraftBalanceRow> balanceRows)
+        List<DraftBalanceRow> draftBalanceRows)
     {
         if (draft.IsCredit &&
-            balanceRows.Sum(x => x.Amount) != -draft.Total)
+            draftBalanceRows.Sum(x => x.Amount) != -draft.Total)
         {
             throw new UserFeedbackException(
                 "Kvitteringen överensstämmer inte med fakturabeloppet.");
         }
     }
-    */
 
     private void AssertInvoiceDateGood(InvoiceDraft draft)
     {
