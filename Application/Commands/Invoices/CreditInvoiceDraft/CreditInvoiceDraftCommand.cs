@@ -33,7 +33,29 @@ public class CreditInvoiceDraftCommand(
                 x.Invoice.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
-        // TODO: Asserts
+        var balanceRows = await database.BalanceRows
+            .AsNoTracking()
+            .Where(x =>
+                (x.DebitInvoiceID == invoice.Id &&
+                x.DebitInvoice.ClientId == userToken.ClientId!.Value) ||
+                (x.CreditInvoiceID == invoice.Id &&
+                x.CreditInvoice.ClientId == userToken.ClientId!.Value))
+            // TODO: Figure out which is which.
+            .ToListAsync();
+
+        var draftBalanceRows = await database.DraftBalanceRows
+            .AsNoTracking()
+            .Where(x =>
+                x.InvoiceId == invoice.Id &&
+                x.Invoice.ClientId == userToken.ClientId!.Value)
+            .ToListAsync();
+
+        Assert(
+            userToken, 
+            invoice, 
+            invoiceRows, 
+            balanceRows, 
+            draftBalanceRows);
 
         var draft = new InvoiceDraft()
         {
@@ -117,5 +139,45 @@ public class CreditInvoiceDraftCommand(
     public bool IsPermitted(IUserToken userToken)
     {
         return userToken.IsClient;
+    }
+
+    private void Assert(
+        IUserToken userToken,
+        Invoice invoice,
+        List<InvoiceRow> invoiceRows,
+        List<BalanceRow> balanceRows,
+        List<DraftBalanceRow> draftBalanceRows)
+    {
+        AssertIsDebetInvoice(invoice);
+        AssertHasNoOpenDrafts(draftBalanceRows);
+        AssertAmountLeftToCredit(invoice, balanceRows);
+    }
+
+    private void AssertIsDebetInvoice(Invoice invoice)
+    {
+        if (invoice.IsCredit)
+            throw new UserFeedbackException(
+                "Kreditfakturor kan inte krediteras.");
+    }
+
+    private void AssertHasNoOpenDrafts(
+        List<DraftBalanceRow> draftBalanceRows)
+    {
+        if (draftBalanceRows.Count > 0)
+            throw new UserFeedbackException(
+                "Det finns redan ett utkast för kreditering.");
+    }
+
+    private void AssertAmountLeftToCredit(
+        Invoice invoice,
+        List<BalanceRow> balanceRows)
+    {
+        decimal creditedAmount = balanceRows.Sum(x => x.Amount);
+
+        decimal leftToCredit = invoice.Total - creditedAmount;
+
+        if (leftToCredit <= 0)
+            throw new UserFeedbackException(
+                "Inget belopp kvar att kreditera.");
     }
 }
