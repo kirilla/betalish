@@ -73,6 +73,20 @@ public class CreditInvoiceDraftModel(
 
             return Page();
         }
+        catch (UserFeedbackException ex)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Id),
+                ex.Message);
+
+            // Note:
+            //
+            // We're exposing internals here, taking a calculated risk,
+            // to give the user a meaningful error message without 
+            // having to add a specific exception type for every assertion.
+
+            return Page();
+        }
         catch
         {
             return Redirect("/help/notpermitted");
