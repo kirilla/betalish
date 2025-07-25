@@ -41,7 +41,7 @@ public class CreditInvoiceDraftCommand(
 
             About = $"Kreditering av faktura {invoice.InvoiceNumber}.",
 
-            InvoiceDate = invoice.InvoiceDate,
+            InvoiceDate = null,
 
             PaymentTermDays = invoice.PaymentTermDays,
             PaymentTerms = invoice.PaymentTerms,
