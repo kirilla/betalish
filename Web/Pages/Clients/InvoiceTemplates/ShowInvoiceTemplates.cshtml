@@ -14,6 +14,8 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
+@await Html.PartialAsync("/Pages/Clients/_Shared/_InvoiceTemplate.cshtml", Model.UserToken)
+
 <main>
 
     <h4>
@@ -39,11 +41,5 @@
             }
         </ul>
     }
-
-    <p>
-        <a class="button" href="/add-invoice-template">
-            Lägg till
-        </a>
-    </p>
 
 </main>
