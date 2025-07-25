@@ -39,7 +39,7 @@ public class ShowInvoiceModel(
                 .Include(x => x.CreditInvoice)
                 .Include(x => x.DebitInvoice)
                 .Where(x =>
-                    x.CreditInvoiceID == id ||
+                    x.CreditInvoiceId == id ||
                     x.DebitInvoiceID == id)
                 .ToListAsync();
 

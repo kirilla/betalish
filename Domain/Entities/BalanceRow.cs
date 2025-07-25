@@ -16,7 +16,7 @@ public class BalanceRow : ICreatedDateTime, IUpdatedDateTime
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
 
-    public int CreditInvoiceID { get; set; }
+    public int CreditInvoiceId { get; set; }
     public Invoice CreditInvoice { get; set; } = null!;
 
     public int DebitInvoiceID { get; set; }

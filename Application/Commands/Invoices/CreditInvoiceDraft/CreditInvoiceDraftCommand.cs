@@ -38,7 +38,7 @@ public class CreditInvoiceDraftCommand(
             .Where(x =>
                 (x.DebitInvoiceID == invoice.Id &&
                 x.DebitInvoice.ClientId == userToken.ClientId!.Value) ||
-                (x.CreditInvoiceID == invoice.Id &&
+                (x.CreditInvoiceId == invoice.Id &&
                 x.CreditInvoice.ClientId == userToken.ClientId!.Value))
             // TODO: Figure out which is which.
             .ToListAsync();
