@@ -186,6 +186,8 @@
 
     @if (Model.Invoice.IsCredit || Model.BalanceRows.Count > 0)
     {
+        <br />
+
         <h5>Kreditering</h5>
 
         <figure>
@@ -215,6 +217,8 @@
                 }
             </table>
         </figure>
+
+        <br />
     }
 
     @if (Model.Invoice.IsCredit == false)
