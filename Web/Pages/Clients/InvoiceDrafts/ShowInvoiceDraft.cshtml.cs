@@ -7,6 +7,7 @@ public class ShowInvoiceDraftModel(
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 
     public List<InvoiceDraftRow> InvoiceDraftRows { get; set; } = [];
+    public List<DraftBalanceRow> DraftBalanceRows { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -19,18 +20,24 @@ public class ShowInvoiceDraftModel(
 
             InvoiceDraft = await database.InvoiceDrafts
                 .Where(x =>
-                    x.ClientId == UserToken.ClientId!.Value &&
-                    x.Id == id)
+                    x.Id == id &&
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
             InvoiceDraftRows = await database.InvoiceDraftRows
                 .AsNoTracking()
                 .Where(x =>
-                    x.InvoiceDraft.ClientId == UserToken.ClientId!.Value &&
-                    x.InvoiceDraftId == id)
+                    x.InvoiceDraftId == id &&
+                    x.InvoiceDraft.ClientId == UserToken.ClientId!.Value)
                 .OrderBy(x => x.ArticleNumber)
                 .ThenBy(x => x.ArticleName)
+                .ToListAsync();
+
+            DraftBalanceRows = await database.DraftBalanceRows
+                .Where(x => 
+                    x.InvoiceDraftId == id &&
+                    x.InvoiceDraft.ClientId == UserToken.ClientId!.Value)
                 .ToListAsync();
 
             return Page();

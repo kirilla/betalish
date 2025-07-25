@@ -108,10 +108,6 @@
         <a class="button" href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
             Redigera
         </a>
-
-        <a class="button" href="/remove-invoice-draft/@(Model.InvoiceDraft.Id)">
-            Ta bort
-        </a>
     </p>
 
     <h5>Artiklar</h5>
@@ -185,32 +181,66 @@
     <figure>
         <table>
             <tr>
-                <th>Netto</th>
-                <th>Moms</th>
-                <th>Avrundning</th>
-                <th>Totalt</th>
+                <th class="end-align">Netto</th>
+                <th class="end-align">Moms</th>
+                <th class="end-align">Avrundning</th>
+                <th class="end-align">Totalt</th>
             </tr>
             <tr>
-                <td>
+                <td class="end-align">
                     @(Model.InvoiceDraft.NetAmount.ToSwedish())
                 </td>
-                <td>
+                <td class="end-align">
                     @(Model.InvoiceDraft.VatAmount.ToSwedish())
                 </td>
-                <td style="text-align:end">
+                <td class="end-align">
                     @(Model.InvoiceDraft.TotalRounding.ToSwedish())
                 </td>
-                <td>
+                <td class="end-align">
                     @(Model.InvoiceDraft.Total.ToSwedish())
                 </td>
             </tr>
         </table>
     </figure>
+    <br />
+
+    @if (Model.DraftBalanceRows.Count > 0)
+    {
+        <h5>Kreditering</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th class="end-align">Fakturanummer</th>
+                    <th class="end-align">Belopp</th>
+                </tr>
+                @foreach (var row in Model.DraftBalanceRows)
+                {
+                    <tr>
+                        <td class="end-align">
+                            <a href="/show-invoice/@(row.InvoiceId)">
+                                @(row.InvoiceNumber)
+                            </a>
+                        </td>
+                        <td class="end-align">
+                            @(row.Amount.ToSwedish())
+                        </td>
+                    </tr>
+                }
+            </table>
+        </figure>
+    }
 
     <p>
         <a class="button" href="/approve-invoice-draft/@(Model.InvoiceDraft.Id)">
             Godkänn utkast, skapa faktura
         </a>
+
+        <a class="button" href="/remove-invoice-draft/@(Model.InvoiceDraft.Id)">
+            Ta bort
+        </a>
     </p>
+
+    <br />
 
 </main>
