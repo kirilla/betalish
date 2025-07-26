@@ -1,0 +1,44 @@
+﻿@page "/show-payments"
+@model ShowPaymentsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Betalningar -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Payment.cshtml", Model.UserToken)
+
+<main>
+
+    <h4>
+        Betalningar
+    </h4>
+
+    @if (!Model.Payments.Any())
+    {
+        <div class="notice">
+            Det finns inga betalningar.
+        </div>
+    }
+
+    @if (Model.Payments.Any())
+    {
+        <ul class="notice">
+            @foreach (var payment in Model.Payments)
+            {
+                <li>
+                    <a href="/show-payment/@(payment.Id)">@(payment.Amount)</a>
+                </li>
+            }
+        </ul>
+    }
+
+</main>

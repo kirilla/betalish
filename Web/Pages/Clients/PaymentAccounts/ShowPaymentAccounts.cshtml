@@ -1,0 +1,44 @@
+﻿@page "/show-payment-accounts"
+@model ShowPaymentAccountsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Konton -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Payment.cshtml", Model.UserToken)
+
+<main>
+
+    <h4>
+        Konton
+    </h4>
+
+    @if (!Model.PaymentAccounts.Any())
+    {
+        <div class="notice">
+            Det finns inga konton.
+        </div>
+    }
+
+    @if (Model.PaymentAccounts.Any())
+    {
+        <ul class="notice">
+            @foreach (var account in Model.PaymentAccounts)
+            {
+                <li>
+                    <a href="/show-payment-account/@(account.Id)">@(account.Name)</a>
+                </li>
+            }
+        </ul>
+    }
+
+</main>
