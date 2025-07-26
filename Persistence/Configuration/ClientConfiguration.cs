@@ -63,6 +63,11 @@ class ClientConfiguration : IEntityTypeConfiguration<Client>
             .HasForeignKey(x => x.ClientId)
             .OnDelete(DeleteBehavior.NoAction);
 
+        builder.HasMany(x => x.PaymentAccounts)
+            .WithOne(x => x.Client)
+            .HasForeignKey(x => x.ClientId)
+            .OnDelete(DeleteBehavior.NoAction);
+
         builder.HasMany(x => x.Sessions)
             .WithOne(x => x.Client)
             .HasForeignKey(x => x.ClientId)

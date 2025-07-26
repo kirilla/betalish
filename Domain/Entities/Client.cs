@@ -19,6 +19,7 @@ public class Client
     public List<InvoiceTemplate> InvoiceTemplates { get; set; } = [];
     public List<LedgerAccount> LedgerAccounts { get; set; } = [];
     public List<Payment> Payments { get; set; } = [];
+    public List<PaymentAccount> PaymentAccounts { get; set; } = [];
     public List<Session> Sessions { get; set; } = [];
     public List<SessionRecord> SessionRecords { get; set; } = [];
 }

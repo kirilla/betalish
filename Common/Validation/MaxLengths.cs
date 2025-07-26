@@ -242,7 +242,12 @@ public static class MaxLengths
         {
             public const int Description = 200;
         }
-        
+
+        public static class PaymentAccount
+        {
+            public const int Name = 50;
+        }
+
         public static class UserEvent
         {
             public const int Description = 200;

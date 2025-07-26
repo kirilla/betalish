@@ -36,6 +36,7 @@ public class DatabaseService(
     public DbSet<NetworkRequest> NetworkRequests { get; set; }
     public DbSet<NetworkRule> NetworkRules { get; set; }
     public DbSet<Payment> Payments { get; set; }
+    public DbSet<PaymentAccount> PaymentAccounts { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<SessionActivity> SessionActivities { get; set; }
     public DbSet<SessionRecord> SessionRecords { get; set; }
@@ -77,6 +78,7 @@ public class DatabaseService(
         new NetworkRequestConfiguration().Configure(builder.Entity<NetworkRequest>());
         new NetworkRuleConfiguration().Configure(builder.Entity<NetworkRule>());
         new PaymentConfiguration().Configure(builder.Entity<Payment>());
+        new PaymentAccountConfiguration().Configure(builder.Entity<PaymentAccount>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
         new SessionActivityConfiguration().Configure(builder.Entity<SessionActivity>());
         new SessionRecordConfiguration().Configure(builder.Entity<SessionRecord>());
