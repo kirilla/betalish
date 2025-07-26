@@ -95,6 +95,7 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
         builder
             .HasMany(x => x.Payments)
             .WithOne(x => x.Invoice)
-            .HasForeignKey(x => x.InvoiceId);
+            .HasForeignKey(x => x.InvoiceId)
+            .IsRequired(false);
     }
 }
