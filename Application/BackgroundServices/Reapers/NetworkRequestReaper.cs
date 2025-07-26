@@ -46,22 +46,18 @@ namespace Betalish.Application.BackgroundServices.Reapers
             var database = scope.ServiceProvider
                 .GetRequiredService<IDatabaseService>();
 
-            var count = await database.NetworkRequests
-                .OrderByDescending(x => x.Created)
-                .Skip(_historySize * 2)
-                .CountAsync(cancellation);
-
-            if (count == 0)
+            if (await database.NetworkRequests
+                .CountAsync(cancellation) < _historySize * 2)
                 return;
 
             await database.NetworkRequests
-                .OrderByDescending(x => x.Created)
-                .Skip(_historySize)
+                .OrderBy(x => x.Created)
+                .Take(_historySize)
                 .ExecuteDeleteAsync(cancellation);
 
             logItemList.AddLogItem(new LogItem()
             {
-                Description = $"{count} logged network requests removed.",
+                Description = $"{_historySize} logged network requests removed.",
                 LogItemKind = LogItemKind.NetworkRequestReaped,
             });
         }
