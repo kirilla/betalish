@@ -36,9 +36,14 @@
             {
                 <li>
                     <a href="/show-payment-account/@(account.Id)">@(account.Name)</a>
+                    <span class="muted">@(account.Description)</span>
                 </li>
             }
         </ul>
     }
+
+    <p>
+        <a class="button" href="/add-payment-account">Nytt konto</a>
+    </p>
 
 </main>

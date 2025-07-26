@@ -27,7 +27,7 @@ public class ShowPaymentAccountsModel(
         {
             return Redirect("/help/notfound");
         }
-        catch
+        catch (Exception ex)
         {
             return Redirect("/help/notpermitted");
         }

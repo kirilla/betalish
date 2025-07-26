@@ -246,6 +246,7 @@ public static class MaxLengths
         public static class PaymentAccount
         {
             public const int Name = 50;
+            public const int Description = 50;
         }
 
         public static class UserEvent

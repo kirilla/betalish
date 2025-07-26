@@ -1,0 +1,51 @@
+﻿@page "/edit-payment-account/{id:int}"
+@model EditPaymentAccountModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera konto -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Payment.cshtml", Model.UserToken)
+
+<main>
+    <h4>
+        Redigera
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.Name">
+            Konto
+        </label>
+        <input asp-for="CommandModel.Name"
+               placeholder="0000" />
+
+        <label asp-for="CommandModel.Description">
+            Beskrivning
+        </label>
+        <input asp-for="CommandModel.Description"
+               placeholder="" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-payment-accounts">
+            Avbryt
+        </a>
+    </form>
+
+</main>

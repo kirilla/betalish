@@ -1,0 +1,39 @@
+﻿@page "/show-payment-account/{id:int}"
+@model ShowPaymentAccountModel
+@{
+}
+
+@section Meta {
+    <title>
+        Konto @(Model.PaymentAccount.Name) - @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Payment.cshtml", Model.UserToken)
+
+<main>
+
+    <h4>
+        Konto
+        @(Model.PaymentAccount.Name)
+    </h4>
+
+    <div class="notice">
+        Inga metadata.
+    </div>
+
+    <p>
+        <a class="button" href="/edit-payment-account/@(Model.PaymentAccount.Id)">
+            Redigera
+        </a>
+
+        <a class="button" href="/remove-payment-account/@(Model.PaymentAccount.Id)">
+            Ta bort
+        </a>
+    </p>
+
+</main>

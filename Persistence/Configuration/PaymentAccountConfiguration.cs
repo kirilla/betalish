@@ -9,5 +9,8 @@ class PaymentAccountConfiguration : IEntityTypeConfiguration<PaymentAccount>
         builder.Property(p => p.Name)
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.PaymentAccount.Name);
+
+        builder.Property(p => p.Description)
+            .HasMaxLength(MaxLengths.Domain.PaymentAccount.Description);
     }
 }
