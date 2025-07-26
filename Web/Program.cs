@@ -21,6 +21,16 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        EnumValidator.EnsureUniqueValues<ClientEventKind>();
+        EnumValidator.EnsureUniqueValues<EmailKind>();
+        EnumValidator.EnsureUniqueValues<EmailStatus>();
+        EnumValidator.EnsureUniqueValues<LogItemKind>();
+        EnumValidator.EnsureUniqueValues<SessionEnd>();
+        EnumValidator.EnsureUniqueValues<SignInBy>();
+        EnumValidator.EnsureUniqueValues<UserEventKind>();
+        EnumValidator.EnsureUniqueValues<UserPurpose>();
+        EnumValidator.EnsureUniqueValues<VatClass>();
+
         // App
         var builder = WebApplication.CreateBuilder(args);
 
