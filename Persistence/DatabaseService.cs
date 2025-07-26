@@ -35,6 +35,7 @@ public class DatabaseService(
     public DbSet<LogItem> LogItems { get; set; }
     public DbSet<NetworkRequest> NetworkRequests { get; set; }
     public DbSet<NetworkRule> NetworkRules { get; set; }
+    public DbSet<Payment> Payments { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<SessionActivity> SessionActivities { get; set; }
     public DbSet<SessionRecord> SessionRecords { get; set; }
@@ -75,6 +76,7 @@ public class DatabaseService(
         new LogItemConfiguration().Configure(builder.Entity<LogItem>());
         new NetworkRequestConfiguration().Configure(builder.Entity<NetworkRequest>());
         new NetworkRuleConfiguration().Configure(builder.Entity<NetworkRule>());
+        new PaymentConfiguration().Configure(builder.Entity<Payment>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
         new SessionActivityConfiguration().Configure(builder.Entity<SessionActivity>());
         new SessionRecordConfiguration().Configure(builder.Entity<SessionRecord>());

@@ -59,6 +59,8 @@ public class Invoice : IFormatOnSave, IValidateOnSave
 
     public List<DraftBalanceRow> DraftBalanceRows { get; set; } = [];
 
+    public List<Payment> Payments { get; set; } = [];
+
     public void FormatOnSave()
     {
     }
