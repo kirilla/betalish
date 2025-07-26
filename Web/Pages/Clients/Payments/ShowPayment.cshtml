@@ -1,0 +1,39 @@
+﻿@page "/show-payment/{id:int}"
+@model ShowPaymentModel
+@{
+}
+
+@section Meta {
+    <title>
+        Betalning - @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Payment.cshtml", Model.UserToken)
+
+<main>
+
+    <h4>
+        Betalning
+        @(Model.Payment.Amount)
+    </h4>
+
+    <div class="notice">
+        Inga metadata.
+    </div>
+
+    <p>
+        <a class="button" href="/edit-payment/@(Model.Payment.Id)">
+            Redigera
+        </a>
+
+        <a class="button" href="/remove-payment/@(Model.Payment.Id)">
+            Ta bort
+        </a>
+    </p>
+
+</main>

@@ -1,0 +1,42 @@
+﻿@page "/add-payment"
+@model AddPaymentModel
+@{
+}
+
+@section Meta {
+    <title>
+        Nytt konto -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Payment.cshtml", Model.UserToken)
+
+<main>
+    <h4>
+        Nytt konto
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.Amount">
+            Belopp
+        </label>
+        <input asp-for="CommandModel.Amount" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-payments">
+            Avbryt
+        </a>
+    </form>
+
+</main>
