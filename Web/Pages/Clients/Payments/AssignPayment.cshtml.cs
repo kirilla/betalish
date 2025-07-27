@@ -73,7 +73,7 @@ public class AssignPaymentModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/show-payments");
+            return Redirect($"/show-payment/{Payment.Id}");
         }
         catch (AlreadyAssignedException)
         {
