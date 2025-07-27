@@ -25,6 +25,8 @@ public class Program
         EnumValidator.EnsureUniqueValues<EmailKind>();
         EnumValidator.EnsureUniqueValues<EmailStatus>();
         EnumValidator.EnsureUniqueValues<LogItemKind>();
+        EnumValidator.EnsureUniqueValues<PaymentKind>();
+        EnumValidator.EnsureUniqueValues<PaymentMethod>();
         EnumValidator.EnsureUniqueValues<SessionEnd>();
         EnumValidator.EnsureUniqueValues<SignInBy>();
         EnumValidator.EnsureUniqueValues<UserEventKind>();

@@ -6,8 +6,7 @@ class PaymentConfiguration : IEntityTypeConfiguration<Payment>
     {
         builder.HasKey(p => p.Id);
 
-        builder
-            .Property(p => p.Amount)
+        builder.Property(p => p.Amount)
             .HasPrecision(18, 2);
     }
 }

@@ -9,6 +9,8 @@ public class EditPaymentModel(
 {
     public Payment Payment { get; set; } = null!;
 
+    public List<PaymentAccount> PaymentAccounts { get; set; } = [];
+
     [BindProperty]
     public EditPaymentCommandModel CommandModel { get; set; }
         = new EditPaymentCommandModel();
@@ -27,10 +29,16 @@ public class EditPaymentModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
+            PaymentAccounts = await database.PaymentAccounts
+                .Where(x => x.ClientId == UserToken.ClientId!.Value)
+                .ToListAsync();
+
             CommandModel = new EditPaymentCommandModel()
             {
                 Id = Payment.Id,
                 Amount = Payment.Amount.ToSwedish(),
+                Date = Payment.Date.ToIso8601(),
+                PaymentMethod = Payment.PaymentMethod,
             };
 
             return Page();
@@ -58,6 +66,10 @@ public class EditPaymentModel(
                     x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
+
+            PaymentAccounts = await database.PaymentAccounts
+                .Where(x => x.ClientId == UserToken.ClientId!.Value)
+                .ToListAsync();
 
             if (!ModelState.IsValid)
                 return Page();

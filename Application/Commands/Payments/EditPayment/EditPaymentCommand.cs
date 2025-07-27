@@ -11,14 +11,24 @@ public class EditPaymentCommand(IDatabaseService database) : IEditPaymentCommand
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        var account = await database.Payments
+        var payment = await database.Payments
             .Where(x =>
-                x.ClientId == userToken.ClientId!.Value &&
-                x.Id == model.Id)
+                x.Id == model.Id &&
+                x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        account.Amount = model.Amount!.TryParseDecimal()!.Value;
+        var account = await database.PaymentAccounts
+            .Where(x =>
+                x.Id == model.PaymentAccountId!.Value &&
+                x.ClientId == userToken.ClientId!.Value)
+            .SingleOrDefaultAsync() ??
+            throw new NotFoundException();
+
+        payment.Amount = model.Amount!.TryParseDecimal()!.Value;
+        payment.Date = model.Date!.ToIso8601DateOnly()!.Value;
+        payment.PaymentMethod = model.PaymentMethod!.Value;
+        payment.PaymentAccountId = account.Id;
 
         await database.SaveAsync(userToken);
     }

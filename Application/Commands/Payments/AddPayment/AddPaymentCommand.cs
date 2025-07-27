@@ -1,6 +1,8 @@
 ﻿namespace Betalish.Application.Commands.Payments.AddPayment;
 
-public class AddPaymentCommand(IDatabaseService database) : IAddPaymentCommand
+public class AddPaymentCommand(
+    IDatabaseService database,
+    IDateService dateService) : IAddPaymentCommand
 {
     public async Task<int> Execute(
         IUserToken userToken, AddPaymentCommandModel model)
@@ -11,13 +13,38 @@ public class AddPaymentCommand(IDatabaseService database) : IAddPaymentCommand
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        var account = new Payment()
+        var amount = model.Amount?.TryParseDecimal();
+
+        if (amount == null || amount == 0)
+            throw new InvalidAmountException();
+
+        var today = dateService.GetDateOnlyNow();
+
+        var date = model.Date?.ToIso8601DateOnly();
+
+        if (date == null || date > today)
+            throw new InvalidDateException();
+
+        var account = await database.PaymentAccounts
+            .Where(x =>
+                x.Id == model.PaymentAccountId!.Value &&
+                x.ClientId == userToken.ClientId!.Value)
+            .SingleOrDefaultAsync() ??
+            throw new NotFoundException();
+
+        var payment = new Payment()
         {
-            Amount = model.Amount!.TryParseDecimal()!.Value,
+            Amount = amount!.Value,
+            Date = date!.Value,
+            
+            PaymentKind = PaymentKind.Payment,
+            PaymentMethod = model.PaymentMethod!.Value,
+
+            PaymentAccountId = account.Id,
             ClientId = userToken.ClientId!.Value,
         };
 
-        database.Payments.Add(account);
+        database.Payments.Add(payment);
 
         await database.SaveAsync(userToken);
 

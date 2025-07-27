@@ -21,7 +21,6 @@ public class AddInvoiceRangeCommandModel
     [RegularExpression(
         Pattern.Common.Date.Iso8601Permissive,
         ErrorMessage = "Ange datum i formatet ÅÅÅÅ-MM-DD.")]
-    
     public string? StartDate { get; set; }
 
     [RegularExpression(

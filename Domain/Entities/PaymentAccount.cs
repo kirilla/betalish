@@ -9,4 +9,6 @@ public class PaymentAccount
 
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
+
+    public List<Payment> Payments { get; set; } = [];
 }

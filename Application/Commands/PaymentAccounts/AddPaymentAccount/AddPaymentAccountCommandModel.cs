@@ -4,13 +4,12 @@ namespace Betalish.Application.Commands.PaymentAccounts.AddPaymentAccount;
 
 public class AddPaymentAccountCommandModel
 {
-    [Required(ErrorMessage = "Namn.")]
+    [Required(ErrorMessage = "Ange namn.")]
     [StringLength(
         MaxLengths.Domain.PaymentAccount.Name,
         ErrorMessage = "Skriv kortare.")]
     public string? Name { get; set; }
 
-    [Required(ErrorMessage = "Ange namn.")]
     [StringLength(
         MaxLengths.Domain.PaymentAccount.Description, 
         ErrorMessage = "Skriv kortare.")]

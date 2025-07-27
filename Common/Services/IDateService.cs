@@ -2,5 +2,6 @@
 
 public interface IDateService
 {
+    DateOnly GetDateOnlyNow();
     DateTime GetDateTimeNow();
 }
