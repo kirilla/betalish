@@ -33,7 +33,7 @@ public class AssignPaymentCommand(IDatabaseService database) : IAssignPaymentCom
         // If debit, if credit, ...?
 
         payment.InvoiceId = invoice.Id;
-        payment.InvoiceId = invoice.InvoiceNumber;
+        payment.InvoiceNumber = invoice.InvoiceNumber;
 
         await database.SaveAsync(userToken);
     }
