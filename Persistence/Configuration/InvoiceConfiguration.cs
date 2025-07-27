@@ -40,6 +40,13 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
         builder.Property(p => p.TotalRounding)
             .HasPrecision(18, 2);
 
+        // Payment
+        builder.Property(p => p.Balance)
+            .HasPrecision(18, 2);
+
+        builder.Property(p => p.LeftToPay)
+            .HasPrecision(18, 2);
+
         // Customer identity
         builder.Property(p => p.Customer_Name)
             .HasMaxLength(MaxLengths.Common.Person.FullName);

@@ -84,6 +84,10 @@ public class ConvertDraftToInvoiceRoutine(
             Total = draft.Total,
             TotalRounding = draft.TotalRounding,
 
+            // Payment
+            Balance = draft.Total,
+            LeftToPay = draft.Total,
+
             // Customer identity
             Customer_Name = draft.Customer_Name,
             CustomerKind = draft.CustomerKind,

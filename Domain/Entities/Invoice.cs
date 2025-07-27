@@ -26,6 +26,10 @@ public class Invoice : IFormatOnSave, IValidateOnSave
     public required decimal Total { get; set; }
     public required decimal TotalRounding { get; set; }
 
+    // Payment
+    public required decimal Balance { get; set; }
+    public required decimal LeftToPay { get; set; }
+
     // Customer identity
     public required string Customer_Name { get; set; }
 
