@@ -5,7 +5,7 @@
 
 @section Meta {
     <title>
-        Redigera betalning -
+        Knyt betalning till faktura -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -18,7 +18,7 @@
 
 <main>
     <h4>
-        Redigera
+        Knyt till faktura
     </h4>
 
     <form method="post">
@@ -43,7 +43,7 @@
         <div asp-validation-summary="All"></div>
 
         <button type="submit">
-            Spara
+            Knyt till faktura
         </button>
 
         <a class="button" href="/show-payment/@(Model.Payment.Id)">

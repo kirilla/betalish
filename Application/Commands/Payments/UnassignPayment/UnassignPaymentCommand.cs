@@ -1,9 +1,9 @@
-﻿namespace Betalish.Application.Commands.Payments.AssignPayment;
+﻿namespace Betalish.Application.Commands.Payments.UnassignPayment;
 
-public class AssignPaymentCommand(IDatabaseService database) : IAssignPaymentCommand
+public class UnassignPaymentCommand(IDatabaseService database) : IUnassignPaymentCommand
 {
     public async Task Execute(
-        IUserToken userToken, AssignPaymentCommandModel model)
+        IUserToken userToken, UnassignPaymentCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -18,22 +18,15 @@ public class AssignPaymentCommand(IDatabaseService database) : IAssignPaymentCom
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        var invoice = await database.Invoices
-            .Where(x =>
-                x.Id == model.InvoiceId!.Value &&
-                x.ClientId == userToken.ClientId!.Value)
-            .SingleOrDefaultAsync() ??
-            throw new NotFoundException();
-
-        if (payment.InvoiceId.HasValue)
-            throw new AlreadyAssignedException();
-
+        if (payment.InvoiceId == null)
+            throw new NotAssignedException();
+        
         // TODO: More asserts
 
         // If debit, if credit, ...?
 
-        payment.InvoiceId = invoice.Id;
-        payment.InvoiceNumber = invoice.InvoiceNumber;
+        payment.InvoiceId = null;
+        payment.InvoiceNumber = null;
 
         await database.SaveAsync(userToken);
     }

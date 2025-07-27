@@ -5,6 +5,7 @@ public class ShowPaymentModel(
     IDatabaseService database) : ClientPageModel(userToken)
 {
     public Payment Payment { get; set; } = null!;
+    public Invoice? Invoice { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -21,6 +22,12 @@ public class ShowPaymentModel(
                     x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
+
+            Invoice = await database.Invoices
+                .Where(x =>
+                    x.Id == Payment.InvoiceId &&
+                    x.ClientId == UserToken.ClientId!.Value)
+                .SingleOrDefaultAsync();
 
             return Page();
         }

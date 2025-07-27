@@ -1,0 +1,60 @@
+﻿@page "/unassign-payment/{id:int}"
+@model UnassignPaymentModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lösgör betalning från faktura -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Payment.cshtml", Model.UserToken)
+
+<main>
+    <h4>
+        Lösgör från faktura
+    </h4>
+
+    <div class="notice">
+        <span>Betalningen</span>
+        <ul>
+            @(Model.Payment.Date.ToIso8601()),
+            @(Model.Payment.Amount) kr,
+            @(Model.Payment.PaymentMethod)
+        </ul>
+        <span>är knuten till 
+            <a href="/show-invoice/@(Model.Invoice.Id)">
+                faktura @(Model.Invoice.InvoiceNumber?
+                .ToSwedish() ?? "okänt fakturanummer?")
+            </a>
+        </span>
+        <ul>
+            @(Model.Invoice.InvoiceDate.ToIso8601()),
+            @(Model.Invoice.Customer_Name),
+            @(Model.Invoice.About),
+            @(Model.Invoice.Total) kr
+        </ul>
+    </div>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lösgör från faktura
+        </button>
+
+        <a class="button" href="/show-payment/@(Model.Payment.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

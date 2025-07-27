@@ -1,19 +1,18 @@
-﻿using Betalish.Application.Commands.Payments.AssignPayment;
+﻿using Betalish.Application.Commands.Payments.UnassignPayment;
 
 namespace Betalish.Web.Pages.Clients.Payments;
 
-public class AssignPaymentModel(
+public class UnassignPaymentModel(
     IUserToken userToken,
     IDatabaseService database,
-    IAssignPaymentCommand command) : ClientPageModel(userToken)
+    IUnassignPaymentCommand command) : ClientPageModel(userToken)
 {
     public Payment Payment { get; set; } = null!;
-
-    public List<Invoice> Invoices { get; set; } = [];
+    public Invoice? Invoice { get; set; } = null!;
 
     [BindProperty]
-    public AssignPaymentCommandModel CommandModel { get; set; }
-        = new AssignPaymentCommandModel();
+    public UnassignPaymentCommandModel CommandModel { get; set; }
+        = new UnassignPaymentCommandModel();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -29,11 +28,13 @@ public class AssignPaymentModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            Invoices = await database.Invoices
-                .Where(x => x.ClientId == UserToken.ClientId!.Value)
-                .ToListAsync();
+            Invoice = await database.Invoices
+                .Where(x =>
+                    x.Id == Payment.InvoiceId &&
+                    x.ClientId == UserToken.ClientId!.Value)
+                .SingleOrDefaultAsync();
 
-            CommandModel = new AssignPaymentCommandModel()
+            CommandModel = new UnassignPaymentCommandModel()
             {
                 Id = Payment.Id,
             };
@@ -64,9 +65,12 @@ public class AssignPaymentModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            Invoices = await database.Invoices
-                .Where(x => x.ClientId == UserToken.ClientId!.Value)
-                .ToListAsync();
+            Invoice = await database.Invoices
+                .Where(x =>
+                    x.Id == Payment.InvoiceId &&
+                    x.ClientId == UserToken.ClientId!.Value)
+                .SingleOrDefaultAsync() ??
+                throw new NotAssignedException();
 
             if (!ModelState.IsValid)
                 return Page();
@@ -75,11 +79,11 @@ public class AssignPaymentModel(
 
             return Redirect("/show-payments");
         }
-        catch (AlreadyAssignedException)
+        catch (NotAssignedException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.InvoiceId),
-                "Betalningen är redan knuten till en faktura.");
+                nameof(CommandModel.Id),
+                "Betalningen är inte knuten till någon faktura.");
 
             return Page();
         }

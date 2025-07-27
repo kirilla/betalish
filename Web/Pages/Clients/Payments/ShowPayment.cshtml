@@ -1,6 +1,8 @@
 ﻿@page "/show-payment/{id:int}"
 @model ShowPaymentModel
 @{
+    var payment = Model.Payment;
+    var invoice = Model.Invoice;
 }
 
 @section Meta {
@@ -19,21 +21,101 @@
 
     <h4>
         Betalning
-        @(Model.Payment.Amount)
     </h4>
 
-    <div class="notice">
-        Inga metadata.
-    </div>
+    <figure>
+        <table>
+            <tr>
+                <th>Datum</th>
+                <td class="end-align">
+                    @(payment.Date.ToIso8601())
+                </td>
+            </tr>
+            <tr>
+                <th>Belopp</th>
+                <td class="end-align">
+                    @(payment.Amount.ToSwedish())
+                </td>
+            </tr>
+            <tr>
+                <th>Betalsätt</th>
+                <td class="end-align">
+                    @(payment.PaymentMethod.ToString() ?? "-")
+                </td>
+            </tr>
+            <tr>
+                <th>Konto</th>
+                <td class="end-align">
+                    @if (payment.PaymentAccountId.HasValue)
+                    {
+                        @(payment.PaymentAccount?.Name ?? "-")
+                    }
+                    else
+                    {
+                        <span>&ndash;</span>
+                    }
+                </td>
+            </tr>
+        </table>
+    </figure>
 
+    @if (invoice != null)
+    {
+        <br />
+
+        <h5>Knuten till faktura</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th>Fakturadatum</th>
+                    <td class="end-align">
+                        @(invoice.InvoiceDate.ToIso8601())
+                    </td>
+                </tr>
+                <tr>
+                    <th>Nummer</th>
+                    <td class="end-align">
+                        <a href="/show-invoice/@(invoice.Id)">
+                            @(invoice.InvoiceNumber?.ToSwedish() ?? "-")
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Mottagare</th>
+                    <td class="end-align">
+                        @(invoice.Customer_Name ?? "-")
+                    </td>
+                </tr>
+                <tr>
+                    <th>Sammanfattning</th>
+                    <td class="end-align">
+                        @(invoice.About ?? "-")
+                    </td>
+                </tr>
+                <tr>
+                    <th>Belopp</th>
+                    <td class="end-align">
+                        @(invoice.Total.ToSwedish())
+                    </td>
+                </tr>
+            </table>
+        </figure>
+    }
+    
     <p>
-        <a class="button" href="/assign-payment/@(Model.Payment.Id)">
-            Bind till faktura
-        </a>
-
-        <a class="button" href="/unassign-payment/@(Model.Payment.Id)">
-            Lösgör från faktura
-        </a>
+        @if (Model.Payment.InvoiceId == null)
+        {
+            <a class="button" href="/assign-payment/@(Model.Payment.Id)">
+                Knyt till faktura
+            </a>
+        }
+        @if (Model.Payment.InvoiceId.HasValue)
+        {
+            <a class="button" href="/unassign-payment/@(Model.Payment.Id)">
+                Lösgör från faktura
+            </a>
+        }
     </p>
 
     <p>
