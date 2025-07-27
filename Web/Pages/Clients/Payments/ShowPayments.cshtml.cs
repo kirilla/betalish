@@ -17,8 +17,9 @@ public class ShowPaymentsModel(
 
             Payments = await database.Payments
                 .AsNoTracking()
+                .Include(x => x.PaymentAccount)
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
-                .OrderBy(x => x.Amount)
+                .OrderBy(x => x.Date)
                 .ToListAsync();
 
             return Page();

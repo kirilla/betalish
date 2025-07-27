@@ -31,14 +31,68 @@
 
     @if (Model.Payments.Any())
     {
-        <ul class="notice">
-            @foreach (var payment in Model.Payments)
-            {
-                <li>
-                    <a href="/show-payment/@(payment.Id)">@(payment.Amount)</a>
-                </li>
-            }
-        </ul>
+        <figure>
+            <table>
+                <tr>
+                    <th>Datum</th>
+                    <th class="end-align">Belopp</th>
+                    <th>Typ</th>
+                    <th>Betalsätt</th>
+                    <th>Faktura</th>
+                    <th>Konto</th>
+                </tr>
+                @foreach (var payment in Model.Payments)
+                {
+                    <tr>
+                        <td>
+                            <a href="/show-payment/@(payment.Id)">
+                                @(payment.Date.ToIso8601())
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-payment/@(payment.Id)">
+                                @(payment.Amount.ToSwedish())
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-payment/@(payment.Id)">
+                                @(payment.PaymentKind.ToString() ?? "-")
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-payment/@(payment.Id)">
+                                @(payment.PaymentMethod.ToString() ?? "-")
+                            </a>
+                        </td>
+                        <td>
+                            @if (payment.InvoiceId.HasValue)
+                            {
+                                <a href="/show-payment/@(payment.Id)">
+                                    Knuten till faktura
+                                </a>
+                            }
+                            else
+                            {
+                                <span>&ndash;</span>
+                            }
+                        </td>
+                        <td class="end-align">
+                            @if (payment.PaymentAccountId.HasValue)
+                            {
+                                <a href="/show-payment/@(payment.Id)">
+                                    
+                                    @(payment.PaymentAccount?.Name ?? "-")
+                                </a>
+                            }
+                            else
+                            {
+                                <span>&ndash;</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </figure>
     }
 
 </main>
