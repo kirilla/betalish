@@ -1,6 +1,10 @@
-﻿namespace Betalish.Application.Commands.Payments.UnassignPayment;
+﻿using Betalish.Application.Routines.UpdateInvoicePaymentStatus;
 
-public class UnassignPaymentCommand(IDatabaseService database) : IUnassignPaymentCommand
+namespace Betalish.Application.Commands.Payments.UnassignPayment;
+
+public class UnassignPaymentCommand(
+    IDatabaseService database,
+    IUpdateInvoicePaymentStatusRoutine updatePaymentStatus) : IUnassignPaymentCommand
 {
     public async Task Execute(
         IUserToken userToken, UnassignPaymentCommandModel model)
@@ -20,15 +24,19 @@ public class UnassignPaymentCommand(IDatabaseService database) : IUnassignPaymen
 
         if (payment.InvoiceId == null)
             throw new NotAssignedException();
-        
+
         // TODO: More asserts
 
         // If debit, if credit, ...?
+
+        var invoiceId = payment.InvoiceId!.Value;
 
         payment.InvoiceId = null;
         payment.InvoiceNumber = null;
 
         await database.SaveAsync(userToken);
+
+        await updatePaymentStatus.Execute(userToken, invoiceId);
     }
 
     public bool IsPermitted(IUserToken userToken)
