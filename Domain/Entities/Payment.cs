@@ -15,6 +15,8 @@ public class Payment :
     public required PaymentKind PaymentKind { get; set; }
     public required PaymentMethod PaymentMethod { get; set; }
 
+    public int? InvoiceNumber { get; set; }
+
     public int? PaymentAccountId { get; set; }
     public PaymentAccount? PaymentAccount { get; set; } = null!;
 

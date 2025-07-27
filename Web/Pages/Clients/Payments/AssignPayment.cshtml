@@ -1,0 +1,54 @@
+﻿@page "/assign-payment/{id:int}"
+@model AssignPaymentModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera betalning -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Payment.cshtml", Model.UserToken)
+
+<main>
+    <h4>
+        Redigera
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.InvoiceId">
+            Faktura
+        </label>
+        <select asp-for="CommandModel.InvoiceId">
+            <option value="">–</option>
+            @foreach (var invoice in Model.Invoices)
+            {
+                <option value="@(invoice.Id)">
+                    @(invoice.InvoiceDate.ToIso8601()),
+                    @(invoice.Customer_Name),
+                    @(invoice.Total.ToSwedish()),
+                </option>
+            }
+        </select>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-payment/@(Model.Payment.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

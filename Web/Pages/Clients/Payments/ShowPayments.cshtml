@@ -68,7 +68,7 @@
                             @if (payment.InvoiceId.HasValue)
                             {
                                 <a href="/show-payment/@(payment.Id)">
-                                    Knuten till faktura
+                                    @(payment.InvoiceNumber)
                                 </a>
                             }
                             else

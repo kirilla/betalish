@@ -27,6 +27,16 @@
     </div>
 
     <p>
+        <a class="button" href="/assign-payment/@(Model.Payment.Id)">
+            Bind till faktura
+        </a>
+
+        <a class="button" href="/unassign-payment/@(Model.Payment.Id)">
+            Lösgör från faktura
+        </a>
+    </p>
+
+    <p>
         <a class="button" href="/edit-payment/@(Model.Payment.Id)">
             Redigera
         </a>
