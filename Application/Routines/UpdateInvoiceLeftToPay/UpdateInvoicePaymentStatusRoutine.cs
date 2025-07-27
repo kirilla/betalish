@@ -17,7 +17,7 @@ public class UpdateInvoicePaymentStatusRoutine(
         if (invoice == null)
             return;
 
-        var fees = await database.InvoicesFees
+        var fees = await database.InvoiceFees
             .AsNoTracking()
             .Where(x =>
                 x.InvoiceId == invoice.Id &&
