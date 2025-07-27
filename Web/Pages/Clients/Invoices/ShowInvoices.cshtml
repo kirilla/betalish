@@ -47,6 +47,8 @@
                     <th>Mottagare</th>
                     <th>Sammanfattning</th>
                     <th class="end-align">Belopp</th>
+                    <th class="end-align">Balans</th>
+                    <th class="end-align">Kvar att betala</th>
                 </tr>
                 @foreach (var invoice in Model.Invoices)
                 {
@@ -74,6 +76,16 @@
                         <td class="end-align">
                             <a href="/show-invoice/@(invoice.Id)">
                                 @(invoice.Total.ToSwedish())
+                            </a>
+                        </td>
+                        <td class="end-align">
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.Balance.ToSwedish())
+                            </a>
+                        </td>
+                        <td class="end-align">
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.LeftToPay.ToSwedish())
                             </a>
                         </td>
                     </tr>
