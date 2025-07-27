@@ -5,6 +5,7 @@ namespace Betalish.Web.Pages.Clients.Payments;
 public class AddPaymentModel(
     IUserToken userToken,
     IDatabaseService database,
+    IDateService dateService,
     IAddPaymentCommand command) : ClientPageModel(userToken)
 {
     public List<PaymentAccount> PaymentAccounts { get; set; } = [];
@@ -24,7 +25,12 @@ public class AddPaymentModel(
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .ToListAsync();
 
-            CommandModel = new AddPaymentCommandModel();
+            var today = dateService.GetDateOnlyToday();
+
+            CommandModel = new AddPaymentCommandModel()
+            {
+                Date = today.ToString("yyyy-MM-"),
+            };
 
             return Page();
         }

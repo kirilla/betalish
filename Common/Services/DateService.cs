@@ -7,7 +7,7 @@ public class DateService : IDateService
         return DateTime.Now;
     }
 
-    public DateOnly GetDateOnlyNow()
+    public DateOnly GetDateOnlyToday()
     {
         return DateOnly.FromDateTime(DateTime.Now);
     }

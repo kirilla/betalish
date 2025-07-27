@@ -18,7 +18,7 @@ public class AddPaymentCommand(
         if (amount == null || amount == 0)
             throw new InvalidAmountException();
 
-        var today = dateService.GetDateOnlyNow();
+        var today = dateService.GetDateOnlyToday();
 
         var date = model.Date?.ToIso8601DateOnly();
 
