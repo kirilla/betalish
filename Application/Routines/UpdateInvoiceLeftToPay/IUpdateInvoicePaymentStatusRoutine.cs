@@ -2,5 +2,5 @@
 
 public interface IUpdateInvoicePaymentStatusRoutine
 {
-    Task Execute(IUserToken userToken, int invoiceDraftId);
+    Task Execute(IUserToken userToken, int invoiceId);
 }
