@@ -17,18 +17,18 @@ public class AddLedgerAccountCommand(IDatabaseService database) : IAddLedgerAcco
                 x.Account == model.Account!))
             throw new BlockedByExistingException();
 
-        var acccount = new LedgerAccount()
+        var account = new LedgerAccount()
         {
             Account = model.Account!,
             Description = model.Description!,
             ClientId = userToken.ClientId!.Value,
         };
 
-        database.LedgerAccounts.Add(acccount);
+        database.LedgerAccounts.Add(account);
 
         await database.SaveAsync(userToken);
 
-        return acccount.Id;
+        return account.Id;
     }
 
     public bool IsPermitted(IUserToken userToken)
