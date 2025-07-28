@@ -242,13 +242,13 @@
         <br />
     }
 
-    @if (Model.Invoice.IsCredit == false)
-    {
-        <p>
+    <p>
+        @if (Model.Invoice.IsCredit == false)
+        {
             <a class="button" href="/credit-invoice-draft/@(Model.Invoice.Id)">
                 Kreditera
             </a>
-        </p>
-    }
-    
+        }
+    </p>
+
 </main>
