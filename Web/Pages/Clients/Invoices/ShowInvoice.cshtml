@@ -242,11 +242,51 @@
         <br />
     }
 
+    @if (Model.InvoiceAccountings.Count > 0)
+    {
+        <br />
+
+        <h5>Kontering</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th>Konto</th>
+                    <th class="end-align">Debet</th>
+                    <th class="end-align">Kredit</th>
+                </tr>
+                @foreach (var accounting in Model.InvoiceAccountings)
+                {
+                    <tr>
+                        <td>
+                            @(accounting.Account ?? "Okänt")
+                        </td>
+                        <td class="end-align">
+                            @(accounting.Debit.ToSwedish())
+                        </td>
+                        <td class="end-align">
+                            @(accounting.Credit.ToSwedish())
+                        </td>
+                    </tr>
+                }
+            </table>
+        </figure>
+
+        <br />
+    }
+
     <p>
         @if (Model.Invoice.IsCredit == false)
         {
             <a class="button" href="/credit-invoice-draft/@(Model.Invoice.Id)">
                 Kreditera
+            </a>
+        }
+
+        @if (Model.UserToken.IsAdmin)
+        {
+            <a class="button" href="/update-invoice-accounting/@(Model.Invoice.Id)">
+                Skapa kontering
             </a>
         }
     </p>

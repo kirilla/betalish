@@ -6,6 +6,7 @@ public class ShowInvoiceModel(
 {
     public Invoice Invoice { get; set; } = null!;
 
+    public List<InvoiceAccounting> InvoiceAccountings { get; set; } = [];
     public List<InvoiceRow> InvoiceRows { get; set; } = [];
     public List<BalanceRow> BalanceRows { get; set; } = [];
     public List<DraftBalanceRow> DraftBalanceRows { get; set; } = [];
@@ -33,6 +34,14 @@ public class ShowInvoiceModel(
                     x.InvoiceId == id)
                 .OrderBy(x => x.ArticleNumber)
                 .ThenBy(x => x.ArticleName)
+                .ToListAsync();
+
+            InvoiceAccountings = await database.InvoiceAccountings
+                .AsNoTracking()
+                .Where(x =>
+                    x.InvoiceId == id &&
+                    x.Invoice.ClientId == UserToken.ClientId!.Value)
+                .OrderBy(x => x.Account)
                 .ToListAsync();
 
             BalanceRows = await database.BalanceRows
