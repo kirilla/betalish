@@ -25,6 +25,7 @@ public class DatabaseService(
     public DbSet<EmailImage> EmailImages { get; set; }
     public DbSet<EmailMessage> EmailMessages { get; set; }
     public DbSet<Invoice> Invoices { get; set; }
+    public DbSet<InvoiceAccounting> InvoiceAccountings { get; set; }
     public DbSet<InvoiceFee> InvoiceFees { get; set; }
     public DbSet<InvoiceRow> InvoiceRows { get; set; }
     public DbSet<InvoiceDraft> InvoiceDrafts { get; set; }
@@ -68,6 +69,7 @@ public class DatabaseService(
         new EmailImageConfiguration().Configure(builder.Entity<EmailImage>());
         new EmailMessageConfiguration().Configure(builder.Entity<EmailMessage>());
         new InvoiceConfiguration().Configure(builder.Entity<Invoice>());
+        new InvoiceAccountingConfiguration().Configure(builder.Entity<InvoiceAccounting>());
         new InvoiceFeeConfiguration().Configure(builder.Entity<InvoiceFee>());
         new InvoiceRowConfiguration().Configure(builder.Entity<InvoiceRow>());
         new InvoiceDraftConfiguration().Configure(builder.Entity<InvoiceDraft>());
