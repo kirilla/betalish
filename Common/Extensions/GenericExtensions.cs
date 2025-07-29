@@ -81,6 +81,8 @@ public static class GenericExtensions
         }
     }
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Style", "IDE0019:Use pattern matching", Justification = "<Pending>")]
     public static void TruncateByStringLength<T>(this T obj)
     {
         if (obj == null) 
