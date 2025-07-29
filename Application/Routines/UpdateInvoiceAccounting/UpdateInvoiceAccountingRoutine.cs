@@ -18,13 +18,13 @@ public class UpdateInvoiceAccountingRoutine(
         if (invoice == null)
             return;
 
-        var accountingsToRemove = await database.InvoiceAccountings
+        var accountingsToRemove = await database.InvoiceAccountingRows
             .Where(x => 
                 x.InvoiceId == invoice.Id &&
                 x.Invoice.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
-        database.InvoiceAccountings.RemoveRange(accountingsToRemove);
+        database.InvoiceAccountingRows.RemoveRange(accountingsToRemove);
 
         var invoiceRows = await database.InvoiceRows
             .AsNoTracking()
@@ -41,7 +41,7 @@ public class UpdateInvoiceAccountingRoutine(
             InvoiceId = invoice.Id,
         };
 
-        database.InvoiceAccountings.Add(receivableRow);
+        database.InvoiceAccountingRows.Add(receivableRow);
 
         if (invoice.TotalRounding != 0)
         {
@@ -53,7 +53,7 @@ public class UpdateInvoiceAccountingRoutine(
                 InvoiceId = invoice.Id,
             };
 
-            database.InvoiceAccountings.Add(roundingRow);
+            database.InvoiceAccountingRows.Add(roundingRow);
         }
 
         var revenueCreditRows = invoiceRows
@@ -99,7 +99,7 @@ public class UpdateInvoiceAccountingRoutine(
             })
             .ToList();
 
-        database.InvoiceAccountings.AddRange(summedAccountings);
+        database.InvoiceAccountingRows.AddRange(summedAccountings);
 
         await database.SaveAsync(userToken);
     }

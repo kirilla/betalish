@@ -36,7 +36,7 @@ public class ShowInvoiceModel(
                 .ThenBy(x => x.ArticleName)
                 .ToListAsync();
 
-            InvoiceAccountings = await database.InvoiceAccountings
+            InvoiceAccountings = await database.InvoiceAccountingRows
                 .AsNoTracking()
                 .Where(x =>
                     x.InvoiceId == id &&

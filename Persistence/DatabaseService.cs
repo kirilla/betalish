@@ -25,7 +25,7 @@ public class DatabaseService(
     public DbSet<EmailImage> EmailImages { get; set; }
     public DbSet<EmailMessage> EmailMessages { get; set; }
     public DbSet<Invoice> Invoices { get; set; }
-    public DbSet<InvoiceAccounting> InvoiceAccountings { get; set; }
+    public DbSet<InvoiceAccounting> InvoiceAccountingRows { get; set; }
     public DbSet<InvoiceFee> InvoiceFees { get; set; }
     public DbSet<InvoiceRow> InvoiceRows { get; set; }
     public DbSet<InvoiceDraft> InvoiceDrafts { get; set; }
