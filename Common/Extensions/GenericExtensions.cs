@@ -102,7 +102,7 @@ public static class GenericExtensions
                 currentValue.Length <= attribute.MaximumLength)
                 continue;
 
-            var truncatedValue = currentValue.Substring(0, attribute.MaximumLength);
+            var truncatedValue = currentValue[..attribute.MaximumLength];
             property.SetValue(obj, truncatedValue);
         }
     }
