@@ -11,14 +11,14 @@ public class RemovePaymentCommand(IDatabaseService database) : IRemovePaymentCom
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var account = await database.Payments
+        var payment = await database.Payments
             .Where(x => 
                 x.Id == model.Id &&
                 x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.Payments.Remove(account);
+        database.Payments.Remove(payment);
 
         await database.SaveAsync(userToken);
     }
