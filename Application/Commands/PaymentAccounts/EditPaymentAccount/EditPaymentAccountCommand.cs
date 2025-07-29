@@ -27,6 +27,7 @@ public class EditPaymentAccountCommand(IDatabaseService database) : IEditPayment
 
         account.Name = model.Name!;
         account.Description = model.Description;
+        account.Account = model.Account!;
 
         await database.SaveAsync(userToken);
     }

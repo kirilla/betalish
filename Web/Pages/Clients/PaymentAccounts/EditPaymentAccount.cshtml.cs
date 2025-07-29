@@ -31,6 +31,7 @@ public class EditPaymentAccountModel(
                 Id = PaymentAccount.Id,
                 Name = PaymentAccount.Name,
                 Description = PaymentAccount.Description,
+                Account = PaymentAccount.Account,
             };
 
             return Page();
@@ -71,6 +72,14 @@ public class EditPaymentAccountModel(
             ModelState.AddModelError(
                 nameof(CommandModel.Name),
                 "Det finns ett annat konto med samma nummer.");
+
+            return Page();
+        }
+        catch (MissingAccountException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Account),
+                "Ange bokföringskonto.");
 
             return Page();
         }

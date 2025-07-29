@@ -26,12 +26,17 @@
         <label asp-for="CommandModel.Name">
             Konto
         </label>
-        <input asp-for="CommandModel.Name" />
+        <input asp-for="CommandModel.Name" placeholder="Bankkonto X" />
 
         <label asp-for="CommandModel.Description">
             Beskrivning
         </label>
-        <input asp-for="CommandModel.Description" />
+        <input asp-for="CommandModel.Description" placeholder="Förtydligande" />
+
+        <label asp-for="CommandModel.Account">
+            Bokföringskonto
+        </label>
+        <input asp-for="CommandModel.Account" placeholder="1930" />
 
         <div asp-validation-summary="All"></div>
 

@@ -48,6 +48,14 @@ public class AddPaymentAccountModel(
 
             return Page();
         }
+        catch (MissingAccountException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Account),
+                "Ange bokföringskonto.");
+
+            return Page();
+        }
         catch
         {
             return Redirect("/help/notpermitted");

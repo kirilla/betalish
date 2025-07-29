@@ -21,6 +21,7 @@ public class AddPaymentAccountCommand(IDatabaseService database) : IAddPaymentAc
         {
             Name = model.Name!,
             Description = model.Description,
+            Account = model.Account!,
             ClientId = userToken.ClientId!.Value,
         };
 

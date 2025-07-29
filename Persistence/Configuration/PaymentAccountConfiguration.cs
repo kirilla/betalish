@@ -13,6 +13,9 @@ class PaymentAccountConfiguration : IEntityTypeConfiguration<PaymentAccount>
         builder.Property(p => p.Description)
             .HasMaxLength(MaxLengths.Domain.PaymentAccount.Description);
 
+        builder.Property(p => p.Account)
+            .HasMaxLength(MaxLengths.Common.Bookkeeping.Account);
+
         builder
             .HasMany(x => x.Payments)
             .WithOne(x => x.PaymentAccount)
