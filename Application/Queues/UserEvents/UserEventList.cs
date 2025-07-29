@@ -6,7 +6,7 @@ public class UserEventList(
     IHostEnvironment hostEnvironment,
     IDateService dateService) : IUserEventList
 {
-    private List<UserEvent> list { get; } = [];
+    private List<UserEvent> List { get; } = [];
 
     public void AddUserEvent(UserEvent evt)
     {
@@ -17,7 +17,7 @@ public class UserEventList(
         {
             evt.Created = dateService.GetDateTimeNow();
 
-            list.Add(evt);
+            List.Add(evt);
         }
     }
 
@@ -25,9 +25,9 @@ public class UserEventList(
     {
         lock (this)
         {
-            var entries = list.ToList();
+            var entries = List.ToList();
 
-            list.Clear();
+            List.Clear();
 
             return entries;
         }

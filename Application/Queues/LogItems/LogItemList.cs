@@ -6,7 +6,7 @@ public class LogItemList(
     IHostEnvironment hostEnvironment,
     IDateService dateService) : ILogItemList
 {
-    private List<LogItem> list { get; } = [];
+    private List<LogItem> List { get; } = [];
 
     public void AddLogItem(LogItem logItem)
     {
@@ -17,7 +17,7 @@ public class LogItemList(
         {
             logItem.Created = dateService.GetDateTimeNow();
 
-            list.Add(logItem);
+            List.Add(logItem);
         }
     }
 
@@ -25,9 +25,9 @@ public class LogItemList(
     {
         lock (this)
         {
-            var entries = list.ToList();
+            var entries = List.ToList();
 
-            list.Clear();
+            List.Clear();
 
             return entries;
         }

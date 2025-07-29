@@ -10,7 +10,7 @@ public class BadSignInList(
 {
     private readonly BadSignInConfiguration _config = options.Value;
 
-    private List<BadSignIn> list { get; set; } = [];
+    private List<BadSignIn> List { get; set; } = [];
 
     public void AddSignIn(
         IPAddress? ipAddress,
@@ -51,7 +51,7 @@ public class BadSignInList(
             if (_config.LogPassword)
                 signin.Password = password;
 
-            list.Add(signin);
+            List.Add(signin);
         }
     }
 
@@ -59,9 +59,9 @@ public class BadSignInList(
     {
         lock (this)
         {
-            var entries = list.ToList();
+            var entries = List.ToList();
 
-            list.Clear();
+            List.Clear();
 
             return entries;
         }

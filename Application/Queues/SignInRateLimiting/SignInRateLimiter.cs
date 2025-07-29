@@ -6,7 +6,7 @@ public class SignInRateLimiter(
     IDateService dateService,
     ILogItemList logItemList) : ISignInRateLimiter
 {
-    private List<SignInAttempt> list { get; set; } = [];
+    private List<SignInAttempt> List { get; set; } = [];
 
     public void TryRateLimit(int limit, SignInAttempt attempt)
     {
@@ -15,9 +15,9 @@ public class SignInRateLimiter(
 
         lock (this)
         {
-            list.Add(attempt);
+            List.Add(attempt);
 
-            var count = list
+            var count = List
                 .Count(x =>
                     x.Endpoint == attempt.Endpoint &&
                     x.Username == attempt.Username);
@@ -41,7 +41,7 @@ public class SignInRateLimiter(
     {
         lock (this)
         {
-            return list.ToList();
+            return List.ToList();
         }
     }
 
@@ -49,7 +49,7 @@ public class SignInRateLimiter(
     {
         lock (this)
         {
-            list.Clear();
+            List.Clear();
         }
     }
 
@@ -59,7 +59,7 @@ public class SignInRateLimiter(
         {
             var timeAgo = dateService.GetDateTimeNow() - timeSpan;
 
-            list = list
+            List = List
                 .Where(x => x.DateTime > timeAgo)
                 .ToList();
         }

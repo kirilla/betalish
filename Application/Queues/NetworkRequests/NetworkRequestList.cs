@@ -6,7 +6,7 @@ public class NetworkRequestList(
     IHostEnvironment hostEnvironment,
     IDateService dateService) : INetworkRequestList
 {
-    private List<NetworkRequest> list { get; } = [];
+    private List<NetworkRequest> List { get; } = [];
 
     public void Add(NetworkRequest request)
     {
@@ -17,7 +17,7 @@ public class NetworkRequestList(
         {
             request.Created = dateService.GetDateTimeNow();
 
-            list.Add(request);
+            List.Add(request);
         }
     }
 
@@ -25,9 +25,9 @@ public class NetworkRequestList(
     {
         lock (this)
         {
-            var entries = list.ToList();
+            var entries = List.ToList();
 
-            list.Clear();
+            List.Clear();
 
             return entries;
         }

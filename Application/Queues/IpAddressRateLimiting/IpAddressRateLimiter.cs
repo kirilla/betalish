@@ -6,7 +6,7 @@ public class IpAddressRateLimiter(
     IDateService dateService,
     ILogItemList logItemList) : IIpAddressRateLimiter
 {
-    private List<IpAddressEndpointHit> list { get; set; } = [];
+    private List<IpAddressEndpointHit> List { get; set; } = [];
 
     public void TryRateLimit(int limit, IpAddressEndpointHit hit)
     {
@@ -15,9 +15,9 @@ public class IpAddressRateLimiter(
 
         lock (this)
         {
-            list.Add(hit);
+            List.Add(hit);
 
-            var count = list
+            var count = List
                 .Count(x =>
                     x.Endpoint == hit.Endpoint &&
                     x.IpAddress == hit.IpAddress);
@@ -42,7 +42,7 @@ public class IpAddressRateLimiter(
     {
         lock (this)
         {
-            return list.ToList();
+            return List.ToList();
         }
     }
 
@@ -50,7 +50,7 @@ public class IpAddressRateLimiter(
     {
         lock (this)
         {
-            list.Clear();
+            List.Clear();
         }
     }
 
@@ -60,7 +60,7 @@ public class IpAddressRateLimiter(
         {
             var timeAgo = dateService.GetDateTimeNow() - timeSpan;
 
-            list = list
+            List = List
                 .Where(x => x.DateTime > timeAgo)
                 .ToList();
         }

@@ -6,7 +6,7 @@ public class EndpointRateLimiter(
     IDateService dateService,
     ILogItemList logItemList) : IEndpointRateLimiter
 {
-    private List<EndpointHit> list { get; set; } = [];
+    private List<EndpointHit> List { get; set; } = [];
 
     public void TryRateLimit(int limit, EndpointHit hit)
     {
@@ -15,9 +15,9 @@ public class EndpointRateLimiter(
 
         lock (this)
         {
-            list.Add(hit);
+            List.Add(hit);
 
-            var count = list.Count(x => x.Endpoint == hit.Endpoint);
+            var count = List.Count(x => x.Endpoint == hit.Endpoint);
 
             if (count > limit)
             {
@@ -37,7 +37,7 @@ public class EndpointRateLimiter(
     {
         lock (this)
         {
-            return list.ToList();
+            return List.ToList();
         }
     }
 
@@ -45,7 +45,7 @@ public class EndpointRateLimiter(
     {
         lock (this)
         {
-            list.Clear();
+            List.Clear();
         }
     }
 
@@ -55,7 +55,7 @@ public class EndpointRateLimiter(
         {
             var timeAgo = dateService.GetDateTimeNow() - timeSpan;
 
-            list = list
+            List = List
                 .Where(x => x.DateTime > timeAgo)
                 .ToList();
         }
