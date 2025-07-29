@@ -67,6 +67,22 @@ public class EditArticleAccountingModel(
 
             return Redirect("/show-article-accounting");
         }
+        catch (MissingRevenueAccountException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.RevenueAccount),
+                "Ange intäktskonto.");
+
+            return Page();
+        }
+        catch (MissingVatAccountException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.VatAccount),
+                "Ange moms-konto.");
+
+            return Page();
+        }
         catch
         {
             return Redirect("/help/notpermitted");

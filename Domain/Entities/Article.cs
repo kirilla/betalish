@@ -24,9 +24,34 @@ public class Article : IFormatOnSave, IValidateOnSave
 
     public void FormatOnSave()
     {
+        if (VatRate == 0)
+            VatAccount = null;
+
+        // BUT: What about reverse VAT situations?
     }
 
     public void ValidateOnSave()
     {
+        if (IsMissingRevenueAccount())
+            throw new MissingRevenueAccountException();
+
+        if (IsMissingVatAccount())
+            throw new MissingVatAccountException();
+    }
+
+    public bool IsMissingRevenueAccount()
+    {
+        return
+            RevenueAccount == null ||
+            RevenueAccount == string.Empty ||
+            RevenueAccount.Length != 4;
+    }
+
+    public bool IsMissingVatAccount()
+    {
+        return VatRate != 0 &&
+            (VatAccount == null ||
+            VatAccount == string.Empty ||
+            VatAccount.Length != 4);
     }
 }
