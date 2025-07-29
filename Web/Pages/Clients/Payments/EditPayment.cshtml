@@ -25,15 +25,28 @@
 
         <input type="hidden" asp-for="CommandModel.Id" />
 
+        <label asp-for="CommandModel.Date">
+            Datum
+        </label>
+        <input asp-for="CommandModel.Date" />
+
         <label asp-for="CommandModel.Amount">
             Belopp
         </label>
         <input asp-for="CommandModel.Amount" />
 
-        <label asp-for="CommandModel.Date">
-            Datum
+        <label asp-for="CommandModel.PaymentAccountId">
+            Konto
         </label>
-        <input asp-for="CommandModel.Date" />
+        <select asp-for="CommandModel.PaymentAccountId">
+            <option value="">–</option>
+            @foreach (var account in Model.PaymentAccounts)
+            {
+                <option value="@(account.Id)">
+                    @(account.Name)
+                </option>
+            }
+        </select>
 
         <label asp-for="CommandModel.PaymentMethod">
             Betalsätt
@@ -58,19 +71,6 @@
             <option value="@(PaymentMethod.Iban)">
                 Iban
             </option>
-        </select>
-
-        <label asp-for="CommandModel.PaymentAccountId">
-            Konto
-        </label>
-        <select asp-for="CommandModel.PaymentAccountId">
-            <option value="">–</option>
-            @foreach (var account in Model.PaymentAccounts)
-            {
-                <option value="@(account.Id)">
-                    @(account.Name)
-                </option>
-            }
         </select>
 
         <div asp-validation-summary="All"></div>
