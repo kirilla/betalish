@@ -4,7 +4,7 @@ namespace Betalish.Application.Commands.Payments.UnassignPayment;
 
 public class UnassignPaymentCommand(
     IDatabaseService database,
-    IUpdateInvoicePaymentStatusRoutine updatePaymentStatus) : IUnassignPaymentCommand
+    IUpdateInvoicePaymentStatusRoutine updateInvoicePaymentStatus) : IUnassignPaymentCommand
 {
     public async Task Execute(
         IUserToken userToken, UnassignPaymentCommandModel model)
@@ -36,7 +36,7 @@ public class UnassignPaymentCommand(
 
         await database.SaveAsync(userToken);
 
-        await updatePaymentStatus.Execute(userToken, invoiceId);
+        await updateInvoicePaymentStatus.Execute(userToken, invoiceId);
     }
 
     public bool IsPermitted(IUserToken userToken)
