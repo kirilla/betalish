@@ -1,6 +1,4 @@
-﻿using static Betalish.Common.Constants.Defaults;
-
-namespace Betalish.Application.Routines.UpdateInvoiceAccounting;
+﻿namespace Betalish.Application.Routines.UpdateInvoiceAccounting;
 
 public class UpdateInvoiceAccountingRoutine(
     IDatabaseService database) : IUpdateInvoiceAccountingRoutine
