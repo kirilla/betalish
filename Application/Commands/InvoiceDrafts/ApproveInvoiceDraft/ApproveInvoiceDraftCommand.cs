@@ -105,7 +105,7 @@ public class ApproveInvoiceDraftCommand(
         }
     }
 
-    private void AssertTotalNotZero(
+    private static void AssertTotalNotZero(
         InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
     {
         if (draft.Total == 0 && draft.TotalRounding == 0)
@@ -113,7 +113,7 @@ public class ApproveInvoiceDraftCommand(
                 "Fakturabeloppet får inte vara noll.");
     }
 
-    private void AssertTotalNegativeForCreditInvoice(
+    private static void AssertTotalNegativeForCreditInvoice(
         InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
     {
         if (draft.IsCredit && draft.Total > 0)
@@ -121,7 +121,7 @@ public class ApproveInvoiceDraftCommand(
                 "Belopp på kreditfaktura ska vara negativt.");
     }
 
-    private void AssertTotalPositiveForDebitInvoice(
+    private static void AssertTotalPositiveForDebitInvoice(
         InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
     {
         if (draft.IsCredit == false && draft.Total < 0)
@@ -129,7 +129,7 @@ public class ApproveInvoiceDraftCommand(
                 "Belopp på debetfaktura ska vara positivt.");
     }
 
-    private void AssertHasAddress(InvoiceDraft draft)
+    private static void AssertHasAddress(InvoiceDraft draft)
     {
         if (draft.Customer_ZipCode.IsMissingValue() ||
             draft.Customer_City.IsMissingValue())
@@ -143,7 +143,7 @@ public class ApproveInvoiceDraftCommand(
         }
     }
 
-    private void AssertHasDraftRows(
+    private static void AssertHasDraftRows(
         InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
     {
         if (draftRows.Count == 0)
@@ -151,7 +151,7 @@ public class ApproveInvoiceDraftCommand(
                 "Utkastet saknar rader.");
     }
 
-    private void AssertCreditDraftHasBalanceRows(
+    private static void AssertCreditDraftHasBalanceRows(
         InvoiceDraft draft,
         List<InvoiceDraftRow> draftRows,
         List<DraftBalanceRow> draftBalanceRows)
@@ -163,7 +163,7 @@ public class ApproveInvoiceDraftCommand(
         }
     }
 
-    private void AssertBalanceSumTotalMatchesCreditDraftTotal(
+    private static void AssertBalanceSumTotalMatchesCreditDraftTotal(
         InvoiceDraft draft,
         List<InvoiceDraftRow> draftRows,
         List<DraftBalanceRow> draftBalanceRows)
@@ -176,7 +176,7 @@ public class ApproveInvoiceDraftCommand(
         }
     }
 
-    private void AssertInvoiceDateGood(InvoiceDraft draft)
+    private static void AssertInvoiceDateGood(InvoiceDraft draft)
     {
         var today = DateOnly.FromDateTime(DateTime.Today);
 
