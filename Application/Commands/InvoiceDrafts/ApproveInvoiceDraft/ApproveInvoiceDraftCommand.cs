@@ -83,6 +83,7 @@ public class ApproveInvoiceDraftCommand(
 
             // Rows
             AssertHasDraftRows(draftRows);
+            AssertDraftRowsHaveVatAccount(draftRows);
 
             // Balance rows
             AssertCreditDraftHasBalanceRows(draft, draftBalanceRows);
@@ -145,6 +146,15 @@ public class ApproveInvoiceDraftCommand(
         if (draftRows.Count == 0)
             throw new UserFeedbackException(
                 "Utkastet saknar rader.");
+    }
+
+    private static void AssertDraftRowsHaveVatAccount(List<InvoiceDraftRow> draftRows)
+    {
+        if (draftRows.Any(x =>
+            x.VatRate != 0 &&
+            x.VatAccount.AccountIsValid() == false))
+            throw new UserFeedbackException(
+                "En rad i utkastet saknar moms-konto.");
     }
 
     private static void AssertCreditDraftHasBalanceRows(

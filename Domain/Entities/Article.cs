@@ -39,19 +39,15 @@ public class Article : IFormatOnSave, IValidateOnSave
             throw new MissingVatAccountException();
     }
 
-    public bool IsMissingRevenueAccount()
+    private bool IsMissingRevenueAccount()
     {
-        return
-            RevenueAccount == null ||
-            RevenueAccount == string.Empty ||
-            RevenueAccount.Length != 4;
+        return RevenueAccount.AccountIsValid() == false;
     }
 
-    public bool IsMissingVatAccount()
+    private bool IsMissingVatAccount()
     {
-        return VatRate != 0 &&
-            (VatAccount == null ||
-            VatAccount == string.Empty ||
-            VatAccount.Length != 4);
+        return 
+            VatRate != 0 &&
+            VatAccount.AccountIsValid() == false;
     }
 }

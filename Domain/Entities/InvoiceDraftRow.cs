@@ -32,10 +32,18 @@ public class InvoiceDraftRow : IFormatOnSave, IValidateOnSave
         NetAmount = _NetAmount;
         VatAmount = _VatAmount;
         TotalAmount = _TotalAmount;
+
+        if (VatRate == 0)
+            VatAccount = null;
     }
 
     public void ValidateOnSave()
     {
+        if (IsMissingRevenueAccount())
+            throw new MissingRevenueAccountException();
+
+        if (IsMissingVatAccount())
+            throw new MissingVatAccountException();
     }
 
     private decimal _NetAmount
@@ -62,5 +70,17 @@ public class InvoiceDraftRow : IFormatOnSave, IValidateOnSave
         {
             return _NetAmount + _VatAmount;
         }
+    }
+
+    private bool IsMissingRevenueAccount()
+    {
+        return RevenueAccount.AccountIsValid() == false;
+    }
+
+    private bool IsMissingVatAccount()
+    {
+        return
+            VatRate != 0 &&
+            VatAccount.AccountIsValid() == false;
     }
 }
