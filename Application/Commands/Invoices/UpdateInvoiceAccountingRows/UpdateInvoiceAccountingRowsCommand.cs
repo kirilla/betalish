@@ -31,6 +31,8 @@ public class UpdateInvoiceAccountingRowsCommand(
 
     public bool IsPermitted(IUserToken userToken)
     {
-        return userToken.IsClient;
+        return
+            userToken.IsClient && // AND
+            userToken.IsAdmin;
     }
 }
