@@ -25,7 +25,7 @@ public class UnassignPaymentCommand(
         if (payment.InvoiceId == null)
             throw new NotAssignedException();
 
-        // TODO: More asserts
+        // TODO: Asserts
 
         // If debit, if credit, ...?
 
@@ -33,6 +33,14 @@ public class UnassignPaymentCommand(
 
         payment.InvoiceId = null;
         payment.InvoiceNumber = null;
+
+        var paymentAccountingRows = await database.PaymentAccountingRows
+            .Where(x => 
+                x.PaymentId == payment.Id &&
+                x.Payment.ClientId == userToken.ClientId!.Value)
+            .ToListAsync();
+
+        database.PaymentAccountingRows.RemoveRange(paymentAccountingRows);
 
         await database.SaveAsync(userToken);
 
