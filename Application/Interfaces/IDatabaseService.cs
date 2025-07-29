@@ -20,7 +20,7 @@ public interface IDatabaseService
     DbSet<EmailImage> EmailImages { get; set; }
     DbSet<EmailMessage> EmailMessages { get; set; }
     DbSet<Invoice> Invoices { get; set; }
-    DbSet<InvoiceAccounting> InvoiceAccountingRows { get; set; }
+    DbSet<InvoiceAccountingRow> InvoiceAccountingRows { get; set; }
     DbSet<InvoiceFee> InvoiceFees { get; set; }
     DbSet<InvoiceRow> InvoiceRows { get; set; }
     DbSet<InvoiceDraft> InvoiceDrafts { get; set; }

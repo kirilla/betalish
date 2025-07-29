@@ -242,7 +242,7 @@
         <br />
     }
 
-    @if (Model.InvoiceAccountings.Count > 0)
+    @if (Model.InvoiceAccountingRows.Count > 0)
     {
         <br />
 
@@ -255,17 +255,17 @@
                     <th class="end-align">Debet</th>
                     <th class="end-align">Kredit</th>
                 </tr>
-                @foreach (var accounting in Model.InvoiceAccountings)
+                @foreach (var row in Model.InvoiceAccountingRows)
                 {
                     <tr>
                         <td>
-                            @(accounting.Account ?? "Okänt")
+                            @(row.Account ?? "Okänt")
                         </td>
                         <td class="end-align">
-                            @(accounting.Debit.ToSwedish())
+                            @(row.Debit.ToSwedish())
                         </td>
                         <td class="end-align">
-                            @(accounting.Credit.ToSwedish())
+                            @(row.Credit.ToSwedish())
                         </td>
                     </tr>
                 }
@@ -285,7 +285,7 @@
 
         @if (Model.UserToken.IsAdmin)
         {
-            <a class="button" href="/update-invoice-accounting/@(Model.Invoice.Id)">
+            <a class="button" href="/update-invoice-accounting-rows/@(Model.Invoice.Id)">
                 Skapa kontering
             </a>
         }

@@ -1,13 +1,13 @@
-﻿using Betalish.Application.Routines.UpdateInvoiceAccounting;
+﻿using Betalish.Application.Routines.UpdateInvoiceAccountingRows;
 
-namespace Betalish.Application.Commands.Invoices.UpdateInvoiceAccounting;
+namespace Betalish.Application.Commands.Invoices.UpdateInvoiceAccountingRows;
 
-public class UpdateInvoiceAccountingCommand(
+public class UpdateInvoiceAccountingRowsCommand(
     IDatabaseService database,
-    IUpdateInvoiceAccountingRoutine updateSummaryRoutine) : IUpdateInvoiceAccountingCommand
+    IUpdateInvoiceAccountingRowsRoutine updateAccountingRows) : IUpdateInvoiceAccountingRowsCommand
 {
     public async Task Execute(
-        IUserToken userToken, UpdateInvoiceAccountingCommandModel model)
+        IUserToken userToken, UpdateInvoiceAccountingRowsCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -26,7 +26,7 @@ public class UpdateInvoiceAccountingCommand(
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        await updateSummaryRoutine.Execute(userToken, invoice.Id);
+        await updateAccountingRows.Execute(userToken, invoice.Id);
     }
 
     public bool IsPermitted(IUserToken userToken)

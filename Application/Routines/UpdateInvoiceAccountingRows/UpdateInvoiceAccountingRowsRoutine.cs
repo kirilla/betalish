@@ -1,7 +1,7 @@
-﻿namespace Betalish.Application.Routines.UpdateInvoiceAccounting;
+﻿namespace Betalish.Application.Routines.UpdateInvoiceAccountingRows;
 
-public class UpdateInvoiceAccountingRoutine(
-    IDatabaseService database) : IUpdateInvoiceAccountingRoutine
+public class UpdateInvoiceAccountingRowsRoutine(
+    IDatabaseService database) : IUpdateInvoiceAccountingRowsRoutine
 {
     public async Task Execute(
         IUserToken userToken, int invoiceId)
@@ -33,7 +33,7 @@ public class UpdateInvoiceAccountingRoutine(
                 x.Invoice.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
-        var receivableRow = new InvoiceAccounting()
+        var receivableRow = new InvoiceAccountingRow()
         {
             Account = Defaults.Accounting.AccountsReceivable,
             Debit = invoice.Total,
@@ -45,7 +45,7 @@ public class UpdateInvoiceAccountingRoutine(
 
         if (invoice.TotalRounding != 0)
         {
-            var roundingRow = new InvoiceAccounting()
+            var roundingRow = new InvoiceAccountingRow()
             {
                 Account = Defaults.Accounting.Rounding,
                 Debit = 0,
@@ -60,7 +60,7 @@ public class UpdateInvoiceAccountingRoutine(
             .GroupBy(x => new {
                 x.RevenueAccount,
             })
-            .Select(x => new InvoiceAccounting()
+            .Select(x => new InvoiceAccountingRow()
             {
                 Debit = 0,
                 Credit = x.Sum(y => y.NetAmount),
@@ -74,7 +74,7 @@ public class UpdateInvoiceAccountingRoutine(
             .GroupBy(x => new {
                 x.VatAccount,
             })
-            .Select(x => new InvoiceAccounting()
+            .Select(x => new InvoiceAccountingRow()
             {
                 Debit = 0,
                 Credit = x.Sum(y => y.VatAmount),
@@ -83,14 +83,14 @@ public class UpdateInvoiceAccountingRoutine(
             })
             .ToList();
 
-        var list = new List<InvoiceAccounting>();
+        var list = new List<InvoiceAccountingRow>();
 
         list.AddRange(revenueCreditRows);
         list.AddRange(vatCreditRows);
 
         var summedAccountings = list
             .GroupBy(x => x.Account)
-            .Select(x => new InvoiceAccounting()
+            .Select(x => new InvoiceAccountingRow()
             {
                 Account = x.Key,
                 Debit = x.Sum(y => y.Debit),

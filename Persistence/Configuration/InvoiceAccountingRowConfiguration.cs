@@ -1,8 +1,8 @@
 ﻿namespace Betalish.Persistence.Configuration;
 
-class InvoiceAccountingConfiguration : IEntityTypeConfiguration<InvoiceAccounting>
+class InvoiceAccountingRowConfiguration : IEntityTypeConfiguration<InvoiceAccountingRow>
 {
-    public void Configure(EntityTypeBuilder<InvoiceAccounting> builder)
+    public void Configure(EntityTypeBuilder<InvoiceAccountingRow> builder)
     {
         builder.HasKey(p => p.Id);
 

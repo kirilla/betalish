@@ -1,7 +1,7 @@
 ﻿using Betalish.Application.Queues.LogItems;
 using Betalish.Application.Routines.ConvertDraftToInvoice;
 using Betalish.Application.Routines.SetInvoiceNumber;
-using Betalish.Application.Routines.UpdateInvoiceAccounting;
+using Betalish.Application.Routines.UpdateInvoiceAccountingRows;
 
 namespace Betalish.Application.Commands.InvoiceDrafts.ApproveInvoiceDraft;
 
@@ -10,7 +10,7 @@ public class ApproveInvoiceDraftCommand(
     ILogItemList logItemList,
     IConvertDraftToInvoiceRoutine convertToInvoiceRoutine,
     ISetInvoiceNumberRoutine setInvoiceNumberRoutine,
-    IUpdateInvoiceAccountingRoutine updateInvoiceAccounting) : IApproveInvoiceDraftCommand
+    IUpdateInvoiceAccountingRowsRoutine updateInvoiceAccounting) : IApproveInvoiceDraftCommand
 {
     public async Task<int> Execute(
         IUserToken userToken, ApproveInvoiceDraftCommandModel model)

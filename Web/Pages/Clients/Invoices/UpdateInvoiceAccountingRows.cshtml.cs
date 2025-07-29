@@ -1,16 +1,16 @@
-﻿using Betalish.Application.Commands.Invoices.UpdateInvoiceAccounting;
+﻿using Betalish.Application.Commands.Invoices.UpdateInvoiceAccountingRows;
 
 namespace Betalish.Web.Pages.Clients.Invoices;
 
-public class UpdateInvoiceAccountingModel(
+public class UpdateInvoiceAccountingRowsModel(
     IUserToken userToken,
     IDatabaseService database,
-    IUpdateInvoiceAccountingCommand command) : ClientPageModel(userToken)
+    IUpdateInvoiceAccountingRowsCommand command) : ClientPageModel(userToken)
 {
     public Invoice Invoice { get; set; } = null!;
 
     [BindProperty]
-    public UpdateInvoiceAccountingCommandModel CommandModel { get; set; } = new();
+    public UpdateInvoiceAccountingRowsCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -26,7 +26,7 @@ public class UpdateInvoiceAccountingModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new UpdateInvoiceAccountingCommandModel()
+            CommandModel = new UpdateInvoiceAccountingRowsCommandModel()
             {
                 Id = Invoice.Id,
             };

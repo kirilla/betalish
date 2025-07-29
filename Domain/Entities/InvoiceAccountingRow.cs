@@ -1,6 +1,6 @@
 ﻿namespace Betalish.Domain.Entities;
 
-public class InvoiceAccounting : 
+public class InvoiceAccountingRow : 
     IFormatOnSave, 
     IValidateOnSave
 {

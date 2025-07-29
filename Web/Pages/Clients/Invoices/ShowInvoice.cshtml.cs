@@ -6,7 +6,7 @@ public class ShowInvoiceModel(
 {
     public Invoice Invoice { get; set; } = null!;
 
-    public List<InvoiceAccounting> InvoiceAccountings { get; set; } = [];
+    public List<InvoiceAccountingRow> InvoiceAccountingRows { get; set; } = [];
     public List<InvoiceRow> InvoiceRows { get; set; } = [];
     public List<BalanceRow> BalanceRows { get; set; } = [];
     public List<DraftBalanceRow> DraftBalanceRows { get; set; } = [];
@@ -36,7 +36,7 @@ public class ShowInvoiceModel(
                 .ThenBy(x => x.ArticleName)
                 .ToListAsync();
 
-            InvoiceAccountings = await database.InvoiceAccountingRows
+            InvoiceAccountingRows = await database.InvoiceAccountingRows
                 .AsNoTracking()
                 .Where(x =>
                     x.InvoiceId == id &&
