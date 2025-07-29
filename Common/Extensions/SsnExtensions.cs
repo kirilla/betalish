@@ -22,7 +22,7 @@ public static class SsnExtensions
             try
             {
                 return DateOnly.ParseExact(
-                    ssn.Substring(0, 8), "yyyyMMdd", CultureInfo.InvariantCulture);
+                    ssn[..8], "yyyyMMdd", CultureInfo.InvariantCulture);
             }
             catch
             {
@@ -35,7 +35,7 @@ public static class SsnExtensions
             try
             {
                 return DateOnly.ParseExact(
-                    ssn.Substring(0, 6), "yyMMdd", CultureInfo.InvariantCulture);
+                    ssn[..6], "yyMMdd", CultureInfo.InvariantCulture);
             }
             catch
             {
