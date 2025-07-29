@@ -19,6 +19,7 @@ public class ShowPaymentModel(
             AssertIsClient();
 
             Payment = await database.Payments
+                .Include(x => x.PaymentAccount)
                 .Where(x =>
                     x.Id == id &&
                     x.ClientId == UserToken.ClientId!.Value)

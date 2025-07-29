@@ -21,6 +21,7 @@ public class UnassignPaymentModel(
                 throw new NotPermittedException();
 
             Payment = await database.Payments
+                .Include(x => x.PaymentAccount)
                 .Where(x =>
                     x.Id == id &&
                     x.ClientId == UserToken.ClientId!.Value)
@@ -58,6 +59,7 @@ public class UnassignPaymentModel(
                 throw new NotPermittedException();
 
             Payment = await database.Payments
+                .Include(x => x.PaymentAccount)
                 .Where(x =>
                     x.Id == id &&
                     x.ClientId == UserToken.ClientId!.Value)

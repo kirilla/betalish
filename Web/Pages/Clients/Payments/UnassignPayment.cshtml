@@ -18,28 +18,27 @@
 
 <main>
     <h4>
-        Frigör från faktura
+        Frigör betalning
+        <span class="muted">
+            @(Model.Payment.Date.ToIso8601()) &nbsp;
+            @(Model.Payment.Amount) kr &nbsp;
+            @(Model.Payment.PaymentAccount?.Name)
+        </span>
     </h4>
 
     <div class="notice">
-        <span>Betalningen</span>
-        <ul>
-            @(Model.Payment.Date.ToIso8601()),
-            @(Model.Payment.Amount) kr,
-            @(Model.Payment.PaymentMethod)
-        </ul>
-        <span>är knuten till 
+        Faktura: 
+        <span>
             <a href="/show-invoice/@(Model.Invoice.Id)">
-                faktura @(Model.Invoice.InvoiceNumber?
-                .ToSwedish() ?? "okänt fakturanummer?")
+                @(Model.Invoice.InvoiceNumber?.ToSwedish() ?? "-")
             </a>
         </span>
-        <ul>
-            @(Model.Invoice.InvoiceDate.ToIso8601()),
-            @(Model.Invoice.Customer_Name),
-            @(Model.Invoice.About),
+        <br />
+        <span>
+            @(Model.Invoice.InvoiceDate.ToIso8601()) &nbsp;
+            @(Model.Invoice.Customer_Name) &nbsp;
             @(Model.Invoice.Total) kr
-        </ul>
+        </span>
     </div>
 
     <form method="post">

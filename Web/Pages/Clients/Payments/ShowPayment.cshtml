@@ -27,76 +27,70 @@
         <table>
             <tr>
                 <th>Datum</th>
-                <td class="end-align">
-                    @(payment.Date.ToIso8601())
-                </td>
+                <th class="end-align">Belopp</th>
+                <th>Konto</th>
+                <th>Betalsätt</th>
             </tr>
             <tr>
-                <th>Belopp</th>
+                <td>
+                    @(payment.Date.ToIso8601())
+                </td>
                 <td class="end-align">
                     @(payment.Amount.ToSwedish())
                 </td>
-            </tr>
-            <tr>
-                <th>Betalsätt</th>
-                <td class="end-align">
-                    @(payment.PaymentMethod.ToString() ?? "-")
+                <td>
+                    @(payment.PaymentAccount?.Name ?? "-")
                 </td>
-            </tr>
-            <tr>
-                <th>Konto</th>
-                <td class="end-align">
-                    @if (payment.PaymentAccountId.HasValue)
-                    {
-                        @(payment.PaymentAccount?.Name ?? "-")
-                    }
-                    else
-                    {
-                        <span>&ndash;</span>
-                    }
+                <td>
+                    @(payment.PaymentMethod.ToString() ?? "-")
                 </td>
             </tr>
         </table>
     </figure>
 
+    @if (invoice == null)
+    {
+        <br />
+
+        <div class="notice">
+            Betalningen är inte knuten till någon faktura.
+        </div>
+    }
+
     @if (invoice != null)
     {
         <br />
 
-        <h5>Knuten till faktura</h5>
+        <h5>Faktura</h5>
 
         <figure>
             <table>
                 <tr>
+                    <th>Nummer</th>
                     <th>Fakturadatum</th>
-                    <td class="end-align">
-                        @(invoice.InvoiceDate.ToIso8601())
-                    </td>
+                    <th>Mottagare</th>
+                    <th class="end-align">Belopp</th>
                 </tr>
                 <tr>
-                    <th>Nummer</th>
-                    <td class="end-align">
+                    <td>
                         <a href="/show-invoice/@(invoice.Id)">
                             @(invoice.InvoiceNumber?.ToSwedish() ?? "-")
                         </a>
                     </td>
-                </tr>
-                <tr>
-                    <th>Mottagare</th>
-                    <td class="end-align">
-                        @(invoice.Customer_Name ?? "-")
+                    <td>
+                        <a href="/show-invoice/@(invoice.Id)">
+                            @(invoice.InvoiceDate.ToIso8601())
+                        </a>
                     </td>
-                </tr>
-                <tr>
-                    <th>Sammanfattning</th>
-                    <td class="end-align">
-                        @(invoice.About ?? "-")
+                    <td>
+                        <a href="/show-invoice/@(invoice.Id)">
+                            @(invoice.Customer_Name ?? "-")
+                        </a>
                     </td>
-                </tr>
-                <tr>
-                    <th>Belopp</th>
                     <td class="end-align">
-                        @(invoice.Total.ToSwedish())
+                        <a href="/show-invoice/@(invoice.Id)">
+                            @(invoice.Total.ToSwedish())
+                        </a>
                     </td>
                 </tr>
             </table>
