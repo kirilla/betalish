@@ -136,40 +136,41 @@
         <br />
     }
 
-    <p>
+    <div role="toolbar" aria-label="Åtgärder">
+        <div role="group">
+            @if (Model.Payment.InvoiceId == null)
+            {
+                <a class="button" href="/assign-payment/@(Model.Payment.Id)">
+                    Knyt till faktura
+                </a>
+            }
+            @if (Model.Payment.InvoiceId.HasValue)
+            {
+                <a class="button" href="/unassign-payment/@(Model.Payment.Id)">
+                    Lösgör från faktura
+                </a>
+            }
+        </div>
         @if (Model.Payment.InvoiceId == null)
         {
-            <a class="button" href="/assign-payment/@(Model.Payment.Id)">
-                Knyt till faktura
-            </a>
+            <div role="group">
+                <a class="button" href="/edit-payment/@(Model.Payment.Id)">
+                    Redigera
+                </a>
+
+                <a class="button" href="/remove-payment/@(Model.Payment.Id)">
+                    Ta bort
+                </a>
+            </div>
         }
-        @if (Model.Payment.InvoiceId.HasValue)
+        @if (Model.UserToken.IsAdmin)
         {
-            <a class="button" href="/unassign-payment/@(Model.Payment.Id)">
-                Lösgör från faktura
-            </a>
+            <div role="group">
+                <a class="button admin" href="/update-payment-accounting-rows/@(Model.Payment.Id)">
+                    Skapa kontering
+                </a>
+            </div>
         }
-    </p>
-
-    <p>
-        <a class="button" href="/edit-payment/@(Model.Payment.Id)">
-            Redigera
-        </a>
-
-        <a class="button" href="/remove-payment/@(Model.Payment.Id)">
-            Ta bort
-        </a>
-    </p>
-
-    @if (Model.UserToken.IsAdmin)
-    {
-        <p>
-            <h5>Admin</h5>
-
-            <a class="button" href="/update-payment-accounting-rows/@(Model.Payment.Id)">
-                Skapa kontering
-            </a>
-        </p>
-    }
+    </div>
 
 </main>

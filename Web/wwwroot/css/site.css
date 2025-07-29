@@ -228,3 +228,30 @@ label.required {
 .end-align {
     text-align: end;
 }
+
+/* Toolbar */
+div[role="toolbar"] {
+    margin: 1.5rem 0;
+}
+
+div[role="group"] {
+    border-top: 1rem;
+    padding-top: 1rem;
+}
+
+    div[role="group"]:first-child {
+        border-top: 0;
+        padding-top: 0;
+    }
+
+a.admin {
+    border-color: darkred;
+    background-color: darkred;
+    color: white;
+}
+
+div[role="group"] a.admin:hover {
+    border-color: red;
+    background-color: red;
+    color: white;
+}
