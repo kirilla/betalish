@@ -38,6 +38,7 @@ public class EditPaymentModel(
                 Amount = Payment.Amount.ToSwedish(),
                 Date = Payment.Date.ToIso8601(),
                 PaymentMethod = Payment.PaymentMethod,
+                PaymentAccountId = Payment.PaymentAccountId,
             };
 
             return Page();
