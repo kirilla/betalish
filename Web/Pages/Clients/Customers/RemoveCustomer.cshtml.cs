@@ -10,8 +10,7 @@ public class RemoveCustomerModel(
     public Customer Customer { get; set; } = null!;
 
     [BindProperty]
-    public RemoveCustomerCommandModel CommandModel { get; set; }
-        = new RemoveCustomerCommandModel();
+    public RemoveCustomerCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

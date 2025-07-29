@@ -7,8 +7,7 @@ public class RemoveEmailMessagesModel(
     IRemoveEmailMessagesCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public RemoveEmailMessagesCommandModel CommandModel { get; set; } 
-        = new RemoveEmailMessagesCommandModel();
+    public RemoveEmailMessagesCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

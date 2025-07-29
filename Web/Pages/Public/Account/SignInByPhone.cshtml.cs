@@ -25,8 +25,7 @@ public class SignInByPhoneModel(
     private readonly SignInConfiguration _config = options.Value;
 
     [BindProperty]
-    public SignInByPhoneCommandModel CommandModel { get; set; }
-        = new SignInByPhoneCommandModel();
+    public SignInByPhoneCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

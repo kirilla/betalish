@@ -11,8 +11,7 @@ public class AddPaymentModel(
     public List<PaymentAccount> PaymentAccounts { get; set; } = [];
 
     [BindProperty]
-    public AddPaymentCommandModel CommandModel { get; set; }
-        = new AddPaymentCommandModel();
+    public AddPaymentCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync()
     {

@@ -10,8 +10,7 @@ public class ApproveInvoiceDraftModel(
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 
     [BindProperty]
-    public ApproveInvoiceDraftCommandModel CommandModel { get; set; }
-        = new ApproveInvoiceDraftCommandModel();
+    public ApproveInvoiceDraftCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

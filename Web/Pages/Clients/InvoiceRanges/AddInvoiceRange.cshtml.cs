@@ -10,8 +10,7 @@ public class AddInvoiceRangeModel(
     public List<InvoiceRange> InvoiceRanges { get; set; } = [];
 
     [BindProperty]
-    public AddInvoiceRangeCommandModel CommandModel { get; set; }
-        = new AddInvoiceRangeCommandModel();
+    public AddInvoiceRangeCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync()
     {

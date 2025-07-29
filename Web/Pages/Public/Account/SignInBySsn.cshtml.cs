@@ -25,8 +25,7 @@ public class SignInBySsnModel(
     private readonly SignInConfiguration _config = options.Value;
 
     [BindProperty]
-    public SignInBySsnCommandModel CommandModel { get; set; }
-        = new SignInBySsnCommandModel();
+    public SignInBySsnCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

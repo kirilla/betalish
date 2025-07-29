@@ -10,8 +10,7 @@ public class RemoveAccountPhoneModel(
     public List<UserPhone> UserPhones { get; set; } = [];
 
     [BindProperty]
-    public RemoveAccountPhoneCommandModel CommandModel { get; set; }
-        = new RemoveAccountPhoneCommandModel();
+    public RemoveAccountPhoneCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync()
     {

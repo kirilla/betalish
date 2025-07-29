@@ -10,8 +10,7 @@ public class StripUserAdminModel(
     public new User User { get; set; } = null!;
 
     [BindProperty]
-    public StripUserAdminCommandModel CommandModel { get; set; }
-        = new StripUserAdminCommandModel();
+    public StripUserAdminCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

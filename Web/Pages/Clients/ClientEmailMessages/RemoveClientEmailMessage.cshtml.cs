@@ -10,8 +10,7 @@ public class RemoveClientEmailMessageModel(
     public ClientEmailMessage ClientEmailMessage { get; set; } = null!;
 
     [BindProperty]
-    public RemoveClientEmailMessageCommandModel CommandModel { get; set; }
-        = new RemoveClientEmailMessageCommandModel();
+    public RemoveClientEmailMessageCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

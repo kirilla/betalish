@@ -10,8 +10,7 @@ public class EditPaymentAccountModel(
     public PaymentAccount PaymentAccount { get; set; } = null!;
 
     [BindProperty]
-    public EditPaymentAccountCommandModel CommandModel { get; set; }
-        = new EditPaymentAccountCommandModel();
+    public EditPaymentAccountCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

@@ -7,8 +7,7 @@ public class RemoveLogItemsModel(
     IRemoveLogItemsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public RemoveLogItemsCommandModel CommandModel { get; set; } 
-        = new RemoveLogItemsCommandModel();
+    public RemoveLogItemsCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

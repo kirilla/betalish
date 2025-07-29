@@ -7,8 +7,7 @@ public class AddAccountPhoneModel(
     IAddAccountPhoneCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]
-    public AddAccountPhoneCommandModel CommandModel { get; set; }
-        = new AddAccountPhoneCommandModel();
+    public AddAccountPhoneCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

@@ -8,8 +8,7 @@ public class EditUserModel(
     IUserToken userToken) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public EditUserCommandModel CommandModel { get; set; }
-        = new EditUserCommandModel();
+    public EditUserCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

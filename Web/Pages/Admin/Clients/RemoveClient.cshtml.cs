@@ -10,7 +10,7 @@ public class RemoveClientModel(
     public Client Client { get; set; } = null!;
 
     [BindProperty]
-    public RemoveClientCommandModel CommandModel { get; set; } = new RemoveClientCommandModel();
+    public RemoveClientCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

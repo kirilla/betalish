@@ -10,8 +10,7 @@ public class MakeUserAdminModel(
     public new User User { get; set; } = null!;
 
     [BindProperty]
-    public MakeUserAdminCommandModel CommandModel { get; set; }
-        = new MakeUserAdminCommandModel();
+    public MakeUserAdminCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

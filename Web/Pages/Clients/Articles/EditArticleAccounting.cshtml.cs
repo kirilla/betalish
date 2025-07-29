@@ -10,8 +10,7 @@ public class EditArticleAccountingModel(
     public Article Article { get; set; } = null!;
 
     [BindProperty]
-    public EditArticleAccountingCommandModel CommandModel { get; set; }
-        = new EditArticleAccountingCommandModel();
+    public EditArticleAccountingCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

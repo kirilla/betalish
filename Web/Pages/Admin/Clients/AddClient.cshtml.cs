@@ -7,7 +7,7 @@ public class AddClientModel(
     IAddClientCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public AddClientCommandModel CommandModel { get; set; } = new AddClientCommandModel();
+    public AddClientCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

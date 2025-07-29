@@ -10,8 +10,7 @@ public class RemoveLedgerAccountModel(
     public LedgerAccount LedgerAccount { get; set; } = null!;
 
     [BindProperty]
-    public RemoveLedgerAccountCommandModel CommandModel { get; set; }
-        = new RemoveLedgerAccountCommandModel();
+    public RemoveLedgerAccountCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

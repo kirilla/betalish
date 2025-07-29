@@ -7,8 +7,7 @@ public class AddArticleModel(
     IAddArticleCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
-    public AddArticleCommandModel CommandModel { get; set; }
-        = new AddArticleCommandModel();
+    public AddArticleCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

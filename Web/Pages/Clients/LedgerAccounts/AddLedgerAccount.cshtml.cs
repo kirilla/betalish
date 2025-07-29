@@ -7,8 +7,7 @@ public class AddLedgerAccountModel(
     IAddLedgerAccountCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
-    public AddLedgerAccountCommandModel CommandModel { get; set; }
-        = new AddLedgerAccountCommandModel();
+    public AddLedgerAccountCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

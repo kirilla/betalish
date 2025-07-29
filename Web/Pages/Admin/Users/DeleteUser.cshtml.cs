@@ -10,8 +10,7 @@ public class DeleteUserModel(
     public new User User { get; set; } = null!;
 
     [BindProperty]
-    public DeleteUserCommandModel CommandModel { get; set; }
-        = new DeleteUserCommandModel();
+    public DeleteUserCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

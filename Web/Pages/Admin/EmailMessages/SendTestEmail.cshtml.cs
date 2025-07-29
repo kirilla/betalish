@@ -7,8 +7,7 @@ public class SendTestEmailModel(
     ISendTestEmailCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public SendTestEmailCommandModel CommandModel { get; set; } 
-        = new SendTestEmailCommandModel();
+    public SendTestEmailCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

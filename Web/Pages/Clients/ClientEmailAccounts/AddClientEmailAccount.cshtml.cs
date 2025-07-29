@@ -7,8 +7,7 @@ public class AddClientEmailAccountModel(
     IAddClientEmailAccountCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
-    public AddClientEmailAccountCommandModel CommandModel { get; set; }
-        = new AddClientEmailAccountCommandModel();
+    public AddClientEmailAccountCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

@@ -10,8 +10,7 @@ public class RemoveArticleModel(
     public Article Article { get; set; } = null!;
 
     [BindProperty]
-    public RemoveArticleCommandModel CommandModel { get; set; }
-        = new RemoveArticleCommandModel();
+    public RemoveArticleCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

@@ -7,8 +7,7 @@ public class TestLogItemDedupModel(
     IUserToken userToken) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public TestLogItemDedupCommandModel CommandModel { get; set; }
-        = new TestLogItemDedupCommandModel();
+    public TestLogItemDedupCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

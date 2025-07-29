@@ -7,8 +7,7 @@ public class TerminateSessionsModel(
     ITerminateSessionsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public TerminateSessionsCommandModel CommandModel { get; set; }
-        = new TerminateSessionsCommandModel();
+    public TerminateSessionsCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

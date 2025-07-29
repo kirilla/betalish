@@ -7,8 +7,7 @@ public class RemoveNetworkRequestsModel(
     IRemoveNetworkRequestsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public RemoveNetworkRequestsCommandModel CommandModel { get; set; } 
-        = new RemoveNetworkRequestsCommandModel();
+    public RemoveNetworkRequestsCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

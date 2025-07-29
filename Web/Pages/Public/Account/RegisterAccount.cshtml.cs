@@ -12,8 +12,7 @@ public class RegisterAccountModel(
     private readonly SignUpConfiguration _config = options.Value;
 
     [BindProperty]
-    public RegisterAccountCommandModel CommandModel { get; set; }
-        = new RegisterAccountCommandModel();
+    public RegisterAccountCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

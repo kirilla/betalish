@@ -25,8 +25,7 @@ public class SignInByEmailModel(
     private readonly SignInConfiguration _config = options.Value;
 
     [BindProperty]
-    public SignInByEmailCommandModel CommandModel { get; set; }
-        = new SignInByEmailCommandModel();
+    public SignInByEmailCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

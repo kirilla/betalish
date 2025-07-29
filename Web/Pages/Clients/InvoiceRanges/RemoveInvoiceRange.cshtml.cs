@@ -10,8 +10,7 @@ public class RemoveInvoiceRangeModel(
     public InvoiceRange InvoiceRange { get; set; } = null!;
 
     [BindProperty]
-    public RemoveInvoiceRangeCommandModel CommandModel { get; set; }
-        = new RemoveInvoiceRangeCommandModel();
+    public RemoveInvoiceRangeCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

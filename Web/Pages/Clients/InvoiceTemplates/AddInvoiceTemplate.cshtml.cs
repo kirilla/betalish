@@ -7,8 +7,7 @@ public class AddInvoiceTemplateModel(
     IAddInvoiceTemplateCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
-    public AddInvoiceTemplateCommandModel CommandModel { get; set; }
-        = new AddInvoiceTemplateCommandModel();
+    public AddInvoiceTemplateCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

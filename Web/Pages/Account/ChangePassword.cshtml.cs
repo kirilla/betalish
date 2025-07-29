@@ -7,8 +7,7 @@ public class ChangePasswordModel(
     IChangePasswordCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]
-    public ChangePasswordCommandModel CommandModel { get; set; } 
-        = new ChangePasswordCommandModel();
+    public ChangePasswordCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

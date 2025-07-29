@@ -7,8 +7,7 @@ public class RemoveClientEmailMessagesModel(
     IRemoveClientEmailMessagesCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
-    public RemoveClientEmailMessagesCommandModel CommandModel { get; set; }
-        = new RemoveClientEmailMessagesCommandModel();
+    public RemoveClientEmailMessagesCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

@@ -10,8 +10,7 @@ public class AddInvoiceTemplateRowModel(
     public InvoiceTemplate InvoiceTemplate { get; set; } = null!;
 
     [BindProperty]
-    public AddInvoiceTemplateRowCommandModel CommandModel { get; set; }
-        = new AddInvoiceTemplateRowCommandModel();
+    public AddInvoiceTemplateRowCommandModel CommandModel { get; set; } = new();
 
     public List<Article> Articles { get; set; } = [];
 

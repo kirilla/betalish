@@ -7,8 +7,7 @@ public class RemoveSessionRecordsModel(
     IRemoveSessionRecordsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public RemoveSessionRecordsCommandModel CommandModel { get; set; }
-        = new RemoveSessionRecordsCommandModel();
+    public RemoveSessionRecordsCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

@@ -10,8 +10,7 @@ public class SetClientEmailAccountPasswordModel(
     public ClientEmailAccount ClientEmailAccount { get; set; } = null!;
 
     [BindProperty]
-    public SetClientEmailAccountPasswordCommandModel CommandModel { get; set; }
-        = new SetClientEmailAccountPasswordCommandModel();
+    public SetClientEmailAccountPasswordCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

@@ -10,8 +10,7 @@ public class RemoveSignupModel(
     public Signup Signup { get; set; } = null!;
 
     [BindProperty]
-    public RemoveSignupCommandModel CommandModel { get; set; }
-        = new RemoveSignupCommandModel();
+    public RemoveSignupCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

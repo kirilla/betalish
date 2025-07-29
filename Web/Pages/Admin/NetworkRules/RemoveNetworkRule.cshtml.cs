@@ -11,8 +11,7 @@ public class RemoveNetworkRuleModel(
     public NetworkRule NetworkRule { get; set; } = null!;
 
     [BindProperty]
-    public RemoveNetworkRuleCommandModel CommandModel { get; set; }
-        = new RemoveNetworkRuleCommandModel();
+    public RemoveNetworkRuleCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

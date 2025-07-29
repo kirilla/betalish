@@ -11,8 +11,7 @@ public class EditInvoiceTemplateRowModel(
     public InvoiceTemplateRow InvoiceTemplateRow { get; set; } = null!;
 
     [BindProperty]
-    public EditInvoiceTemplateRowCommandModel CommandModel { get; set; }
-        = new EditInvoiceTemplateRowCommandModel();
+    public EditInvoiceTemplateRowCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

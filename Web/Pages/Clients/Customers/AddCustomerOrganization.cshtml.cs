@@ -7,8 +7,7 @@ public class AddCustomerOrganizationModel(
     IAddCustomerOrganizationCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
-    public AddCustomerOrganizationCommandModel CommandModel { get; set; }
-        = new AddCustomerOrganizationCommandModel();
+    public AddCustomerOrganizationCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

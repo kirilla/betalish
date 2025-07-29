@@ -10,8 +10,7 @@ public class EditLedgerAccountModel(
     public LedgerAccount LedgerAccount { get; set; } = null!;
 
     [BindProperty]
-    public EditLedgerAccountCommandModel CommandModel { get; set; }
-        = new EditLedgerAccountCommandModel();
+    public EditLedgerAccountCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

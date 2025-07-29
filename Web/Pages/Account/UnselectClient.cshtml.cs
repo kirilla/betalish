@@ -7,7 +7,7 @@ public class UnselectClientModel(
     IUnselectClientCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public UnselectClientCommandModel CommandModel { get; set; } = new UnselectClientCommandModel();
+    public UnselectClientCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

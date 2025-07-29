@@ -11,8 +11,7 @@ public class EditNetworkRuleModel(
     public NetworkRule NetworkRule { get; set; } = null!;
 
     [BindProperty]
-    public EditNetworkRuleCommandModel CommandModel { get; set; }
-        = new EditNetworkRuleCommandModel();
+    public EditNetworkRuleCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

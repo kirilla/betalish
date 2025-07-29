@@ -10,8 +10,7 @@ public class RemoveNetworkRequestModel(
     public NetworkRequest NetworkRequest { get; set; } = null!;
 
     [BindProperty]
-    public RemoveNetworkRequestCommandModel CommandModel { get; set; } 
-        = new RemoveNetworkRequestCommandModel();
+    public RemoveNetworkRequestCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

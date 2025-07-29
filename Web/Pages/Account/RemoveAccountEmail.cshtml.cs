@@ -10,8 +10,7 @@ public class RemoveAccountEmailModel(
     public List<UserEmail> UserEmails { get; set; } = [];
 
     [BindProperty]
-    public RemoveAccountEmailCommandModel CommandModel { get; set; } 
-        = new RemoveAccountEmailCommandModel();
+    public RemoveAccountEmailCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync()
     {

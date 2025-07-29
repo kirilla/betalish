@@ -10,8 +10,7 @@ public class EditCustomerOrganizationModel(
     public Customer Customer { get; set; } = null!;
 
     [BindProperty]
-    public EditCustomerOrganizationCommandModel CommandModel { get; set; }
-        = new EditCustomerOrganizationCommandModel();
+    public EditCustomerOrganizationCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

@@ -10,7 +10,7 @@ public class SelectClientModel(
     public Client Client { get; set; } = null!;
 
     [BindProperty]
-    public SelectClientCommandModel CommandModel { get; set; } = new SelectClientCommandModel();
+    public SelectClientCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

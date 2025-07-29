@@ -7,8 +7,7 @@ public class AddCustomerPersonModel(
     IAddCustomerPersonCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
-    public AddCustomerPersonCommandModel CommandModel { get; set; }
-        = new AddCustomerPersonCommandModel();
+    public AddCustomerPersonCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

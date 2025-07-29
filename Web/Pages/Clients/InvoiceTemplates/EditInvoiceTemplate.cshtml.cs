@@ -10,8 +10,7 @@ public class EditInvoiceTemplateModel(
     public InvoiceTemplate InvoiceTemplate { get; set; } = null!;
 
     [BindProperty]
-    public EditInvoiceTemplateCommandModel CommandModel { get; set; }
-        = new EditInvoiceTemplateCommandModel();
+    public EditInvoiceTemplateCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

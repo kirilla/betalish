@@ -12,7 +12,7 @@ public class GrantClientAuthModel(
     public List<Client> Clients { get; set; } = [];
 
     [BindProperty]
-    public GrantClientAuthCommandModel CommandModel { get; set; } = new GrantClientAuthCommandModel();
+    public GrantClientAuthCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int userId)
     {

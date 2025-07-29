@@ -7,8 +7,7 @@ public class AddPaymentAccountModel(
     IAddPaymentAccountCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
-    public AddPaymentAccountCommandModel CommandModel { get; set; }
-        = new AddPaymentAccountCommandModel();
+    public AddPaymentAccountCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

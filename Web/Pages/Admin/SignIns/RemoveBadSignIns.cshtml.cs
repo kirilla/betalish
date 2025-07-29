@@ -7,8 +7,7 @@ public class RemoveBadSignInsModel(
     IRemoveBadSignInsCommand command) : AdminPageModel(userToken)
 {
     [BindProperty]
-    public RemoveBadSignInsCommandModel CommandModel { get; set; }
-        = new RemoveBadSignInsCommandModel();
+    public RemoveBadSignInsCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

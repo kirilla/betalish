@@ -10,8 +10,7 @@ public class RemovePaymentModel(
     public Payment Payment { get; set; } = null!;
 
     [BindProperty]
-    public RemovePaymentCommandModel CommandModel { get; set; }
-        = new RemovePaymentCommandModel();
+    public RemovePaymentCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

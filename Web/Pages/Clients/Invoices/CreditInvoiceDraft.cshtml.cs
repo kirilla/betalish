@@ -10,8 +10,7 @@ public class CreditInvoiceDraftModel(
     public Invoice Invoice { get; set; } = null!;
 
     [BindProperty]
-    public CreditInvoiceDraftCommandModel CommandModel { get; set; }
-        = new CreditInvoiceDraftCommandModel();
+    public CreditInvoiceDraftCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

@@ -11,8 +11,7 @@ public class UnassignPaymentModel(
     public Invoice? Invoice { get; set; } = null!;
 
     [BindProperty]
-    public UnassignPaymentCommandModel CommandModel { get; set; }
-        = new UnassignPaymentCommandModel();
+    public UnassignPaymentCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

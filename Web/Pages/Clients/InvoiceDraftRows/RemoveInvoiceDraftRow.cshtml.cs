@@ -11,8 +11,7 @@ public class RemoveInvoiceDraftRowModel(
     public InvoiceDraftRow InvoiceDraftRow { get; set; } = null!;
 
     [BindProperty]
-    public RemoveInvoiceDraftRowCommandModel CommandModel { get; set; }
-        = new RemoveInvoiceDraftRowCommandModel();
+    public RemoveInvoiceDraftRowCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

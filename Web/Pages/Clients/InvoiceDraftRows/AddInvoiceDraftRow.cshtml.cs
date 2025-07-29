@@ -12,8 +12,7 @@ public class AddInvoiceDraftRowModel(
     public List<Article> Articles { get; set; } = [];
 
     [BindProperty]
-    public AddInvoiceDraftRowCommandModel CommandModel { get; set; }
-        = new AddInvoiceDraftRowCommandModel();
+    public AddInvoiceDraftRowCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGet(int id)
     {

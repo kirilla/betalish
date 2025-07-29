@@ -15,8 +15,7 @@ public class FinishSignupModel(
     public Signup Signup { get; set; } = null!;
 
     [BindProperty]
-    public FinishSignupCommandModel CommandModel { get; set; }
-        = new FinishSignupCommandModel();
+    public FinishSignupCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(Guid guid)
     {

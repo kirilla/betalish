@@ -10,8 +10,7 @@ public class SendEmailModel(
     public EmailMessage EmailMessage { get; set; } = null!;
 
     [BindProperty]
-    public SendEmailCommandModel CommandModel { get; set; } 
-        = new SendEmailCommandModel();
+    public SendEmailCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int emailMessageId)
     {

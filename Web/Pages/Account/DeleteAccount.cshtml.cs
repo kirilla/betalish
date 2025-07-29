@@ -7,7 +7,7 @@ public class DeleteAccountModel(
     IDeleteAccountCommand command) : UserTokenPageModel(userToken)
 {
     [BindProperty]
-    public DeleteAccountCommandModel CommandModel { get; set; } = new DeleteAccountCommandModel();
+    public DeleteAccountCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {

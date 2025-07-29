@@ -10,8 +10,7 @@ public class EditClientEmailAccountModel(
     public ClientEmailAccount ClientEmailAccount { get; set; } = null!;
 
     [BindProperty]
-    public EditClientEmailAccountCommandModel CommandModel { get; set; }
-        = new EditClientEmailAccountCommandModel();
+    public EditClientEmailAccountCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

@@ -12,8 +12,7 @@ public class AssignPaymentModel(
     public List<Invoice> Invoices { get; set; } = [];
 
     [BindProperty]
-    public AssignPaymentCommandModel CommandModel { get; set; }
-        = new AssignPaymentCommandModel();
+    public AssignPaymentCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

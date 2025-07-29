@@ -12,7 +12,7 @@ public class RevokeClientAuthModel(
     public List<Client> Clients { get; set; } = [];
 
     [BindProperty]
-    public RevokeClientAuthCommandModel CommandModel { get; set; } = new RevokeClientAuthCommandModel();
+    public RevokeClientAuthCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int userId)
     {

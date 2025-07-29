@@ -8,8 +8,7 @@ public class AddInvoiceDraftModel(
     IAddInvoiceDraftCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
-    public AddInvoiceDraftCommandModel CommandModel { get; set; }
-        = new AddInvoiceDraftCommandModel();
+    public AddInvoiceDraftCommandModel CommandModel { get; set; } = new();
 
     public List<Customer> Customers { get; set; } = [];
     public List<InvoiceTemplate> InvoiceTemplates { get; set; } = [];

@@ -10,8 +10,7 @@ public class EditArticleModel(
     public Article Article { get; set; } = null!;
 
     [BindProperty]
-    public EditArticleCommandModel CommandModel { get; set; }
-        = new EditArticleCommandModel();
+    public EditArticleCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

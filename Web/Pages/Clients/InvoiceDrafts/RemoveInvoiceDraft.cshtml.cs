@@ -10,8 +10,7 @@ public class RemoveInvoiceDraftModel(
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 
     [BindProperty]
-    public RemoveInvoiceDraftCommandModel CommandModel { get; set; }
-        = new RemoveInvoiceDraftCommandModel();
+    public RemoveInvoiceDraftCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
