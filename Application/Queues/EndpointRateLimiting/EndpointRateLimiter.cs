@@ -37,7 +37,7 @@ public class EndpointRateLimiter(
     {
         lock (this)
         {
-            return List.ToList();
+            return [.. List];
         }
     }
 
@@ -55,9 +55,7 @@ public class EndpointRateLimiter(
         {
             var timeAgo = dateService.GetDateTimeNow() - timeSpan;
 
-            List = List
-                .Where(x => x.DateTime > timeAgo)
-                .ToList();
+            List = [.. List.Where(x => x.DateTime > timeAgo)];
         }
     }
 }

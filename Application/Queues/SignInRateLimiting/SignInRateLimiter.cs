@@ -41,7 +41,7 @@ public class SignInRateLimiter(
     {
         lock (this)
         {
-            return List.ToList();
+            return [.. List];
         }
     }
 
@@ -59,9 +59,7 @@ public class SignInRateLimiter(
         {
             var timeAgo = dateService.GetDateTimeNow() - timeSpan;
 
-            List = List
-                .Where(x => x.DateTime > timeAgo)
-                .ToList();
+            List = [.. List.Where(x => x.DateTime > timeAgo)];
         }
     }
 }
