@@ -1,0 +1,44 @@
+﻿@page "/show-payment-report"
+@model PaymentReportModel
+@{
+}
+
+@section Meta {
+    <title>
+        Betalrapport -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Payment.cshtml", Model.UserToken)
+
+<main>
+    <h4>
+        Betalrapport
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="QueryModel.StartDate">
+            Startdatum
+        </label>
+        <input asp-for="QueryModel.StartDate" />
+
+        <label asp-for="QueryModel.EndDate">
+            Slutdatum
+        </label>
+        <input asp-for="QueryModel.EndDate" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Visa rapporten
+        </button>
+
+    </form>
+
+</main>
