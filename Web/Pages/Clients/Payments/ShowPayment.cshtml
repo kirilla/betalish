@@ -103,6 +103,39 @@
         </figure>
     }
     
+    @if (Model.PaymentAccountingRows.Count > 0)
+    {
+        <br />
+
+        <h5>Kontering</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th>Konto</th>
+                    <th class="end-align">Debet</th>
+                    <th class="end-align">Kredit</th>
+                </tr>
+                @foreach (var row in Model.PaymentAccountingRows)
+                {
+                    <tr>
+                        <td>
+                            @(row.Account ?? "Okänt")
+                        </td>
+                        <td class="end-align">
+                            @(row.Debit.ToSwedish())
+                        </td>
+                        <td class="end-align">
+                            @(row.Credit.ToSwedish())
+                        </td>
+                    </tr>
+                }
+            </table>
+        </figure>
+
+        <br />
+    }
+
     <p>
         @if (Model.Payment.InvoiceId == null)
         {
@@ -127,5 +160,16 @@
             Ta bort
         </a>
     </p>
+
+    @if (Model.UserToken.IsAdmin)
+    {
+        <p>
+            <h5>Admin</h5>
+
+            <a class="button" href="/update-payment-accounting-rows/@(Model.Payment.Id)">
+                Skapa kontering
+            </a>
+        </p>
+    }
 
 </main>

@@ -7,6 +7,8 @@ public class ShowPaymentModel(
     public Payment Payment { get; set; } = null!;
     public Invoice? Invoice { get; set; } = null!;
 
+    public List<PaymentAccountingRow> PaymentAccountingRows { get; set; } = [];
+
     public async Task<IActionResult> OnGetAsync(int id)
     {
         try
@@ -28,6 +30,14 @@ public class ShowPaymentModel(
                     x.Id == Payment.InvoiceId &&
                     x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync();
+
+            PaymentAccountingRows = await database.PaymentAccountingRows
+                .AsNoTracking()
+                .Where(x =>
+                    x.PaymentId == Payment.Id &&
+                    x.Payment.ClientId == UserToken.ClientId!.Value)
+                .OrderBy(x => x.Account)
+                .ToListAsync();
 
             return Page();
         }
