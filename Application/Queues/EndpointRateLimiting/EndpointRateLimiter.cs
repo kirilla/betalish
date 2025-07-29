@@ -6,7 +6,7 @@ public class EndpointRateLimiter(
     IDateService dateService,
     ILogItemList logItemList) : IEndpointRateLimiter
 {
-    private List<EndpointHit> list { get; set; } = new List<EndpointHit>();
+    private List<EndpointHit> list { get; set; } = [];
 
     public void TryRateLimit(int limit, EndpointHit hit)
     {

@@ -11,7 +11,7 @@ public static class TimeSpanExtensions
         if (span.TotalMinutes < 3)
             return null;
 
-        List<string> strings = new List<string>();
+        List<string> strings = [];
 
         if (days > 0)
             strings.Add($"{days} dagar");

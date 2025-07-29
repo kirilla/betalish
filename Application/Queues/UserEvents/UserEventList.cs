@@ -6,7 +6,7 @@ public class UserEventList(
     IHostEnvironment hostEnvironment,
     IDateService dateService) : IUserEventList
 {
-    private List<UserEvent> list { get; } = new List<UserEvent>();
+    private List<UserEvent> list { get; } = [];
 
     public void AddUserEvent(UserEvent evt)
     {

@@ -6,7 +6,7 @@ public class IpAddressRateLimiter(
     IDateService dateService,
     ILogItemList logItemList) : IIpAddressRateLimiter
 {
-    private List<IpAddressEndpointHit> list { get; set; } = new List<IpAddressEndpointHit>();
+    private List<IpAddressEndpointHit> list { get; set; } = [];
 
     public void TryRateLimit(int limit, IpAddressEndpointHit hit)
     {

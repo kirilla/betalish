@@ -6,7 +6,7 @@ public class SignInRateLimiter(
     IDateService dateService,
     ILogItemList logItemList) : ISignInRateLimiter
 {
-    private List<SignInAttempt> list { get; set; } = new List<SignInAttempt>();
+    private List<SignInAttempt> list { get; set; } = [];
 
     public void TryRateLimit(int limit, SignInAttempt attempt)
     {

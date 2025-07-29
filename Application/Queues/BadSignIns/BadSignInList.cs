@@ -10,7 +10,7 @@ public class BadSignInList(
 {
     private readonly BadSignInConfiguration _config = options.Value;
 
-    private List<BadSignIn> list { get; set; } = new List<BadSignIn>();
+    private List<BadSignIn> list { get; set; } = [];
 
     public void AddSignIn(
         IPAddress? ipAddress,

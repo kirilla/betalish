@@ -5,7 +5,7 @@ namespace Betalish.Application.Queues.SessionActivities;
 public class SessionActivityList(
     IHostEnvironment hostEnvironment) : ISessionActivityList
 {
-    private List<int> SessionIdList { get; } = new List<int>();
+    private List<int> SessionIdList { get; } = [];
 
     public void AddSessionId(int sessionId)
     {

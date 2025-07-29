@@ -6,7 +6,7 @@ public class NetworkRequestList(
     IHostEnvironment hostEnvironment,
     IDateService dateService) : INetworkRequestList
 {
-    private List<NetworkRequest> list { get; } = new List<NetworkRequest>();
+    private List<NetworkRequest> list { get; } = [];
 
     public void Add(NetworkRequest request)
     {

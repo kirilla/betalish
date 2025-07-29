@@ -6,7 +6,7 @@ public class LogItemList(
     IHostEnvironment hostEnvironment,
     IDateService dateService) : ILogItemList
 {
-    private List<LogItem> list { get; } = new List<LogItem>();
+    private List<LogItem> list { get; } = [];
 
     public void AddLogItem(LogItem logItem)
     {
