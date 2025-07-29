@@ -26,6 +26,8 @@ public class Payment :
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
 
+    public List<PaymentAccountingRow> PaymentAccountingRows { get; set; } = [];
+
     public DateTime? Created { get; set; }
     public DateTime? Updated { get; set; }
 

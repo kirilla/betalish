@@ -34,6 +34,7 @@ public interface IDatabaseService
     DbSet<NetworkRule> NetworkRules { get; set; }
     DbSet<Payment> Payments { get; set; }
     DbSet<PaymentAccount> PaymentAccounts { get; set; }
+    DbSet<PaymentAccountingRow> PaymentAccountingRows { get; set; }
     DbSet<Session> Sessions { get; set; }
     DbSet<SessionActivity> SessionActivities { get; set; }
     DbSet<SessionRecord> SessionRecords { get; set; }
