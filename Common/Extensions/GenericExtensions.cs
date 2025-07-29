@@ -109,8 +109,7 @@ public static class GenericExtensions
 
     public static void AssertEnumPropertiesAreValid(this object obj)
     {
-        if (obj == null) 
-            throw new ArgumentNullException(nameof(obj));
+        ArgumentNullException.ThrowIfNull(obj);
 
         var properties = obj
             .GetType()
