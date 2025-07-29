@@ -73,22 +73,22 @@ public class ApproveInvoiceDraftCommand(
             AssertInvoiceDateGood(draft);
 
             // Total
-            AssertTotalNotZero(draft, draftRows);
-            AssertTotalNegativeForCreditInvoice(draft, draftRows);
-            AssertTotalPositiveForDebitInvoice(draft, draftRows);
+            AssertTotalNotZero(draft);
+            AssertTotalNegativeForCreditInvoice(draft);
+            AssertTotalPositiveForDebitInvoice(draft);
             // AssertTotalAboveMinToConsiderPaid(draft);
 
             // Address
             AssertHasAddress(draft);
 
             // Rows
-            AssertHasDraftRows(draft, draftRows);
+            AssertHasDraftRows(draftRows);
 
             // Balance rows
-            AssertCreditDraftHasBalanceRows(draft, draftRows, draftBalanceRows);
+            AssertCreditDraftHasBalanceRows(draft, draftBalanceRows);
 
             // Balance sum
-            AssertBalanceSumTotalMatchesCreditDraftTotal(draft, draftRows, draftBalanceRows);
+            AssertBalanceSumTotalMatchesCreditDraftTotal(draft, draftBalanceRows);
         }
         catch (Exception ex)
         {
@@ -105,24 +105,21 @@ public class ApproveInvoiceDraftCommand(
         }
     }
 
-    private static void AssertTotalNotZero(
-        InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
+    private static void AssertTotalNotZero(InvoiceDraft draft)
     {
         if (draft.Total == 0 && draft.TotalRounding == 0)
             throw new UserFeedbackException(
                 "Fakturabeloppet får inte vara noll.");
     }
 
-    private static void AssertTotalNegativeForCreditInvoice(
-        InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
+    private static void AssertTotalNegativeForCreditInvoice(InvoiceDraft draft)
     {
         if (draft.IsCredit && draft.Total > 0)
             throw new UserFeedbackException(
                 "Belopp på kreditfaktura ska vara negativt.");
     }
 
-    private static void AssertTotalPositiveForDebitInvoice(
-        InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
+    private static void AssertTotalPositiveForDebitInvoice(InvoiceDraft draft)
     {
         if (draft.IsCredit == false && draft.Total < 0)
             throw new UserFeedbackException(
@@ -143,8 +140,7 @@ public class ApproveInvoiceDraftCommand(
         }
     }
 
-    private static void AssertHasDraftRows(
-        InvoiceDraft draft, List<InvoiceDraftRow> draftRows)
+    private static void AssertHasDraftRows(List<InvoiceDraftRow> draftRows)
     {
         if (draftRows.Count == 0)
             throw new UserFeedbackException(
@@ -152,8 +148,7 @@ public class ApproveInvoiceDraftCommand(
     }
 
     private static void AssertCreditDraftHasBalanceRows(
-        InvoiceDraft draft,
-        List<InvoiceDraftRow> draftRows,
+        InvoiceDraft draft, 
         List<DraftBalanceRow> draftBalanceRows)
     {
         if (draft.IsCredit && draftBalanceRows.Count == 0)
@@ -165,7 +160,6 @@ public class ApproveInvoiceDraftCommand(
 
     private static void AssertBalanceSumTotalMatchesCreditDraftTotal(
         InvoiceDraft draft,
-        List<InvoiceDraftRow> draftRows,
         List<DraftBalanceRow> draftBalanceRows)
     {
         if (draft.IsCredit &&
