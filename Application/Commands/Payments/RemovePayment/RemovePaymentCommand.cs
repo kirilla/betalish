@@ -18,6 +18,9 @@ public class RemovePaymentCommand(IDatabaseService database) : IRemovePaymentCom
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
+        if (payment.InvoiceId.HasValue)
+            throw new BlockedByInvoiceException();
+
         database.Payments.Remove(payment);
 
         await database.SaveAsync(userToken);

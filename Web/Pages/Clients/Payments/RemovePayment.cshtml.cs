@@ -1,4 +1,4 @@
-using Betalish.Application.Commands.Payments.RemovePayment;
+﻿using Betalish.Application.Commands.Payments.RemovePayment;
 
 namespace Betalish.Web.Pages.Clients.Payments;
 
@@ -60,11 +60,20 @@ public class RemovePaymentModel(
 
             return Redirect($"/show-payments");
         }
+        catch (BlockedByInvoiceException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Id),
+                "Betalningen kan inte tas bort eftersom " +
+                "den är knuten till en faktura.");
+
+            return Page();
+        }
         catch (ConfirmationRequiredException)
         {
             ModelState.AddModelError(
                 nameof(CommandModel.Confirmed),
-                "Bekr�fta att du verkligen vill ta bort.");
+                "Bekräfta att du verkligen vill ta bort.");
 
             return Page();
         }

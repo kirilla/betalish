@@ -18,6 +18,9 @@ public class EditPaymentCommand(IDatabaseService database) : IEditPaymentCommand
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
+        if (payment.InvoiceId.HasValue)
+            throw new BlockedByInvoiceException();
+
         var account = await database.PaymentAccounts
             .Where(x =>
                 x.Id == model.PaymentAccountId!.Value &&

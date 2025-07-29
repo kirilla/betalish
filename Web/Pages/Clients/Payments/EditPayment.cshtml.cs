@@ -77,6 +77,15 @@ public class EditPaymentModel(
 
             return Redirect("/show-payments");
         }
+        catch (BlockedByInvoiceException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Id),
+                "Betalningen kan inte redigeras eftersom " +
+                "den är knuten till en faktura.");
+
+            return Page();
+        }
         catch
         {
             return Redirect("/help/notpermitted");
