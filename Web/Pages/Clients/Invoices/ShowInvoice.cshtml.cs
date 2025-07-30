@@ -45,11 +45,9 @@ public class ShowInvoiceModel(
                 .ToListAsync();
 
             BalanceRows = await database.BalanceRows
-                .Include(x => x.CreditInvoice)
-                .Include(x => x.DebitInvoice)
                 .Where(x =>
-                    x.CreditInvoiceId == id ||
-                    x.DebitInvoiceId == id)
+                    x.InvoiceId == id &&
+                    x.Invoice.ClientId == UserToken.ClientId!.Value)
                 .ToListAsync();
 
             DraftBalanceRows = await database.DraftBalanceRows
