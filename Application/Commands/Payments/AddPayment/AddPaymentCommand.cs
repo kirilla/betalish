@@ -45,7 +45,7 @@ public class AddPaymentCommand(
 
         await database.SaveAsync(userToken);
 
-        return account.Id;
+        return payment.Id;
     }
 
     public bool IsPermitted(IUserToken userToken)
