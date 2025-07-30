@@ -243,6 +243,11 @@ public static class MaxLengths
             public const int Description = 200;
         }
 
+        public static class Payment
+        {
+            public const int Reference = 40;
+        }
+
         public static class PaymentAccount
         {
             public const int Name = 50;

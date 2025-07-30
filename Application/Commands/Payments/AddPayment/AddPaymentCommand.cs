@@ -34,8 +34,9 @@ public class AddPaymentCommand(
 
         var payment = new Payment()
         {
-            Amount = amount!.Value,
             Date = date!.Value,
+            Amount = amount!.Value,
+            Reference = model.Reference,
             PaymentAccountId = account.Id,
             ClientId = userToken.ClientId!.Value,
         };

@@ -9,6 +9,9 @@ class PaymentConfiguration : IEntityTypeConfiguration<Payment>
         builder.Property(p => p.Amount)
             .HasPrecision(18, 2);
 
+        builder.Property(p => p.Reference)
+            .HasMaxLength(MaxLengths.Domain.Payment.Reference);
+
         builder.HasMany(x => x.PaymentAccountingRows)
             .WithOne(x => x.Payment)
             .HasForeignKey(x => x.PaymentId);

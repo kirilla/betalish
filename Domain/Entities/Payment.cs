@@ -12,6 +12,8 @@ public class Payment :
 
     public required DateOnly Date { get; set; }
 
+    public required string? Reference { get; set; }
+
     public int? InvoiceNumber { get; set; }
 
     public int PaymentAccountId { get; set; }

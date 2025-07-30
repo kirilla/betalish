@@ -37,6 +37,7 @@
                     <th>Datum</th>
                     <th class="end-align">Belopp</th>
                     <th>Konto</th>
+                    <th>Referens</th>
                     <th>Faktura</th>
                 </tr>
                 @foreach (var payment in Model.Payments)
@@ -55,6 +56,11 @@
                         <td class="end-align">
                             <a href="/show-payment/@(payment.Id)">
                                 @(payment.PaymentAccount.Name ?? "-")
+                            </a>
+                        </td>
+                        <td class="end-align">
+                            <a href="/show-payment/@(payment.Id)">
+                                @(payment.Reference ?? "-")
                             </a>
                         </td>
                         <td>

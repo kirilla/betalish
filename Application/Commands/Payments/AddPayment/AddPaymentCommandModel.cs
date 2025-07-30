@@ -16,6 +16,11 @@ public class AddPaymentCommandModel
     [Required(ErrorMessage = "Ange belopp.")]
     public string? Amount { get; set; }
 
+    [StringLength(
+        MaxLengths.Domain.Payment.Reference,
+        ErrorMessage = "Skriv kortare.")]
+    public string? Reference { get; set; }
+
     [Required(ErrorMessage = "Ange konto.")]
     public int? PaymentAccountId { get; set; }
 }

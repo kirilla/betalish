@@ -35,8 +35,9 @@ public class EditPaymentModel(
             CommandModel = new EditPaymentCommandModel()
             {
                 Id = Payment.Id,
-                Amount = Payment.Amount.ToSwedish(),
                 Date = Payment.Date.ToIso8601(),
+                Amount = Payment.Amount.ToSwedish(),
+                Reference = Payment.Reference,
                 PaymentAccountId = Payment.PaymentAccountId,
             };
 
