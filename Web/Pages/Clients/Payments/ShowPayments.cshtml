@@ -37,8 +37,8 @@
                     <th>Datum</th>
                     <th class="end-align">Belopp</th>
                     <th>Konto</th>
-                    <th>Referens</th>
                     <th>Faktura</th>
+                    <th>Referens</th>
                 </tr>
                 @foreach (var payment in Model.Payments)
                 {
@@ -48,26 +48,33 @@
                                 @(payment.Date.ToIso8601())
                             </a>
                         </td>
-                        <td>
+                        <td class="end-align">
                             <a href="/show-payment/@(payment.Id)">
                                 @(payment.Amount.ToSwedish())
                             </a>
                         </td>
-                        <td class="end-align">
+                        <td>
                             <a href="/show-payment/@(payment.Id)">
                                 @(payment.PaymentAccount.Name ?? "-")
                             </a>
                         </td>
                         <td>
-                            <a href="/show-payment/@(payment.Id)">
-                                @(payment.Reference ?? "-")
-                            </a>
-                        </td>
-                        <td>
                             @if (payment.InvoiceId.HasValue)
                             {
-                                <a href="/show-payment/@(payment.Id)">
+                                <a href="/show-invoice/@(payment.InvoiceId)">
                                     @(payment.InvoiceNumber)
+                                </a>
+                            }
+                            else
+                            {
+                                <span>&ndash;</span>
+                            }
+                        </td>
+                        <td>
+                            @if (payment.Reference.HasValue())
+                            {
+                                <a href="/show-payment/@(payment.Id)">
+                                    @(payment.Reference)
                                 </a>
                             }
                             else
