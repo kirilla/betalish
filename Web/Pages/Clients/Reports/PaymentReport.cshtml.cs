@@ -1,4 +1,4 @@
-﻿using Betalish.Application.Reports.Payment.PaymentReport;
+﻿using Betalish.Application.Reports.Payment;
 
 namespace Betalish.Web.Pages.Clients.Reports;
 
@@ -12,7 +12,7 @@ public class PaymentReportModel(
     [BindProperty]
     public PaymentReportQueryModel QueryModel { get; set; } = new();
 
-    public async Task<IActionResult> OnGetAsync()
+    public IActionResult OnGet()
     {
         try
         {

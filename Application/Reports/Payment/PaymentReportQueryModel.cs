@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Betalish.Application.Reports.Payment.PaymentReport;
+namespace Betalish.Application.Reports.Payment;
 
 public class PaymentReportQueryModel
 {

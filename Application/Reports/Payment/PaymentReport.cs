@@ -1,4 +1,4 @@
-﻿namespace Betalish.Application.Reports.Payment.PaymentReport;
+﻿namespace Betalish.Application.Reports.Payment;
 
 public class PaymentReport(IDatabaseService database) : IPaymentReport
 {
