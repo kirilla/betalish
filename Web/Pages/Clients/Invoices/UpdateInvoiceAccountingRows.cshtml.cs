@@ -72,7 +72,7 @@ public class UpdateInvoiceAccountingRowsModel(
 
             return Page();
         }
-        catch (Exception ex)
+        catch
         {
             return Redirect("/help/notpermitted");
         }

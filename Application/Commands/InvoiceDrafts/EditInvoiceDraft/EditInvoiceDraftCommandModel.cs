@@ -38,13 +38,13 @@ public class EditInvoiceDraftCommandModel
     [StringLength(
         MaxLengths.Common.Address.ZipCode,
         ErrorMessage = "Skriv kortare.")]
-    public string Customer_ZipCode { get; set; }
+    public string? Customer_ZipCode { get; set; }
 
     [Required(ErrorMessage = "Ange postort.")]
     [StringLength(
         MaxLengths.Common.Address.City,
         ErrorMessage = "Skriv kortare.")]
-    public string Customer_City { get; set; }
+    public string? Customer_City { get; set; }
 
     [StringLength(
         MaxLengths.Common.Address.Country,

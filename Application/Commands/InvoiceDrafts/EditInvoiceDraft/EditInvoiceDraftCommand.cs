@@ -14,7 +14,7 @@ public class EditInvoiceDraftCommand(IDatabaseService database) : IEditInvoiceDr
         if (model.Customer_Country.IsMissingValue())
         {
             model.Customer_ZipCode = 
-                model.Customer_ZipCode.StripNonNumeric();
+                model.Customer_ZipCode?.StripNonNumeric();
         }
 
         var draft = await database.InvoiceDrafts
@@ -36,8 +36,8 @@ public class EditInvoiceDraftCommand(IDatabaseService database) : IEditInvoiceDr
         // Customer address
         draft.Customer_Address1 = model.Customer_Address1;
         draft.Customer_Address2 = model.Customer_Address2;
-        draft.Customer_ZipCode = model.Customer_ZipCode;
-        draft.Customer_City = model.Customer_City;
+        draft.Customer_ZipCode = model.Customer_ZipCode!;
+        draft.Customer_City = model.Customer_City!;
         draft.Customer_Country = model.Customer_Country;
 
         // Customer email

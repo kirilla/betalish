@@ -8,7 +8,7 @@ public class UnassignPaymentModel(
     IUnassignPaymentCommand command) : ClientPageModel(userToken)
 {
     public Payment Payment { get; set; } = null!;
-    public Invoice? Invoice { get; set; } = null!;
+    public Invoice Invoice { get; set; } = null!;
 
     [BindProperty]
     public UnassignPaymentCommandModel CommandModel { get; set; } = new();
@@ -32,7 +32,8 @@ public class UnassignPaymentModel(
                 .Where(x =>
                     x.Id == Payment.InvoiceId &&
                     x.ClientId == UserToken.ClientId!.Value)
-                .SingleOrDefaultAsync();
+                .SingleOrDefaultAsync() ??
+                throw new NotFoundException();
 
             CommandModel = new UnassignPaymentCommandModel()
             {
