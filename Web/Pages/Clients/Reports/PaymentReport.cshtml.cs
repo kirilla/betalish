@@ -1,4 +1,5 @@
 ﻿using Betalish.Application.Reports.Payment;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Betalish.Web.Pages.Clients.Reports;
 
@@ -7,7 +8,7 @@ public class PaymentReportModel(
     IDateService dateService,
     IPaymentReport report) : ClientPageModel(userToken)
 {
-    public PaymentReportResultsModel ResultsModel { get; set; } = new();
+    public PaymentReportResultsModel ResultsModel { get; set; } = null!;
 
     [BindProperty]
     public PaymentReportQueryModel QueryModel { get; set; } = new();
@@ -46,6 +47,14 @@ public class PaymentReportModel(
                 return Page();
 
             ResultsModel = await report.Execute(UserToken, QueryModel);
+
+            return Page();
+        }
+        catch (InvalidDateException)
+        {
+            ModelState.AddModelError(
+                nameof(QueryModel.StartDate),
+                "Ogiltiga datum.");
 
             return Page();
         }

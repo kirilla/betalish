@@ -17,11 +17,13 @@ public class PaymentReport(IDatabaseService database) : IPaymentReport
         if (startDate == null || endDate == null)
             throw new InvalidDateException();
 
-        if (startDate >= endDate)
+        if (startDate > endDate)
             throw new InvalidDateException();
 
         var payments = await database.Payments
             .AsNoTracking()
+            .Include(x => x.Invoice)
+            .Include(x => x.PaymentAccount)
             .Where(x =>
                 x.ClientId == userToken.ClientId!.Value &&
                 x.Date >= startDate.Value &&

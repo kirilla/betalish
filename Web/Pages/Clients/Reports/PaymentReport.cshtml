@@ -1,6 +1,7 @@
 ﻿@page "/show-payment-report"
 @model PaymentReportModel
 @{
+    var report = Model.ResultsModel;
 }
 
 @section Meta {
@@ -17,6 +18,7 @@
 @await Html.PartialAsync("/Pages/Clients/_Shared/_Payment.cshtml", Model.UserToken)
 
 <main>
+    
     <h4>
         Betalrapport
     </h4>
@@ -36,9 +38,60 @@
         <div asp-validation-summary="All"></div>
 
         <button type="submit">
-            Visa rapporten
+            Visa
         </button>
 
     </form>
+
+    @if (Model.ResultsModel != null)
+    {
+        <br />
+
+        <h5>Payments</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th>Datum</th>
+                    <th>Belopp</th>
+                    <th>Konto</th>
+                    <th>Betalsätt</th>
+                    <th>Faktura</th>
+                </tr>
+                @foreach (var payment in report.Payments)
+                {
+                    <tr>
+                        <td>@(payment.Date.ToIso8601())</td>
+                        <td>@(payment.Amount.ToSwedish())</td>
+                        <td>@(payment.PaymentAccount?.Name ?? "-")</td>
+                        <td>@(payment.PaymentMethod.ToString())</td>
+                        <td>@(payment.Invoice?.InvoiceNumber?.ToString() ?? "-")</td>
+                    </tr>
+                }
+            </table>
+        </figure>
+
+        <br />
+
+        <h5>Konteringar</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th>Konto</th>
+                    <th>Debet</th>
+                    <th>Kredit</th>
+                </tr>
+                @foreach (var row in report.PaymentAccountingRows)
+                {
+                    <tr>
+                        <td>@(row.Account)</td>
+                        <td>@(row.Debit.ToSwedish())</td>
+                        <td>@(row.Credit.ToSwedish())</td>
+                    </tr>
+                }
+            </table>
+        </figure>
+    }
 
 </main>
