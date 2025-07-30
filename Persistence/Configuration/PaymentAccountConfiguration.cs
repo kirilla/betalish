@@ -20,7 +20,6 @@ class PaymentAccountConfiguration : IEntityTypeConfiguration<PaymentAccount>
             .HasMany(x => x.Payments)
             .WithOne(x => x.PaymentAccount)
             .HasForeignKey(x => x.PaymentAccountId)
-            .IsRequired(false)
             .OnDelete(DeleteBehavior.NoAction);
     }
 }

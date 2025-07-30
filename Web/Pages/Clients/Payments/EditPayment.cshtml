@@ -48,31 +48,6 @@
             }
         </select>
 
-        <label asp-for="CommandModel.PaymentMethod">
-            Betalsätt
-        </label>
-        <select asp-for="CommandModel.PaymentMethod">
-            <option value="">–</option>
-            <option value="@(PaymentMethod.Cash)">
-                Kontant
-            </option>
-            <option value="@(PaymentMethod.Swish)">
-                Swish
-            </option>
-            <option value="@(PaymentMethod.Autogiro)">
-                Autogiro
-            </option>
-            <option value="@(PaymentMethod.Bankgiro)">
-                Bankgiro
-            </option>
-            <option value="@(PaymentMethod.Plusgiro)">
-                Plusgiro
-            </option>
-            <option value="@(PaymentMethod.Iban)">
-                Iban
-            </option>
-        </select>
-
         <div asp-validation-summary="All"></div>
 
         <button type="submit">

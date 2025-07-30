@@ -29,7 +29,6 @@
                 <th>Datum</th>
                 <th class="end-align">Belopp</th>
                 <th>Konto</th>
-                <th>Betalsätt</th>
             </tr>
             <tr>
                 <td>
@@ -40,9 +39,6 @@
                 </td>
                 <td>
                     @(payment.PaymentAccount?.Name ?? "-")
-                </td>
-                <td>
-                    @(payment.PaymentMethod.ToString() ?? "-")
                 </td>
             </tr>
         </table>

@@ -20,7 +20,4 @@ public class EditPaymentCommandModel
 
     [Required(ErrorMessage = "Ange konto.")]
     public int? PaymentAccountId { get; set; }
-
-    [Required(ErrorMessage = "Ange betalsätt.")]
-    public PaymentMethod? PaymentMethod { get; set; }
 }

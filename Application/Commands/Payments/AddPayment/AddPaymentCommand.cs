@@ -36,10 +36,6 @@ public class AddPaymentCommand(
         {
             Amount = amount!.Value,
             Date = date!.Value,
-            
-            PaymentKind = PaymentKind.Payment,
-            PaymentMethod = model.PaymentMethod!.Value,
-
             PaymentAccountId = account.Id,
             ClientId = userToken.ClientId!.Value,
         };

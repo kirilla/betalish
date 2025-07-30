@@ -55,7 +55,6 @@
                     <th>Datum</th>
                     <th class="end-align">Belopp</th>
                     <th>Konto</th>
-                    <th>Betalsätt</th>
                     <th>Faktura</th>
                 </tr>
                 @foreach (var payment in report.Payments)
@@ -64,7 +63,6 @@
                         <td>@(payment.Date.ToIso8601())</td>
                         <td class="end-align">@(payment.Amount.ToSwedish())</td>
                         <td>@(payment.PaymentAccount?.Name ?? "-")</td>
-                        <td>@(payment.PaymentMethod.ToString())</td>
                         <td>@(payment.Invoice?.InvoiceNumber?.ToString() ?? "-")</td>
                     </tr>
                 }

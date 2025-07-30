@@ -36,8 +36,6 @@
                 <tr>
                     <th>Datum</th>
                     <th class="end-align">Belopp</th>
-                    <th>Typ</th>
-                    <th>Betalsätt</th>
                     <th>Faktura</th>
                     <th>Konto</th>
                 </tr>
@@ -55,16 +53,6 @@
                             </a>
                         </td>
                         <td>
-                            <a href="/show-payment/@(payment.Id)">
-                                @(payment.PaymentKind.ToString() ?? "-")
-                            </a>
-                        </td>
-                        <td>
-                            <a href="/show-payment/@(payment.Id)">
-                                @(payment.PaymentMethod.ToString() ?? "-")
-                            </a>
-                        </td>
-                        <td>
                             @if (payment.InvoiceId.HasValue)
                             {
                                 <a href="/show-payment/@(payment.Id)">
@@ -77,17 +65,9 @@
                             }
                         </td>
                         <td class="end-align">
-                            @if (payment.PaymentAccountId.HasValue)
-                            {
-                                <a href="/show-payment/@(payment.Id)">
-                                    
-                                    @(payment.PaymentAccount?.Name ?? "-")
-                                </a>
-                            }
-                            else
-                            {
-                                <span>&ndash;</span>
-                            }
+                            <a href="/show-payment/@(payment.Id)">
+                                @(payment.PaymentAccount.Name ?? "-")
+                            </a>
                         </td>
                     </tr>
                 }

@@ -12,13 +12,10 @@ public class Payment :
 
     public required DateOnly Date { get; set; }
 
-    public required PaymentKind PaymentKind { get; set; }
-    public required PaymentMethod PaymentMethod { get; set; }
-
     public int? InvoiceNumber { get; set; }
 
-    public int? PaymentAccountId { get; set; }
-    public PaymentAccount? PaymentAccount { get; set; } = null!;
+    public int PaymentAccountId { get; set; }
+    public PaymentAccount PaymentAccount { get; set; } = null!;
 
     public int? InvoiceId { get; set; }
     public Invoice? Invoice { get; set; } = null!;
@@ -40,13 +37,5 @@ public class Payment :
         if (Amount == 0)
             throw new ValidateOnSaveException(
                 $"Oväntat belopp: {Amount}.");
-
-        if (!Enum.IsDefined(PaymentKind))
-            throw new ValidateOnSaveException(
-                $"Oväntad PaymentKind: {PaymentKind}.");
-
-        if (!Enum.IsDefined(PaymentMethod))
-            throw new ValidateOnSaveException(
-                $"Oväntad PaymentMethod: {PaymentMethod}.");
     }
 }

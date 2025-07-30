@@ -30,7 +30,6 @@ public class EditPaymentCommand(IDatabaseService database) : IEditPaymentCommand
 
         payment.Amount = model.Amount!.TryParseDecimal()!.Value;
         payment.Date = model.Date!.ToIso8601DateOnly()!.Value;
-        payment.PaymentMethod = model.PaymentMethod!.Value;
         payment.PaymentAccountId = account.Id;
 
         await database.SaveAsync(userToken);
