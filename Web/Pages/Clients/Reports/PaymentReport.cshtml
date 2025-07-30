@@ -53,7 +53,7 @@
             <table>
                 <tr>
                     <th>Datum</th>
-                    <th>Belopp</th>
+                    <th class="end-align">Belopp</th>
                     <th>Konto</th>
                     <th>Betalsätt</th>
                     <th>Faktura</th>
@@ -62,7 +62,7 @@
                 {
                     <tr>
                         <td>@(payment.Date.ToIso8601())</td>
-                        <td>@(payment.Amount.ToSwedish())</td>
+                        <td class="end-align">@(payment.Amount.ToSwedish())</td>
                         <td>@(payment.PaymentAccount?.Name ?? "-")</td>
                         <td>@(payment.PaymentMethod.ToString())</td>
                         <td>@(payment.Invoice?.InvoiceNumber?.ToString() ?? "-")</td>
@@ -79,19 +79,71 @@
             <table>
                 <tr>
                     <th>Konto</th>
-                    <th>Debet</th>
-                    <th>Kredit</th>
+                    <th class="end-align">Debet</th>
+                    <th class="end-align">Kredit</th>
                 </tr>
                 @foreach (var row in report.PaymentAccountingRows)
                 {
                     <tr>
                         <td>@(row.Account)</td>
-                        <td>@(row.Debit.ToSwedish())</td>
-                        <td>@(row.Credit.ToSwedish())</td>
+                        <td class="end-align">@(row.Debit.ToSwedish())</td>
+                        <td class="end-align">@(row.Credit.ToSwedish())</td>
                     </tr>
                 }
             </table>
         </figure>
+
+        <br />
+
+        <h5>Summerad kontering</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th>Konto</th>
+                    <th class="end-align">Debet</th>
+                    <th class="end-align">Kredit</th>
+                    <th>Beskrivning</th>
+                </tr>
+                @foreach (var row in report.SummedPaymentAccountingRows)
+                {
+                    <tr>
+                        <td>@(row.Account)</td>
+                        <td class="end-align">@(row.Debit.ToSwedish())</td>
+                        <td class="end-align">@(row.Credit.ToSwedish())</td>
+                        <td>@(row.Description ?? "-")</td>
+                    </tr>
+                }
+            </table>
+        </figure>
+
+        <br />
+
+        <h5>Datum</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th>Datum</th>
+                    <th>Bankkonto</th>
+                    <th>Bokföringskonto</th>
+                    <th class="end-align">Belopp</th>
+                    <th class="end-align">Antal betalningar</th>
+                </tr>
+                @foreach (var row in report.PaymentDateSums)
+                {
+                    <tr>
+                        <td>@(row.Date.ToIso8601())</td>
+                        <td>@(row.PaymentAccountName)</td>
+                        <td>@(row.BookkeepingAccount)</td>
+                        <td class="end-align">@(row.Amount.ToSwedish())</td>
+                        <td class="end-align">@(row.Count.ToSwedish())</td>
+                    </tr>
+                }
+            </table>
+        </figure>
+
+        <br />
     }
 
 </main>

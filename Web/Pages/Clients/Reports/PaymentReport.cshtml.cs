@@ -1,5 +1,4 @@
 ﻿using Betalish.Application.Reports.Payment;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Betalish.Web.Pages.Clients.Reports;
 
