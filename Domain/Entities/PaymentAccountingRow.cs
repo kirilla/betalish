@@ -16,8 +16,7 @@ public class PaymentAccountingRow :
 
     public void FormatOnSave()
     {
-        RaiseToZero();
-        LowerToZero();
+        (Debit, Credit) = AccountingLogic.Normalize(Debit, Credit);
     }
 
     public void ValidateOnSave()
@@ -31,43 +30,6 @@ public class PaymentAccountingRow :
         {
             throw new ValidateOnSaveException(
                 $"Ogiltigt kontering. Debet: {Debit}, Credit: {Credit}.");
-        }
-    }
-
-    public void RaiseToZero()
-    {
-        decimal correction = 0;
-
-        if (Debit < 0)
-            correction = Math.Abs(Debit);
-
-        if (Credit < 0)
-            correction = Math.Abs(Credit);
-
-        Debit += correction;
-        Credit += correction;
-    }
-
-    public void LowerToZero()
-    {
-        if (Debit == Credit)
-        {
-            Debit = 0;
-            Credit = 0;
-        }
-
-        if (Debit > 0 && Credit > 0)
-        {
-            decimal lesserAmount = 0;
-
-            if (Debit < Credit)
-                lesserAmount = Debit;
-
-            if (Credit < Debit)
-                lesserAmount = Credit;
-
-            Debit -= lesserAmount;
-            Credit -= lesserAmount;
         }
     }
 }
