@@ -1,0 +1,91 @@
+﻿@page "/show-unpaid-report"
+@model UnpaidReportModel
+@{
+    var report = Model.ResultsModel;
+}
+
+@section Meta {
+    <title>
+        Kundfordringar -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Report.cshtml", Model.UserToken)
+
+<main>
+    
+    <h4>
+        Kundfordringar
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="QueryModel.ReportDate">
+            Rapportdatum
+        </label>
+        <input asp-for="QueryModel.ReportDate" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Visa
+        </button>
+
+    </form>
+
+    @if (Model.ResultsModel != null)
+    {
+        <br />
+
+        <h5>Fakturor</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th>Fakturadatum</th>
+                    <th>FakturaNr</th>
+                    <th>Mottagare</th>
+                    <th>Gäller</th>
+                    <th class="end-align">Inkl. moms</th>
+                    <th class="end-align">Saldo</th>
+                </tr>
+                @foreach (var invoice in report.Invoices)
+                {
+                    <tr>
+                        <td>@(invoice.InvoiceDate.ToIso8601())</td>
+                        <td>@(invoice.InvoiceNumber?.ToSwedish() ?? "-")</td>
+                        <td>@(invoice.Customer_Name)</td>
+                        <td>@(invoice.About)</td>
+                        <td class="end-align">@(invoice.Total.ToSwedish())</td>
+                        <td class="end-align">@(invoice.LeftToPay.ToSwedish())</td>
+                    </tr>
+                }
+            </table>
+        </figure>
+
+        <br />
+
+        <h5>Summa</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th class="end-align">Inkl. moms</th>
+                    <th class="end-align">Saldo</th>
+                </tr>
+                <tr>
+                    <td class="end-align">@(report.Total.ToSwedish())</td>
+                    <td class="end-align">@(report.LeftToPay.ToSwedish())</td>
+                </tr>
+            </table>
+        </figure>
+
+        <br />
+    }
+
+</main>
