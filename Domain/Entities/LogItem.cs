@@ -12,8 +12,11 @@ public class LogItem : ICreatedDateTime, IFormatOnSave
 
     public LogItemKind? LogItemKind { get; set; }
 
+    public int? ClientId { get; set; }
     public int? UserId { get; set; }
     public string? IpAddress { get; set; }
+
+    public string? Source { get; set; }
 
     public DateTime? Created { get; set; }
     public DateTime? RepeatedUntil { get; set; }
@@ -33,6 +36,9 @@ public class LogItem : ICreatedDateTime, IFormatOnSave
 
         IpAddress = IpAddress
             .Truncate(MaxLengths.Common.Ip.Address.IPv6);
+
+        Source = Source
+            .Truncate(MaxLengths.Domain.LogItem.Source);
     }
 
     public LogItem()
@@ -44,5 +50,11 @@ public class LogItem : ICreatedDateTime, IFormatOnSave
         Description = ex?.Message;
         Exception = ex?.Message;
         InnerException = ex?.InnerException?.Message;
+    }
+
+    public LogItem(IUserToken userToken)
+    {
+        ClientId = userToken.ClientId;
+        UserId = userToken.UserId;
     }
 }

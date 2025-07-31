@@ -236,6 +236,7 @@ public static class MaxLengths
             public const int Description = 200;
             public const int Exception = 200;
             public const int InnerException = 200;
+            public const int Source = 100;
         }
 
         public static class NetworkRule
