@@ -1,0 +1,46 @@
+﻿@page "/update-invoice-payment-status/{id:int}"
+@model UpdateInvoicePaymentStatusModel
+@{
+}
+
+@section Meta {
+    <title>
+        Räkna om betalstatus -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Invoice.cshtml", Model.UserToken)
+
+<main>
+    <h4>
+        Räkna om betalstatus
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.InvoiceId" />
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Räkna om
+        </button>
+
+        <a class="button" href="/show-invoice/@(Model.Invoice.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

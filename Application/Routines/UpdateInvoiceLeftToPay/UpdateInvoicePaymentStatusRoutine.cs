@@ -31,12 +31,42 @@ public class UpdateInvoicePaymentStatusRoutine(
                 x.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
+        List<BalanceRow> balanceRows = [];
+
+        if (invoice.IsCredit)
+        {
+            balanceRows = await database.BalanceRows
+                .AsNoTracking()
+                .Where(x =>
+                    x.CreditInvoiceId == invoice.Id &&
+                    x.CreditInvoice.ClientId == userToken.ClientId!.Value)
+                .ToListAsync();
+        }
+        else
+        {
+            balanceRows = await database.BalanceRows
+                .AsNoTracking()
+                .Where(x =>
+                    x.DebitInvoiceId == invoice.Id &&
+                    x.DebitInvoice.ClientId == userToken.ClientId!.Value)
+                .ToListAsync();
+        }
+
         // TODO: Interest?
 
         invoice.Balance =
             (invoice.Total +
             fees.Sum(x => x.Amount) -
             payments.Sum(x => x.Amount));
+
+        if (invoice.IsCredit)
+        {
+            invoice.Balance += balanceRows.Sum(x => x.Amount);
+        }
+        else
+        {
+            invoice.Balance -= balanceRows.Sum(x => x.Amount);
+        }
 
         invoice.LeftToPay = decimal.Clamp(
             invoice.Balance, 0, decimal.MaxValue);
