@@ -1,0 +1,99 @@
+﻿@page "/show-invoice-report"
+@model InvoiceReportModel
+@{
+    var report = Model.ResultsModel;
+}
+
+@section Meta {
+    <title>
+        Betalrapport -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Report.cshtml", Model.UserToken)
+
+<main>
+    
+    <h4>
+        Betalrapport
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="QueryModel.StartDate">
+            Startdatum
+        </label>
+        <input asp-for="QueryModel.StartDate" />
+
+        <label asp-for="QueryModel.EndDate">
+            Slutdatum
+        </label>
+        <input asp-for="QueryModel.EndDate" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Visa
+        </button>
+
+    </form>
+
+    @if (Model.ResultsModel != null)
+    {
+        <br />
+
+        <h5>Summerade fakturarader</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th>Art.nr</th>
+                    <th>Artikel</th>
+                    <th class="end-align">Netto</th>
+                    <th class="end-align">Kvantitet</th>
+                </tr>
+                @foreach (var row in report.SummedInvoiceRows)
+                {
+                    <tr>
+                        <td>@(row.ArticleNumber)</td>
+                        <td>@(row.ArticleName)</td>
+                        <td class="end-align">@(row.NetAmount.ToSwedish())</td>
+                        <td class="end-align">@(row.Quantity.ToSwedish())</td>
+                    </tr>
+                }
+            </table>
+        </figure>
+
+        <br />
+
+        <h5>Summerad kontering</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th>Konto</th>
+                    <th class="end-align">Debet</th>
+                    <th class="end-align">Kredit</th>
+                    <th>Beskrivning</th>
+                </tr>
+                @foreach (var row in report.SummedInvoiceAccountingRows)
+                {
+                    <tr>
+                        <td>@(row.Account)</td>
+                        <td class="end-align">@(row.Debit.ToSwedish())</td>
+                        <td class="end-align">@(row.Credit.ToSwedish())</td>
+                        <td>@(row.Description ?? "-")</td>
+                    </tr>
+                }
+            </table>
+        </figure>
+
+        <br />
+    }
+
+</main>
