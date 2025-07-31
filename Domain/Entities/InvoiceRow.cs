@@ -36,6 +36,11 @@ public class InvoiceRow : IFormatOnSave, IValidateOnSave
 
     public void ValidateOnSave()
     {
+        if (Quantity < 0)
+            throw new ValidateOnSaveException();
+
+        if (UnitPrice < 0)
+            throw new ValidateOnSaveException();
     }
 
     private decimal _NetAmount

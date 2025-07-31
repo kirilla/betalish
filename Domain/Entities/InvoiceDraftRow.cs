@@ -39,6 +39,12 @@ public class InvoiceDraftRow : IFormatOnSave, IValidateOnSave
 
     public void ValidateOnSave()
     {
+        if (Quantity < 0)
+            throw new ValidateOnSaveException();
+
+        if (UnitPrice < 0)
+            throw new ValidateOnSaveException();
+
         if (IsMissingRevenueAccount())
             throw new MissingRevenueAccountException();
 
