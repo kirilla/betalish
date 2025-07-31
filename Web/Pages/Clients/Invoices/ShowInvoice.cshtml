@@ -166,6 +166,11 @@
                 <th class="end-align">Moms</th>
                 <th class="end-align">Avrundning</th>
                 <th class="end-align">Totalt</th>
+                @if (Model.UserToken.IsAdmin)
+                {
+                    <th class="end-align admin">Balans</th>
+                    <th class="end-align admin">Kvar att betala</th>
+                }
             </tr>
             <tr>
                 <td class="end-align">
@@ -180,30 +185,20 @@
                 <td class="end-align">
                     @(Model.Invoice.Total.ToSwedish())
                 </td>
+                @if (Model.UserToken.IsAdmin)
+                {
+                    <td class="end-align admin">
+                        @(Model.Invoice.Balance.ToSwedish())
+                    </td>
+                    <td class="end-align admin">
+                        @(Model.Invoice.LeftToPay.ToSwedish())
+                    </td>
+                }
             </tr>
         </table>
     </figure>
 
     <br />
-
-    <h5>Betalstatus</h5>
-
-    <figure>
-        <table>
-            <tr>
-                <th class="end-align">Balans</th>
-                <th class="end-align">Kvar att betala</th>
-            </tr>
-            <tr>
-                <td class="end-align">
-                    @(Model.Invoice.Balance.ToSwedish())
-                </td>
-                <td class="end-align">
-                    @(Model.Invoice.LeftToPay.ToSwedish())
-                </td>
-            </tr>
-        </table>
-    </figure>
 
     @if (Model.BalanceRows.Count > 0)
     {

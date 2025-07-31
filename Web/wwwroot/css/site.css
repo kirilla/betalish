@@ -255,3 +255,7 @@ div[role="group"] a.admin:hover {
     background-color: red;
     color: white;
 }
+
+th.admin, td.admin {
+    color: grey;
+}
