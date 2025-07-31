@@ -91,9 +91,16 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
             .HasForeignKey(x => x.InvoiceId);
 
         builder
-            .HasMany(x => x.BalanceRows)
-            .WithOne(x => x.Invoice)
-            .HasForeignKey(x => x.InvoiceId);
+            .HasMany(x => x.CreditBalanceRows)
+            .WithOne(x => x.CreditInvoice)
+            .HasForeignKey(x => x.CreditInvoiceId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+            .HasMany(x => x.DebitBalanceRows)
+            .WithOne(x => x.DebitInvoice)
+            .HasForeignKey(x => x.DebitInvoiceId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder
             .HasMany(x => x.DraftBalanceRows)

@@ -137,11 +137,20 @@ public class ConvertDraftToInvoiceRoutine(
 
         if (draft.IsCredit)
         {
-            foreach (var row in draftBalanceRows)
-            {
-                await CreateBalanceRow(
-                    userToken, invoice, invoiceDate, row);
-            }
+            var balanceRows = draftBalanceRows
+                .Select(x => new BalanceRow()
+                {
+                    DebitInvoiceNumber = x.Invoice.InvoiceNumber!.Value,
+                    CreditInvoiceNumber = null,
+                        // Note: The credit invoice does not yet have a number
+                    Amount = x.Amount,
+                    Date = invoiceDate,
+                    DebitInvoiceId = x.InvoiceId,
+                    CreditInvoice = invoice,
+                })
+                .ToList();
+
+            database.BalanceRows.AddRange(balanceRows);
         }
 
         database.InvoiceDrafts.Remove(draft);
@@ -149,42 +158,5 @@ public class ConvertDraftToInvoiceRoutine(
         await database.SaveAsync(userToken);
 
         return invoice.Id;
-    }
-
-    private async Task CreateBalanceRow(
-        IUserToken userToken,
-        Invoice creditInvoice,
-        DateOnly invoiceDate,
-        DraftBalanceRow draftBalanceRow)
-    {
-        var debetInvoice = await database.Invoices
-            .Where(x =>
-                x.Id == draftBalanceRow.InvoiceId &&
-                x.ClientId == userToken.ClientId!.Value)
-            .SingleOrDefaultAsync() ??
-            throw new NotFoundException();
-
-        var guid = Guid.NewGuid();
-
-        var debetBalanceRow = new BalanceRow()
-        {
-            RefGuid = guid,
-            RefInvoiceNumber = null,
-            Amount = draftBalanceRow.Amount,
-            Date = invoiceDate,
-            InvoiceId = debetInvoice.Id,
-        };
-
-        var creditBalanceRow = new BalanceRow()
-        {
-            RefGuid = guid,
-            RefInvoiceNumber = debetInvoice.InvoiceNumber,
-            Amount = -draftBalanceRow.Amount,
-            Date = invoiceDate,
-            Invoice = creditInvoice,
-        };
-
-        database.BalanceRows.Add(creditBalanceRow);
-        database.BalanceRows.Add(debetBalanceRow);
     }
 }

@@ -205,7 +205,7 @@
         </table>
     </figure>
 
-    @if (Model.Invoice.IsCredit || Model.BalanceRows.Count > 0)
+    @if (Model.BalanceRows.Count > 0)
     {
         <br />
 
@@ -215,7 +215,8 @@
             <table>
                 <tr>
                     <th>Datum</th>
-                    <th>Faktura</th>
+                    <th>Debetfaktura</th>
+                    <th>Kreditfaktura</th>
                     <th class="end-align">Belopp</th>
                 </tr>
                 @foreach (var row in Model.BalanceRows)
@@ -225,7 +226,14 @@
                             @(row.Date.ToIso8601())
                         </td>
                         <td>
-                            @(row.RefInvoiceNumber.ToString() ?? "-")
+                            <a href="/show-invoice/@(row.DebitInvoiceId)">
+                                @(row.DebitInvoiceNumber.ToString() ?? "-")
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice/@(row.CreditInvoiceId)">
+                                @(row.CreditInvoiceNumber?.ToString() ?? "-")
+                            </a>
                         </td>
                         <td class="end-align">
                             @(row.Amount.ToSwedish())

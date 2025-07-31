@@ -36,8 +36,8 @@ public class CreditInvoiceDraftCommand(
         var balanceRows = await database.BalanceRows
             .AsNoTracking()
             .Where(x =>
-                x.InvoiceId == invoice.Id &&
-                x.Invoice.ClientId == userToken.ClientId!.Value)
+                x.DebitInvoiceId == invoice.Id &&
+                x.DebitInvoice.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
         var draftBalanceRows = await database.DraftBalanceRows
