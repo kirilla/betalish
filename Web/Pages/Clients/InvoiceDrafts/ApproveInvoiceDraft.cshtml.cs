@@ -78,6 +78,15 @@ public class ApproveInvoiceDraftModel(
 
             return Page();
         }
+        catch (RoutineException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.Id),
+                $"Något gick snett i en inre rutin. " +
+                $"Be administratören att kolla loggarna.");
+
+            return Page();
+        }
         catch
         {
             return Redirect("/help/notpermitted");
