@@ -138,6 +138,11 @@ public static class MaxLengths
             public const int Password = 200;
         }
 
+        public static class Batch
+        {
+            public const int Name = 50;
+        }
+
         public static class Client
         {
             public const int Name = Common.Person.FullName;

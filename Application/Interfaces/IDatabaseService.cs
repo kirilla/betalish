@@ -8,6 +8,7 @@ public interface IDatabaseService
     DbSet<Article> Articles { get; set; }
     DbSet<BadSignIn> BadSignIns { get; set; }
     DbSet<BalanceRow> BalanceRows { get; set; }
+    DbSet<Batch> Batches { get; set; }
     DbSet<Client> Clients { get; set; }
     DbSet<ClientAuth> ClientAuths { get; set; }
     DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }

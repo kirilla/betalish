@@ -44,6 +44,9 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
     public required Guid? CustomerGuid { get; set; }
 
     // Relations
+    public int? BatchId { get; set; }
+    public Batch? Batch { get; set; } = null!;
+
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
 
