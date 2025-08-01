@@ -1,0 +1,134 @@
+﻿@page "/show-batch/{id:int}"
+@model ShowBatchModel
+@{
+}
+
+@section Meta {
+    <title>Batch - @(Model.Batch.Id) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Invoice.cshtml", Model.UserToken)
+
+<main>
+
+    <h4>
+        Batch
+        <span class="muted">
+            @(Model.Batch.Name)
+        </span>
+    </h4>
+
+    <ul class="notice">
+        <li>
+            @(Model.InvoiceDrafts.Count.ToSwedish()) utkast
+        </li>
+        <li>
+            @(Model.Invoices.Count.ToSwedish()) fakturor
+        </li>
+    </ul>
+
+    @if (Model.InvoiceDrafts.Any())
+    {
+        <h5>Utkast</h5>
+
+        <figure>
+            <table>
+                <tr>
+                    <th>Fakturadatum</th>
+                    <th>Mottagare</th>
+                    <th>Sammanfattning</th>
+                    <th class="end-align">Belopp</th>
+                </tr>
+                @foreach (var draft in Model.InvoiceDrafts)
+                {
+                    <tr>
+                        <td>
+                            <a href="/show-invoice-draft/@(draft.Id)">
+                                @(draft.InvoiceDate?.ToIso8601() ?? "Inte angett")
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice-draft/@(draft.Id)">
+                                @(draft.Customer_Name ?? "-")
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice-draft/@(draft.Id)">
+                                @(draft.About ?? "-")
+                            </a>
+                        </td>
+                        <td class="end-align">
+                            <a href="/show-invoice-draft/@(draft.Id)">
+                                @(draft.Total.ToSwedish())
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </figure>
+    }
+
+    @if (Model.Invoices.Any())
+    {
+        <h5>Fakturor</h5>
+
+        <figure style="width:100%">
+            <table style="width:inherit">
+                <tr>
+                    <th>Nummer</th>
+                    <th>Fakturadatum</th>
+                    <th>Mottagare</th>
+                    <th>Sammanfattning</th>
+                    <th class="end-align">Belopp</th>
+                    <th class="end-align">Balans</th>
+                    <th class="end-align">Kvar att betala</th>
+                </tr>
+                @foreach (var invoice in Model.Invoices)
+                {
+                    <tr>
+                        <td>
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.InvoiceNumber?.ToSwedish() ?? "-")
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.InvoiceDate.ToIso8601())
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.Customer_Name ?? "-")
+                            </a>
+                        </td>
+                        <td>
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.About ?? "-")
+                            </a>
+                        </td>
+                        <td class="end-align">
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.Total.ToSwedish())
+                            </a>
+                        </td>
+                        <td class="end-align">
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.Balance.ToSwedish())
+                            </a>
+                        </td>
+                        <td class="end-align">
+                            <a href="/show-invoice/@(invoice.Id)">
+                                @(invoice.LeftToPay.ToSwedish())
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </figure>
+    }
+
+</main>
