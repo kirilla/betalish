@@ -14,6 +14,15 @@ class ClientConfiguration : IEntityTypeConfiguration<Client>
             .IsRequired()
             .HasMaxLength(MaxLengths.Domain.Client.Address);
 
+        builder.HasMany(x => x.Articles)
+            .WithOne(x => x.Client)
+            .HasForeignKey(x => x.ClientId);
+
+        builder.HasMany(x => x.Batches)
+            .WithOne(x => x.Client)
+            .HasForeignKey(x => x.ClientId)
+            .OnDelete(DeleteBehavior.NoAction);
+
         builder.HasMany(x => x.ClientAuths)
             .WithOne(x => x.Client)
             .HasForeignKey(x => x.ClientId);

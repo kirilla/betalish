@@ -8,6 +8,7 @@ public class Client
     public required string Address { get; set; }
 
     public List<Article> Articles { get; set; } = [];
+    public List<Batch> Batches { get; set; } = [];
     public List<ClientAuth> ClientAuths { get; set; } = [];
     public List<ClientEmailAccount> ClientEmailAccounts { get; set; } = [];
     public List<ClientEmailMessage> ClientEmailMessages { get; set; } = [];
