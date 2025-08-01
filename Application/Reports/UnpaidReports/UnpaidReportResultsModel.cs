@@ -2,7 +2,7 @@
 
 public class UnpaidReportResultsModel
 {
-    public List<Invoice> Invoices { get; set; } = [];
+    public List<UnpaidInvoice> Invoices { get; set; } = [];
 
     public decimal Total { get; set; }
     public decimal LeftToPay { get; set; }

@@ -18,31 +18,83 @@ public class UnpaidReport(IDatabaseService database) : IUnpaidReport
 
         var invoices = await database.Invoices
             .AsNoTracking()
-            //.Include(x => x.Payments)
             .Where(x =>
                 x.ClientId == userToken.ClientId!.Value &&
                 x.InvoiceDate <= reportDate.Value &&
                 x.InvoiceStatus == InvoiceStatus.Issued)
             .OrderBy(x => x.InvoiceNumber)
+            .Select(x => new UnpaidInvoice
+            {
+                Id = x.Id,
+                InvoiceNumber = x.InvoiceNumber,
+                IsCredit = x.IsCredit,
+                About = x.About,
+                InvoiceDate = x.InvoiceDate,
+                Total = x.Total,
+                Balance = x.Balance,
+                LeftToPay = x.LeftToPay,
+                Customer_Name = x.Customer_Name,
+            })
+            .ToListAsync();
+
+        var invoiceFees = await database.InvoiceFees
+            .AsNoTracking()
+            .Where(x => 
+                x.Invoice.ClientId == userToken.ClientId!.Value &&
+                x.Date <= reportDate.Value)
+            .ToListAsync();
+
+        var payments = await database.Payments
+            .AsNoTracking()
+            .Where(x => 
+                x.Invoice!.ClientId == userToken.ClientId!.Value &&
+                x.Date <= reportDate.Value)
+            .ToListAsync();
+
+        var debitBalanceRows = await database.BalanceRows
+            .AsNoTracking()
+            .Where(x => 
+                x.DebitInvoice.ClientId == userToken.ClientId!.Value &&
+                x.Date <= reportDate.Value)
+            .ToListAsync();
+
+        var creditBalanceRows = await database.BalanceRows
+            .AsNoTracking()
+            .Where(x => 
+                x.CreditInvoice.ClientId == userToken.ClientId!.Value &&
+                x.Date <= reportDate.Value)
             .ToListAsync();
 
         foreach (var invoice in invoices)
         {
-            // TODO:
-            //
-            // Calculate LeftToPay __at report date__ 
-            // 
-            // Base on the Payment dates.
+            invoice.InvoiceFees = invoiceFees
+                .Where(x => x.InvoiceId == invoice.Id)
+                .ToList();
+
+            invoice.Payments = payments
+                .Where(x => x.InvoiceId == invoice.Id)
+                .ToList();
+
+            invoice.DebitBalanceRows = debitBalanceRows
+                .Where(x => x.DebitInvoiceId == invoice.Id)
+                .ToList();
+
+            invoice.CreditBalanceRows = creditBalanceRows
+                .Where(x => x.CreditInvoiceId == invoice.Id)
+                .ToList();
         }
 
-        // TEMP:
+        foreach (var invoice in invoices)
+        {
+            invoice.UpdatePaymentStatus();
+        }
 
         invoices = invoices
             .Where(x => x.LeftToPay > 0)
             .ToList();
 
         var total = invoices.Sum(x => x.Total);
-        var leftToPay = invoices.Sum(x => x.LeftToPay); // NOTE: Temp
+        var leftToPay = invoices.Sum(x => x.LeftToPay);
 
         return new UnpaidReportResultsModel()
         {
