@@ -48,7 +48,7 @@
                 {
                     <tr>
                         <td>
-                            <a href="/show-invoice/@(batch.Id)">
+                            <a href="/show-batch/@(batch.Id)">
                                 @(batch.Name ?? "-")
                             </a>
                         </td>
@@ -57,5 +57,9 @@
             </table>
         </figure>
     }
+
+    <p>
+        <a class="button" href="/add-batch">Ny batch</a>
+    </p>
 
 </main>

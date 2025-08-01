@@ -1,0 +1,48 @@
+﻿@page "/edit-batch/{id:int}"
+@model EditBatchModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera batch -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Invoice.cshtml", Model.UserToken)
+
+<main>
+    <h4>
+        Redigera
+    </h4>
+
+    <h5>
+        @(Model.Batch.Name)
+    </h5>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-batches">
+            Avbryt
+        </a>
+    </form>
+
+</main>
