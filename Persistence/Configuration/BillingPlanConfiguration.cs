@@ -8,5 +8,9 @@ class BillingPlanConfiguration : IEntityTypeConfiguration<BillingPlan>
 
         builder.Property(p => p.Name)
             .HasMaxLength(MaxLengths.Domain.BillingPlan.Name);
+
+        builder.HasMany(x => x.BillingPlanItems)
+            .WithOne(x => x.BillingPlan)
+            .HasForeignKey(x => x.BillingPlanId);
     }
 }

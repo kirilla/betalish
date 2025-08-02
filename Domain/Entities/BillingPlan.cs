@@ -9,4 +9,6 @@ public class BillingPlan
     // Relations
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
+
+    public List<BillingPlanItem> BillingPlanItems { get; set; } = [];
 }
