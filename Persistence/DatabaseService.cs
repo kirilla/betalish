@@ -14,6 +14,7 @@ public class DatabaseService(
     public DbSet<BadSignIn> BadSignIns { get; set; }
     public DbSet<BalanceRow> BalanceRows { get; set; }
     public DbSet<Batch> Batches { get; set; }
+    public DbSet<BillingPlan> BillingPlans { get; set; }
     public DbSet<Client> Clients { get; set; }
     public DbSet<ClientAuth> ClientAuths { get; set; }
     public DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }
@@ -60,6 +61,7 @@ public class DatabaseService(
         new BadSignInConfiguration().Configure(builder.Entity<BadSignIn>());
         new BalanceRowConfiguration().Configure(builder.Entity<BalanceRow>());
         new BatchConfiguration().Configure(builder.Entity<Batch>());
+        new BillingPlanConfiguration().Configure(builder.Entity<BillingPlan>());
         new ClientConfiguration().Configure(builder.Entity<Client>());
         new ClientAuthConfiguration().Configure(builder.Entity<ClientAuth>());
         new ClientEmailAccountConfiguration().Configure(builder.Entity<ClientEmailAccount>());

@@ -1,0 +1,36 @@
+﻿@page "/show-billing-plan/{id:int}"
+@model ShowBillingPlanModel
+@{
+}
+
+@section Meta {
+    <title>Tidsplan - @(Model.BillingPlan.Id) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Invoice.cshtml", Model.UserToken)
+
+<main>
+
+    <h4>
+        BillingPlan
+        <span class="muted">
+            &thinsp;
+            @(Model.BillingPlan.Name)
+        </span>
+    </h4>
+
+    <ul class="notice">
+        <li>
+        </li>
+    </ul>
+
+    <p>
+        <a class="button" href="/edit-billing-plan/@(Model.BillingPlan.Id)">Redigera</a>
+        <a class="button" href="/remove-billing-plan/@(Model.BillingPlan.Id)">Ta bort</a>
+    </p>
+
+</main>
