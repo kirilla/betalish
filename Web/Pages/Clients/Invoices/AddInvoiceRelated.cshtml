@@ -1,0 +1,33 @@
+﻿@page "/add-invoice-related"
+@model AddInvoiceRelatedModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_Invoice.cshtml", Model.UserToken)
+
+<main>
+    <h4>
+        Lägg till
+    </h4>
+
+    <p>
+        <a class="button" href="/add-invoice-draft">Faktura</a>
+        <a class="button" href="/add-batch">Batch</a>
+    </p>
+
+    <p>
+        <a class="button" href="/add-invoice-template">Fakturamall</a>
+    </p>
+
+</main>

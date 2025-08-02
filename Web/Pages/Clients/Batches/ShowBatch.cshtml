@@ -18,6 +18,7 @@
     <h4>
         Batch
         <span class="muted">
+            &thinsp;
             @(Model.Batch.Name)
         </span>
     </h4>
@@ -130,5 +131,12 @@
             </table>
         </figure>
     }
+
+    <br />
+
+    <p>
+        <a class="button" href="/edit-batch/@(Model.Batch.Id)">Redigera</a>
+        <a class="button" href="/remove-batch/@(Model.Batch.Id)">Ta bort</a>
+    </p>
 
 </main>

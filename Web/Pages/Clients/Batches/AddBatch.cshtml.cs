@@ -4,6 +4,7 @@ namespace Betalish.Web.Pages.Clients.Batches;
 
 public class AddBatchModel(
     IUserToken userToken,
+    IDateService dateService,
     IAddBatchCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
@@ -16,7 +17,12 @@ public class AddBatchModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new AddBatchCommandModel();
+            var today = dateService.GetDateOnlyToday();
+
+            CommandModel = new AddBatchCommandModel()
+            {
+                Name = $"Batch {today.ToIso8601()}",
+            };
 
             return Page();
         }

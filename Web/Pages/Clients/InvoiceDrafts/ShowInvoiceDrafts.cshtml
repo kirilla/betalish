@@ -5,7 +5,7 @@
 
 @section Meta {
     <title>
-        Fakturautkast -
+        Utkast -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -19,7 +19,7 @@
 <main>
 
     <h4>
-        Fakturautkast
+        Utkast
     </h4>
 
     @if (!Model.InvoiceDrafts.Any())
@@ -43,9 +43,16 @@
                 {
                     <tr>
                         <td>
-                            <a href="/show-invoice-draft/@(draft.Id)">
-                                @(draft.InvoiceDate?.ToIso8601() ?? "Inte angett")
-                            </a>
+                            @if (draft.InvoiceDate.HasValue)
+                            {
+                                <a href="/show-invoice-draft/@(draft.Id)">
+                                    @(draft.InvoiceDate?.ToIso8601() ?? "Inte angett")
+                                </a>
+                            }
+                            else
+                            {
+                                <span>&ndash;</span>
+                            }
                         </td>
                         <td>
                             <a href="/show-invoice-draft/@(draft.Id)">

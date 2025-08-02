@@ -19,18 +19,18 @@
 <main>
     <h4>
         Redigera
+        <span class="muted">
+            &thinsp;
+            @(Model.Batch.Name)
+        </span>
     </h4>
-
-    <h5>
-        @(Model.Batch.Name)
-    </h5>
 
     <form method="post">
 
         <input type="hidden" asp-for="CommandModel.Id" />
 
         <label asp-for="CommandModel.Name">
-            Namn
+            Sammanfattning
         </label>
         <input asp-for="CommandModel.Name" />
 

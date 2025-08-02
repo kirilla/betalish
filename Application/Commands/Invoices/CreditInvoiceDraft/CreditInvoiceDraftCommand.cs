@@ -58,7 +58,7 @@ public class CreditInvoiceDraftCommand(
         {
             IsCredit = true,
 
-            About = $"Kreditering av faktura {invoice.InvoiceNumber}.",
+            About = $"Kreditering av faktura {invoice.InvoiceNumber}",
 
             InvoiceDate = null,
 

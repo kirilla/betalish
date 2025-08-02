@@ -4,7 +4,7 @@ public class ShowBatchesModel(
     IUserToken userToken,
     IDatabaseService database) : ClientPageModel(userToken)
 {
-    public List<Batch> Batches { get; set; } = [];
+    public List<BatchSummary> Batches { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -19,6 +19,12 @@ public class ShowBatchesModel(
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .OrderBy(x => x.Id)
+                .Select(x => new BatchSummary { 
+                    Id = x.Id,
+                    Name = x.Name,
+                    InvoiceCount = x.Invoices.Count,
+                    InvoiceDraftCount = x.InvoiceDrafts.Count,
+                })
                 .ToListAsync();
 
             return Page();

@@ -7,7 +7,7 @@ public class EditBatchCommandModel
     public int Id { get; set; }
 
     [RegularExpression(Pattern.Common.SomeContent)]
-    [Required(ErrorMessage = "Ange namn.")]
+    [Required(ErrorMessage = "Ge batchen ett sammanfattande namn.")]
     [StringLength(
         MaxLengths.Domain.Batch.Name,
         ErrorMessage = "Skriv kortare.")]

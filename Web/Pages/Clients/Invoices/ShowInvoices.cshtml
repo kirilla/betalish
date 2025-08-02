@@ -14,14 +14,6 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
-@section Style {
-    <style>
-        body {
-            grid-template-columns: 1fr min(70rem, 90%) 1fr;
-        }
-    </style>
-}
-
 @await Html.PartialAsync("/Pages/Clients/_Shared/_Invoice.cshtml", Model.UserToken)
 
 <main>
@@ -45,18 +37,21 @@
                     <th>Nummer</th>
                     <th>Fakturadatum</th>
                     <th>Mottagare</th>
-                    <th>Sammanfattning</th>
-                    <th class="end-align">Belopp</th>
+                    @* <th>Sammanfattning</th> *@
+                    @* <th class="end-align">Belopp</th> *@
                     <th class="end-align">Balans</th>
-                    <th class="end-align">Kvar att betala</th>
+                    @* <th class="end-align">Kvar att betala</th> *@
                 </tr>
                 @foreach (var invoice in Model.Invoices)
                 {
                     <tr>
                         <td>
                             <a href="/show-invoice/@(invoice.Id)">
-                                @(invoice.InvoiceNumber?.ToSwedish() ?? "-")
-                            </a>
+                                @(invoice.InvoiceNumber?.ToSwedish() ?? "-")</a>
+                            @if (invoice.IsCredit)
+                            {
+                                <span class="muted">Kredit</span>
+                            }
                         </td>
                         <td>
                             <a href="/show-invoice/@(invoice.Id)">
@@ -68,26 +63,26 @@
                                 @(invoice.Customer_Name ?? "-")
                             </a>
                         </td>
-                        <td>
+                        @* <td>
                             <a href="/show-invoice/@(invoice.Id)">
                                 @(invoice.About ?? "-")
                             </a>
-                        </td>
-                        <td class="end-align">
+                        </td> *@
+                        @* <td class="end-align">
                             <a href="/show-invoice/@(invoice.Id)">
                                 @(invoice.Total.ToSwedish())
                             </a>
-                        </td>
+                        </td> *@
                         <td class="end-align">
-                            <a href="/show-invoice/@(invoice.Id)">
-                                @(invoice.Balance.ToSwedish())
+                            <a href="/show-invoice/@(invoice.Id)">@(
+                                invoice.Balance.ToSwedish())
                             </a>
                         </td>
-                        <td class="end-align">
+                        @* <td class="end-align">
                             <a href="/show-invoice/@(invoice.Id)">
                                 @(invoice.LeftToPay.ToSwedish())
                             </a>
-                        </td>
+                        </td> *@
                     </tr>
                 }
             </table>
