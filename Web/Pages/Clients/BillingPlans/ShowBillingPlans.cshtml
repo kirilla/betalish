@@ -5,7 +5,7 @@
 
 @section Meta {
     <title>
-        Tidsplaner -
+        Tidsplan -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -14,44 +14,29 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
-@await Html.PartialAsync("/Pages/Clients/_Shared/_Invoice.cshtml", Model.UserToken)
+@await Html.PartialAsync("/Pages/Clients/_Shared/_BillingPlan.cshtml", Model.UserToken)
 
 <main>
 
     <h4>
-        Tidsplaner
+        Tidsplan
     </h4>
 
-    @if (!Model.BillingPlans.Any())
-    {
-        <div class="notice">
-            Det finns inga planer.
-        </div>
-    }
-
-    @if (Model.BillingPlans.Any())
-    {
-        <figure style="width:100%">
-            <table style="width:inherit">
-                <tr>
-                    <th>Sammanfattning</th>
-                </tr>
-                @foreach (var plan in Model.BillingPlans)
-                {
-                    <tr>
-                        <td>
-                            <a href="/show-billing-plan/@(plan.Id)">
-                                @(plan.Name ?? "-")
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </table>
-        </figure>
-    }
-
-    <p>
-        <a class="button" href="/add-billing-plan">Ny tidsplan</a>
-    </p>
+    <ul class="notice">
+        @foreach (var plan in Model.BillingPlans)
+        {
+            <li>
+                <a href="/show-billing-plan/@(plan.Id)">
+                    @(plan.Name ?? "-")
+                </a>
+            </li>
+        }
+        @if (!Model.BillingPlans.Any())
+        {
+            <li>
+                Det saknas tidsplan.
+            </li>
+        }
+    </ul>
 
 </main>

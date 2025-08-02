@@ -14,7 +14,7 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
-@await Html.PartialAsync("/Pages/Clients/_Shared/_Invoice.cshtml", Model.UserToken)
+@await Html.PartialAsync("/Pages/Clients/_Shared/_BillingPlan.cshtml", Model.UserToken)
 
 <main>
     <h4>
@@ -24,7 +24,7 @@
     <form method="post">
 
         <label asp-for="CommandModel.Name">
-            Sammanfattning
+            Namn
         </label>
         <input asp-for="CommandModel.Name" />
 

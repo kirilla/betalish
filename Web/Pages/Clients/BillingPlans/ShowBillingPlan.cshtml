@@ -11,12 +11,12 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
-@await Html.PartialAsync("/Pages/Clients/_Shared/_Invoice.cshtml", Model.UserToken)
+@await Html.PartialAsync("/Pages/Clients/_Shared/_BillingPlan.cshtml", Model.UserToken)
 
 <main>
 
     <h4>
-        BillingPlan
+        Tidsplan
         <span class="muted">
             &thinsp;
             @(Model.BillingPlan.Name)
@@ -25,6 +25,7 @@
 
     <ul class="notice">
         <li>
+            Här kommer något snart.
         </li>
     </ul>
 

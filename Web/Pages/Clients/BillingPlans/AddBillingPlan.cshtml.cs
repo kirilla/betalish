@@ -4,7 +4,6 @@ namespace Betalish.Web.Pages.Clients.BillingPlans;
 
 public class AddBillingPlanModel(
     IUserToken userToken,
-    IDateService dateService,
     IAddBillingPlanCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
@@ -17,12 +16,7 @@ public class AddBillingPlanModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            var today = dateService.GetDateOnlyToday();
-
-            CommandModel = new AddBillingPlanCommandModel()
-            {
-                Name = $"BillingPlan {today.ToIso8601()}",
-            };
+            CommandModel = new AddBillingPlanCommandModel();
 
             return Page();
         }
