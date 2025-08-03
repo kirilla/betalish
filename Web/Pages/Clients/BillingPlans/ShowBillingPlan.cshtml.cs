@@ -6,6 +6,8 @@ public class ShowBillingPlanModel(
 {
     public BillingPlan BillingPlan { get; set; } = null!;
 
+    public List<BillingPlanItem> BillingPlanItems { get; set; } = [];
+
     public async Task<IActionResult> OnGetAsync(int id)
     {
         try
@@ -21,6 +23,13 @@ public class ShowBillingPlanModel(
                     x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
+
+            BillingPlanItems = await database.BillingPlanItems
+                .Where(x =>
+                    x.BillingPlanId == id &&
+                    x.BillingPlan.ClientId == UserToken.ClientId!.Value)
+                .OrderBy(x => x.OnDay)
+                .ToListAsync();
 
             return Page();
         }

@@ -38,7 +38,7 @@ public class AddBillingPlanModel(
 
             var id = await command.Execute(UserToken, CommandModel);
 
-            return Redirect("/show-billing-plans");
+            return Redirect($"/show-billing-plan/{id}");
         }
         catch (BlockedByExistingException)
         {

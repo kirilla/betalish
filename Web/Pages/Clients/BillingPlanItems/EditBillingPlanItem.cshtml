@@ -1,11 +1,11 @@
-﻿@page "/remove-billing-plan/{id:int}"
-@model RemoveBillingPlanModel
+﻿@page "/edit-billing-plan-item/{id:int}"
+@model EditBillingPlanItemModel
 @{
 }
 
 @section Meta {
     <title>
-        Ta bort plan -
+        Redigera rad -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -18,28 +18,23 @@
 
 <main>
     <h4>
-        Ta bort
-        <span class="muted">
-            &thinsp;
-            @(Model.BillingPlan.Name)
-        </span>
+        Redigera händelse i tidsplan
+        <span class="muted">@(Model.BillingPlan.Name)</span>
     </h4>
 
     <form method="post">
 
         <input type="hidden" asp-for="CommandModel.Id" />
 
-        <p>
-            <label asp-for="CommandModel.Confirmed">
-                <input asp-for="CommandModel.Confirmed" type="checkbox" />
-                Ja, jag är säker
-            </label>
-        </p>
+        <label asp-for="CommandModel.OnDay">
+            Dag nummer
+        </label>
+        <input asp-for="CommandModel.OnDay" placeholder="Antal dagar efter faktardatum" />
 
         <div asp-validation-summary="All"></div>
 
         <button type="submit">
-            Ta bort
+            Spara
         </button>
 
         <a class="button" href="/show-billing-plan/@(Model.BillingPlan.Id)">

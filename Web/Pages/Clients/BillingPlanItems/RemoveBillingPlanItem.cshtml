@@ -1,11 +1,11 @@
-﻿@page "/remove-billing-plan/{id:int}"
-@model RemoveBillingPlanModel
+﻿@page "/remove-billing-plan-item/{id:int}"
+@model RemoveBillingPlanItemModel
 @{
 }
 
 @section Meta {
     <title>
-        Ta bort plan -
+        Ta bort händelse ur tidsplan -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -18,11 +18,8 @@
 
 <main>
     <h4>
-        Ta bort
-        <span class="muted">
-            &thinsp;
-            @(Model.BillingPlan.Name)
-        </span>
+        Ta bort händelse ur tidsplan
+        <span class="muted">@(Model.BillingPlan.Name)</span>
     </h4>
 
     <form method="post">

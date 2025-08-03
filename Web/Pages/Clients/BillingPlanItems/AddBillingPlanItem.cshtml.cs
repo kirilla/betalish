@@ -1,18 +1,18 @@
-﻿using Betalish.Application.Commands.BillingPlans.EditBillingPlan;
+﻿using Betalish.Application.Commands.BillingPlanItems.AddBillingPlanItem;
 
-namespace Betalish.Web.Pages.Clients.BillingPlans;
+namespace Betalish.Web.Pages.Clients.BillingPlanItems;
 
-public class EditBillingPlanModel(
+public class AddBillingPlanItemModel(
     IUserToken userToken,
     IDatabaseService database,
-    IEditBillingPlanCommand command) : ClientPageModel(userToken)
+    IAddBillingPlanItemCommand command) : ClientPageModel(userToken)
 {
     public BillingPlan BillingPlan { get; set; } = null!;
 
     [BindProperty]
-    public EditBillingPlanCommandModel CommandModel { get; set; } = new();
+    public AddBillingPlanItemCommandModel CommandModel { get; set; } = new();
 
-    public async Task<IActionResult> OnGetAsync(int id)
+    public async Task<IActionResult> OnGet(int id)
     {
         try
         {
@@ -21,22 +21,17 @@ public class EditBillingPlanModel(
 
             BillingPlan = await database.BillingPlans
                 .Where(x =>
-                    x.ClientId == UserToken.ClientId!.Value &&
-                    x.Id == id)
+                    x.Id == id &&
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new EditBillingPlanCommandModel()
+            CommandModel = new AddBillingPlanItemCommandModel()
             {
-                Id = BillingPlan.Id,
-                Name = BillingPlan.Name,
+                BillingPlanId = id,
             };
 
             return Page();
-        }
-        catch (NotFoundException)
-        {
-            return Redirect("/help/notfound");
         }
         catch
         {
@@ -53,8 +48,8 @@ public class EditBillingPlanModel(
 
             BillingPlan = await database.BillingPlans
                 .Where(x =>
-                    x.ClientId == UserToken.ClientId!.Value &&
-                    x.Id == id)
+                    x.Id == id &&
+                    x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
@@ -64,14 +59,6 @@ public class EditBillingPlanModel(
             await command.Execute(UserToken, CommandModel);
 
             return Redirect($"/show-billing-plan/{id}");
-        }
-        catch (BlockedByExistingException)
-        {
-            ModelState.AddModelError(
-                nameof(CommandModel.Name),
-                "Det finns en annan tidsplan med samma namn.");
-
-            return Page();
         }
         catch
         {
