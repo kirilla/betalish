@@ -16,5 +16,7 @@ public static class Defaults
             public const int Max = 120;
             public const int Default = 30;
         }
+
+        public const decimal MinToConsiderPaid = 20m;
     }
 }

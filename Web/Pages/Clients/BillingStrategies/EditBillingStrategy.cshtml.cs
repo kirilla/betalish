@@ -34,6 +34,7 @@ public class EditBillingStrategyModel(
                 Reminder = BillingStrategy.Reminder,
                 Demand = BillingStrategy.Demand,
                 Collect = BillingStrategy.Collect,
+                PaymentTermDays = BillingStrategy.PaymentTermDays,
                 MinToConsiderPaid = BillingStrategy.MinToConsiderPaid?.ToSwedish(),
             };
 

@@ -69,6 +69,11 @@
         </ul>
 
         <p>
+            Betalvillkor:<br />
+            @(strategy.PaymentTermDays.ToSwedish()) dagar netto
+        </p>
+
+        <p>
             Fakturan anses betald om skulden understiger:<br />
             @(strategy.MinToConsiderPaid?.ToSwedish() ?? "–")
         </p>

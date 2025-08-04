@@ -1,6 +1,9 @@
 ﻿@page "/add-billing-strategy"
 @model AddBillingStrategyModel
 @{
+    var dayRangePlaceholder =
+        $"{Defaults.Invoice.PaymentTermDays.Min}-" +
+        $"{Defaults.Invoice.PaymentTermDays.Max} dagar";
 }
 
 @section Meta {
@@ -49,6 +52,12 @@
                 KFM-ansökan
             </label>
         </p>
+
+        <label asp-for="CommandModel.PaymentTermDays">
+            Betalvillkor, antal dagar
+        </label>
+        <input asp-for="CommandModel.PaymentTermDays" 
+            placeholder="@(dayRangePlaceholder)" />
 
         <label asp-for="CommandModel.MinToConsiderPaid">
             Anse fakturan betald om skulden understiger

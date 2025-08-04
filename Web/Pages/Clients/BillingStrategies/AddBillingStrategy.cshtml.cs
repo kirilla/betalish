@@ -16,7 +16,15 @@ public class AddBillingStrategyModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new AddBillingStrategyCommandModel();
+            CommandModel = new AddBillingStrategyCommandModel()
+            {
+                Interest = true,
+                Reminder = true,
+                Demand = true,
+                Collect = false,
+                PaymentTermDays = Defaults.Invoice.PaymentTermDays.Default,
+                MinToConsiderPaid = Defaults.Invoice.MinToConsiderPaid.ToSwedish(),
+            };
 
             return Page();
         }

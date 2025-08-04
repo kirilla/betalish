@@ -1,4 +1,6 @@
-﻿namespace Betalish.Domain.Entities;
+﻿using Betalish.Common.Constants;
+
+namespace Betalish.Domain.Entities;
 
 public class BillingStrategy : IFormatOnSave, IValidateOnSave
 {
@@ -10,6 +12,8 @@ public class BillingStrategy : IFormatOnSave, IValidateOnSave
     public required bool Reminder { get; set; }
     public required bool Demand { get; set; }
     public required bool Collect { get; set; }
+
+    public required int PaymentTermDays { get; set; }
 
     public required decimal? MinToConsiderPaid { get; set; }
 
@@ -37,6 +41,10 @@ public class BillingStrategy : IFormatOnSave, IValidateOnSave
     public void ValidateOnSave()
     {
         if (MinToConsiderPaid < 0)
-            throw new ValidateOnSaveException();
+            throw new ValidateOnSaveException("MinToConsiderPaid");
+
+        if (PaymentTermDays < Defaults.Invoice.PaymentTermDays.Min ||
+            PaymentTermDays > Defaults.Invoice.PaymentTermDays.Max)
+            throw new ValidateOnSaveException("PaymentTermDays");
     }
 }

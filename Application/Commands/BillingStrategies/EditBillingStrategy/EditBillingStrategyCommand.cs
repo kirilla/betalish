@@ -32,6 +32,7 @@ public class EditBillingStrategyCommand(IDatabaseService database) : IEditBillin
         strategy.Reminder = model.Reminder;
         strategy.Demand = model.Demand;
         strategy.Collect = model.Collect;
+        strategy.PaymentTermDays = model.PaymentTermDays!.Value;
         strategy.MinToConsiderPaid = minToConsiderPaid;
 
         await database.SaveAsync(userToken);
