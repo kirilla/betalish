@@ -11,5 +11,10 @@ class BillingStrategyConfiguration : IEntityTypeConfiguration<BillingStrategy>
 
         builder.Property(p => p.MinToConsiderPaid)
             .HasPrecision(18, 2);
+
+        builder.HasMany(x => x.InvoiceDrafts)
+            .WithOne(x => x.BillingStrategy)
+            .HasForeignKey(x => x.BillingStrategyId)
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

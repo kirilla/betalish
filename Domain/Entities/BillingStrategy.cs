@@ -21,6 +21,8 @@ public class BillingStrategy : IFormatOnSave, IValidateOnSave
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
 
+    public List<InvoiceDraft> InvoiceDrafts { get; set; } = [];
+
     public void FormatOnSave()
     {
         if (MinToConsiderPaid == 0)
