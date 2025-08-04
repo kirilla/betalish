@@ -17,6 +17,8 @@ public class AddBillingStrategyCommand(IDatabaseService database) : IAddBillingS
                 x.Name == model.Name))
             throw new BlockedByExistingException();
 
+        var minToConsiderPaid = model.MinToConsiderPaid?.TryParseDecimal();
+
         var strategy = new BillingStrategy()
         {
             Name = model.Name!,
@@ -25,6 +27,7 @@ public class AddBillingStrategyCommand(IDatabaseService database) : IAddBillingS
             Reminder = model.Reminder,
             Demand = model.Demand,
             Collect = model.Collect,
+            MinToConsiderPaid = minToConsiderPaid,
         };
 
         database.BillingStrategies.Add(strategy);

@@ -34,6 +34,7 @@ public class EditBillingStrategyModel(
                 Reminder = BillingStrategy.Reminder,
                 Demand = BillingStrategy.Demand,
                 Collect = BillingStrategy.Collect,
+                MinToConsiderPaid = BillingStrategy.MinToConsiderPaid?.ToSwedish(),
             };
 
             return Page();

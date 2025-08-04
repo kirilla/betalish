@@ -8,5 +8,8 @@ class BillingStrategyConfiguration : IEntityTypeConfiguration<BillingStrategy>
 
         builder.Property(p => p.Name)
             .HasMaxLength(MaxLengths.Domain.BillingStrategy.Name);
+
+        builder.Property(p => p.MinToConsiderPaid)
+            .HasPrecision(18, 2);
     }
 }

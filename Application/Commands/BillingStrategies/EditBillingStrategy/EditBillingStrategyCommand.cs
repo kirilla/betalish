@@ -18,6 +18,8 @@ public class EditBillingStrategyCommand(IDatabaseService database) : IEditBillin
                 x.Id != model.Id))
             throw new BlockedByExistingException();
 
+        var minToConsiderPaid = model.MinToConsiderPaid?.TryParseDecimal();
+
         var strategy = await database.BillingStrategies
             .Where(x =>
                 x.ClientId == userToken.ClientId!.Value &&
@@ -26,11 +28,11 @@ public class EditBillingStrategyCommand(IDatabaseService database) : IEditBillin
             throw new NotFoundException();
 
         strategy.Name = model.Name!;
-
         strategy.Interest = model.Interest;
         strategy.Reminder = model.Reminder;
         strategy.Demand = model.Demand;
         strategy.Collect = model.Collect;
+        strategy.MinToConsiderPaid = minToConsiderPaid;
 
         await database.SaveAsync(userToken);
     }

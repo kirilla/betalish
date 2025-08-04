@@ -1,6 +1,6 @@
 ﻿namespace Betalish.Domain.Entities;
 
-public class BillingStrategy
+public class BillingStrategy : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
@@ -11,7 +11,32 @@ public class BillingStrategy
     public required bool Demand { get; set; }
     public required bool Collect { get; set; }
 
+    public required decimal? MinToConsiderPaid { get; set; }
+
     // Relations
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
+
+    public void FormatOnSave()
+    {
+        if (MinToConsiderPaid == 0)
+            MinToConsiderPaid = null;
+
+        if (Demand)
+        {
+            Reminder = true;
+        }
+
+        if (Collect)
+        {
+            Reminder = true;
+            Demand = true;
+        }
+    }
+
+    public void ValidateOnSave()
+    {
+        if (MinToConsiderPaid < 0)
+            throw new ValidateOnSaveException();
+    }
 }

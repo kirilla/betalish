@@ -56,6 +56,11 @@
             </label>
         </p>
 
+        <label asp-for="CommandModel.MinToConsiderPaid">
+            Anse fakturan betald om skulden understiger
+        </label>
+        <input asp-for="CommandModel.MinToConsiderPaid" />
+
         <div asp-validation-summary="All"></div>
 
         <button type="submit">

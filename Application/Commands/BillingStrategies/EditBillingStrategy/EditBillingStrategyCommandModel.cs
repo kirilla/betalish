@@ -17,4 +17,9 @@ public class EditBillingStrategyCommandModel
     public bool Reminder { get; set; }
     public bool Demand { get; set; }
     public bool Collect { get; set; }
+
+    [RegularExpression(
+        Pattern.Common.Decimal.Unsigned.TwoOptionalDecimals,
+        ErrorMessage = "Belopp anges med två decimaler.")]
+    public string? MinToConsiderPaid { get; set; }
 }

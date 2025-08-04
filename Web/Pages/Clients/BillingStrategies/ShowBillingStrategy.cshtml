@@ -24,48 +24,55 @@
         </span>
     </h4>
 
-    <ul class="notice">
-        <li>
-            @if (strategy.Interest)
-            {
-                <span>✅ Dröjsmålsränta</span>
-            }
-            else
-            {
-                <span>❌ Dröjsmålsränta</span>
-            }
-        </li>
-        <li>
-            @if (strategy.Reminder)
-            {
-                <span>✅ Påminnelse</span>
-            }
-            else
-            {
-                <span>❌ Påminnelse</span>
-            }
-        </li>
-        <li>
-            @if (strategy.Demand)
-            {
-                <span>✅ Inkassokrav</span>
-            }
-            else
-            {
-                <span>❌ Inkassokrav</span>
-            }
-        </li>
-        <li>
-            @if (strategy.Collect)
-            {
-                <span>✅ KFM-ansökan</span>
-            }
-            else
-            {
-                <span>❌ KFM-ansökan</span>
-            }
-        </li>
-    </ul>
+    <div class="notice">
+        <ul>
+            <li>
+                @if (strategy.Interest)
+                {
+                    <span>✅ Dröjsmålsränta</span>
+                }
+                else
+                {
+                    <span>❌ Dröjsmålsränta</span>
+                }
+            </li>
+            <li>
+                @if (strategy.Reminder)
+                {
+                    <span>✅ Påminnelse</span>
+                }
+                else
+                {
+                    <span>❌ Påminnelse</span>
+                }
+            </li>
+            <li>
+                @if (strategy.Demand)
+                {
+                    <span>✅ Inkassokrav</span>
+                }
+                else
+                {
+                    <span>❌ Inkassokrav</span>
+                }
+            </li>
+            <li>
+                @if (strategy.Collect)
+                {
+                    <span>✅ KFM-ansökan</span>
+                }
+                else
+                {
+                    <span>❌ KFM-ansökan</span>
+                }
+            </li>
+        </ul>
+
+        <p>
+            Fakturan anses betald om skulden understiger:<br />
+            @(strategy.MinToConsiderPaid?.ToSwedish() ?? "–")
+        </p>
+    </div>
 
     <p>
         <a class="button" href="/edit-billing-strategy/@(Model.BillingStrategy.Id)">Redigera</a>
