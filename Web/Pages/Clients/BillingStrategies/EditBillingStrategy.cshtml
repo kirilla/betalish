@@ -1,0 +1,48 @@
+﻿@page "/edit-billing-strategy/{id:int}"
+@model EditBillingStrategyModel
+@{
+}
+
+@section Meta {
+    <title>
+        Redigera strategi -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_BillingStrategy.cshtml", Model.UserToken)
+
+<main>
+    <h4>
+        Redigera
+        <span class="muted">
+            &thinsp;
+            @(Model.BillingStrategy.Name)
+        </span>
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Spara
+        </button>
+
+        <a class="button" href="/show-billing-strategy/@(Model.BillingStrategy.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

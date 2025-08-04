@@ -1,0 +1,42 @@
+﻿@page "/show-billing-strategies"
+@model ShowBillingStrategiesModel
+@{
+}
+
+@section Meta {
+    <title>
+        Strategier -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_BillingStrategy.cshtml", Model.UserToken)
+
+<main>
+
+    <h4>
+        Strategier
+    </h4>
+
+    <ul class="notice">
+        @foreach (var strategy in Model.BillingStrategies)
+        {
+            <li>
+                <a href="/show-billing-strategy/@(strategy.Id)">
+                    @(strategy.Name ?? "-")
+                </a>
+            </li>
+        }
+        @if (!Model.BillingStrategies.Any())
+        {
+            <li>
+                Det saknas strategi.
+            </li>
+        }
+    </ul>
+
+</main>

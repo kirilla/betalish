@@ -1,0 +1,35 @@
+﻿@page "/show-billing-strategy/{id:int}"
+@model ShowBillingStrategyModel
+@{
+}
+
+@section Meta {
+    <title>Strategi - @(Model.BillingStrategy.Id) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_BillingStrategy.cshtml", Model.UserToken)
+
+<main>
+
+    <h4>
+        Strategi
+        <span class="muted">
+            &thinsp;
+            @(Model.BillingStrategy.Name)
+        </span>
+    </h4>
+
+    <div class="notice">
+        @* TODO *@
+    </div>
+
+    <p>
+        <a class="button" href="/edit-billing-strategy/@(Model.BillingStrategy.Id)">Redigera</a>
+        <a class="button" href="/remove-billing-strategy/@(Model.BillingStrategy.Id)">Ta bort</a>
+    </p>
+
+</main>

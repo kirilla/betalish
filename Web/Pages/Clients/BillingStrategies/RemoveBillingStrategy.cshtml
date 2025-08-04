@@ -1,0 +1,50 @@
+﻿@page "/remove-billing-strategy/{id:int}"
+@model RemoveBillingStrategyModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ta bort strategy -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_BillingStrategy.cshtml", Model.UserToken)
+
+<main>
+    <h4>
+        Ta bort
+        <span class="muted">
+            &thinsp;
+            @(Model.BillingStrategy.Name)
+        </span>
+    </h4>
+
+    <form method="post">
+
+        <input type="hidden" asp-for="CommandModel.Id" />
+
+        <p>
+            <label asp-for="CommandModel.Confirmed">
+                <input asp-for="CommandModel.Confirmed" type="checkbox" />
+                Ja, jag är säker
+            </label>
+        </p>
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Ta bort
+        </button>
+
+        <a class="button" href="/show-billing-strategy/@(Model.BillingStrategy.Id)">
+            Avbryt
+        </a>
+    </form>
+
+</main>

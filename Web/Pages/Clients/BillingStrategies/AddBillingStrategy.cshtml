@@ -1,0 +1,42 @@
+﻿@page "/add-billing-strategy"
+@model AddBillingStrategyModel
+@{
+}
+
+@section Meta {
+    <title>
+        Ny strategi -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_BillingStrategy.cshtml", Model.UserToken)
+
+<main>
+    <h4>
+        Ny strategi
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.Name">
+            Namn
+        </label>
+        <input asp-for="CommandModel.Name" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-billing-strategies">
+            Avbryt
+        </a>
+    </form>
+
+</main>
