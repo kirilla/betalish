@@ -27,6 +27,11 @@ public class EditBillingStrategyCommand(IDatabaseService database) : IEditBillin
 
         strategy.Name = model.Name!;
 
+        strategy.Interest = model.Interest;
+        strategy.Reminder = model.Reminder;
+        strategy.Demand = model.Demand;
+        strategy.Collect = model.Collect;
+
         await database.SaveAsync(userToken);
     }
 

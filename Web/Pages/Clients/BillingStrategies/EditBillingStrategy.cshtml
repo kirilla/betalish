@@ -34,6 +34,28 @@
         </label>
         <input asp-for="CommandModel.Name" />
 
+        <p>
+            <label asp-for="CommandModel.Interest">
+                <input asp-for="CommandModel.Interest" type="checkbox" />
+                Dröjsmålsränta
+            </label>
+
+            <label asp-for="CommandModel.Reminder">
+                <input asp-for="CommandModel.Reminder" type="checkbox" />
+                Påminnelse
+            </label>
+
+            <label asp-for="CommandModel.Demand">
+                <input asp-for="CommandModel.Demand" type="checkbox" />
+                Inkassokrav
+            </label>
+
+            <label asp-for="CommandModel.Collect">
+                <input asp-for="CommandModel.Collect" type="checkbox" />
+                KFM-ansökan
+            </label>
+        </p>
+
         <div asp-validation-summary="All"></div>
 
         <button type="submit">

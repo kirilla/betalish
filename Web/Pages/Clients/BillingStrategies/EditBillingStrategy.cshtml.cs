@@ -30,6 +30,10 @@ public class EditBillingStrategyModel(
             {
                 Id = BillingStrategy.Id,
                 Name = BillingStrategy.Name,
+                Interest = BillingStrategy.Interest,
+                Reminder = BillingStrategy.Reminder,
+                Demand = BillingStrategy.Demand,
+                Collect = BillingStrategy.Collect,
             };
 
             return Page();

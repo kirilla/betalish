@@ -21,6 +21,10 @@ public class AddBillingStrategyCommand(IDatabaseService database) : IAddBillingS
         {
             Name = model.Name!,
             ClientId = userToken.ClientId!.Value,
+            Interest = model.Interest,
+            Reminder = model.Reminder,
+            Demand = model.Demand,
+            Collect = model.Collect,
         };
 
         database.BillingStrategies.Add(strategy);
