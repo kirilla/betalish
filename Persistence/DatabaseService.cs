@@ -74,6 +74,7 @@ public class DatabaseService(
         new ClientEmailAccountConfiguration().Configure(builder.Entity<ClientEmailAccount>());
         new ClientEmailMessageConfiguration().Configure(builder.Entity<ClientEmailMessage>());
         new ClientEventConfiguration().Configure(builder.Entity<ClientEvent>());
+        new CollectConfiguration().Configure(builder.Entity<Collect>());
         new CustomerConfiguration().Configure(builder.Entity<Customer>());
         new CustomerTagConfiguration().Configure(builder.Entity<CustomerTag>());
         new DemandConfiguration().Configure(builder.Entity<Demand>());
