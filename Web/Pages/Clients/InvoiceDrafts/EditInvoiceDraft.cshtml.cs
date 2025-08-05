@@ -9,6 +9,8 @@ public class EditInvoiceDraftModel(
 {
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 
+    public List<BillingStrategy> BillingStrategies { get; set; } = [];
+
     [BindProperty]
     public EditInvoiceDraftCommandModel CommandModel { get; set; } = new();
 
@@ -25,6 +27,11 @@ public class EditInvoiceDraftModel(
                     x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
+
+            BillingStrategies = await database.BillingStrategies
+                .AsNoTracking()
+                .Where(x => x.ClientId == UserToken.ClientId!.Value)
+                .ToListAsync();
 
             CommandModel = new EditInvoiceDraftCommandModel()
             {
@@ -47,6 +54,10 @@ public class EditInvoiceDraftModel(
 
                 // Customer email
                 Customer_Email = InvoiceDraft.Customer_Email,
+
+                // Strategy
+                IsDebit = InvoiceDraft.IsDebit,
+                BillingStrategyId = InvoiceDraft.BillingStrategyId,
             };
 
             return Page();
@@ -75,12 +86,25 @@ public class EditInvoiceDraftModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
+            BillingStrategies = await database.BillingStrategies
+                .AsNoTracking()
+                .Where(x => x.ClientId == UserToken.ClientId!.Value)
+                .ToListAsync();
+
             if (!ModelState.IsValid)
                 return Page();
 
             await command.Execute(UserToken, CommandModel);
 
             return Redirect($"/show-invoice-draft/{id}");
+        }
+        catch (MissingBillingStrategyException)
+        {
+            ModelState.AddModelError(
+                nameof(CommandModel.BillingStrategyId),
+                "Strategi måste anges.");
+
+            return Page();
         }
         catch
         {

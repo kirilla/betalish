@@ -25,6 +25,23 @@
     <form method="post">
 
         <input type="hidden" asp-for="CommandModel.Id" />
+        <input type="hidden" asp-for="CommandModel.IsDebit" />
+
+        @if (Model.CommandModel.IsDebit)
+        {
+            <label asp-for="CommandModel.BillingStrategyId">
+                Strategi
+            </label>
+            <select asp-for="CommandModel.BillingStrategyId">
+                <option value="">–</option>
+                @foreach (var strategy in Model.BillingStrategies)
+                {
+                    <option value="@(strategy.Id)">
+                        @(strategy.Name)
+                    </option>
+                }
+            </select>
+        }
 
         <p>
             <label asp-for="CommandModel.About" class="required">

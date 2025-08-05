@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Betalish.Common.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Betalish.Application.Commands.InvoiceDrafts.EditInvoiceDraft;
 
@@ -57,4 +58,10 @@ public class EditInvoiceDraftCommandModel
         MaxLengths.Common.Email.Address,
         ErrorMessage = "Skriv kortare.")]
     public string? Customer_Email { get; set; }
+
+    // Strategy
+    public bool IsDebit { get; set; }
+
+    [RequiredIfBoolean(nameof(IsDebit), true, "Ange strategi.")]
+    public int? BillingStrategyId { get; set; }
 }
