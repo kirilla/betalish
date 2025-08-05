@@ -62,9 +62,6 @@ public class CreditInvoiceDraftCommand(
 
             InvoiceDate = null,
 
-            PaymentTermDays = null,
-            PaymentTerms = null,
-
             NetAmount = 0,
             VatAmount = 0,
             Total = 0,

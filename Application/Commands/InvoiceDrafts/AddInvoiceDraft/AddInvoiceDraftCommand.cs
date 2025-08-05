@@ -40,10 +40,6 @@ public class AddInvoiceDraftCommand(
             // Dates
             InvoiceDate = null,
 
-            // Terms
-            PaymentTermDays = strategy.PaymentTermDays,
-            PaymentTerms = $"{strategy.PaymentTermDays} dagar netto",
-
             // Customer identity
             Customer_Name = customer.Name,
             CustomerKind = customer.CustomerKind,

@@ -41,10 +41,6 @@ public class EditInvoiceDraftModel(
                 // Dates
                 InvoiceDate = InvoiceDraft.InvoiceDate.ToIso8601(),
 
-                // Terms
-                PaymentTermDays = InvoiceDraft.PaymentTermDays,
-                PaymentTerms = InvoiceDraft.PaymentTerms,
-
                 // Customer address
                 Customer_Address1 = InvoiceDraft.Customer_Address1,
                 Customer_Address2 = InvoiceDraft.Customer_Address2,

@@ -12,10 +12,6 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
 
     // Dates
     public required DateOnly? InvoiceDate { get; set; }
-
-    // Terms
-    public required int? PaymentTermDays { get; set; }
-    public required string? PaymentTerms { get; set; }
     
     // Summary
     public decimal NetAmount { get; set; }

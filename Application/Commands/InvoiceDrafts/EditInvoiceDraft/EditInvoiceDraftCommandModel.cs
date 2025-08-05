@@ -16,14 +16,6 @@ public class EditInvoiceDraftCommandModel
     // Dates
     public string? InvoiceDate { get; set; }
 
-    // Terms
-    public int? PaymentTermDays { get; set; }
-
-    [StringLength(
-        MaxLengths.Common.Invoice.PaymentTerms,
-        ErrorMessage = "Skriv kortare.")]
-    public string? PaymentTerms { get; set; }
-
     // Customer address
     [StringLength(
         MaxLengths.Common.Address.Address1,

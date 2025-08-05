@@ -1,6 +1,9 @@
-﻿namespace Betalish.Application.Routines.ConvertDraftToInvoice;
+﻿using Betalish.Common.Services;
+
+namespace Betalish.Application.Routines.ConvertDraftToInvoice;
 
 public class ConvertDraftToInvoiceRoutine(
+    IDateService dateService,
     IDatabaseService database) : IConvertDraftToInvoiceRoutine
 {
     public async Task<int> Execute(
@@ -28,37 +31,15 @@ public class ConvertDraftToInvoiceRoutine(
                 x.InvoiceDraft.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
+        var strategy = await database.BillingStrategies
+            .Where(x =>
+                x.Id == draft.BillingStrategyId &&
+                x.ClientId == userToken.ClientId!.Value)
+            .SingleOrDefaultAsync();
+
         DateOnly invoiceDate =
             draft.InvoiceDate ??
-            DateOnly.FromDateTime(DateTime.Today);
-
-        DateOnly? dueDate;
-        int? paymentTermDays;
-        string paymentTerms;
-
-        if (draft.IsCredit)
-        {
-            dueDate = null;
-            paymentTermDays = null;
-            paymentTerms = 
-                draft.PaymentTerms ??
-                    $"{paymentTermDays} dagar netto";
-        }
-        else
-        {
-            dueDate = 
-                invoiceDate.AddDays(
-                    draft.PaymentTermDays ??
-                    Defaults.Invoice.PaymentTermDays.Default);
-
-            paymentTermDays = 
-                draft.PaymentTermDays ??
-                    Defaults.Invoice.PaymentTermDays.Default;
-
-            paymentTerms =
-                draft.PaymentTerms ??
-                    $"{paymentTermDays} dagar netto";
-        }
+            dateService.GetDateOnlyToday();
 
         var invoice = new Invoice()
         {
@@ -72,11 +53,11 @@ public class ConvertDraftToInvoiceRoutine(
 
             // Dates
             InvoiceDate = invoiceDate,
-            DueDate = dueDate,
+            DueDate = null,
 
             // Terms
-            PaymentTermDays = draft.PaymentTermDays,
-            PaymentTerms = paymentTerms,
+            PaymentTermDays = null,
+            PaymentTerms = null,
 
             // Summary
             NetAmount = draft.NetAmount,
@@ -111,6 +92,21 @@ public class ConvertDraftToInvoiceRoutine(
             // Relations
             ClientId = draft.ClientId,
         };
+
+        if (draft.IsDebit)
+        {
+            invoice.DueDate =
+                invoiceDate.AddDays(
+                    strategy?.PaymentTermDays ??
+                    Defaults.Invoice.PaymentTermDays.Default);
+
+            invoice.PaymentTermDays =
+                strategy?.PaymentTermDays ??
+                    Defaults.Invoice.PaymentTermDays.Default;
+
+            invoice.PaymentTerms =
+                $"{invoice.PaymentTermDays} dagar netto";
+        }
 
         database.Invoices.Add(invoice);
 

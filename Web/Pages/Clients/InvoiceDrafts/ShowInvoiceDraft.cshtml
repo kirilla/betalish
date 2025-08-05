@@ -29,7 +29,7 @@
         else
         {
             <span class="muted">
-                @(strategy?.Name ?? "Faktura")
+                Faktura
             </span>
         }
         <span class="muted">
@@ -81,14 +81,9 @@
         @if (strategy != null)
         {
             <li>
-                Strategi:
-                &thinsp;
-                @(strategy.Name)
-            </li>
-            <li>
                 Betalvillkor:
                 &thinsp;
-                @($"{strategy.PaymentTermDays} dagar netto")
+                @(strategy.Name), @($"{strategy.PaymentTermDays} dagar netto")
             </li>
         }
     </ul>

@@ -33,10 +33,6 @@ public class EditInvoiceDraftCommand(IDatabaseService database) : IEditInvoiceDr
         // Dates
         draft.InvoiceDate = model.InvoiceDate?.ToIso8601DateOnly();
 
-        // Terms
-        draft.PaymentTermDays = model.PaymentTermDays;
-        draft.PaymentTerms = model.PaymentTerms;
-
         // Customer address
         draft.Customer_Address1 = model.Customer_Address1;
         draft.Customer_Address2 = model.Customer_Address2;
