@@ -16,7 +16,7 @@ public class DatabaseService(
     public DbSet<Batch> Batches { get; set; }
     public DbSet<BillingPlan> BillingPlans { get; set; }
     public DbSet<BillingPlanItem> BillingPlanItems { get; set; }
-    public DbSet<BillingStrategy> BillingStrategies { get; set; }
+    public DbSet<BillingStrategy> PaymentTerms { get; set; }
     public DbSet<Client> Clients { get; set; }
     public DbSet<ClientAuth> ClientAuths { get; set; }
     public DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }

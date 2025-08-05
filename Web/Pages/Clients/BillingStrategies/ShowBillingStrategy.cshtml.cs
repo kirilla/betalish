@@ -15,7 +15,7 @@ public class ShowBillingStrategyModel(
 
             AssertIsClient();
 
-            BillingStrategy = await database.BillingStrategies
+            BillingStrategy = await database.PaymentTerms
                 .Where(x =>
                     x.Id == id &&
                     x.ClientId == UserToken.ClientId!.Value)

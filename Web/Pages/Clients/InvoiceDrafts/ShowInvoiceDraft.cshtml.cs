@@ -27,7 +27,7 @@ public class ShowInvoiceDraftModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            BillingStrategy = await database.BillingStrategies
+            BillingStrategy = await database.PaymentTerms
                 .Where(x =>
                     x.Id == InvoiceDraft.BillingStrategyId &&
                     x.ClientId == UserToken.ClientId!.Value)

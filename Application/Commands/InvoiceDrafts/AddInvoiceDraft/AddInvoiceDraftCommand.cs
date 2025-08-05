@@ -23,7 +23,7 @@ public class AddInvoiceDraftCommand(
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        var strategy = await database.BillingStrategies
+        var strategy = await database.PaymentTerms
             .AsNoTracking()
             .Where(x =>
                 x.Id == model.BillingStrategyId!.Value &&

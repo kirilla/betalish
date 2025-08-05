@@ -11,14 +11,14 @@ public class RemoveBillingStrategyCommand(IDatabaseService database) : IRemoveBi
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var strategy = await database.BillingStrategies
+        var strategy = await database.PaymentTerms
             .Where(x =>
                 x.ClientId == userToken.ClientId!.Value &&
                 x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.BillingStrategies.Remove(strategy);
+        database.PaymentTerms.Remove(strategy);
 
         await database.SaveAsync(userToken);
     }

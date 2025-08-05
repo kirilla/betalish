@@ -46,7 +46,7 @@ public class EditInvoiceDraftCommand(IDatabaseService database) : IEditInvoiceDr
         // Strategy
         if (model.BillingStrategyId.HasValue)
         {
-            var strategy = await database.BillingStrategies
+            var strategy = await database.PaymentTerms
                 .AsNoTracking()
                 .Where(x =>
                     x.Id == model.BillingStrategyId!.Value &&

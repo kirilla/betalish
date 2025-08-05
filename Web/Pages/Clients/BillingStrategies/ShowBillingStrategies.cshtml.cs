@@ -15,7 +15,7 @@ public class ShowBillingStrategiesModel(
 
             AssertIsClient();
 
-            BillingStrategies = await database.BillingStrategies
+            BillingStrategies = await database.PaymentTerms
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .OrderBy(x => x.Name)

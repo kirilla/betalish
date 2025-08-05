@@ -28,7 +28,7 @@ public class EditInvoiceDraftModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            BillingStrategies = await database.BillingStrategies
+            BillingStrategies = await database.PaymentTerms
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .ToListAsync();
@@ -82,7 +82,7 @@ public class EditInvoiceDraftModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            BillingStrategies = await database.BillingStrategies
+            BillingStrategies = await database.PaymentTerms
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .ToListAsync();

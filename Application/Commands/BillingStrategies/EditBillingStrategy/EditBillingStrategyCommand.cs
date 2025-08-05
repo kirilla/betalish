@@ -11,7 +11,7 @@ public class EditBillingStrategyCommand(IDatabaseService database) : IEditBillin
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        if (await database.BillingStrategies
+        if (await database.PaymentTerms
             .AnyAsync(x =>
                 x.ClientId == userToken.ClientId!.Value &&
                 x.Name == model.Name &&
@@ -20,7 +20,7 @@ public class EditBillingStrategyCommand(IDatabaseService database) : IEditBillin
 
         var minToConsiderPaid = model.MinToConsiderPaid?.TryParseDecimal();
 
-        var strategy = await database.BillingStrategies
+        var strategy = await database.PaymentTerms
             .Where(x =>
                 x.ClientId == userToken.ClientId!.Value &&
                 x.Id == model.Id)

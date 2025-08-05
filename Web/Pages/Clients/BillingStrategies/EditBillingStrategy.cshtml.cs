@@ -19,7 +19,7 @@ public class EditBillingStrategyModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            BillingStrategy = await database.BillingStrategies
+            BillingStrategy = await database.PaymentTerms
                 .Where(x =>
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == id)
@@ -57,7 +57,7 @@ public class EditBillingStrategyModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            BillingStrategy = await database.BillingStrategies
+            BillingStrategy = await database.PaymentTerms
                 .Where(x =>
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == id)

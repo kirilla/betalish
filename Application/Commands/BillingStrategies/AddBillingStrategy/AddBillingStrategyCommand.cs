@@ -11,7 +11,7 @@ public class AddBillingStrategyCommand(IDatabaseService database) : IAddBillingS
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        if (await database.BillingStrategies
+        if (await database.PaymentTerms
             .AnyAsync(x =>
                 x.ClientId == userToken.ClientId!.Value &&
                 x.Name == model.Name))
@@ -31,7 +31,7 @@ public class AddBillingStrategyCommand(IDatabaseService database) : IAddBillingS
             MinToConsiderPaid = minToConsiderPaid,
         };
 
-        database.BillingStrategies.Add(strategy);
+        database.PaymentTerms.Add(strategy);
 
         await database.SaveAsync(userToken);
 

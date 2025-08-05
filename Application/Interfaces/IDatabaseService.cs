@@ -11,7 +11,7 @@ public interface IDatabaseService
     DbSet<Batch> Batches { get; set; }
     DbSet<BillingPlan> BillingPlans { get; set; }
     DbSet<BillingPlanItem> BillingPlanItems { get; set; }
-    DbSet<BillingStrategy> BillingStrategies { get; set; }
+    DbSet<BillingStrategy> PaymentTerms { get; set; }
     DbSet<Client> Clients { get; set; }
     DbSet<ClientAuth> ClientAuths { get; set; }
     DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }
