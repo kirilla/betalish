@@ -15,6 +15,7 @@ class BillingStrategyConfiguration : IEntityTypeConfiguration<BillingStrategy>
         builder.HasMany(x => x.InvoiceDrafts)
             .WithOne(x => x.BillingStrategy)
             .HasForeignKey(x => x.BillingStrategyId)
+            .IsRequired(false)
             .OnDelete(DeleteBehavior.NoAction);
     }
 }
