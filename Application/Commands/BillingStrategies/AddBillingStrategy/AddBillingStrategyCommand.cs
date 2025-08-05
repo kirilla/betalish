@@ -19,7 +19,7 @@ public class AddBillingStrategyCommand(IDatabaseService database) : IAddBillingS
 
         var minToConsiderPaid = model.MinToConsiderPaid?.TryParseDecimal();
 
-        var strategy = new BillingStrategy()
+        var strategy = new PaymentTerms()
         {
             Name = model.Name!,
             ClientId = userToken.ClientId!.Value,

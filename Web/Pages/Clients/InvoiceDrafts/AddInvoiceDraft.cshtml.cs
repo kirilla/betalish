@@ -12,7 +12,7 @@ public class AddInvoiceDraftModel(
 
     public List<Customer> Customers { get; set; } = [];
     public List<InvoiceTemplate> InvoiceTemplates { get; set; } = [];
-    public List<BillingStrategy> BillingStrategies { get; set; } = [];
+    public List<PaymentTerms> BillingStrategies { get; set; } = [];
 
     public async Task<IActionResult> OnGet()
     {

@@ -7,7 +7,7 @@ public class RemoveBillingStrategyModel(
     IDatabaseService database,
     IRemoveBillingStrategyCommand command) : ClientPageModel(userToken)
 {
-    public BillingStrategy BillingStrategy { get; set; } = null!;
+    public PaymentTerms BillingStrategy { get; set; } = null!;
 
     [BindProperty]
     public RemoveBillingStrategyCommandModel CommandModel { get; set; } = new();

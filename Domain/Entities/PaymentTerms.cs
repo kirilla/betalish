@@ -2,7 +2,7 @@
 
 namespace Betalish.Domain.Entities;
 
-public class BillingStrategy : IFormatOnSave, IValidateOnSave
+public class PaymentTerms : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 

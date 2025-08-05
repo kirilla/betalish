@@ -9,7 +9,7 @@ public class EditInvoiceDraftModel(
 {
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 
-    public List<BillingStrategy> BillingStrategies { get; set; } = [];
+    public List<PaymentTerms> BillingStrategies { get; set; } = [];
 
     [BindProperty]
     public EditInvoiceDraftCommandModel CommandModel { get; set; } = new();

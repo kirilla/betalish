@@ -46,7 +46,7 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
     public Batch? Batch { get; set; } = null!;
 
     public int? BillingStrategyId { get; set; }
-    public BillingStrategy? BillingStrategy { get; set; } = null!;
+    public PaymentTerms? BillingStrategy { get; set; } = null!;
 
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;

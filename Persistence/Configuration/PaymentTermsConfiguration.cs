@@ -1,8 +1,8 @@
 ﻿namespace Betalish.Persistence.Configuration;
 
-class BillingStrategyConfiguration : IEntityTypeConfiguration<BillingStrategy>
+class PaymentTermsConfiguration : IEntityTypeConfiguration<PaymentTerms>
 {
-    public void Configure(EntityTypeBuilder<BillingStrategy> builder)
+    public void Configure(EntityTypeBuilder<PaymentTerms> builder)
     {
         builder.HasKey(p => p.Id);
 

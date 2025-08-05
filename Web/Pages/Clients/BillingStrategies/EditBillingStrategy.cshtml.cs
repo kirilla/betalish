@@ -7,7 +7,7 @@ public class EditBillingStrategyModel(
     IDatabaseService database,
     IEditBillingStrategyCommand command) : ClientPageModel(userToken)
 {
-    public BillingStrategy BillingStrategy { get; set; } = null!;
+    public PaymentTerms BillingStrategy { get; set; } = null!;
 
     [BindProperty]
     public EditBillingStrategyCommandModel CommandModel { get; set; } = new();

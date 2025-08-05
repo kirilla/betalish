@@ -4,7 +4,7 @@ public class ShowBillingStrategyModel(
     IUserToken userToken,
     IDatabaseService database) : ClientPageModel(userToken)
 {
-    public BillingStrategy BillingStrategy { get; set; } = null!;
+    public PaymentTerms BillingStrategy { get; set; } = null!;
 
     public async Task<IActionResult> OnGetAsync(int id)
     {

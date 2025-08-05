@@ -16,7 +16,6 @@ public class DatabaseService(
     public DbSet<Batch> Batches { get; set; }
     public DbSet<BillingPlan> BillingPlans { get; set; }
     public DbSet<BillingPlanItem> BillingPlanItems { get; set; }
-    public DbSet<BillingStrategy> PaymentTerms { get; set; }
     public DbSet<Client> Clients { get; set; }
     public DbSet<ClientAuth> ClientAuths { get; set; }
     public DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }
@@ -44,6 +43,7 @@ public class DatabaseService(
     public DbSet<Payment> Payments { get; set; }
     public DbSet<PaymentAccount> PaymentAccounts { get; set; }
     public DbSet<PaymentAccountingRow> PaymentAccountingRows { get; set; }
+    public DbSet<PaymentTerms> PaymentTerms { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<SessionActivity> SessionActivities { get; set; }
     public DbSet<SessionRecord> SessionRecords { get; set; }
@@ -65,7 +65,6 @@ public class DatabaseService(
         new BatchConfiguration().Configure(builder.Entity<Batch>());
         new BillingPlanConfiguration().Configure(builder.Entity<BillingPlan>());
         new BillingPlanItemConfiguration().Configure(builder.Entity<BillingPlanItem>());
-        new BillingStrategyConfiguration().Configure(builder.Entity<BillingStrategy>());
         new ClientConfiguration().Configure(builder.Entity<Client>());
         new ClientAuthConfiguration().Configure(builder.Entity<ClientAuth>());
         new ClientEmailAccountConfiguration().Configure(builder.Entity<ClientEmailAccount>());
@@ -93,6 +92,7 @@ public class DatabaseService(
         new PaymentConfiguration().Configure(builder.Entity<Payment>());
         new PaymentAccountConfiguration().Configure(builder.Entity<PaymentAccount>());
         new PaymentAccountingRowConfiguration().Configure(builder.Entity<PaymentAccountingRow>());
+        new PaymentTermsConfiguration().Configure(builder.Entity<PaymentTerms>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
         new SessionActivityConfiguration().Configure(builder.Entity<SessionActivity>());
         new SessionRecordConfiguration().Configure(builder.Entity<SessionRecord>());
