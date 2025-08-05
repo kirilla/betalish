@@ -112,5 +112,26 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
             .WithOne(x => x.Invoice)
             .HasForeignKey(x => x.InvoiceId)
             .IsRequired(false);
+
+        // Stages
+        builder
+            .HasOne(x => x.Distribution)
+            .WithOne(x => x.Invoice)
+            .HasForeignKey<Distribution>(x => x.Id); // Shared PK
+
+        builder
+            .HasOne(x => x.Reminder)
+            .WithOne(x => x.Invoice)
+            .HasForeignKey<Reminder>(x => x.Id); // ...
+
+        builder
+            .HasOne(x => x.Demand)
+            .WithOne(x => x.Invoice)
+            .HasForeignKey<Demand>(x => x.Id);
+
+        builder
+            .HasOne(x => x.Collect)
+            .WithOne(x => x.Invoice)
+            .HasForeignKey<Collect>(x => x.Id); 
     }
 }

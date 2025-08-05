@@ -21,8 +21,11 @@ public class DatabaseService(
     public DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }
     public DbSet<ClientEmailMessage> ClientEmailMessages { get; set; }
     public DbSet<ClientEvent> ClientEvents { get; set; }
+    public DbSet<Collect> Collects { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<CustomerTag> CustomerTags { get; set; }
+    public DbSet<Demand> Demands { get; set; }
+    public DbSet<Distribution> Distributions { get; set; }
     public DbSet<DraftBalanceRow> DraftBalanceRows { get; set; }
     public DbSet<EmailAttachment> EmailAttachments { get; set; }
     public DbSet<EmailImage> EmailImages { get; set; }
@@ -44,6 +47,7 @@ public class DatabaseService(
     public DbSet<PaymentAccount> PaymentAccounts { get; set; }
     public DbSet<PaymentAccountingRow> PaymentAccountingRows { get; set; }
     public DbSet<PaymentTerms> PaymentTerms { get; set; }
+    public DbSet<Reminder> Reminders { get; set; }
     public DbSet<Session> Sessions { get; set; }
     public DbSet<SessionActivity> SessionActivities { get; set; }
     public DbSet<SessionRecord> SessionRecords { get; set; }
@@ -72,6 +76,8 @@ public class DatabaseService(
         new ClientEventConfiguration().Configure(builder.Entity<ClientEvent>());
         new CustomerConfiguration().Configure(builder.Entity<Customer>());
         new CustomerTagConfiguration().Configure(builder.Entity<CustomerTag>());
+        new DemandConfiguration().Configure(builder.Entity<Demand>());
+        new DistributionConfiguration().Configure(builder.Entity<Distribution>());
         new DraftBalanceRowConfiguration().Configure(builder.Entity<DraftBalanceRow>());
         new EmailAttachmentConfiguration().Configure(builder.Entity<EmailAttachment>());
         new EmailImageConfiguration().Configure(builder.Entity<EmailImage>());
@@ -93,6 +99,7 @@ public class DatabaseService(
         new PaymentAccountConfiguration().Configure(builder.Entity<PaymentAccount>());
         new PaymentAccountingRowConfiguration().Configure(builder.Entity<PaymentAccountingRow>());
         new PaymentTermsConfiguration().Configure(builder.Entity<PaymentTerms>());
+        new ReminderConfiguration().Configure(builder.Entity<Reminder>());
         new SessionConfiguration().Configure(builder.Entity<Session>());
         new SessionActivityConfiguration().Configure(builder.Entity<SessionActivity>());
         new SessionRecordConfiguration().Configure(builder.Entity<SessionRecord>());
