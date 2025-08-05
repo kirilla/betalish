@@ -1,13 +1,13 @@
-﻿using Betalish.Application.Commands.BillingStrategies.AddBillingStrategy;
+﻿using Betalish.Application.Commands.PaymentTerms.AddPaymentTerms;
 
-namespace Betalish.Web.Pages.Clients.BillingStrategies;
+namespace Betalish.Web.Pages.Clients.PaymentTerms;
 
-public class AddBillingStrategyModel(
+public class AddPaymentTermsModel(
     IUserToken userToken,
-    IAddBillingStrategyCommand command) : ClientPageModel(userToken)
+    IAddPaymentTermsCommand command) : ClientPageModel(userToken)
 {
     [BindProperty]
-    public AddBillingStrategyCommandModel CommandModel { get; set; } = new();
+    public AddPaymentTermsCommandModel CommandModel { get; set; } = new();
 
     public IActionResult OnGet()
     {
@@ -16,7 +16,7 @@ public class AddBillingStrategyModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            CommandModel = new AddBillingStrategyCommandModel()
+            CommandModel = new AddPaymentTermsCommandModel()
             {
                 Interest = true,
                 Reminder = true,
@@ -46,13 +46,13 @@ public class AddBillingStrategyModel(
 
             var id = await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-billing-strategy/{id}");
+            return Redirect($"/show-payment-terms/{id}");
         }
         catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
                 nameof(CommandModel.Name),
-                "Det finns redan en strategy med samma namn.");
+                "Det finns redan betalvillkor med samma namn.");
 
             return Page();
         }

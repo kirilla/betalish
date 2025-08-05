@@ -1,16 +1,16 @@
-using Betalish.Application.Commands.BillingStrategies.RemoveBillingStrategy;
+using Betalish.Application.Commands.PaymentTerms.RemovePaymentTerms;
 
-namespace Betalish.Web.Pages.Clients.BillingStrategies;
+namespace Betalish.Web.Pages.Clients.PaymentTerms;
 
-public class RemoveBillingStrategyModel(
+public class RemovePaymentTermsModel(
     IUserToken userToken,
     IDatabaseService database,
-    IRemoveBillingStrategyCommand command) : ClientPageModel(userToken)
+    IRemovePaymentTermsCommand command) : ClientPageModel(userToken)
 {
-    public PaymentTerms BillingStrategy { get; set; } = null!;
+    public Domain.Entities.PaymentTerms PaymentTerms { get; set; } = null!;
 
     [BindProperty]
-    public RemoveBillingStrategyCommandModel CommandModel { get; set; } = new();
+    public RemovePaymentTermsCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -19,16 +19,16 @@ public class RemoveBillingStrategyModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            BillingStrategy = await database.PaymentTerms
+            PaymentTerms = await database.PaymentTerms
                 .Where(x =>
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new RemoveBillingStrategyCommandModel()
+            CommandModel = new RemovePaymentTermsCommandModel()
             {
-                Id = BillingStrategy.Id,
+                Id = PaymentTerms.Id,
             };
 
             return Page();
@@ -50,7 +50,7 @@ public class RemoveBillingStrategyModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            BillingStrategy = await database.PaymentTerms
+            PaymentTerms = await database.PaymentTerms
                 .Where(x =>
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == id)
@@ -62,7 +62,7 @@ public class RemoveBillingStrategyModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-billing-strategies");
+            return Redirect($"/show-all-payment-terms");
         }
         catch (ConfirmationRequiredException)
         {

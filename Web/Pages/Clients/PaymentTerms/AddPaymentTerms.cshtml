@@ -1,5 +1,5 @@
-﻿@page "/add-billing-strategy"
-@model AddBillingStrategyModel
+﻿@page "/add-payment-terms"
+@model AddPaymentTermsModel
 @{
     var dayRangePlaceholder =
         $"{Defaults.Invoice.PaymentTermDays.Min}-" +
@@ -8,7 +8,7 @@
 
 @section Meta {
     <title>
-        Ny strategi -
+        Nya betalvillkor -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -17,11 +17,11 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
-@await Html.PartialAsync("/Pages/Clients/_Shared/_BillingStrategy.cshtml", Model.UserToken)
+@await Html.PartialAsync("/Pages/Clients/_Shared/_PaymentTerms.cshtml", Model.UserToken)
 
 <main>
     <h4>
-        Ny strategi
+        Nya betalvillkor
     </h4>
 
     <form method="post">
@@ -70,7 +70,7 @@
             Lägg till
         </button>
 
-        <a class="button" href="/show-billing-strategies">
+        <a class="button" href="/show-all-payment-terms">
             Avbryt
         </a>
     </form>

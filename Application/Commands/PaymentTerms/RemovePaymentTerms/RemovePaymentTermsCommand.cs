@@ -1,9 +1,9 @@
-﻿namespace Betalish.Application.Commands.BillingStrategies.RemoveBillingStrategy;
+﻿namespace Betalish.Application.Commands.PaymentTerms.RemovePaymentTerms;
 
-public class RemoveBillingStrategyCommand(IDatabaseService database) : IRemoveBillingStrategyCommand
+public class RemovePaymentTermsCommand(IDatabaseService database) : IRemovePaymentTermsCommand
 {
     public async Task Execute(
-        IUserToken userToken, RemoveBillingStrategyCommandModel model)
+        IUserToken userToken, RemovePaymentTermsCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -11,14 +11,14 @@ public class RemoveBillingStrategyCommand(IDatabaseService database) : IRemoveBi
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var strategy = await database.PaymentTerms
+        var terms = await database.PaymentTerms
             .Where(x =>
                 x.ClientId == userToken.ClientId!.Value &&
                 x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.PaymentTerms.Remove(strategy);
+        database.PaymentTerms.Remove(terms);
 
         await database.SaveAsync(userToken);
     }

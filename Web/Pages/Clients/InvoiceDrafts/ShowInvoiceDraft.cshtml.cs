@@ -6,7 +6,7 @@ public class ShowInvoiceDraftModel(
 {
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 
-    public PaymentTerms? PaymentTerms { get; set; } = null!;
+    public Domain.Entities.PaymentTerms? PaymentTerms { get; set; } = null!;
 
     public List<InvoiceDraftRow> InvoiceDraftRows { get; set; } = [];
     public List<DraftBalanceRow> DraftBalanceRows { get; set; } = [];

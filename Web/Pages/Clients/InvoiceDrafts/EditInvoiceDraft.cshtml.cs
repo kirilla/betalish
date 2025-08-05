@@ -9,7 +9,7 @@ public class EditInvoiceDraftModel(
 {
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 
-    public List<PaymentTerms> PaymentTerms { get; set; } = [];
+    public List<Domain.Entities.PaymentTerms> PaymentTerms { get; set; } = [];
 
     [BindProperty]
     public EditInvoiceDraftCommandModel CommandModel { get; set; } = new();
@@ -51,7 +51,7 @@ public class EditInvoiceDraftModel(
                 // Customer email
                 Customer_Email = InvoiceDraft.Customer_Email,
 
-                // Strategy
+                // PaymentTerms
                 IsDebit = InvoiceDraft.IsDebit,
                 PaymentTermsId = InvoiceDraft.PaymentTermsId,
             };
@@ -98,7 +98,7 @@ public class EditInvoiceDraftModel(
         {
             ModelState.AddModelError(
                 nameof(CommandModel.PaymentTermsId),
-                "Strategi måste anges.");
+                "Betalvillkor måste anges.");
 
             return Page();
         }

@@ -31,7 +31,7 @@ public class ConvertDraftToInvoiceRoutine(
                 x.InvoiceDraft.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
-        var strategy = await database.PaymentTerms
+        var terms = await database.PaymentTerms
             .Where(x =>
                 x.Id == draft.PaymentTermsId &&
                 x.ClientId == userToken.ClientId!.Value)
@@ -97,11 +97,11 @@ public class ConvertDraftToInvoiceRoutine(
         {
             invoice.DueDate =
                 invoiceDate.AddDays(
-                    strategy?.PaymentTermDays ??
+                    terms?.PaymentTermDays ??
                     Defaults.Invoice.PaymentTermDays.Default);
 
             invoice.PaymentTermDays =
-                strategy?.PaymentTermDays ??
+                terms?.PaymentTermDays ??
                     Defaults.Invoice.PaymentTermDays.Default;
 
             invoice.PaymentTerms =

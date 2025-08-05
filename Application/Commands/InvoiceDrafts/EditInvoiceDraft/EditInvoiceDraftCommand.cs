@@ -43,10 +43,10 @@ public class EditInvoiceDraftCommand(IDatabaseService database) : IEditInvoiceDr
         // Customer email
         draft.Customer_Email = model.Customer_Email?.ToLowerInvariant();
 
-        // Strategy
+        // PaymentTerms
         if (model.PaymentTermsId.HasValue)
         {
-            var strategy = await database.PaymentTerms
+            var terms = await database.PaymentTerms
                 .AsNoTracking()
                 .Where(x =>
                     x.Id == model.PaymentTermsId!.Value &&
@@ -54,7 +54,7 @@ public class EditInvoiceDraftCommand(IDatabaseService database) : IEditInvoiceDr
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            draft.PaymentTermsId = strategy.Id;
+            draft.PaymentTermsId = terms.Id;
         }
 
         await database.SaveAsync(userToken);

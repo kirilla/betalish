@@ -1,33 +1,33 @@
-﻿@page "/show-billing-strategy/{id:int}"
-@model ShowBillingStrategyModel
+﻿@page "/show-payment-terms/{id:int}"
+@model ShowPaymentTermsModel
 @{
-    var strategy = Model.BillingStrategy;
+    var terms = Model.PaymentTerms;
 }
 
 @section Meta {
-    <title>Strategi - @(Model.BillingStrategy.Id) - @(Branding.WebsiteTitle)</title>
+    <title>Betalvillkor - @(Model.PaymentTerms.Id) - @(Branding.WebsiteTitle)</title>
 }
 
 @section Header {
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
-@await Html.PartialAsync("/Pages/Clients/_Shared/_BillingStrategy.cshtml", Model.UserToken)
+@await Html.PartialAsync("/Pages/Clients/_Shared/_PaymentTerms.cshtml", Model.UserToken)
 
 <main>
 
     <h4>
-        Strategi
+        Betalvillkor
         <span class="muted">
             &thinsp;
-            @(strategy.Name)
+            @(terms.Name)
         </span>
     </h4>
 
     <div class="notice">
         <ul>
             <li>
-                @if (strategy.Interest)
+                @if (terms.Interest)
                 {
                     <span>✅ Dröjsmålsränta</span>
                 }
@@ -37,7 +37,7 @@
                 }
             </li>
             <li>
-                @if (strategy.Reminder)
+                @if (terms.Reminder)
                 {
                     <span>✅ Påminnelse</span>
                 }
@@ -47,7 +47,7 @@
                 }
             </li>
             <li>
-                @if (strategy.Demand)
+                @if (terms.Demand)
                 {
                     <span>✅ Inkassokrav</span>
                 }
@@ -57,7 +57,7 @@
                 }
             </li>
             <li>
-                @if (strategy.Collect)
+                @if (terms.Collect)
                 {
                     <span>✅ KFM-ansökan</span>
                 }
@@ -70,18 +70,18 @@
 
         <p>
             Betalvillkor:<br />
-            @(strategy.PaymentTermDays.ToSwedish()) dagar netto
+            @(terms.PaymentTermDays.ToSwedish()) dagar netto
         </p>
 
         <p>
             Fakturan anses betald om skulden understiger:<br />
-            @(strategy.MinToConsiderPaid?.ToSwedish() ?? "–")
+            @(terms.MinToConsiderPaid?.ToSwedish() ?? "–")
         </p>
     </div>
 
     <p>
-        <a class="button" href="/edit-billing-strategy/@(Model.BillingStrategy.Id)">Redigera</a>
-        <a class="button" href="/remove-billing-strategy/@(Model.BillingStrategy.Id)">Ta bort</a>
+        <a class="button" href="/edit-payment-terms/@(Model.PaymentTerms.Id)">Redigera</a>
+        <a class="button" href="/remove-payment-terms/@(Model.PaymentTerms.Id)">Ta bort</a>
     </p>
 
 </main>

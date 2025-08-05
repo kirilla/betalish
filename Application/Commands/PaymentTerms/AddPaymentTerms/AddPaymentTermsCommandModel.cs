@@ -1,13 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Betalish.Application.Commands.BillingStrategies.AddBillingStrategy;
+namespace Betalish.Application.Commands.PaymentTerms.AddPaymentTerms;
 
-public class AddBillingStrategyCommandModel
+public class AddPaymentTermsCommandModel
 {
     [RegularExpression(Pattern.Common.SomeContent)]
-    [Required(ErrorMessage = "Ge strategin ett namn.")]
+    [Required(ErrorMessage = "Ge betalvillkoren ett namn.")]
     [StringLength(
-        MaxLengths.Domain.BillingStrategy.Name, 
+        MaxLengths.Domain.PaymentTerms.Name, 
         ErrorMessage = "Skriv kortare.")]
     public string? Name { get; set; }
 

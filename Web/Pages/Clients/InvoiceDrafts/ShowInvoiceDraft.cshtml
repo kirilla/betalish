@@ -2,7 +2,7 @@
 @model ShowInvoiceDraftModel
 @{
     var draft = Model.InvoiceDraft;
-    var strategy = Model.PaymentTerms;
+    var terms = Model.PaymentTerms;
 }
 
 @section Meta {
@@ -78,12 +78,12 @@
         <li>
             &nbsp;
         </li>
-        @if (strategy != null)
+        @if (terms != null)
         {
             <li>
                 Betalvillkor:
                 &thinsp;
-                @(strategy.Name), @($"{strategy.PaymentTermDays} dagar netto")
+                @($"{terms.PaymentTermDays} dagar netto"), @(terms.Name)
             </li>
         }
     </ul>

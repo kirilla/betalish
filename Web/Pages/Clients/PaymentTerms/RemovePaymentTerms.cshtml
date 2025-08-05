@@ -1,11 +1,11 @@
-﻿@page "/remove-billing-strategy/{id:int}"
-@model RemoveBillingStrategyModel
+﻿@page "/remove-payment-terms/{id:int}"
+@model RemovePaymentTermsModel
 @{
 }
 
 @section Meta {
     <title>
-        Ta bort strategy -
+        Ta bort betalvillkor -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -14,14 +14,14 @@
     <partial name="_Navbar" model="Model.UserToken" />
 }
 
-@await Html.PartialAsync("/Pages/Clients/_Shared/_BillingStrategy.cshtml", Model.UserToken)
+@await Html.PartialAsync("/Pages/Clients/_Shared/_PaymentTerms.cshtml", Model.UserToken)
 
 <main>
     <h4>
         Ta bort
         <span class="muted">
             &thinsp;
-            @(Model.BillingStrategy.Name)
+            @(Model.PaymentTerms.Name)
         </span>
     </h4>
 
@@ -42,7 +42,7 @@
             Ta bort
         </button>
 
-        <a class="button" href="/show-billing-strategy/@(Model.BillingStrategy.Id)">
+        <a class="button" href="/show-payment-terms/@(Model.PaymentTerms.Id)">
             Avbryt
         </a>
     </form>

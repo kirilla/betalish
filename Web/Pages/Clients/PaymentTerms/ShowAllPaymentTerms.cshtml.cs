@@ -1,10 +1,10 @@
-namespace Betalish.Web.Pages.Clients.BillingStrategies;
+namespace Betalish.Web.Pages.Clients.PaymentTerms;
 
-public class ShowBillingStrategiesModel(
+public class ShowAllPaymentTermsModel(
     IUserToken userToken,
     IDatabaseService database) : ClientPageModel(userToken)
 {
-    public List<PaymentTerms> BillingStrategies { get; set; } = [];
+    public List<Domain.Entities.PaymentTerms> PaymentTerms { get; set; } = [];
 
     public async Task<IActionResult> OnGetAsync()
     {
@@ -15,7 +15,7 @@ public class ShowBillingStrategiesModel(
 
             AssertIsClient();
 
-            BillingStrategies = await database.PaymentTerms
+            PaymentTerms = await database.PaymentTerms
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .OrderBy(x => x.Name)

@@ -148,11 +148,6 @@ public static class MaxLengths
             public const int Name = 50;
         }
 
-        public static class BillingStrategy
-        {
-            public const int Name = 50;
-        }
-
         public static class Client
         {
             public const int Name = Common.Person.FullName;
@@ -268,6 +263,11 @@ public static class MaxLengths
         {
             public const int Name = 50;
             public const int Description = 50;
+        }
+
+        public static class PaymentTerms
+        {
+            public const int Name = 50;
         }
 
         public static class UserEvent

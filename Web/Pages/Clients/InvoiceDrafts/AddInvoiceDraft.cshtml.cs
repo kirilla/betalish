@@ -12,7 +12,7 @@ public class AddInvoiceDraftModel(
 
     public List<Customer> Customers { get; set; } = [];
     public List<InvoiceTemplate> InvoiceTemplates { get; set; } = [];
-    public List<PaymentTerms> PaymentTerms { get; set; } = [];
+    public List<Domain.Entities.PaymentTerms> PaymentTerms { get; set; } = [];
 
     public async Task<IActionResult> OnGet()
     {

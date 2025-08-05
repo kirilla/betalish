@@ -16,6 +16,6 @@ public class AddInvoiceDraftCommandModel
         ErrorMessage = "Skriv kortare.")]
     public string? About { get; set; }
 
-    [Required(ErrorMessage = "Ange strategi.")]
+    [Required(ErrorMessage = "Ange betalvillkor.")]
     public int? PaymentTermsId { get; set; }
 }

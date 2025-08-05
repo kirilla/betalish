@@ -1,9 +1,9 @@
-﻿namespace Betalish.Application.Commands.BillingStrategies.AddBillingStrategy;
+﻿namespace Betalish.Application.Commands.PaymentTerms.AddPaymentTerms;
 
-public class AddBillingStrategyCommand(IDatabaseService database) : IAddBillingStrategyCommand
+public class AddPaymentTermsCommand(IDatabaseService database) : IAddPaymentTermsCommand
 {
     public async Task<int> Execute(
-        IUserToken userToken, AddBillingStrategyCommandModel model)
+        IUserToken userToken, AddPaymentTermsCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -19,7 +19,7 @@ public class AddBillingStrategyCommand(IDatabaseService database) : IAddBillingS
 
         var minToConsiderPaid = model.MinToConsiderPaid?.TryParseDecimal();
 
-        var strategy = new PaymentTerms()
+        var terms = new Domain.Entities.PaymentTerms()
         {
             Name = model.Name!,
             ClientId = userToken.ClientId!.Value,
@@ -31,11 +31,11 @@ public class AddBillingStrategyCommand(IDatabaseService database) : IAddBillingS
             MinToConsiderPaid = minToConsiderPaid,
         };
 
-        database.PaymentTerms.Add(strategy);
+        database.PaymentTerms.Add(terms);
 
         await database.SaveAsync(userToken);
 
-        return strategy.Id;
+        return terms.Id;
     }
 
     public bool IsPermitted(IUserToken userToken)

@@ -51,7 +51,7 @@ public class EditInvoiceDraftCommandModel
         ErrorMessage = "Skriv kortare.")]
     public string? Customer_Email { get; set; }
 
-    // Strategy
+    // PaymentTerms
     public bool IsDebit { get; set; }
 
     [RequiredIfBoolean(nameof(IsDebit), true, "Ange betalvillkor.")]

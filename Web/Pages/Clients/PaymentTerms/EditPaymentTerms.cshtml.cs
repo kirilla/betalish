@@ -1,16 +1,16 @@
-﻿using Betalish.Application.Commands.BillingStrategies.EditBillingStrategy;
+﻿using Betalish.Application.Commands.PaymentTerms.EditPaymentTerms;
 
-namespace Betalish.Web.Pages.Clients.BillingStrategies;
+namespace Betalish.Web.Pages.Clients.PaymentTerms;
 
-public class EditBillingStrategyModel(
+public class EditPaymentTermsModel(
     IUserToken userToken,
     IDatabaseService database,
-    IEditBillingStrategyCommand command) : ClientPageModel(userToken)
+    IEditPaymentTermsCommand command) : ClientPageModel(userToken)
 {
-    public PaymentTerms BillingStrategy { get; set; } = null!;
+    public Domain.Entities.PaymentTerms PaymentTerms { get; set; } = null!;
 
     [BindProperty]
-    public EditBillingStrategyCommandModel CommandModel { get; set; } = new();
+    public EditPaymentTermsCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -19,23 +19,23 @@ public class EditBillingStrategyModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            BillingStrategy = await database.PaymentTerms
+            PaymentTerms = await database.PaymentTerms
                 .Where(x =>
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new EditBillingStrategyCommandModel()
+            CommandModel = new EditPaymentTermsCommandModel()
             {
-                Id = BillingStrategy.Id,
-                Name = BillingStrategy.Name,
-                Interest = BillingStrategy.Interest,
-                Reminder = BillingStrategy.Reminder,
-                Demand = BillingStrategy.Demand,
-                Collect = BillingStrategy.Collect,
-                PaymentTermDays = BillingStrategy.PaymentTermDays,
-                MinToConsiderPaid = BillingStrategy.MinToConsiderPaid?.ToSwedish(),
+                Id = PaymentTerms.Id,
+                Name = PaymentTerms.Name,
+                Interest = PaymentTerms.Interest,
+                Reminder = PaymentTerms.Reminder,
+                Demand = PaymentTerms.Demand,
+                Collect = PaymentTerms.Collect,
+                PaymentTermDays = PaymentTerms.PaymentTermDays,
+                MinToConsiderPaid = PaymentTerms.MinToConsiderPaid?.ToSwedish(),
             };
 
             return Page();
@@ -57,7 +57,7 @@ public class EditBillingStrategyModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            BillingStrategy = await database.PaymentTerms
+            PaymentTerms = await database.PaymentTerms
                 .Where(x =>
                     x.ClientId == UserToken.ClientId!.Value &&
                     x.Id == id)
@@ -69,13 +69,13 @@ public class EditBillingStrategyModel(
 
             await command.Execute(UserToken, CommandModel);
 
-            return Redirect($"/show-billing-strategy/{id}");
+            return Redirect($"/show-payment-terms/{id}");
         }
         catch (BlockedByExistingException)
         {
             ModelState.AddModelError(
                 nameof(CommandModel.Name),
-                "Det finns en annan strategi med samma namn.");
+                "Det finns andra betalvillkor med samma namn.");
 
             return Page();
         }

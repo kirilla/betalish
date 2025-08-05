@@ -7,7 +7,7 @@ class PaymentTermsConfiguration : IEntityTypeConfiguration<PaymentTerms>
         builder.HasKey(p => p.Id);
 
         builder.Property(p => p.Name)
-            .HasMaxLength(MaxLengths.Domain.BillingStrategy.Name);
+            .HasMaxLength(MaxLengths.Domain.PaymentTerms.Name);
 
         builder.Property(p => p.MinToConsiderPaid)
             .HasPrecision(18, 2);

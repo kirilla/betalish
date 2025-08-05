@@ -30,14 +30,14 @@
         @if (Model.CommandModel.IsDebit)
         {
             <label asp-for="CommandModel.PaymentTermsId">
-                Strategi
+                Betalvillkor
             </label>
             <select asp-for="CommandModel.PaymentTermsId">
                 <option value="">–</option>
-                @foreach (var strategy in Model.PaymentTerms)
+                @foreach (var terms in Model.PaymentTerms)
                 {
-                    <option value="@(strategy.Id)">
-                        @(strategy.Name)
+                    <option value="@(terms.Id)">
+                        @(terms.Name)
                     </option>
                 }
             </select>

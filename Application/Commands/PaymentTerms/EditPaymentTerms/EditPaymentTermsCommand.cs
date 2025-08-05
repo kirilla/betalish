@@ -1,9 +1,9 @@
-﻿namespace Betalish.Application.Commands.BillingStrategies.EditBillingStrategy;
+﻿namespace Betalish.Application.Commands.PaymentTerms.EditPaymentTerms;
 
-public class EditBillingStrategyCommand(IDatabaseService database) : IEditBillingStrategyCommand
+public class EditPaymentTermsCommand(IDatabaseService database) : IEditPaymentTermsCommand
 {
     public async Task Execute(
-        IUserToken userToken, EditBillingStrategyCommandModel model)
+        IUserToken userToken, EditPaymentTermsCommandModel model)
     {
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
@@ -20,20 +20,20 @@ public class EditBillingStrategyCommand(IDatabaseService database) : IEditBillin
 
         var minToConsiderPaid = model.MinToConsiderPaid?.TryParseDecimal();
 
-        var strategy = await database.PaymentTerms
+        var terms = await database.PaymentTerms
             .Where(x =>
                 x.ClientId == userToken.ClientId!.Value &&
                 x.Id == model.Id)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        strategy.Name = model.Name!;
-        strategy.Interest = model.Interest;
-        strategy.Reminder = model.Reminder;
-        strategy.Demand = model.Demand;
-        strategy.Collect = model.Collect;
-        strategy.PaymentTermDays = model.PaymentTermDays!.Value;
-        strategy.MinToConsiderPaid = minToConsiderPaid;
+        terms.Name = model.Name!;
+        terms.Interest = model.Interest;
+        terms.Reminder = model.Reminder;
+        terms.Demand = model.Demand;
+        terms.Collect = model.Collect;
+        terms.PaymentTermDays = model.PaymentTermDays!.Value;
+        terms.MinToConsiderPaid = minToConsiderPaid;
 
         await database.SaveAsync(userToken);
     }

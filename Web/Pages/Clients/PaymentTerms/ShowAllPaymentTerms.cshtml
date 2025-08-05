@@ -1,0 +1,42 @@
+﻿@page "/show-all-payment-terms"
+@model ShowAllPaymentTermsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Betalvillkor -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+@await Html.PartialAsync("/Pages/Clients/_Shared/_PaymentTerms.cshtml", Model.UserToken)
+
+<main>
+
+    <h4>
+        Betalvillkor
+    </h4>
+
+    <ul class="notice">
+        @foreach (var terms in Model.PaymentTerms)
+        {
+            <li>
+                <a href="/show-payment-terms/@(terms.Id)">
+                    @(terms.Name ?? "-")
+                </a>
+            </li>
+        }
+        @if (!Model.PaymentTerms.Any())
+        {
+            <li>
+                Det saknas betalvillkor.
+            </li>
+        }
+    </ul>
+
+</main>
