@@ -9,7 +9,7 @@ public class EditInvoiceDraftModel(
 {
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 
-    public List<PaymentTerms> BillingStrategies { get; set; } = [];
+    public List<PaymentTerms> PaymentTerms { get; set; } = [];
 
     [BindProperty]
     public EditInvoiceDraftCommandModel CommandModel { get; set; } = new();
@@ -28,7 +28,7 @@ public class EditInvoiceDraftModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            BillingStrategies = await database.PaymentTerms
+            PaymentTerms = await database.PaymentTerms
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .ToListAsync();
@@ -53,7 +53,7 @@ public class EditInvoiceDraftModel(
 
                 // Strategy
                 IsDebit = InvoiceDraft.IsDebit,
-                BillingStrategyId = InvoiceDraft.BillingStrategyId,
+                PaymentTermsId = InvoiceDraft.PaymentTermsId,
             };
 
             return Page();
@@ -82,7 +82,7 @@ public class EditInvoiceDraftModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            BillingStrategies = await database.PaymentTerms
+            PaymentTerms = await database.PaymentTerms
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .ToListAsync();
@@ -94,10 +94,10 @@ public class EditInvoiceDraftModel(
 
             return Redirect($"/show-invoice-draft/{id}");
         }
-        catch (MissingBillingStrategyException)
+        catch (MissingPaymentTermsException)
         {
             ModelState.AddModelError(
-                nameof(CommandModel.BillingStrategyId),
+                nameof(CommandModel.PaymentTermsId),
                 "Strategi måste anges.");
 
             return Page();

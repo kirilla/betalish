@@ -45,8 +45,8 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
     public int? BatchId { get; set; }
     public Batch? Batch { get; set; } = null!;
 
-    public int? BillingStrategyId { get; set; }
-    public PaymentTerms? BillingStrategy { get; set; } = null!;
+    public int? PaymentTermsId { get; set; }
+    public PaymentTerms? PaymentTerms { get; set; } = null!;
 
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
@@ -78,12 +78,12 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
         if (!Enum.IsDefined(CustomerKind))
             throw new InvalidEnumException(nameof(CustomerKind));
 
-        if (IsDebit && BillingStrategyId == null)
+        if (IsDebit && PaymentTermsId == null)
             throw new ValidateOnSaveException(
-                $"Debit draft {Id} should have a BillingStrategy.");
+                $"Debit draft {Id} should have PaymentTerms.");
 
-        if (IsCredit && BillingStrategyId.HasValue)
+        if (IsCredit && PaymentTermsId.HasValue)
             throw new ValidateOnSaveException(
-                $"Credit draft {Id} should not have a BillingStrategy.");
+                $"Credit draft {Id} should not have a PaymentTerms.");
     }
 }

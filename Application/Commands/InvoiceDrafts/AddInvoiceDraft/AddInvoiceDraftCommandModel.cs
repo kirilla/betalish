@@ -17,5 +17,5 @@ public class AddInvoiceDraftCommandModel
     public string? About { get; set; }
 
     [Required(ErrorMessage = "Ange strategi.")]
-    public int? BillingStrategyId { get; set; }
+    public int? PaymentTermsId { get; set; }
 }

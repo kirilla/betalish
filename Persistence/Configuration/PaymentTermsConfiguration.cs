@@ -13,8 +13,8 @@ class PaymentTermsConfiguration : IEntityTypeConfiguration<PaymentTerms>
             .HasPrecision(18, 2);
 
         builder.HasMany(x => x.InvoiceDrafts)
-            .WithOne(x => x.BillingStrategy)
-            .HasForeignKey(x => x.BillingStrategyId)
+            .WithOne(x => x.PaymentTerms)
+            .HasForeignKey(x => x.PaymentTermsId)
             .IsRequired(false)
             .OnDelete(DeleteBehavior.NoAction);
     }

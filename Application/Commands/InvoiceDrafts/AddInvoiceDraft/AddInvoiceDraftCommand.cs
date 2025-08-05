@@ -26,7 +26,7 @@ public class AddInvoiceDraftCommand(
         var strategy = await database.PaymentTerms
             .AsNoTracking()
             .Where(x =>
-                x.Id == model.BillingStrategyId!.Value &&
+                x.Id == model.PaymentTermsId!.Value &&
                 x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
@@ -62,7 +62,7 @@ public class AddInvoiceDraftCommand(
 
             // Relations
             ClientId = userToken.ClientId!.Value,
-            BillingStrategyId = model.BillingStrategyId!.Value,
+            PaymentTermsId = model.PaymentTermsId!.Value,
         };
 
         database.InvoiceDrafts.Add(draft);

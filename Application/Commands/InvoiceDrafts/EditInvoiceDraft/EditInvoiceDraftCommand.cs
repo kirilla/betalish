@@ -25,8 +25,8 @@ public class EditInvoiceDraftCommand(IDatabaseService database) : IEditInvoiceDr
             throw new NotFoundException();
 
         if (draft.IsDebit &&
-            draft.BillingStrategyId == null)
-            throw new MissingBillingStrategyException();
+            draft.PaymentTermsId == null)
+            throw new MissingPaymentTermsException();
 
         draft.About = model.About!;
 
@@ -44,17 +44,17 @@ public class EditInvoiceDraftCommand(IDatabaseService database) : IEditInvoiceDr
         draft.Customer_Email = model.Customer_Email?.ToLowerInvariant();
 
         // Strategy
-        if (model.BillingStrategyId.HasValue)
+        if (model.PaymentTermsId.HasValue)
         {
             var strategy = await database.PaymentTerms
                 .AsNoTracking()
                 .Where(x =>
-                    x.Id == model.BillingStrategyId!.Value &&
+                    x.Id == model.PaymentTermsId!.Value &&
                     x.ClientId == userToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            draft.BillingStrategyId = strategy.Id;
+            draft.PaymentTermsId = strategy.Id;
         }
 
         await database.SaveAsync(userToken);

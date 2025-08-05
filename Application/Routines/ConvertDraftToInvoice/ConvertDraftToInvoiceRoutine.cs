@@ -33,7 +33,7 @@ public class ConvertDraftToInvoiceRoutine(
 
         var strategy = await database.PaymentTerms
             .Where(x =>
-                x.Id == draft.BillingStrategyId &&
+                x.Id == draft.PaymentTermsId &&
                 x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync();
 

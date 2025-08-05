@@ -54,6 +54,6 @@ public class EditInvoiceDraftCommandModel
     // Strategy
     public bool IsDebit { get; set; }
 
-    [RequiredIfBoolean(nameof(IsDebit), true, "Ange strategi.")]
-    public int? BillingStrategyId { get; set; }
+    [RequiredIfBoolean(nameof(IsDebit), true, "Ange betalvillkor.")]
+    public int? PaymentTermsId { get; set; }
 }
