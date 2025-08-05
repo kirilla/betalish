@@ -54,6 +54,19 @@
         </label>
         <input asp-for="CommandModel.About" />
 
+        <label asp-for="CommandModel.BillingStrategyId">
+            Strategi
+        </label>
+        <select asp-for="CommandModel.BillingStrategyId">
+            <option value="">–</option>
+            @foreach (var strategy in Model.BillingStrategies)
+            {
+                <option value="@(strategy.Id)">
+                    @(strategy.Name)
+                </option>
+            }
+        </select>
+
         <div asp-validation-summary="All"></div>
 
         <button type="submit">

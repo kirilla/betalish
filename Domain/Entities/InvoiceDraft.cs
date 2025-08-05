@@ -75,5 +75,9 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
     {
         if (!Enum.IsDefined(CustomerKind))
             throw new InvalidEnumException(nameof(CustomerKind));
+
+        if (BillingStrategyId == null && !IsCredit)
+            throw new ValidateOnSaveException(
+                $"InvoiceDraft {Id} is missing a BillingStrategy.");
     }
 }

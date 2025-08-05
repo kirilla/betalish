@@ -15,4 +15,7 @@ public class AddInvoiceDraftCommandModel
         MaxLengths.Common.Invoice.About,
         ErrorMessage = "Skriv kortare.")]
     public string? About { get; set; }
+
+    [Required(ErrorMessage = "Ange strategi.")]
+    public int? BillingStrategyId { get; set; }
 }

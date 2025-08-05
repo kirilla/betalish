@@ -18,8 +18,16 @@ public class AddInvoiceDraftCommand(
         var customer = await database.Customers
             .AsNoTracking()
             .Where(x =>
-                x.ClientId == userToken.ClientId!.Value &&
-                x.Id == model.CustomerId!.Value)
+                x.Id == model.CustomerId!.Value &&
+                x.ClientId == userToken.ClientId!.Value)
+            .SingleOrDefaultAsync() ??
+            throw new NotFoundException();
+
+        var strategy = await database.BillingStrategies
+            .AsNoTracking()
+            .Where(x =>
+                x.Id == model.BillingStrategyId!.Value &&
+                x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
@@ -33,8 +41,8 @@ public class AddInvoiceDraftCommand(
             InvoiceDate = null,
 
             // Terms
-            PaymentTermDays = Defaults.Invoice.PaymentTermDays.Default,
-            PaymentTerms = null,
+            PaymentTermDays = strategy.PaymentTermDays,
+            PaymentTerms = $"{strategy.PaymentTermDays} dagar netto",
 
             // Customer identity
             Customer_Name = customer.Name,
@@ -58,6 +66,7 @@ public class AddInvoiceDraftCommand(
 
             // Relations
             ClientId = userToken.ClientId!.Value,
+            BillingStrategyId = model.BillingStrategyId!.Value,
         };
 
         database.InvoiceDrafts.Add(draft);

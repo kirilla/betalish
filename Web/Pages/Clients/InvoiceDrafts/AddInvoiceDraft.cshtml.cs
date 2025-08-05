@@ -12,6 +12,7 @@ public class AddInvoiceDraftModel(
 
     public List<Customer> Customers { get; set; } = [];
     public List<InvoiceTemplate> InvoiceTemplates { get; set; } = [];
+    public List<BillingStrategy> BillingStrategies { get; set; } = [];
 
     public async Task<IActionResult> OnGet()
     {
@@ -26,6 +27,11 @@ public class AddInvoiceDraftModel(
                 .ToListAsync();
 
             InvoiceTemplates = await database.InvoiceTemplates
+                .AsNoTracking()
+                .Where(x => x.ClientId == UserToken.ClientId!.Value)
+                .ToListAsync();
+
+            BillingStrategies = await database.BillingStrategies
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .ToListAsync();
@@ -53,6 +59,11 @@ public class AddInvoiceDraftModel(
                 .ToListAsync();
 
             InvoiceTemplates = await database.InvoiceTemplates
+                .AsNoTracking()
+                .Where(x => x.ClientId == UserToken.ClientId!.Value)
+                .ToListAsync();
+
+            BillingStrategies = await database.BillingStrategies
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .ToListAsync();

@@ -1,10 +1,12 @@
 ﻿@page "/show-invoice-draft/{id:int}"
 @model ShowInvoiceDraftModel
 @{
+    var draft = Model.InvoiceDraft;
+    var strategy = Model.BillingStrategy;
 }
 
 @section Meta {
-    <title>Fakturautkast - @(Model.InvoiceDraft.Id) - @(Branding.WebsiteTitle)</title>
+    <title>Fakturautkast - @(draft.Id) - @(Branding.WebsiteTitle)</title>
 }
 
 @section Header {
@@ -18,7 +20,7 @@
     <h4>
         Utkast
         &thinsp;
-        @if (Model.InvoiceDraft.IsCredit)
+        @if (draft.IsCredit)
         {
             <span class="muted">
                 Kreditering
@@ -27,76 +29,72 @@
         else
         {
             <span class="muted">
-                Faktura
+                @(strategy?.Name ?? "Faktura")
             </span>
         }
         <span class="muted">
             &thinsp;
-            @(Model.InvoiceDraft.About)
+            @(draft.About)
         </span>
     </h4>
 
     <ul class="notice">
-        @if (Model.InvoiceDraft.InvoiceDate.HasValue)
+        @if (draft.InvoiceDate.HasValue)
         {
             <li>
                 Fakturadatum:
                 &thinsp;
-                @(Model.InvoiceDraft.InvoiceDate?.ToIso8601())
+                @(draft.InvoiceDate?.ToIso8601())
             </li>
             <li>
                 &nbsp;
             </li>
         }        
         <li>
-            @(Model.InvoiceDraft.Customer_Name)
+            @(draft.Customer_Name)
         </li>
-        @if (Model.InvoiceDraft.Customer_Address1.HasValue())
+        @if (draft.Customer_Address1.HasValue())
         {
             <li>
-                @(Model.InvoiceDraft.Customer_Address1)
+                @(draft.Customer_Address1)
             </li>
         }
-        @if (Model.InvoiceDraft.Customer_Address2.HasValue())
+        @if (draft.Customer_Address2.HasValue())
         {
             <li>
-                @(Model.InvoiceDraft.Customer_Address2)
+                @(draft.Customer_Address2)
             </li>
         }
         <li>
-            @(Model.InvoiceDraft.Customer_ZipCode)
-            @(Model.InvoiceDraft.Customer_City)
+            @(draft.Customer_ZipCode)
+            @(draft.Customer_City)
         </li>
-        @if (Model.InvoiceDraft.Customer_Country.HasValue())
+        @if (draft.Customer_Country.HasValue())
         {
             <li>
-                @(Model.InvoiceDraft.Customer_Country)
+                @(draft.Customer_Country)
             </li>
         }
         <li>
             &nbsp;
         </li>
-        @if (Model.InvoiceDraft.IsCredit)
+        @if (strategy != null)
         {
             <li>
-                Villkor
+                Strategi:
                 &thinsp;
-                @(Model.InvoiceDraft.PaymentTerms ?? "-")
+                @(strategy.Name)
             </li>
-        }
-        else
-        {
             <li>
-                Betalvillkor
+                Betalvillkor:
                 &thinsp;
-                @(Model.InvoiceDraft.PaymentTerms ??
-                    $"{Defaults.Invoice.PaymentTermDays.Default} dagar netto")
+                @($"{strategy.PaymentTermDays} dagar netto")
             </li>
         }
     </ul>
 
     <p>
-        <a class="button" href="/edit-invoice-draft/@(Model.InvoiceDraft.Id)">
+        <a class="button" href="/edit-invoice-draft/@(draft.Id)">
             Redigera
         </a>
     </p>
@@ -179,16 +177,16 @@
             </tr>
             <tr>
                 <td class="end-align">
-                    @(Model.InvoiceDraft.NetAmount.ToSwedish())
+                    @(draft.NetAmount.ToSwedish())
                 </td>
                 <td class="end-align">
-                    @(Model.InvoiceDraft.VatAmount.ToSwedish())
+                    @(draft.VatAmount.ToSwedish())
                 </td>
                 <td class="end-align">
-                    @(Model.InvoiceDraft.TotalRounding.ToSwedish())
+                    @(draft.TotalRounding.ToSwedish())
                 </td>
                 <td class="end-align">
-                    @(Model.InvoiceDraft.Total.ToSwedish())
+                    @(draft.Total.ToSwedish())
                 </td>
             </tr>
         </table>
@@ -223,11 +221,11 @@
     }
 
     <p>
-        <a class="button" href="/approve-invoice-draft/@(Model.InvoiceDraft.Id)">
+        <a class="button" href="/approve-invoice-draft/@(draft.Id)">
             Godkänn utkast, skapa faktura
         </a>
 
-        <a class="button" href="/remove-invoice-draft/@(Model.InvoiceDraft.Id)">
+        <a class="button" href="/remove-invoice-draft/@(draft.Id)">
             Ta bort
         </a>
     </p>

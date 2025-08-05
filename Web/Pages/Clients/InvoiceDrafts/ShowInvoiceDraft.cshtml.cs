@@ -6,6 +6,8 @@ public class ShowInvoiceDraftModel(
 {
     public InvoiceDraft InvoiceDraft { get; set; } = null!;
 
+    public BillingStrategy? BillingStrategy { get; set; } = null!;
+
     public List<InvoiceDraftRow> InvoiceDraftRows { get; set; } = [];
     public List<DraftBalanceRow> DraftBalanceRows { get; set; } = [];
 
@@ -24,6 +26,12 @@ public class ShowInvoiceDraftModel(
                     x.ClientId == UserToken.ClientId!.Value)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
+
+            BillingStrategy = await database.BillingStrategies
+                .Where(x =>
+                    x.Id == InvoiceDraft.BillingStrategyId &&
+                    x.ClientId == UserToken.ClientId!.Value)
+                .SingleOrDefaultAsync();
 
             InvoiceDraftRows = await database.InvoiceDraftRows
                 .AsNoTracking()
