@@ -1,4 +1,6 @@
-﻿namespace Betalish.Domain.Entities;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Betalish.Domain.Entities;
 
 public class InvoiceDraft : IFormatOnSave, IValidateOnSave
 {
@@ -59,6 +61,10 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
     // Balance
     public List<DraftBalanceRow> DraftBalanceRows { get; set; } = [];
 
+    // Aux
+    [NotMapped]
+    public bool IsDebit => !IsCredit;
+
     public void FormatOnSave()
     {
         Customer_Email = Customer_Email?.Trim().ToLowerInvariant();
@@ -76,8 +82,12 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
         if (!Enum.IsDefined(CustomerKind))
             throw new InvalidEnumException(nameof(CustomerKind));
 
-        if (BillingStrategyId == null && !IsCredit)
+        if (IsDebit && BillingStrategyId == null)
             throw new ValidateOnSaveException(
-                $"InvoiceDraft {Id} is missing a BillingStrategy.");
+                $"Debit draft {Id} should have a BillingStrategy.");
+
+        if (IsCredit && BillingStrategyId.HasValue)
+            throw new ValidateOnSaveException(
+                $"Credit draft {Id} should not have a BillingStrategy.");
     }
 }
