@@ -58,12 +58,12 @@ public class CreditInvoiceDraftCommand(
         {
             IsCredit = true,
 
-            About = $"Kreditering av faktura {invoice.InvoiceNumber}",
+            About = "Kreditering",
 
             InvoiceDate = null,
 
-            PaymentTermDays = invoice.PaymentTermDays,
-            PaymentTerms = invoice.PaymentTerms,
+            PaymentTermDays = null,
+            PaymentTerms = null,
 
             NetAmount = 0,
             VatAmount = 0,
