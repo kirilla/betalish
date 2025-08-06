@@ -133,5 +133,10 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
             .HasOne(x => x.Collect)
             .WithOne(x => x.Invoice)
             .HasForeignKey<Collect>(x => x.Id); 
+
+        builder
+            .HasOne(x => x.InvoicePlan)
+            .WithOne(x => x.Invoice)
+            .HasForeignKey<InvoicePlan>(x => x.Id);
     }
 }

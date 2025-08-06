@@ -77,6 +77,8 @@ public class Invoice : IFormatOnSave, IValidateOnSave
     public Demand Demand { get; set; } = new();
     public Collect Collect { get; set; } = new();
 
+    public InvoicePlan InvoicePlan { get; set; } = new();
+
     public void FormatOnSave()
     {
     }
