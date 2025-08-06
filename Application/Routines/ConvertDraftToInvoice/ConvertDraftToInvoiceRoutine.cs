@@ -1,6 +1,4 @@
-﻿using Betalish.Common.Services;
-
-namespace Betalish.Application.Routines.ConvertDraftToInvoice;
+﻿namespace Betalish.Application.Routines.ConvertDraftToInvoice;
 
 public class ConvertDraftToInvoiceRoutine(
     IDateService dateService,
