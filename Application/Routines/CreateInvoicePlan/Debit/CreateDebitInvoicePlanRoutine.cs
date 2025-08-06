@@ -36,8 +36,7 @@ public class CreateDebitInvoicePlanRoutine(IDatabaseService database)
         await database.SaveAsync(userToken);
 
         // NOTE: The dependent in a 1:1 relationship is added implicitly
-        // via the Principal navigation property and must not be Add():ed
-        // to the database context. Doing so will fail with a duplicate insertion error.
+        // via the Principal navigation property.
     }
 
     private void AssertIsDebitInvoice(Invoice invoice)
