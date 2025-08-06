@@ -27,6 +27,7 @@ public class ApproveInvoiceDraftCommand(
         model.SetEmptyStringsToNull();
 
         var draft = await database.InvoiceDrafts
+            .AsNoTracking()
             .Where(x =>
                 x.Id == model.Id &&
                 x.ClientId == userToken.ClientId!.Value)
@@ -34,6 +35,7 @@ public class ApproveInvoiceDraftCommand(
             throw new NotFoundException();
 
         var paymentTerms = await database.PaymentTerms
+            .AsNoTracking()
             .Where(x =>
                 x.Id == draft.PaymentTermsId &&
                 x.ClientId == userToken.ClientId!.Value)
