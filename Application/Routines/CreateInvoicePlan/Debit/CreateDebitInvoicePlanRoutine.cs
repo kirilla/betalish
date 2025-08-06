@@ -62,8 +62,6 @@ public class CreateDebitInvoicePlanRoutine(IDatabaseService database)
 
         var plan = new InvoicePlan()
         {
-            Invoice = invoice,
-
             // Distribution
             SendByEmail = sendByEmail,
             SendPostal = sendPostal,
@@ -119,5 +117,7 @@ public class CreateDebitInvoicePlanRoutine(IDatabaseService database)
         {
             // TBD
         }
+
+        invoice.InvoicePlan = plan;
     }
 }

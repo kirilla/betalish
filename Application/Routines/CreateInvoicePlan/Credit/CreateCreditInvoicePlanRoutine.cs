@@ -39,12 +39,12 @@ public class CreateCreditInvoicePlanRoutine(IDatabaseService database)
         bool sendByEmail = invoice.Customer_Email.HasValue();
         bool sendPostal = !sendByEmail;
 
-        var invoicePlan = new InvoicePlan()
+        var plan = new InvoicePlan()
         {
-            Invoice = invoice,
-
             SendByEmail = sendByEmail,
             SendPostal = sendPostal,
         };
+
+        invoice.InvoicePlan = plan;
     }
 }
