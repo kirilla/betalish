@@ -65,5 +65,8 @@ class InvoiceDraftConfiguration : IEntityTypeConfiguration<InvoiceDraft>
 
         // Indexes
         builder.HasIndex(e => e.CustomerId_Hint);
+
+        // Ignore
+        builder.Ignore(x => x.IsDebit);
     }
 }

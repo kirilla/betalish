@@ -9,6 +9,7 @@ public class Invoice : IFormatOnSave, IValidateOnSave
     public int? InvoiceNumber { get; set; }
 
     public bool IsCredit { get; set; }
+    public bool IsDebit => !IsCredit;
 
     public required string About { get; set; }
 

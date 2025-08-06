@@ -138,5 +138,8 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
             .HasOne(x => x.InvoicePlan)
             .WithOne(x => x.Invoice)
             .HasForeignKey<InvoicePlan>(x => x.Id);
+
+        // Ignore
+        builder.Ignore(x => x.IsDebit);
     }
 }

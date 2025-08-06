@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Betalish.Domain.Entities;
+﻿namespace Betalish.Domain.Entities;
 
 public class InvoiceDraft : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
     public bool IsCredit { get; set; }
+    public bool IsDebit => !IsCredit;
 
     public required string About { get; set; }
 
@@ -56,10 +55,6 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
 
     // Balance
     public List<DraftBalanceRow> DraftBalanceRows { get; set; } = [];
-
-    // Aux
-    [NotMapped]
-    public bool IsDebit => !IsCredit;
 
     public void FormatOnSave()
     {
