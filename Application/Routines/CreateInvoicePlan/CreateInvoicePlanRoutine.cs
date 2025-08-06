@@ -23,12 +23,17 @@ public class CreateInvoicePlanRoutine(
             AssertInvoiceStatusIssued(invoice);
             AssertHasInvoiceNumber(invoice);
 
-            var paymentTerms = await database.PaymentTerms
-                .AsNoTracking()
-                .Where(x =>
-                    x.Id == paymentTermsId!.Value &&
-                    x.ClientId == userToken.ClientId!.Value)
-                .SingleOrDefaultAsync();
+            PaymentTerms? paymentTerms = null;
+
+            if (paymentTermsId.HasValue)
+            {
+                paymentTerms = await database.PaymentTerms
+                    .AsNoTracking()
+                    .Where(x =>
+                        x.Id == paymentTermsId &&
+                        x.ClientId == userToken.ClientId!.Value)
+                    .SingleOrDefaultAsync();
+            }
 
             AssertDebitInvoiceHasPaymentTerms(invoice, paymentTerms);
             AssertCreditInvoiceDoesNotHavePaymentTerms(invoice, paymentTerms);
