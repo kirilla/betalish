@@ -33,6 +33,12 @@ public class ApproveInvoiceDraftCommand(
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
+        var paymentTerms = await database.PaymentTerms
+            .Where(x =>
+                x.Id == draft.PaymentTermsId &&
+                x.ClientId == userToken.ClientId!.Value)
+            .SingleOrDefaultAsync();
+
         var draftRows = await database.InvoiceDraftRows
             .AsNoTracking()
             .Where(x =>
@@ -47,7 +53,7 @@ public class ApproveInvoiceDraftCommand(
                 x.InvoiceDraft.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
-        Assert(userToken, draft, draftRows, draftBalanceRows);
+        Assert(userToken, draft, paymentTerms, draftRows, draftBalanceRows);
 
         int invoiceId = await convertToInvoiceRoutine.Execute(userToken, draft.Id);
 
@@ -71,6 +77,7 @@ public class ApproveInvoiceDraftCommand(
     private void Assert(
         IUserToken userToken, 
         InvoiceDraft draft,
+        Domain.Entities.PaymentTerms? paymentTerms,
         List<InvoiceDraftRow> draftRows,
         List<DraftBalanceRow> draftBalanceRows)
     {
@@ -78,6 +85,10 @@ public class ApproveInvoiceDraftCommand(
         {
             // Date
             AssertInvoiceDateGood(draft);
+
+            // PaymentTerms
+            AssertDebitInvoiceHasPaymentTerms(draft, paymentTerms);
+            AssertCreditInvoiceDoesNotHavePaymentTerms(draft, paymentTerms);
 
             // Total
             AssertTotalNotZero(draft);
@@ -197,6 +208,22 @@ public class ApproveInvoiceDraftCommand(
             throw new UserFeedbackException(
                 "Fakturadatum har passerat.");
         }
+    }
+
+    private static void AssertDebitInvoiceHasPaymentTerms(
+        InvoiceDraft draft, Domain.Entities.PaymentTerms? terms)
+    {
+        if (draft.IsDebit && terms == null)
+            throw new UserFeedbackException(
+                "Fakturan saknar betalvillkor.");
+    }
+
+    private static void AssertCreditInvoiceDoesNotHavePaymentTerms(
+        InvoiceDraft draft, Domain.Entities.PaymentTerms? terms)
+    {
+        if (draft.IsCredit && terms != null)
+            throw new UserFeedbackException(
+                "Fakturan har betalvillkor trots att det är en kreditfaktura.");
     }
 
     /*
