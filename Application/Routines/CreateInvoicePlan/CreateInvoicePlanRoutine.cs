@@ -18,6 +18,7 @@ public class CreateInvoicePlanRoutine(
             database.ChangeTracker.Clear();
 
             var invoice = await database.Invoices
+                .AsNoTracking()
                 .Where(x =>
                     x.Id == invoiceId &&
                     x.ClientId == userToken.ClientId!.Value)
@@ -36,8 +37,6 @@ public class CreateInvoicePlanRoutine(
             {
                 await createCreditInvoicePlan.Execute(userToken, invoiceId);
             }
-
-            await database.SaveAsync(userToken);
         }
         catch (Exception ex)
         {
