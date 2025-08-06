@@ -20,8 +20,13 @@ public class InvoicePlan
 
     // Dates
     public DateOnly? DistributionDate { get; set; }
+    
     public DateOnly? ReminderDate { get; set; }
+    public DateOnly? ReminderDueDate { get; set; }
+
     public DateOnly? DemandDate { get; set; }
+    public DateOnly? DemandDueDate { get; set; }
+
     public DateOnly? CollectDate { get; set; }
 
     // Customer reachability

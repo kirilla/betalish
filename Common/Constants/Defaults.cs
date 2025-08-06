@@ -17,6 +17,20 @@ public static class Defaults
             public const int Default = 30;
         }
 
+        public static class Reminder
+        {
+            public const int ReminderDays = 10;
+            public const int ReminderDueDays = 8;
+        }
+
+        public static class Demand
+        {
+            public const int DemandDays = 1;
+            public const int DemandDueDays = 8;
+        }
+
         public const decimal MinToConsiderPaid = 20m;
+
+        public const int ReferenceRateMarkup = 8;
     }
 }

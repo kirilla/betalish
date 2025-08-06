@@ -231,19 +231,4 @@ public class ApproveInvoiceDraftCommand(
             throw new UserFeedbackException(
                 "Fakturan har betalvillkor trots att det är en kreditfaktura.");
     }
-
-    /*
-    private void AssertTotalAboveMinToConsiderPaid(
-        Client client,
-        InvoiceDraft draft,
-        List<InvoiceDraftRow> draftRows)
-    {
-        if (draft.IsCredit == false &&
-            draft.Total < client.MinToConsiderPaid)
-        {
-            throw new UserFeedbackException(
-                "Fakturabeloppet är under beloppsgränsen.");
-        }
-    }
-    */
 }

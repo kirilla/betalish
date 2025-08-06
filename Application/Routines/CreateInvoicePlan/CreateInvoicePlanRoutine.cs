@@ -1,10 +1,14 @@
 ﻿using Betalish.Application.Queues.LogItems;
+using Betalish.Application.Routines.CreateInvoicePlan.Credit;
+using Betalish.Application.Routines.CreateInvoicePlan.Debit;
 
 namespace Betalish.Application.Routines.CreateInvoicePlan;
 
 public class CreateInvoicePlanRoutine(
     IDatabaseService database,
-    ILogItemList logItemList) : ICreateInvoicePlanRoutine
+    ILogItemList logItemList,
+    ICreateDebitInvoicePlanRoutine createDebitInvoicePlan,
+    ICreateCreditInvoicePlanRoutine createCreditInvoicePlan) : ICreateInvoicePlanRoutine
 {
     public async Task Execute(
         IUserToken userToken, int invoiceId, int? paymentTermsId)
@@ -23,28 +27,15 @@ public class CreateInvoicePlanRoutine(
             AssertInvoiceStatusIssued(invoice);
             AssertHasInvoiceNumber(invoice);
 
-            PaymentTerms? paymentTerms = null;
-
-            if (paymentTermsId.HasValue)
+            if (invoice.IsDebit)
             {
-                paymentTerms = await database.PaymentTerms
-                    .AsNoTracking()
-                    .Where(x =>
-                        x.Id == paymentTermsId &&
-                        x.ClientId == userToken.ClientId!.Value)
-                    .SingleOrDefaultAsync();
+                await createDebitInvoicePlan.Execute(userToken, invoiceId, paymentTermsId);
             }
 
-            AssertDebitInvoiceHasPaymentTerms(invoice, paymentTerms);
-            AssertCreditInvoiceDoesNotHavePaymentTerms(invoice, paymentTerms);
-
-            //database.Invoices.Attach(invoice);
-
-            if (invoice.IsDebit)
-                CreateDebitInvoicePlan(invoice, paymentTerms);
-
             if (invoice.IsCredit)
-                CreateCreditInvoicePlan(invoice, paymentTerms);
+            {
+                await createCreditInvoicePlan.Execute(userToken, invoiceId);
+            }
 
             await database.SaveAsync(userToken);
         }
@@ -56,7 +47,8 @@ public class CreateInvoicePlanRoutine(
             });
 
             throw new UserFeedbackException(
-                "Fel i intern rutin för skapande av fakturaplanering. Kontakta administratören.");
+                "Fel i intern rutin för skapande av fakturaplanering. " +
+                "Kontakta administratören.");
         }
     }
 
@@ -76,47 +68,5 @@ public class CreateInvoicePlanRoutine(
                 $"Invoice {invoice.Id}, " +
                 $"Expected InvoiceNumber: non-null, " +
                 $"Actual InvoiceNumber: null.");
-    }
-
-    private void AssertDebitInvoiceHasPaymentTerms(Invoice invoice, PaymentTerms? paymentTerms)
-    {
-        if (invoice.IsDebit && paymentTerms == null)
-            throw new Exception(
-                $"Missing PaymentTerms for debit Invoice {invoice.Id}.");
-    }
-
-    private void AssertCreditInvoiceDoesNotHavePaymentTerms(Invoice invoice, PaymentTerms? paymentTerms)
-    {
-        if (invoice.IsCredit && paymentTerms != null)
-            throw new Exception(
-                $"Unexpected PaymentTerms present for credit Invoice {invoice.Id}.");
-    }
-
-    private void CreateDebitInvoicePlan(Invoice invoice, PaymentTerms? paymentTerms)
-    {
-        var invoicePlan = new InvoicePlan()
-        {
-            Invoice = invoice,
-
-            // TODO
-        };
-
-        // NOTE: The dependent in a 1:1 relationship is added implicitly
-        // via the Principal navigation property and must not be Add():ed
-        // to the database context. Doing so will fail with a duplicate insertion error.
-    }
-
-    private void CreateCreditInvoicePlan(Invoice invoice, PaymentTerms? paymentTerms)
-    {
-        var invoicePlan = new InvoicePlan()
-        {
-            Invoice = invoice,
-
-            // TODO
-        };
-
-        // NOTE: The dependent in a 1:1 relationship is added implicitly
-        // via the Principal navigation property and must not be Add():ed
-        // to the database context. Doing so will fail with a duplicate insertion error.
     }
 }
