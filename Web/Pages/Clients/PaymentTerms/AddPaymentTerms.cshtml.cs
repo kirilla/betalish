@@ -18,7 +18,7 @@ public class AddPaymentTermsModel(
 
             CommandModel = new AddPaymentTermsCommandModel()
             {
-                Interest = true,
+                Interest = false,
                 Reminder = true,
                 Demand = true,
                 Collect = false,
