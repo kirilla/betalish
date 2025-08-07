@@ -27,23 +27,13 @@
     <div class="notice">
         <ul>
             <li>
-                @if (terms.Interest)
-                {
-                    <span>✅ Dröjsmålsränta</span>
-                }
-                else
-                {
-                    <span>❌ Dröjsmålsränta</span>
-                }
-            </li>
-            <li>
                 @if (terms.Reminder)
                 {
                     <span>✅ Påminnelse</span>
                 }
                 else
                 {
-                    <span>❌ Påminnelse</span>
+                    <span>🟩 Påminnelse</span>
                 }
             </li>
             <li>
@@ -53,7 +43,7 @@
                 }
                 else
                 {
-                    <span>❌ Inkassokrav</span>
+                    <span>🟩 Inkassokrav</span>
                 }
             </li>
             <li>
@@ -63,20 +53,37 @@
                 }
                 else
                 {
-                    <span>❌ KFM-ansökan</span>
+                    <span>🟩 KFM-ansökan</span>
                 }
             </li>
         </ul>
 
         <p>
             Betalvillkor:<br />
-            @(terms.PaymentTermDays.ToSwedish()) dagar netto
+            <b>
+                @(terms.PaymentTermDays.ToSwedish()) dagar netto
+            </b>
         </p>
 
         <p>
-            Fakturan anses betald om skulden understiger:<br />
-            @(terms.MinToConsiderPaid?.ToSwedish() ?? "–")
+            Accepterad underbetalning:<br />
+            <b>
+                @(terms.MinToConsiderPaid?.ToSwedish() ?? "–")
+            </b>
         </p>
+
+        <ul>
+            <li>
+                @if (terms.Interest)
+                {
+                    <span>✅ Dröjsmålsränta</span>
+                }
+                else
+                {
+                    <span>0️⃣ Dröjsmålsränta</span>
+                }
+            </li>
+        </ul>
     </div>
 
     <p>

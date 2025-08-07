@@ -38,11 +38,6 @@
         <input asp-for="CommandModel.Name" />
 
         <p>
-            <label asp-for="CommandModel.Interest">
-                <input asp-for="CommandModel.Interest" type="checkbox" />
-                Dröjsmålsränta
-            </label>
-
             <label asp-for="CommandModel.Reminder">
                 <input asp-for="CommandModel.Reminder" type="checkbox" />
                 Påminnelse
@@ -66,9 +61,16 @@
             placeholder="@(dayRangePlaceholder)" />
 
         <label asp-for="CommandModel.MinToConsiderPaid">
-            Anse fakturan betald om skulden understiger
+            Accepterad underbetalning, kr
         </label>
         <input asp-for="CommandModel.MinToConsiderPaid" />
+
+        <p>
+            <label asp-for="CommandModel.Interest">
+                <input asp-for="CommandModel.Interest" type="checkbox" />
+                Dröjsmålsränta
+            </label>
+        </p>
 
         <div asp-validation-summary="All"></div>
 
