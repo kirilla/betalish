@@ -72,12 +72,6 @@ public class Invoice : IFormatOnSave, IValidateOnSave
 
     public List<Payment> Payments { get; set; } = [];
 
-    // Stages
-    public Distribution Distribution { get; set; } = new();
-    public Reminder Reminder { get; set; } = new();
-    public Demand Demand { get; set; } = new();
-    public Collect Collect { get; set; } = new();
-
     public InvoicePlan? InvoicePlan { get; set; }
 
     public void FormatOnSave()

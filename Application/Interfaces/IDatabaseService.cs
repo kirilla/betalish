@@ -16,11 +16,8 @@ public interface IDatabaseService
     DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }
     DbSet<ClientEmailMessage> ClientEmailMessages { get; set; }
     DbSet<ClientEvent> ClientEvents { get; set; }
-    DbSet<Collect> Collects { get; set; }
     DbSet<Customer> Customers { get; set; }
     DbSet<CustomerTag> CustomerTags { get; set; }
-    DbSet<Demand> Demands { get; set; }
-    DbSet<Distribution> Distributions { get; set; }
     DbSet<DraftBalanceRow> DraftBalanceRows { get; set; }
     DbSet<EmailAttachment> EmailAttachments { get; set; }
     DbSet<EmailImage> EmailImages { get; set; }
@@ -43,7 +40,6 @@ public interface IDatabaseService
     DbSet<PaymentAccount> PaymentAccounts { get; set; }
     DbSet<PaymentAccountingRow> PaymentAccountingRows { get; set; }
     DbSet<PaymentTerms> PaymentTerms { get; set; }
-    DbSet<Reminder> Reminders { get; set; }
     DbSet<Session> Sessions { get; set; }
     DbSet<SessionActivity> SessionActivities { get; set; }
     DbSet<SessionRecord> SessionRecords { get; set; }
