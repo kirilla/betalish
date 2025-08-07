@@ -28,4 +28,14 @@ public class EditPaymentTermsCommandModel
         Pattern.Common.Decimal.Unsigned.TwoOptionalDecimals,
         ErrorMessage = "Belopp anges med två decimaler.")]
     public string? MinToConsiderPaid { get; set; }
+
+    [RegularExpression(
+        Pattern.Common.Decimal.Unsigned.TwoOptionalDecimals,
+        ErrorMessage = "Belopp anges med två decimaler.")]
+    public string? ReminderFee { get; set; }
+
+    [RegularExpression(
+        Pattern.Common.Decimal.Unsigned.TwoOptionalDecimals,
+        ErrorMessage = "Belopp anges med två decimaler.")]
+    public string? DemandFee { get; set; }
 }

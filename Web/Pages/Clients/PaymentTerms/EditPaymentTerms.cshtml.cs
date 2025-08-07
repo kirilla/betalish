@@ -36,6 +36,8 @@ public class EditPaymentTermsModel(
                 Collect = PaymentTerms.Collect,
                 PaymentTermDays = PaymentTerms.PaymentTermDays,
                 MinToConsiderPaid = PaymentTerms.MinToConsiderPaid?.ToSwedish(),
+                ReminderFee = PaymentTerms.ReminderFee?.ToSwedish(),
+                DemandFee = PaymentTerms.DemandFee?.ToSwedish(),
             };
 
             return Page();

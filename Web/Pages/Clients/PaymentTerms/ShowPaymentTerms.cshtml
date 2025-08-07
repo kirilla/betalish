@@ -84,6 +84,34 @@
                 }
             </li>
         </ul>
+
+        <p>
+            Påminnelseavgift:<br />
+            @if (terms.ReminderFee.HasValue)
+            {
+                <b>
+                    @(terms.ReminderFee?.ToOptionalDecimals()) kr
+                </b>
+            }
+            else
+            {
+                <b>&ndash;</b>
+            }
+        </p>
+
+        <p>
+            Inkassoavgift:<br />
+            @if (terms.DemandFee.HasValue)
+            {
+                <b>
+                    @(terms.DemandFee?.ToOptionalDecimals()) kr
+                </b>
+            }
+            else
+            {
+                <b>&ndash;</b>
+            }
+        </p>
     </div>
 
     <p>

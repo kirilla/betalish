@@ -18,6 +18,10 @@ public class AddPaymentTermsCommand(IDatabaseService database) : IAddPaymentTerm
             throw new BlockedByExistingException();
 
         var minToConsiderPaid = model.MinToConsiderPaid?.TryParseDecimal();
+        var reminderFee = model.ReminderFee?.TryParseDecimal();
+        var demandFee = model.DemandFee?.TryParseDecimal();
+
+        // TODO: Fee limits
 
         var terms = new Domain.Entities.PaymentTerms()
         {
@@ -29,6 +33,8 @@ public class AddPaymentTermsCommand(IDatabaseService database) : IAddPaymentTerm
             Collect = model.Collect,
             PaymentTermDays = model.PaymentTermDays!.Value,
             MinToConsiderPaid = minToConsiderPaid,
+            ReminderFee = reminderFee,
+            DemandFee = demandFee,
         };
 
         database.PaymentTerms.Add(terms);

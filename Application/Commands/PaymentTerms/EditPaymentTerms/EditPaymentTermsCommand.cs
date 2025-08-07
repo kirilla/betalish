@@ -19,6 +19,10 @@ public class EditPaymentTermsCommand(IDatabaseService database) : IEditPaymentTe
             throw new BlockedByExistingException();
 
         var minToConsiderPaid = model.MinToConsiderPaid?.TryParseDecimal();
+        var reminderFee = model.ReminderFee?.TryParseDecimal();
+        var demandFee = model.DemandFee?.TryParseDecimal();
+
+        // TODO: Fee limits
 
         var terms = await database.PaymentTerms
             .Where(x =>
@@ -34,7 +38,9 @@ public class EditPaymentTermsCommand(IDatabaseService database) : IEditPaymentTe
         terms.Collect = model.Collect;
         terms.PaymentTermDays = model.PaymentTermDays!.Value;
         terms.MinToConsiderPaid = minToConsiderPaid;
-
+        terms.ReminderFee = reminderFee;
+        terms.DemandFee = demandFee;
+        
         await database.SaveAsync(userToken);
     }
 

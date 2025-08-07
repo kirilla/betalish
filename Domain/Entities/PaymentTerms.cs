@@ -17,6 +17,9 @@ public class PaymentTerms : IFormatOnSave, IValidateOnSave
 
     public required decimal? MinToConsiderPaid { get; set; }
 
+    public required decimal? ReminderFee { get; set; }
+    public required decimal? DemandFee { get; set; }
+
     // Relations
     public int ClientId { get; set; }
     public Client Client { get; set; } = null!;
@@ -27,6 +30,12 @@ public class PaymentTerms : IFormatOnSave, IValidateOnSave
     {
         if (MinToConsiderPaid == 0)
             MinToConsiderPaid = null;
+
+        if (ReminderFee == 0)
+            ReminderFee = null;
+
+        if (DemandFee == 0)
+            DemandFee = null;
 
         if (Demand)
         {

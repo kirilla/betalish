@@ -24,6 +24,8 @@ public class AddPaymentTermsModel(
                 Collect = false,
                 PaymentTermDays = Defaults.Invoice.PaymentTermDays.Default,
                 MinToConsiderPaid = Defaults.Invoice.MinToConsiderPaid.ToSwedish(),
+                ReminderFee = Defaults.Fee.Reminder.Default.ToSwedish(),
+                DemandFee = Defaults.Fee.Demand.Default.ToSwedish(),
             };
 
             return Page();

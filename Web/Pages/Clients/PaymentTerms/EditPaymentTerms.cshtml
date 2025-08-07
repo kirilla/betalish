@@ -72,6 +72,16 @@
             </label>
         </p>
 
+        <label asp-for="CommandModel.ReminderFee">
+            Påminnelseavgift
+        </label>
+        <input asp-for="CommandModel.ReminderFee" />
+
+        <label asp-for="CommandModel.DemandFee">
+            Inkassoavgift
+        </label>
+        <input asp-for="CommandModel.DemandFee" />
+
         <div asp-validation-summary="All"></div>
 
         <button type="submit">
