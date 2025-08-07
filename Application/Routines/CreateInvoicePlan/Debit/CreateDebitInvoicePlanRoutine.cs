@@ -79,6 +79,10 @@ public class CreateDebitInvoicePlanRoutine(IDatabaseService database)
             // Interest
             Interest = paymentTerms.Interest,
 
+            // Fees
+            ReminderFee = paymentTerms.ReminderFee,
+            DemandFee = paymentTerms.DemandFee,
+
             // Dates
             DistributionDate = invoice.InvoiceDate,
 

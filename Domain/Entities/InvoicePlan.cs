@@ -18,6 +18,10 @@ public class InvoicePlan
     // Interest
     public bool Interest { get; set; }
 
+    // Fees
+    public decimal? ReminderFee { get; set; }
+    public decimal? DemandFee { get; set; }
+
     // Dates
     public DateOnly? DistributionDate { get; set; }
     

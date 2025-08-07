@@ -12,6 +12,12 @@ class PaymentTermsConfiguration : IEntityTypeConfiguration<PaymentTerms>
         builder.Property(p => p.MinToConsiderPaid)
             .HasPrecision(18, 2);
 
+        builder.Property(p => p.ReminderFee)
+            .HasPrecision(18, 2);
+
+        builder.Property(p => p.DemandFee)
+            .HasPrecision(18, 2);
+
         builder.HasMany(x => x.InvoiceDrafts)
             .WithOne(x => x.PaymentTerms)
             .HasForeignKey(x => x.PaymentTermsId)
