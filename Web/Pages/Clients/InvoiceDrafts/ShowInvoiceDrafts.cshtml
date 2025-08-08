@@ -31,13 +31,14 @@
 
     @if (Model.InvoiceDrafts.Any())
     {
-        <figure>
-            <table>
+        <figure style="width:100%">
+            <table style="width:inherit">
                 <tr>
                     <th>Fakturadatum</th>
                     <th>Mottagare</th>
                     <th>Sammanfattning</th>
                     <th class="end-align">Belopp</th>
+                    <th>Batch</th>
                 </tr>
                 @foreach (var draft in Model.InvoiceDrafts)
                 {
@@ -68,6 +69,18 @@
                             <a href="/show-invoice-draft/@(draft.Id)">
                                 @(draft.Total.ToSwedish())
                             </a>
+                        </td>
+                        <td>
+                            @if (draft.BatchId.HasValue)
+                            {
+                                <a href="/show-invoice-draft/@(draft.Id)">
+                                    @(draft.Batch?.Name)
+                                </a>
+                            }
+                            else
+                            {
+                                <span>&ndash;</span>
+                            }
                         </td>
                     </tr>
                 }

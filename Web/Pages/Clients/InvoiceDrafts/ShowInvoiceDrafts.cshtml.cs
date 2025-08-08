@@ -17,6 +17,7 @@ public class ShowInvoiceDraftsModel(
 
             InvoiceDrafts = await database.InvoiceDrafts
                 .AsNoTracking()
+                .Include(x => x.Batch)
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .OrderBy(x => x.InvoiceDate)
                 .ThenBy(x => x.Customer_Name)
