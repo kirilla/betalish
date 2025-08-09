@@ -78,44 +78,4 @@ public class SmtpService() : ISmtpService
 
         smtp.Send(mail);
     }
-
-    public void SendClientEmailMessage(
-        SmtpConfiguration smtpConf,
-        ClientEmailMessage email)
-    {
-        var mail = new MailMessage();
-
-        mail.From = new MailAddress(smtpConf.FromAddress, smtpConf.FromName);
-
-        //if (!string.IsNullOrWhiteSpace(smtpConf.ReplyToAddress))
-        //{
-        //    mail.ReplyToList.Add(new MailAddress(smtpConf.ReplyToAddress, smtpConf.ReplyToName));
-        //}
-
-        mail.To.Add(new MailAddress(email.ToAddress, email.ToName));
-
-        mail.Subject = email.Subject;
-        //mail.Body = email.HtmlBody;
-        //mail.IsBodyHtml = true;
-
-        var textView = AlternateView.CreateAlternateViewFromString(
-            email.TextBody, Encoding.UTF8, MediaTypeNames.Text.Plain);
-
-        var htmlView = AlternateView.CreateAlternateViewFromString(
-            email.HtmlBody, Encoding.UTF8, MediaTypeNames.Text.Html);
-
-        // TODO: Images?
-
-        mail.AlternateViews.Add(textView);
-        mail.AlternateViews.Add(htmlView);
-
-        // TODO: Attachments?
-
-        SmtpClient smtp = new SmtpClient(smtpConf.SmtpHost);
-        smtp.Credentials = new NetworkCredential(smtpConf.FromAddress, smtpConf.Password);
-        smtp.EnableSsl = true;
-        smtp.Port = smtpConf.SmtpPort;
-
-        smtp.Send(mail);
-    }
 }

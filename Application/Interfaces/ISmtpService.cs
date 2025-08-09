@@ -9,8 +9,4 @@ public interface ISmtpService
         EmailMessage email,
         List<EmailAttachment> attachments,
         List<EmailImage> images);
-
-    void SendClientEmailMessage(
-        SmtpConfiguration smtpConfiguration,
-        ClientEmailMessage email);
 }
