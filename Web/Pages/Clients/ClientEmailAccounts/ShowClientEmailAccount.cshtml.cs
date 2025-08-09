@@ -12,7 +12,7 @@ public class ShowClientEmailAccountModel(
         {
             AssertIsClient();
 
-            ClientEmailAccount = await database.ClientEmailAccounts
+            ClientEmailAccount = await database.EmailAccounts
                 .Where(x => 
                     x.Id == id &&
                     x.ClientId == UserToken.ClientId!.Value)

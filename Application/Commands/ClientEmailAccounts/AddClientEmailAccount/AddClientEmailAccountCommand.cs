@@ -12,7 +12,7 @@ public class AddClientEmailAccountCommand(IDatabaseService database) : IAddClien
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        if (await database.ClientEmailAccounts
+        if (await database.EmailAccounts
             .AnyAsync(x => x.ClientId == userToken.ClientId!.Value))
             throw new BlockedByExistingException();
 
@@ -28,7 +28,7 @@ public class AddClientEmailAccountCommand(IDatabaseService database) : IAddClien
             ClientId = userToken.ClientId!.Value,
         };
 
-        database.ClientEmailAccounts.Add(account);
+        database.EmailAccounts.Add(account);
 
         await database.SaveAsync(userToken);
 

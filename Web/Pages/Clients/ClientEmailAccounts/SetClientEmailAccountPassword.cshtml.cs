@@ -19,7 +19,7 @@ public class SetClientEmailAccountPasswordModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            ClientEmailAccount = await database.ClientEmailAccounts
+            ClientEmailAccount = await database.EmailAccounts
                 .Where(x => x.Id == id)
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
@@ -48,7 +48,7 @@ public class SetClientEmailAccountPasswordModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            ClientEmailAccount = await database.ClientEmailAccounts
+            ClientEmailAccount = await database.EmailAccounts
                 .Where(x => 
                     x.Id == CommandModel.Id &&
                     x.ClientId == UserToken.ClientId!.Value)

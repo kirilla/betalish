@@ -19,7 +19,7 @@ public class RemoveClientEmailAccountModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            ClientEmailAccount = await database.ClientEmailAccounts
+            ClientEmailAccount = await database.EmailAccounts
                 .Where(x => 
                     x.Id == id &&
                     x.ClientId == UserToken.ClientId!.Value)
@@ -50,7 +50,7 @@ public class RemoveClientEmailAccountModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            ClientEmailAccount = await database.ClientEmailAccounts
+            ClientEmailAccount = await database.EmailAccounts
                 .Where(x =>
                     x.Id == CommandModel.ClientEmailAccountId &&
                     x.ClientId == UserToken.ClientId!.Value)

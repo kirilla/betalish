@@ -12,12 +12,12 @@ public class RemoveClientEmailAccountCommand(IDatabaseService database) : IRemov
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var account = await database.ClientEmailAccounts
+        var account = await database.EmailAccounts
             .Where(x => x.Id == model.ClientEmailAccountId)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.ClientEmailAccounts.Remove(account);
+        database.EmailAccounts.Remove(account);
 
         await database.SaveAsync(userToken);
     }

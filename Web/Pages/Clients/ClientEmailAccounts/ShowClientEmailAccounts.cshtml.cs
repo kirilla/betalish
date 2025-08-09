@@ -14,7 +14,7 @@ public class ShowClientEmailAccountsModel(
         {
             AssertIsClient();
 
-            ClientEmailAccounts = await database.ClientEmailAccounts
+            ClientEmailAccounts = await database.EmailAccounts
                 .AsNoTracking()
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .OrderBy(x => x.FromName)

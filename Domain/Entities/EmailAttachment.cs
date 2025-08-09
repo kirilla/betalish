@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Betalish.Domain.Entities;
+﻿namespace Betalish.Domain.Entities;
 
 public class EmailAttachment
 {

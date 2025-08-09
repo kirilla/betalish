@@ -12,7 +12,7 @@ public class EditClientEmailAccountCommand(IDatabaseService database) : IEditCli
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
-        var account = await database.ClientEmailAccounts
+        var account = await database.EmailAccounts
             .Where(x =>
                 x.Id == model.Id &&
                 x.ClientId == userToken.ClientId!.Value)

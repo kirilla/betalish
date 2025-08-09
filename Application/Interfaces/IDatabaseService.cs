@@ -11,7 +11,7 @@ public interface IDatabaseService
     DbSet<Batch> Batches { get; set; }
     DbSet<Client> Clients { get; set; }
     DbSet<ClientAuth> ClientAuths { get; set; }
-    DbSet<ClientEmailAccount> ClientEmailAccounts { get; set; }
+    DbSet<ClientEmailAccount> EmailAccounts { get; set; }
     DbSet<ClientEmailMessage> ClientEmailMessages { get; set; }
     DbSet<ClientEvent> ClientEvents { get; set; }
     DbSet<Customer> Customers { get; set; }
