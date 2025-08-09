@@ -16,12 +16,12 @@ public class DatabaseService(
     public DbSet<Batch> Batches { get; set; }
     public DbSet<Client> Clients { get; set; }
     public DbSet<ClientAuth> ClientAuths { get; set; }
-    public DbSet<ClientEmailAccount> EmailAccounts { get; set; }
     public DbSet<ClientEmailMessage> ClientEmailMessages { get; set; }
     public DbSet<ClientEvent> ClientEvents { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<CustomerTag> CustomerTags { get; set; }
     public DbSet<DraftBalanceRow> DraftBalanceRows { get; set; }
+    public DbSet<EmailAccount> EmailAccounts { get; set; }
     public DbSet<EmailAttachment> EmailAttachments { get; set; }
     public DbSet<EmailImage> EmailImages { get; set; }
     public DbSet<EmailMessage> EmailMessages { get; set; }
@@ -64,12 +64,12 @@ public class DatabaseService(
         new BatchConfiguration().Configure(builder.Entity<Batch>());
         new ClientConfiguration().Configure(builder.Entity<Client>());
         new ClientAuthConfiguration().Configure(builder.Entity<ClientAuth>());
-        new ClientEmailAccountConfiguration().Configure(builder.Entity<ClientEmailAccount>());
         new ClientEmailMessageConfiguration().Configure(builder.Entity<ClientEmailMessage>());
         new ClientEventConfiguration().Configure(builder.Entity<ClientEvent>());
         new CustomerConfiguration().Configure(builder.Entity<Customer>());
         new CustomerTagConfiguration().Configure(builder.Entity<CustomerTag>());
         new DraftBalanceRowConfiguration().Configure(builder.Entity<DraftBalanceRow>());
+        new EmailAccountConfiguration().Configure(builder.Entity<EmailAccount>());
         new EmailAttachmentConfiguration().Configure(builder.Entity<EmailAttachment>());
         new EmailImageConfiguration().Configure(builder.Entity<EmailImage>());
         new EmailMessageConfiguration().Configure(builder.Entity<EmailMessage>());

@@ -32,10 +32,6 @@ class ClientConfiguration : IEntityTypeConfiguration<Client>
             .WithOne(x => x.Client)
             .HasForeignKey(x => x.ClientId);
 
-        builder.HasMany(x => x.ClientEmailAccounts)
-            .WithOne(x => x.Client)
-            .HasForeignKey(x => x.ClientId);
-
         builder.HasMany(x => x.ClientEmailMessages)
             .WithOne(x => x.Client)
             .HasForeignKey(x => x.ClientId);
@@ -48,6 +44,10 @@ class ClientConfiguration : IEntityTypeConfiguration<Client>
             .WithOne(x => x.Client)
             .HasForeignKey(x => x.ClientId)
             .OnDelete(DeleteBehavior.NoAction);
+
+        builder.HasMany(x => x.EmailAccounts)
+            .WithOne(x => x.Client)
+            .HasForeignKey(x => x.ClientId);
 
         builder.HasMany(x => x.Invoices)
             .WithOne(x => x.Client)

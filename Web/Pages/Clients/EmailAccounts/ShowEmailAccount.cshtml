@@ -1,0 +1,59 @@
+﻿@page "/show-email-account/{id:int}"
+@model ShowEmailAccountModel
+@{
+}
+
+@section Meta {
+    <title>Epostkonto - @(Model.EmailAccount.FromName) - @(Branding.WebsiteTitle)</title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        📮
+        Epostkonto
+    </h4>
+
+    <div class="notice">
+        <ul>
+            <li>
+                Avsändare: "@(Model.EmailAccount.FromName)"
+                @(Model.EmailAccount.FromAddress)
+            </li>
+            @if (Model.EmailAccount.ReplyToName.HasValue() || 
+                Model.EmailAccount.ReplyToAddress.HasValue())
+            {
+                <li>
+                    Svara till:
+                    "@(Model.EmailAccount.ReplyToName)"
+                    @(Model.EmailAccount.ReplyToAddress)
+                </li>
+            }
+            <li>
+                Server: @(Model.EmailAccount.SmtpHost)
+            </li>
+            <li>
+                Port: @(Model.EmailAccount.SmtpPort)
+            </li>
+        </ul>
+    </div>
+
+    <p>
+        <a class="button" href="/edit-email-account/@(Model.EmailAccount.Id)">
+            Redigera
+        </a>
+
+        <a class="button" href="/set-email-account-password/@(Model.EmailAccount.Id)">
+            Sätt lösenord
+        </a>
+
+        <a class="button" href="/remove-email-account/@(Model.EmailAccount.Id)">
+            Ta bort
+        </a>
+    </p>
+
+</main>

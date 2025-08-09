@@ -1,0 +1,58 @@
+﻿@page "/show-email-accounts"
+@model ShowEmailAccountsModel
+@{
+}
+
+@section Meta {
+    <title>
+        Epostkonto -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+
+    <h4>
+        Epostkonto
+    </h4>
+
+    <div class="notice">
+
+        <ul>
+            @foreach (var account in Model.EmailAccounts)
+            {
+                <li>
+                    📮
+                    &thinsp;
+                    <a href="/show-email-account/@(account.Id)">
+                        @(account.FromAddress)
+                    </a>
+                </li>
+            }
+
+            @if (!Model.EmailAccounts.Any())
+            {
+                <li>
+                    📮
+                    &thinsp;
+                    &ndash;
+                </li>
+            }
+        </ul>
+
+    </div>
+
+    @if (Model.CanAddEmailAccount)
+    {
+        <p>
+            <a class="button" href="/add-email-account">
+                Lägg till
+            </a>
+        </p>
+    }
+
+</main>

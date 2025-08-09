@@ -149,16 +149,6 @@ public static class MaxLengths
             public const int Address = Common.Email.Address;
         }
 
-        public static class ClientEmailAccount
-        {
-            public const int FromName = Common.Person.FullName;
-            public const int FromAddress = Common.Email.Address;
-            public const int ReplyToName = Common.Person.FullName;
-            public const int ReplyToAddress = Common.Email.Address;
-            public const int Password = 100;
-            public const int SmtpHost = 100;
-        }
-
         public static class ClientEmailMessage
         {
             public const int ToName = Common.Person.FullName;

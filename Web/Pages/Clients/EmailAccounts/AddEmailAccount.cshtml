@@ -1,0 +1,70 @@
+﻿@page "/add-email-account"
+@model AddEmailAccountModel
+@{
+}
+
+@section Meta {
+    <title>
+        Lägg till epostkonto -
+        @(Branding.WebsiteTitle)
+    </title>
+}
+
+@section Header {
+    <partial name="_Navbar" model="Model.UserToken" />
+}
+
+<main>
+    <h4>
+        Lägg till ett epostkonto
+    </h4>
+
+    <form method="post">
+
+        <label asp-for="CommandModel.FromName">
+            Avsändarnamn
+        </label>
+        <input asp-for="CommandModel.FromName" />
+
+        <label asp-for="CommandModel.FromAddress">
+            Epostadress
+        </label>
+        <input asp-for="CommandModel.FromAddress" />
+
+        <label asp-for="CommandModel.ReplyToName">
+            Svara till, namn
+        </label>
+        <input asp-for="CommandModel.ReplyToName" />
+
+        <label asp-for="CommandModel.ReplyToAddress">
+            Svara till, adress
+        </label>
+        <input asp-for="CommandModel.ReplyToAddress" />
+
+        <label asp-for="CommandModel.Password">
+            Lösenord
+        </label>
+        <input asp-for="CommandModel.Password" />
+
+        <label asp-for="CommandModel.SmtpHost">
+            SMTP-server
+        </label>
+        <input asp-for="CommandModel.SmtpHost" />
+
+        <label asp-for="CommandModel.SmtpPort">
+            SMTP-port
+        </label>
+        <input asp-for="CommandModel.SmtpPort" />
+
+        <div asp-validation-summary="All"></div>
+
+        <button type="submit">
+            Lägg till
+        </button>
+
+        <a class="button" href="/show-email-accounts">
+            Avbryt
+        </a>
+    </form>
+
+</main>
