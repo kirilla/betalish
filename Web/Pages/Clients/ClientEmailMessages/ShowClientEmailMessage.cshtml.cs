@@ -12,7 +12,7 @@ public class ShowClientEmailMessageModel(
         {
             AssertIsClient();
 
-            ClientEmailMessage = await database.ClientEmailMessages
+            ClientEmailMessage = await database.MessagesToCustomer
                 .Where(x => 
                     x.Id == id &&
                     x.ClientId == UserToken.ClientId!.Value)

@@ -21,7 +21,7 @@ public class RemoveClientEmailMessageModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            ClientEmailMessage = await database.ClientEmailMessages
+            ClientEmailMessage = await database.MessagesToCustomer
                 .Where(x => 
                     x.Id == id &&
                     x.ClientId == UserToken.ClientId!.Value)
@@ -54,7 +54,7 @@ public class RemoveClientEmailMessageModel(
             if (!command.IsPermitted(UserToken))
                 throw new NotPermittedException();
 
-            ClientEmailMessage = await database.ClientEmailMessages
+            ClientEmailMessage = await database.MessagesToCustomer
                 .Where(x => 
                     x.Id == CommandModel.Id &&
                     x.ClientId == UserToken.ClientId!.Value)

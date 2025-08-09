@@ -16,7 +16,7 @@ public class ShowClientEmailQueueModel(
         {
             AssertIsClient();
 
-            EmailHeaders = await database.ClientEmailMessages
+            EmailHeaders = await database.MessagesToCustomer
                 .Where(x => x.ClientId == UserToken.ClientId!.Value)
                 .OrderBy(x => x.Created)
                 .Select(x => new EmailHeader()

@@ -20,7 +20,7 @@ public class SendClientEmailCommand(
 
         var smtpConfiguration = smtpOptions.Value;
 
-        var message = await database.ClientEmailMessages
+        var message = await database.MessagesToCustomer
             .Where(x => 
                 x.Id == model.Id &&
                 x.ClientId == userToken.ClientId!.Value)

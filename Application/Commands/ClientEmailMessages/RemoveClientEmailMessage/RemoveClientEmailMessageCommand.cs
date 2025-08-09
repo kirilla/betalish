@@ -12,14 +12,14 @@ public class RemoveClientEmailMessageCommand(IDatabaseService database) : IRemov
         if (!model.Confirmed)
             throw new ConfirmationRequiredException();
 
-        var message = await database.ClientEmailMessages
+        var message = await database.MessagesToCustomer
             .Where(x => 
                 x.Id == model.Id &&
                 x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        database.ClientEmailMessages.Remove(message);
+        database.MessagesToCustomer.Remove(message);
 
         await database.SaveAsync(userToken);
     }

@@ -9,7 +9,7 @@ public class RemoveClientEmailMessagesCommand(IDatabaseService database) : IRemo
         if (!IsPermitted(userToken))
             throw new NotPermittedException();
 
-        var query = await database.ClientEmailMessages
+        var query = await database.MessagesToCustomer
             .Where(x => 
                 x.ClientId == userToken.ClientId!.Value &&
                 x.EmailStatus == model.EmailStatus!.Value)

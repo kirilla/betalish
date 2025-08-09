@@ -16,7 +16,7 @@ public class DatabaseService(
     public DbSet<Batch> Batches { get; set; }
     public DbSet<Client> Clients { get; set; }
     public DbSet<ClientAuth> ClientAuths { get; set; }
-    public DbSet<ClientEmailMessage> ClientEmailMessages { get; set; }
+    public DbSet<ClientEmailMessage> MessagesToCustomer { get; set; }
     public DbSet<ClientEvent> ClientEvents { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<CustomerTag> CustomerTags { get; set; }
