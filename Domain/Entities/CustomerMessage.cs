@@ -1,6 +1,6 @@
 ﻿namespace Betalish.Domain.Entities;
 
-public class ClientEmailMessage : ICreatedDateTime
+public class CustomerMessage : ICreatedDateTime
 {
     public int Id { get; set; }
 

@@ -149,7 +149,18 @@ public static class MaxLengths
             public const int Address = Common.Email.Address;
         }
 
-        public static class ClientEmailMessage
+        public static class ClientEvent
+        {
+            public const int Description = 200;
+        }
+
+        public static class Customer
+        {
+            public const int Name = Common.Person.FullName;
+            public const int EmailAddress = Common.Email.Address;
+        }
+
+        public static class CustomerMessage
         {
             public const int ToName = Common.Person.FullName;
             public const int ToAddress = Common.Email.Address;
@@ -164,17 +175,6 @@ public static class MaxLengths
 
             public const int HtmlBody = Common.DbSuperSize;
             public const int TextBody = Common.DbSuperSize;
-        }
-
-        public static class ClientEvent
-        {
-            public const int Description = 200;
-        }
-
-        public static class Customer
-        {
-            public const int Name = Common.Person.FullName;
-            public const int EmailAddress = Common.Email.Address;
         }
 
         public static class EmailAccount

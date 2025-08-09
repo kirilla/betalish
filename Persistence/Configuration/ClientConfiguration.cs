@@ -32,7 +32,7 @@ class ClientConfiguration : IEntityTypeConfiguration<Client>
             .WithOne(x => x.Client)
             .HasForeignKey(x => x.ClientId);
 
-        builder.HasMany(x => x.ClientEmailMessages)
+        builder.HasMany(x => x.CustomerMessages)
             .WithOne(x => x.Client)
             .HasForeignKey(x => x.ClientId)
             .OnDelete(DeleteBehavior.NoAction);
