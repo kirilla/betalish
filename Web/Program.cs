@@ -42,6 +42,9 @@ public class Program
 
         //Console.WriteLine($"ConnectionString: {connectionString}");
 
+        builder.Services.Configure<CustomerMessageConfiguration>(
+            builder.Configuration.GetSection("CustomerMessage"));
+
         builder.Services.Configure<SignUpConfiguration>(
             builder.Configuration.GetSection("SignUp"));
 
