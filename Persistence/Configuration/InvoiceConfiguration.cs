@@ -84,6 +84,10 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
             .IsRequired(false)
             .OnDelete(DeleteBehavior.NoAction);
 
+        builder.HasMany(x => x.DistributionMessages)
+            .WithOne(x => x.Invoice)
+            .HasForeignKey(x => x.InvoiceId);
+
         builder.HasMany(x => x.InvoiceAccountingRows)
             .WithOne(x => x.Invoice)
             .HasForeignKey(x => x.InvoiceId);

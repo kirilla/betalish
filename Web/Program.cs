@@ -23,6 +23,8 @@ public class Program
     {
         EnumValidator.EnsureUniqueValues<ClientEventKind>();
         EnumValidator.EnsureUniqueValues<CustomerMessageKind>();
+        EnumValidator.EnsureUniqueValues<DistributionMessageKind>();
+        EnumValidator.EnsureUniqueValues<DistributionStatus>();
         EnumValidator.EnsureUniqueValues<EmailKind>();
         EnumValidator.EnsureUniqueValues<EmailStatus>();
         EnumValidator.EnsureUniqueValues<LogItemKind>();

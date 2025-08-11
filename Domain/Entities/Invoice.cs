@@ -61,6 +61,7 @@ public class Invoice : IFormatOnSave, IValidateOnSave
     public Client Client { get; set; } = null!;
 
     public List<CustomerMessage> CustomerMessages { get; set; } = [];
+    public List<DistributionMessage> DistributionMessages { get; set; } = [];
 
     public List<InvoiceFee> InvoiceFees { get; set; } = [];
     public List<InvoiceRow> InvoiceRows { get; set; } = [];
