@@ -3,6 +3,6 @@
 public enum CustomerMessageDistributionMethod
 {
     Email = 1,
-    PrintService = 2,
-    PrintManually = 3,
+    Postal = 2,
+    Manual = 3,
 }
