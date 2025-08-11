@@ -1,6 +1,6 @@
 ﻿namespace Betalish.Common.Settings;
 
-public class CustomerMessageConfiguration
+public class DistributionConfiguration
 {
     public bool Active { get; set; }
 }

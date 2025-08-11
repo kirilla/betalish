@@ -5,21 +5,21 @@ namespace Betalish.Web.Pages.Admin.Settings;
 public class ShowConfigModel(
     IUserToken userToken,
     IOptions<BadSignInConfiguration> badSignOptions,
-    IOptions<CustomerMessageConfiguration> customerMessageOptions,
+    IOptions<DistributionConfiguration> distributionOptions,
     IOptions<FirewallConfiguration> firewallOptions,
     IOptions<SignInConfiguration> signinOptions,
     IOptions<SignUpConfiguration> signupOptions,
     IOptions<SmtpConfiguration> smtpOptions) : AdminPageModel(userToken)
 {
     private readonly BadSignInConfiguration _badSignConfig = badSignOptions.Value;
-    private readonly CustomerMessageConfiguration _customerMessageConfig = customerMessageOptions.Value;
+    private readonly DistributionConfiguration _distributionConfig = distributionOptions.Value;
     private readonly FirewallConfiguration _firewallConfig = firewallOptions.Value;
     private readonly SignInConfiguration _signInConfig = signinOptions.Value;
     private readonly SignUpConfiguration _signupConfig = signupOptions.Value;
     private readonly SmtpConfiguration _smtpConfig = smtpOptions.Value;
 
     public string BadSignInJson { get; set; } = null!;
-    public string CustomerMessageJson { get; set; } = null!;
+    public string DistributionJson { get; set; } = null!;
     public string FirewallJson { get; set; } = null!;
     public string SignInJson { get; set; } = null!;
     public string SignUpJson { get; set; } = null!;
@@ -37,7 +37,7 @@ public class ShowConfigModel(
             };
 
             BadSignInJson = JsonSerializer.Serialize(_badSignConfig, options);
-            CustomerMessageJson = JsonSerializer.Serialize(_customerMessageConfig, options);
+            DistributionJson = JsonSerializer.Serialize(_distributionConfig, options);
             FirewallJson = JsonSerializer.Serialize(_firewallConfig, options);
             SignInJson = JsonSerializer.Serialize(_signInConfig, options);
             SignUpJson = JsonSerializer.Serialize(_signupConfig, options);
