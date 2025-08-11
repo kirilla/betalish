@@ -18,7 +18,6 @@ public class DatabaseService(
     public DbSet<ClientAuth> ClientAuths { get; set; }
     public DbSet<ClientEvent> ClientEvents { get; set; }
     public DbSet<Customer> Customers { get; set; }
-    public DbSet<CustomerMessage> CustomerMessages { get; set; }
     public DbSet<CustomerTag> CustomerTags { get; set; }
     public DbSet<DistributionMessage> DistributionMessages { get; set; }
     public DbSet<DraftBalanceRow> DraftBalanceRows { get; set; }
@@ -67,7 +66,6 @@ public class DatabaseService(
         new ClientAuthConfiguration().Configure(builder.Entity<ClientAuth>());
         new ClientEventConfiguration().Configure(builder.Entity<ClientEvent>());
         new CustomerConfiguration().Configure(builder.Entity<Customer>());
-        new CustomerMessageConfiguration().Configure(builder.Entity<CustomerMessage>());
         new CustomerTagConfiguration().Configure(builder.Entity<CustomerTag>());
         new DistributionMessageConfiguration().Configure(builder.Entity<DistributionMessage>());
         new DraftBalanceRowConfiguration().Configure(builder.Entity<DraftBalanceRow>());

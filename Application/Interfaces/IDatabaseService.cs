@@ -13,7 +13,6 @@ public interface IDatabaseService
     DbSet<ClientAuth> ClientAuths { get; set; }
     DbSet<ClientEvent> ClientEvents { get; set; }
     DbSet<Customer> Customers { get; set; }
-    DbSet<CustomerMessage> CustomerMessages { get; set; }
     DbSet<CustomerTag> CustomerTags { get; set; }
     DbSet<DistributionMessage> DistributionMessages { get; set; }
     DbSet<DraftBalanceRow> DraftBalanceRows { get; set; }

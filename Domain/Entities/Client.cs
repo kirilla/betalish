@@ -12,7 +12,6 @@ public class Client
     public List<ClientAuth> ClientAuths { get; set; } = [];
     public List<ClientEvent> ClientEvents { get; set; } = [];
     public List<Customer> Customers { get; set; } = [];
-    public List<CustomerMessage> CustomerMessages { get; set; } = [];
     public List<EmailAccount> EmailAccounts { get; set; } = [];
     public List<EmailMessage> EmailMessages { get; set; } = [];
     public List<Invoice> Invoices { get; set; } = [];
