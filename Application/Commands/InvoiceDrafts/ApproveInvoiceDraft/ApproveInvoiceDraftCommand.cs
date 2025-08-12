@@ -4,6 +4,7 @@ using Betalish.Application.Routines.CreateInvoicePlan;
 using Betalish.Application.Routines.SetBalanceRowCreditInvoiceNumber;
 using Betalish.Application.Routines.SetInvoiceNumber;
 using Betalish.Application.Routines.UpdateInvoiceAccountingRows;
+using Betalish.Application.Routines.UpdateInvoicePaymentStatus;
 
 namespace Betalish.Application.Commands.InvoiceDrafts.ApproveInvoiceDraft;
 
@@ -14,7 +15,8 @@ public class ApproveInvoiceDraftCommand(
     ISetInvoiceNumberRoutine setInvoiceNumberRoutine,
     IUpdateInvoiceAccountingRowsRoutine updateInvoiceAccounting,
     ISetBalanceRowCreditInvoiceNumberRoutine setBalanceRowCreditInvoiceNumber,
-    ICreateInvoicePlanRoutine createInvoicePlan) : IApproveInvoiceDraftCommand
+    ICreateInvoicePlanRoutine createInvoicePlan,
+    IUpdateInvoicePaymentStatusRoutine updatePaymentStatus) : IApproveInvoiceDraftCommand
 {
     public async Task<int> Execute(
         IUserToken userToken, ApproveInvoiceDraftCommandModel model)
@@ -57,6 +59,11 @@ public class ApproveInvoiceDraftCommand(
                 x.InvoiceDraft.ClientId == userToken.ClientId!.Value)
             .ToListAsync();
 
+        var debitInvoices = draftBalanceRows
+            .Select(x => new { x.InvoiceId })
+            .Distinct()
+            .ToList();
+
         Assert(userToken, draft, paymentTerms, draftRows, draftBalanceRows);
 
         int invoiceId = await convertToInvoiceRoutine.Execute(userToken, draft.Id);
@@ -68,6 +75,13 @@ public class ApproveInvoiceDraftCommand(
         if (draft.IsCredit)
         {
             await setBalanceRowCreditInvoiceNumber.Execute(userToken, invoiceId);
+
+            foreach (var debitInvoice in debitInvoices)
+            {
+                await updatePaymentStatus.Execute(userToken, debitInvoice.InvoiceId);
+            }
+
+            await updatePaymentStatus.Execute(userToken, invoiceId);
         }
 
         await createInvoicePlan.Execute(userToken, invoiceId, paymentTerms?.Id);
