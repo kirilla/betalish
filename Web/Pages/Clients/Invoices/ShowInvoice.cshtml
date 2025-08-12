@@ -277,12 +277,8 @@
 
         @if (Model.UserToken.IsAdmin)
         {
-            <a class="button" href="/update-invoice-accounting-rows/@(Model.Invoice.Id)">
-                Skapa kontering
-            </a>
-
-            <a class="button" href="/update-invoice-payment-status/@(Model.Invoice.Id)">
-                Räkna om betalstatus
+            <a class="button admin" href="/execute-invoice-routine/@(Model.Invoice.Id)">
+                Kör fakturarutin
             </a>
         }
     </p>

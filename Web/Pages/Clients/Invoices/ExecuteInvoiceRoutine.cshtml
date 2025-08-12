@@ -1,11 +1,11 @@
-﻿@page "/update-invoice-payment-status/{id:int}"
-@model UpdateInvoicePaymentStatusModel
+﻿@page "/execute-invoice-routine/{id:int}"
+@model ExecuteInvoiceRoutineModel
 @{
 }
 
 @section Meta {
     <title>
-        Räkna om betalstatus -
+        Kör fakturarutin -
         @(Branding.WebsiteTitle)
     </title>
 }
@@ -18,7 +18,7 @@
 
 <main>
     <h4>
-        Räkna om betalstatus
+        Kör fakturarutin
     </h4>
 
     <form method="post">
@@ -26,16 +26,21 @@
         <input type="hidden" asp-for="CommandModel.InvoiceId" />
 
         <p>
-            <label asp-for="CommandModel.Confirmed">
-                <input asp-for="CommandModel.Confirmed" type="checkbox" />
-                Ja, jag är säker
+            <label asp-for="CommandModel.UpdateInvoiceAccountingRows">
+                <input asp-for="CommandModel.UpdateInvoiceAccountingRows" type="checkbox" />
+                Skapa kontering
+            </label>
+            
+            <label asp-for="CommandModel.UpdateInvoicePaymentStatus">
+                <input asp-for="CommandModel.UpdateInvoicePaymentStatus" type="checkbox" />
+                Räkna om betalstatus
             </label>
         </p>
 
         <div asp-validation-summary="All"></div>
 
         <button type="submit">
-            Räkna om
+            Kör
         </button>
 
         <a class="button" href="/show-invoice/@(Model.Invoice.Id)">

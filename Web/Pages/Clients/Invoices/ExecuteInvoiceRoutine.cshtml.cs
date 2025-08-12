@@ -1,16 +1,16 @@
-﻿using Betalish.Application.Commands.Invoices.UpdateInvoicePaymentStatus;
+﻿using Betalish.Application.Commands.Invoices.ExecuteInvoiceRoutine;
 
 namespace Betalish.Web.Pages.Clients.Invoices;
 
-public class UpdateInvoicePaymentStatusModel(
+public class ExecuteInvoiceRoutineModel(
     IUserToken userToken,
     IDatabaseService database,
-    IUpdateInvoicePaymentStatusCommand command) : ClientPageModel(userToken)
+    IExecuteInvoiceRoutineCommand command) : ClientPageModel(userToken)
 {
     public Invoice Invoice { get; set; } = null!;
 
     [BindProperty]
-    public UpdateInvoicePaymentStatusCommandModel CommandModel { get; set; } = new();
+    public ExecuteInvoiceRoutineCommandModel CommandModel { get; set; } = new();
 
     public async Task<IActionResult> OnGetAsync(int id)
     {
@@ -26,7 +26,7 @@ public class UpdateInvoicePaymentStatusModel(
                 .SingleOrDefaultAsync() ??
                 throw new NotFoundException();
 
-            CommandModel = new UpdateInvoicePaymentStatusCommandModel()
+            CommandModel = new ExecuteInvoiceRoutineCommandModel()
             {
                 InvoiceId = Invoice.Id,
             };
@@ -63,14 +63,6 @@ public class UpdateInvoicePaymentStatusModel(
             await command.Execute(UserToken, CommandModel);
 
             return Redirect($"/show-invoice/{id}");
-        }
-        catch (ConfirmationRequiredException)
-        {
-            ModelState.AddModelError(
-                nameof(CommandModel.Confirmed),
-                "Bekräfta att du verkligen vill räkna om betalstatus.");
-
-            return Page();
         }
         catch (Exception ex)
         {
