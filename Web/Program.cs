@@ -1,5 +1,6 @@
 using Betalish.Application.BackgroundServices.Email;
 using Betalish.Application.BackgroundServices.Loggers;
+using Betalish.Application.BackgroundServices.MessageGenerators;
 using Betalish.Application.BackgroundServices.Reapers;
 using Betalish.Application.Queues.BadSignIns;
 using Betalish.Application.Queues.EndpointRateLimiting;
@@ -132,6 +133,9 @@ public class Program
             builder.Services.AddHostedService<SignInRateLimitReaper>();
             builder.Services.AddHostedService<SignupReaper>();
             builder.Services.AddHostedService<UserEventLogger>();
+
+            // DistributionMessage generators
+            builder.Services.AddHostedService<InvoiceEmailDistributionMessageGenerator>();
         }
 
         // API controllers
