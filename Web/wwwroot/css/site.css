@@ -28,7 +28,7 @@ textarea {
     resize: vertical;
 }
 
-@media only screen and (max-width: 720px) {
+/*@media only screen and (max-width: 720px) {
     .notice {
         background: none;
         border: None;
@@ -36,7 +36,7 @@ textarea {
         padding: 0px;
         margin: 0px;
     }
-}
+}*/
 
 /* custom */
 label, nav {
@@ -209,6 +209,10 @@ main h5 + figure {
     margin-top: 1rem;
 }
 
+figure {
+    margin-block: 1.5rem;
+}
+
 .page-menu {
     /*margin-inline-start: 1rem;*/
     margin-top: 0.5rem;
@@ -258,4 +262,55 @@ div[role="group"] a.admin:hover {
 
 th.admin, td.admin {
     color: grey;
+}
+
+/* tabs on invoice page */
+.tablist {
+    display: flex;
+    gap: .5rem;
+    margin-block-start: 1.5rem;
+    margin-block-end: 1rem;
+}
+
+    .tablist button {
+        padding: .5rem 1rem;
+        cursor: pointer;
+        border: none;
+        background: none;
+        border-style: solid;
+        border-color: var(--border);
+        border-width: thin;
+        color: var(--text);
+        width: fit-content;
+    }
+
+        .tablist button.active {
+            background: var(--accent);
+            color: var(--accent-text);
+        }
+
+/* grid on invoice page */
+.grid {
+    display: flex;
+    gap: 1.25rem;
+    align-items: stretch;
+    margin-block-start: 0.5rem;
+}
+
+.col {
+    flex: 1 1 0; /* equal width, grow/shrink as needed */
+    min-width: 0; /* fix overflow in flex items */
+    display: flex;
+}
+
+@media (max-width: 720px) {
+    .grid {
+        flex-direction: column;
+    }
+}
+
+.col > .notice {
+    margin: 0;
+    padding: 0.7rem;
+    flex: 1 1 auto;
 }
