@@ -9,4 +9,10 @@ public interface ISmtpService
         EmailMessage email,
         List<EmailAttachment> attachments,
         List<EmailImage> images);
+
+    void SendEmailMessage(
+        EmailAccount emailAccount,
+        EmailMessage email,
+        List<EmailAttachment> attachments,
+        List<EmailImage> images);
 }

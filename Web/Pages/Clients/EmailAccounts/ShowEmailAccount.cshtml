@@ -51,6 +51,13 @@
             Sätt lösenord
         </a>
 
+        @if (Model.UserToken.IsAdmin)
+        {
+            <a class="button admin" href="/test-email-account/@(Model.EmailAccount.Id)">
+                Skicka testmeddelande
+            </a>
+        }
+        
         <a class="button" href="/remove-email-account/@(Model.EmailAccount.Id)">
             Ta bort
         </a>
