@@ -12,7 +12,5 @@ public interface ISmtpService
 
     void SendEmailMessage(
         EmailAccount emailAccount,
-        EmailMessage email,
-        List<EmailAttachment> attachments,
-        List<EmailImage> images);
+        EmailMessage email);
 }

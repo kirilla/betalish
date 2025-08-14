@@ -81,9 +81,7 @@ public class SmtpService() : ISmtpService
 
     public void SendEmailMessage(
         EmailAccount emailAccount,
-        EmailMessage email,
-        List<EmailAttachment> attachments,
-        List<EmailImage> images)
+        EmailMessage email)
     {
         var mail = new MailMessage();
 
@@ -106,40 +104,8 @@ public class SmtpService() : ISmtpService
         var htmlView = AlternateView.CreateAlternateViewFromString(
             email.HtmlBody, Encoding.UTF8, MediaTypeNames.Text.Html);
 
-        foreach (var image in images)
-        {
-            MemoryStream ms = new MemoryStream(image.Data);
-
-            var resource = new LinkedResource(ms, image.ContentType)
-            {
-                ContentId = $"{image.Id}",
-                TransferEncoding = TransferEncoding.Base64,
-                //ContentType = new ContentType(image.ContentType),
-                //ContentLink = new Uri($"cid:{image.Id}")
-            };
-
-            //resource.ContentDisposition.Inline = true;
-            //resource.ContentDisposition.DispositionType = DispositionTypeNames.Inline;
-
-            //resource.ContentId = "myImageId";
-            //resource.TransferEncoding = TransferEncoding.Base64;
-
-            htmlView.LinkedResources.Add(resource);
-        }
-
         mail.AlternateViews.Add(textView);
         mail.AlternateViews.Add(htmlView);
-
-        foreach (var attachment in attachments)
-        {
-            var stream = new MemoryStream(attachment.Data, 0, attachment.Data.Length);
-
-            //stream.Flush();
-            //stream.Seek(0, 0);
-
-            mail.Attachments.Add(new Attachment(
-                stream, attachment.Name, attachment.ContentType));
-        }
 
         SmtpClient smtp = new SmtpClient(emailAccount.SmtpHost);
         smtp.Credentials = new NetworkCredential(emailAccount.FromAddress, emailAccount.Password);

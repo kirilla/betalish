@@ -27,11 +27,7 @@ public class TestEmailAccountCommand(
             model.ToAddress,
             emailAccount!);
 
-        var attachments = new List<EmailAttachment>();
-        var images = new List<EmailImage>();
-
-        smtpService.SendEmailMessage(
-            emailAccount, emailMessage, attachments, images);
+        smtpService.SendEmailMessage(emailAccount, emailMessage);
     }
 
     public bool IsPermitted(IUserToken userToken)
