@@ -26,7 +26,7 @@ public class InvoiceEmailSender(
                 await SendOne(cancellation);
 
             await Task
-                .Delay(TimeSpan.FromMinutes(1), cancellation)
+                .Delay(TimeSpan.FromMinutes(5), cancellation)
                 .ConfigureAwait(false);
         }
     }
