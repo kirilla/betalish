@@ -55,7 +55,7 @@ public class InvoiceEmailDistributionMessageGenerator(
             })
             .ToList();
 
-        database.DistributionMessages.AddRange(messages);
+        database.DistributionTriggers.AddRange(messages);
 
         await database.SaveAsync(new NoUserToken(), cancellation);
     }

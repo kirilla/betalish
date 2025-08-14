@@ -19,7 +19,7 @@ public class DatabaseService(
     public DbSet<ClientEvent> ClientEvents { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<CustomerTag> CustomerTags { get; set; }
-    public DbSet<DistributionMessage> DistributionMessages { get; set; }
+    public DbSet<DistributionMessage> DistributionTriggers { get; set; }
     public DbSet<DraftBalanceRow> DraftBalanceRows { get; set; }
     public DbSet<EmailAccount> EmailAccounts { get; set; }
     public DbSet<EmailAttachment> EmailAttachments { get; set; }

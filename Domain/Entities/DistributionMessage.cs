@@ -2,8 +2,7 @@
 
 public class DistributionMessage : 
     IValidateOnSave, 
-    ICreatedDateTime,
-    IUpdatedDateTime
+    ICreatedDateTime
 {
     public int Id { get; set; }
 
@@ -11,7 +10,7 @@ public class DistributionMessage :
     public required DistributionStatus DistributionStatus { get; set; }
 
     public DateTime? Created { get; set; }
-    public DateTime? Updated { get; set; }
+    public DateTime? Distributed { get; set; }
 
     public int InvoiceId { get; set; }
     public Invoice Invoice { get; set; } = null!;
