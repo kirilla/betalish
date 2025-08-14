@@ -142,6 +142,7 @@ public class Program
 
             // Email senders
             builder.Services.AddHostedService<InvoiceEmailSender>();
+            builder.Services.AddHostedService<ReminderEmailSender>();
         }
 
         // API controllers
