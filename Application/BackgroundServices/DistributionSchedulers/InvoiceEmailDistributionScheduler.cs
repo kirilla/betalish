@@ -38,7 +38,6 @@ public class InvoiceEmailDistributionScheduler(
             .Where(x =>
                 x.SendByEmail == true &&
                 x.DistributionDate <= today &&
-                x.DistributionEmailSent == null &&
                 x.Invoice.InvoiceStatus == InvoiceStatus.Issued && 
                 !x.Invoice.DistributionTriggers.Any(y => 
                     y.DistributionTriggerKind == DistributionTriggerKind.InvoiceEmail))

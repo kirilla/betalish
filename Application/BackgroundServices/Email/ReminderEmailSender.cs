@@ -90,9 +90,6 @@ public class ReminderEmailSender(
 
             trigger.DistributionStatus = DistributionStatus.Distributed;
             trigger.Distributed = dateService.GetDateTimeNow();
-
-            invoicePlan.ReminderEmailSent = dateService.GetDateTimeNow();
-            // TODO: Are the InvoicePlan sent-dates necessary?
         }
         catch (Exception ex)
         {

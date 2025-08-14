@@ -37,22 +37,6 @@ public class InvoicePlan
     public bool SendByEmail { get; set; }
     public bool SendPostal { get; set; }
 
-    // Distribution
-    public DateTime? DistributionEmailSent { get; set; }
-    public DateTime? DistributionInvoicePrinted { get; set; }
-
-    // Reminder
-    public DateTime? ReminderEmailSent { get; set; }
-    public DateTime? ReminderInvoicePrinted { get; set; }
-
-    // Demand
-    public DateTime? DemandEmailSent { get; set; }
-    public DateTime? DemandInvoicePrinted { get; set; }
-
-    // Collect
-    public DateTime? CollectEmailSent { get; set; }
-    public DateTime? CollectInvoicePrinted { get; set; }
-
     // Relations
     public Invoice Invoice { get; set; } = null!;
 }

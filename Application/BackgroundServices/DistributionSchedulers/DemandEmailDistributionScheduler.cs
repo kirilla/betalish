@@ -39,7 +39,6 @@ public class DemandEmailDistributionScheduler(
                 x.SendByEmail == true &&
                 x.Demand == true &&
                 x.DemandDate <= today &&
-                x.DemandEmailSent == null &&
                 x.Invoice.InvoiceStatus == InvoiceStatus.Issued && 
                 !x.Invoice.DistributionTriggers.Any(y => 
                     y.DistributionTriggerKind == DistributionTriggerKind.DemandEmail))

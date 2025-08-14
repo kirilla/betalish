@@ -101,9 +101,6 @@ public class InvoiceEmailSender(
 
             trigger.DistributionStatus = DistributionStatus.Distributed;
             trigger.Distributed = dateService.GetDateTimeNow();
-
-            invoicePlan.DistributionEmailSent = dateService.GetDateTimeNow();
-            // TODO: Are the InvoicePlan sent-dates necessary?
         }
         catch (Exception ex)
         {
