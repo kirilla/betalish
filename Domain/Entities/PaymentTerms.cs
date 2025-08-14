@@ -8,15 +8,21 @@ public class PaymentTerms : IFormatOnSave, IValidateOnSave
 
     public required string Name { get; set; }
 
-    public required bool Interest { get; set; }
+    // Stages
     public required bool Reminder { get; set; }
     public required bool Demand { get; set; }
     public required bool Collect { get; set; }
 
+    // Time frame
     public required int PaymentTermDays { get; set; }
 
+    // Payment
     public required decimal? MinToConsiderPaid { get; set; }
 
+    // Interest
+    public required bool Interest { get; set; }
+
+    // Fees
     public required decimal? ReminderFee { get; set; }
     public required decimal? DemandFee { get; set; }
 
