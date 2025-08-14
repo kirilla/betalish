@@ -1,6 +1,6 @@
 ﻿namespace Betalish.Domain.Enums;
 
-public enum DistributionMessageKind
+public enum DistributionTriggerKind
 {
     InvoiceEmail = 1001,
     InvoicePostal = 1002,

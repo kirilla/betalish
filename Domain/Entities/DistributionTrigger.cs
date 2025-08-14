@@ -1,12 +1,12 @@
 ﻿namespace Betalish.Domain.Entities;
 
-public class DistributionMessage : 
+public class DistributionTrigger : 
     IValidateOnSave, 
     ICreatedDateTime
 {
     public int Id { get; set; }
 
-    public required DistributionMessageKind DistributionMessageKind { get; set; }
+    public required DistributionTriggerKind DistributionTriggerKind { get; set; }
     public required DistributionStatus DistributionStatus { get; set; }
 
     public DateTime? Created { get; set; }
@@ -17,9 +17,9 @@ public class DistributionMessage :
 
     public void ValidateOnSave()
     {
-        if (!Enum.IsDefined(DistributionMessageKind))
+        if (!Enum.IsDefined(DistributionTriggerKind))
             throw new InvalidEnumException(
-                nameof(DistributionMessageKind));
+                nameof(DistributionTriggerKind));
 
         if (!Enum.IsDefined(DistributionStatus))
             throw new InvalidEnumException(

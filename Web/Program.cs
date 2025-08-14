@@ -1,6 +1,6 @@
+using Betalish.Application.BackgroundServices.DistributionSchedulers;
 using Betalish.Application.BackgroundServices.Email;
 using Betalish.Application.BackgroundServices.Loggers;
-using Betalish.Application.BackgroundServices.MessageGenerators;
 using Betalish.Application.BackgroundServices.Reapers;
 using Betalish.Application.Queues.BadSignIns;
 using Betalish.Application.Queues.EndpointRateLimiting;
@@ -23,7 +23,7 @@ public class Program
     public static void Main(string[] args)
     {
         EnumValidator.EnsureUniqueValues<ClientEventKind>();
-        EnumValidator.EnsureUniqueValues<DistributionMessageKind>();
+        EnumValidator.EnsureUniqueValues<DistributionTriggerKind>();
         EnumValidator.EnsureUniqueValues<DistributionStatus>();
         EnumValidator.EnsureUniqueValues<EmailKind>();
         EnumValidator.EnsureUniqueValues<EmailStatus>();
@@ -135,7 +135,7 @@ public class Program
             builder.Services.AddHostedService<UserEventLogger>();
 
             // DistributionMessage generators
-            builder.Services.AddHostedService<InvoiceEmailDistributionMessageGenerator>();
+            builder.Services.AddHostedService<InvoiceEmailDistributionScheduler>();
         }
 
         // API controllers

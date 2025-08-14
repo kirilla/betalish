@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
-namespace Betalish.Application.BackgroundServices.MessageGenerators;
+namespace Betalish.Application.BackgroundServices.DistributionSchedulers;
 
-public class InvoiceEmailDistributionMessageGenerator(
+public class InvoiceEmailDistributionScheduler(
     IDateService dateService,
     IServiceProvider serviceProvider,
     IOptions<DistributionConfiguration> options) : BackgroundService
@@ -41,15 +41,15 @@ public class InvoiceEmailDistributionMessageGenerator(
                 x.DistributionEmailSent == null &&
                 x.Invoice.InvoiceStatus == InvoiceStatus.Issued && 
                 x.SendByEmail == true &&
-                !x.Invoice.DistributionMessages.Any(y => 
-                    y.DistributionMessageKind == DistributionMessageKind.InvoiceEmail))
+                !x.Invoice.DistributionTriggers.Any(y => 
+                    y.DistributionTriggerKind == DistributionTriggerKind.InvoiceEmail))
             .Take(10)
             .ToListAsync(cancellation);
 
         var messages = invoicePlans
-            .Select(x => new DistributionMessage()
+            .Select(x => new DistributionTrigger()
             {
-                DistributionMessageKind = DistributionMessageKind.InvoiceEmail,
+                DistributionTriggerKind = DistributionTriggerKind.InvoiceEmail,
                 DistributionStatus = DistributionStatus.Pending,
                 InvoiceId = x.Id,
             })

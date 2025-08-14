@@ -14,7 +14,7 @@ public interface IDatabaseService
     DbSet<ClientEvent> ClientEvents { get; set; }
     DbSet<Customer> Customers { get; set; }
     DbSet<CustomerTag> CustomerTags { get; set; }
-    DbSet<DistributionMessage> DistributionTriggers { get; set; }
+    DbSet<DistributionTrigger> DistributionTriggers { get; set; }
     DbSet<DraftBalanceRow> DraftBalanceRows { get; set; }
     DbSet<EmailAccount> EmailAccounts { get; set; }
     DbSet<EmailAttachment> EmailAttachments { get; set; }

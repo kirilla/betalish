@@ -19,7 +19,7 @@ public class DatabaseService(
     public DbSet<ClientEvent> ClientEvents { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<CustomerTag> CustomerTags { get; set; }
-    public DbSet<DistributionMessage> DistributionTriggers { get; set; }
+    public DbSet<DistributionTrigger> DistributionTriggers { get; set; }
     public DbSet<DraftBalanceRow> DraftBalanceRows { get; set; }
     public DbSet<EmailAccount> EmailAccounts { get; set; }
     public DbSet<EmailAttachment> EmailAttachments { get; set; }
@@ -67,7 +67,7 @@ public class DatabaseService(
         new ClientEventConfiguration().Configure(builder.Entity<ClientEvent>());
         new CustomerConfiguration().Configure(builder.Entity<Customer>());
         new CustomerTagConfiguration().Configure(builder.Entity<CustomerTag>());
-        new DistributionMessageConfiguration().Configure(builder.Entity<DistributionMessage>());
+        new DistributionTriggerConfiguration().Configure(builder.Entity<DistributionTrigger>());
         new DraftBalanceRowConfiguration().Configure(builder.Entity<DraftBalanceRow>());
         new EmailAccountConfiguration().Configure(builder.Entity<EmailAccount>());
         new EmailAttachmentConfiguration().Configure(builder.Entity<EmailAttachment>());

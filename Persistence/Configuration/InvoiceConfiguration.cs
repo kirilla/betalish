@@ -78,7 +78,7 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
             .HasMaxLength(MaxLengths.Common.Email.Address);
 
         // Relations
-        builder.HasMany(x => x.DistributionMessages)
+        builder.HasMany(x => x.DistributionTriggers)
             .WithOne(x => x.Invoice)
             .HasForeignKey(x => x.InvoiceId);
 
