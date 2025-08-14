@@ -136,6 +136,9 @@ public class Program
 
             // DistributionMessage generators
             builder.Services.AddHostedService<InvoiceEmailDistributionScheduler>();
+
+            // Email senders
+            builder.Services.AddHostedService<InvoiceEmailSender>();
         }
 
         // API controllers
