@@ -1,8 +1,4 @@
-﻿using Betalish.Application.Interfaces;
-using Betalish.Common.Services;
-using Betalish.Domain.Entities;
-
-namespace Betalish.Application.Commands.EmailAccounts.TestEmailAccount;
+﻿namespace Betalish.Application.Commands.EmailAccounts.TestEmailAccount;
 
 public class TestEmailAccountCommand(
     IDatabaseService database,
