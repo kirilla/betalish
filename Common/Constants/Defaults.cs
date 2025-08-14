@@ -1,6 +1,4 @@
-﻿using static Betalish.Common.Validation.MaxLengths.Domain;
-
-namespace Betalish.Common.Constants;
+﻿namespace Betalish.Common.Constants;
 
 public static class Defaults
 {
