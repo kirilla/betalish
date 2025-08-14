@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Betalish.Application.BackgroundServices.DistributionSchedulers;
 
-public class InvoiceEmailDistributionScheduler(
+public class CollectEmailDistributionScheduler(
     IDateService dateService,
     IServiceProvider serviceProvider,
     IOptions<DistributionConfiguration> options) : BackgroundService
@@ -37,18 +37,19 @@ public class InvoiceEmailDistributionScheduler(
         var plans = await database.InvoicePlans
             .Where(x =>
                 x.SendByEmail == true &&
-                x.DistributionDate <= today &&
-                x.DistributionEmailSent == null &&
+                x.Collect == true &&
+                x.CollectDate <= today &&
+                x.CollectEmailSent == null &&
                 x.Invoice.InvoiceStatus == InvoiceStatus.Issued && 
                 !x.Invoice.DistributionTriggers.Any(y => 
-                    y.DistributionTriggerKind == DistributionTriggerKind.InvoiceEmail))
+                    y.DistributionTriggerKind == DistributionTriggerKind.CollectEmail))
             .Take(10)
             .ToListAsync(cancellation);
 
         var triggers = plans
             .Select(x => new DistributionTrigger()
             {
-                DistributionTriggerKind = DistributionTriggerKind.InvoiceEmail,
+                DistributionTriggerKind = DistributionTriggerKind.CollectEmail,
                 DistributionStatus = DistributionStatus.Pending,
                 InvoiceId = x.Id,
             })

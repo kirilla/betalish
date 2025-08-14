@@ -136,6 +136,9 @@ public class Program
 
             // DistributionMessage generators
             builder.Services.AddHostedService<InvoiceEmailDistributionScheduler>();
+            builder.Services.AddHostedService<ReminderEmailDistributionScheduler>();
+            builder.Services.AddHostedService<DemandEmailDistributionScheduler>();
+            builder.Services.AddHostedService<CollectEmailDistributionScheduler>();
 
             // Email senders
             builder.Services.AddHostedService<InvoiceEmailSender>();
