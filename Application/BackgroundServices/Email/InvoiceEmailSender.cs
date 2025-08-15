@@ -66,11 +66,6 @@ public class InvoiceEmailSender(
         if (string.IsNullOrWhiteSpace(invoice.Customer_Email))
             throw new MissingEmailException();
 
-        var invoicePlan = await database.InvoicePlans
-            .Where(x => x.Id == trigger.InvoiceId)
-            .SingleOrDefaultAsync(cancellation) ??
-            throw new NotFoundException();
-
         var client = await database.Clients
             .AsNoTracking()
             .Where(x => x.Id == invoice.ClientId)
