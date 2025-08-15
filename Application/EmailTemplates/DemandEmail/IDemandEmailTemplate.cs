@@ -2,9 +2,6 @@
 {
     public interface IDemandEmailTemplate
     {
-        EmailMessage Create(
-            EmailAccount account, 
-            Invoice invoice, 
-            InvoicePlan invoicePlan);
+        EmailMessage Create(EmailAccount account, Invoice invoice);
     }
 }

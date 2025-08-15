@@ -64,11 +64,6 @@ public class ReminderEmailSender(
         if (string.IsNullOrWhiteSpace(invoice.Customer_Email))
             throw new MissingEmailException();
 
-        var invoicePlan = await database.InvoicePlans
-            .Where(x => x.Id == trigger.InvoiceId)
-            .SingleOrDefaultAsync(cancellation) ??
-            throw new NotFoundException();
-
         var client = await database.Clients
             .AsNoTracking()
             .Where(x => x.Id == invoice.ClientId)
@@ -82,7 +77,7 @@ public class ReminderEmailSender(
             throw new NotFoundException();
 
         var emailMessage = reminderTemplate.Create(
-            emailAccount, invoice, invoicePlan);
+            emailAccount, invoice);
 
         try
         {

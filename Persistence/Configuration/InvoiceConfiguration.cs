@@ -127,13 +127,6 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
             .HasForeignKey(x => x.InvoiceId)
             .IsRequired(false);
 
-        builder
-            .HasOne(x => x.InvoicePlan)
-            .WithOne(x => x.Invoice)
-            .HasForeignKey<InvoicePlan>(x => x.Id)
-            .IsRequired(false)
-            .OnDelete(DeleteBehavior.Cascade);
-
         // Ignore
         builder.Ignore(x => x.IsDebit);
     }

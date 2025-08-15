@@ -34,18 +34,19 @@ public class DemandEmailDistributionScheduler(
 
         var today = dateService.GetDateOnlyToday();
 
-        var plans = await database.InvoicePlans
+        var invoices = await database.Invoices
+            .AsNoTracking()
             .Where(x =>
-                x.Invoice.Customer_Email != null &&
-                x.Invoice.Demand == true &&
-                x.Invoice.DemandDate <= today &&
-                x.Invoice.InvoiceStatus == InvoiceStatus.Issued && 
-                !x.Invoice.DistributionTriggers.Any(y => 
+                x.Customer_Email != null &&
+                x.Demand == true &&
+                x.DemandDate <= today &&
+                x.InvoiceStatus == InvoiceStatus.Issued && 
+                !x.DistributionTriggers.Any(y => 
                     y.DistributionTriggerKind == DistributionTriggerKind.DemandEmail))
             .Take(10)
             .ToListAsync(cancellation);
 
-        var triggers = plans
+        var triggers = invoices
             .Select(x => new DistributionTrigger()
             {
                 DistributionTriggerKind = DistributionTriggerKind.DemandEmail,

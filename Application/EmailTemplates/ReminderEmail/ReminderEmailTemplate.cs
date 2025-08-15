@@ -2,10 +2,7 @@
 
 public class ReminderEmailTemplate : IReminderEmailTemplate
 {
-    public EmailMessage Create(
-        EmailAccount account,
-        Invoice invoice,
-        InvoicePlan invoicePlan)
+    public EmailMessage Create(EmailAccount account, Invoice invoice)
     {
         var email = new EmailMessage()
         {
@@ -20,17 +17,14 @@ public class ReminderEmailTemplate : IReminderEmailTemplate
 
             Subject = "Påminnelse",
 
-            HtmlBody = CreateHtmlBody(account, invoice, invoicePlan),
-            TextBody = CreateTextBody(account, invoice, invoicePlan),
+            HtmlBody = CreateHtmlBody(account, invoice),
+            TextBody = CreateTextBody(account, invoice),
         };
 
         return email;
     }
 
-    private string CreateHtmlBody(
-        EmailAccount account,
-        Invoice invoice,
-        InvoicePlan invoicePlan)
+    private string CreateHtmlBody(EmailAccount account, Invoice invoice)
     {
         return $"""
             {Email.Html.Start}
@@ -53,10 +47,7 @@ public class ReminderEmailTemplate : IReminderEmailTemplate
             """;
     }
 
-    private string CreateTextBody(
-        EmailAccount account,
-        Invoice invoice,
-        InvoicePlan invoicePlan)
+    private string CreateTextBody(EmailAccount account, Invoice invoice)
     {
         return $"""
             En påminnelse från ???

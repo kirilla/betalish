@@ -31,7 +31,6 @@ public class DatabaseService(
     public DbSet<InvoiceRow> InvoiceRows { get; set; }
     public DbSet<InvoiceDraft> InvoiceDrafts { get; set; }
     public DbSet<InvoiceDraftRow> InvoiceDraftRows { get; set; }
-    public DbSet<InvoicePlan> InvoicePlans { get; set; }
     public DbSet<InvoiceRange> InvoiceRanges { get; set; }
     public DbSet<InvoiceTemplate> InvoiceTemplates { get; set; }
     public DbSet<InvoiceTemplateRow> InvoiceTemplateRows { get; set; }
@@ -79,7 +78,6 @@ public class DatabaseService(
         new InvoiceRowConfiguration().Configure(builder.Entity<InvoiceRow>());
         new InvoiceDraftConfiguration().Configure(builder.Entity<InvoiceDraft>());
         new InvoiceDraftRowConfiguration().Configure(builder.Entity<InvoiceDraftRow>());
-        new InvoicePlanConfiguration().Configure(builder.Entity<InvoicePlan>());
         new InvoiceRangeConfiguration().Configure(builder.Entity<InvoiceRange>());
         new InvoiceTemplateConfiguration().Configure(builder.Entity<InvoiceTemplate>());
         new InvoiceTemplateRowConfiguration().Configure(builder.Entity<InvoiceTemplateRow>());

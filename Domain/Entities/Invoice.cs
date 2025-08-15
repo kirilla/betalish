@@ -97,8 +97,6 @@ public class Invoice : IFormatOnSave, IValidateOnSave
 
     public List<Payment> Payments { get; set; } = [];
 
-    public InvoicePlan? InvoicePlan { get; set; }
-
     public void FormatOnSave()
     {
     }

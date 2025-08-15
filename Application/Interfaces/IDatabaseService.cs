@@ -26,7 +26,6 @@ public interface IDatabaseService
     DbSet<InvoiceRow> InvoiceRows { get; set; }
     DbSet<InvoiceDraft> InvoiceDrafts { get; set; }
     DbSet<InvoiceDraftRow> InvoiceDraftRows { get; set; }
-    DbSet<InvoicePlan> InvoicePlans { get; set; }
     DbSet<InvoiceRange> InvoiceRanges { get; set; }
     DbSet<InvoiceTemplate> InvoiceTemplates { get; set; }
     DbSet<InvoiceTemplateRow> InvoiceTemplateRows { get; set; }

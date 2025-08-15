@@ -34,18 +34,19 @@ public class ReminderEmailDistributionScheduler(
 
         var today = dateService.GetDateOnlyToday();
 
-        var plans = await database.InvoicePlans
+        var invoices = await database.Invoices
+            .AsNoTracking()
             .Where(x =>
-                x.Invoice.Customer_Email != null &&
-                x.Invoice.Reminder == true &&
-                x.Invoice.ReminderDate <= today &&
-                x.Invoice.InvoiceStatus == InvoiceStatus.Issued && 
-                !x.Invoice.DistributionTriggers.Any(y => 
+                x.Customer_Email != null &&
+                x.Reminder == true &&
+                x.ReminderDate <= today &&
+                x.InvoiceStatus == InvoiceStatus.Issued && 
+                !x.DistributionTriggers.Any(y => 
                     y.DistributionTriggerKind == DistributionTriggerKind.ReminderEmail))
             .Take(10)
             .ToListAsync(cancellation);
 
-        var triggers = plans
+        var triggers = invoices
             .Select(x => new DistributionTrigger()
             {
                 DistributionTriggerKind = DistributionTriggerKind.ReminderEmail,

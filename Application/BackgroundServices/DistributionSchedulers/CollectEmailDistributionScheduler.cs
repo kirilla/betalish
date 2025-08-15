@@ -34,18 +34,19 @@ public class CollectEmailDistributionScheduler(
 
         var today = dateService.GetDateOnlyToday();
 
-        var plans = await database.InvoicePlans
+        var invoices = await database.Invoices
+            .AsNoTracking()
             .Where(x =>
-                x.Invoice.Customer_Email != null &&
-                x.Invoice.Collect == true &&
-                x.Invoice.CollectDate <= today &&
-                x.Invoice.InvoiceStatus == InvoiceStatus.Issued && 
-                !x.Invoice.DistributionTriggers.Any(y => 
+                x.Customer_Email != null &&
+                x.Collect == true &&
+                x.CollectDate <= today &&
+                x.InvoiceStatus == InvoiceStatus.Issued && 
+                !x.DistributionTriggers.Any(y => 
                     y.DistributionTriggerKind == DistributionTriggerKind.CollectEmail))
             .Take(10)
             .ToListAsync(cancellation);
 
-        var triggers = plans
+        var triggers = invoices
             .Select(x => new DistributionTrigger()
             {
                 DistributionTriggerKind = DistributionTriggerKind.CollectEmail,

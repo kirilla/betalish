@@ -30,12 +30,6 @@ public class SendReminderEmailRoutine(
         if (string.IsNullOrWhiteSpace(invoice.Customer_Email))
             throw new MissingEmailException();
 
-        var plan = await database.InvoicePlans
-            .AsNoTracking()
-            .Where(x => x.Id == invoiceId)
-            .SingleOrDefaultAsync() ??
-            throw new NotFoundException();
-
         if (invoice.ReminderDate == null)
             throw new Exception(
                 "Fakturan saknar ReminderDate.");
@@ -50,7 +44,7 @@ public class SendReminderEmailRoutine(
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
         
-        var emailMessage = reminderTemplate.Create(emailAccount, invoice, plan);
+        var emailMessage = reminderTemplate.Create(emailAccount, invoice);
 
         smtpService.SendEmailMessage(emailAccount, emailMessage);
     }

@@ -30,12 +30,6 @@ public class SendCollectEmailRoutine(
         if (string.IsNullOrWhiteSpace(invoice.Customer_Email))
             throw new MissingEmailException();
 
-        var plan = await database.InvoicePlans
-            .AsNoTracking()
-            .Where(x => x.Id == invoiceId)
-            .SingleOrDefaultAsync() ??
-            throw new NotFoundException();
-
         if (invoice.CollectDate == null)
             throw new Exception(
                 "Fakturan saknar CollectDate.");
@@ -46,7 +40,7 @@ public class SendCollectEmailRoutine(
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
         
-        var emailMessage = demandTemplate.Create(emailAccount, invoice, plan);
+        var emailMessage = demandTemplate.Create(emailAccount, invoice);
 
         smtpService.SendEmailMessage(emailAccount, emailMessage);
     }
