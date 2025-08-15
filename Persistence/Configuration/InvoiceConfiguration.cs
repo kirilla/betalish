@@ -41,10 +41,20 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
             .HasPrecision(18, 2);
 
         // Payment
+        builder.Property(p => p.MinToConsiderPaid)
+            .HasPrecision(18, 2);
+
         builder.Property(p => p.Balance)
             .HasPrecision(18, 2);
 
         builder.Property(p => p.LeftToPay)
+            .HasPrecision(18, 2);
+
+        // Fees
+        builder.Property(p => p.ReminderFee)
+            .HasPrecision(18, 2);
+
+        builder.Property(p => p.DemandFee)
             .HasPrecision(18, 2);
 
         // Customer identity

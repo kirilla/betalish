@@ -57,17 +57,6 @@ public class CreateDebitInvoicePlanRoutine(IDatabaseService database)
     {
         var plan = new InvoicePlan()
         {
-            // Payment
-            MinToConsiderPaid = paymentTerms.MinToConsiderPaid,
-
-            // Interest
-            Interest = paymentTerms.Interest,
-
-            // Fees
-            ReminderFee = paymentTerms.ReminderFee,
-            DemandFee = paymentTerms.DemandFee,
-
-            // TODO
         };
 
         invoice.InvoicePlan = plan;

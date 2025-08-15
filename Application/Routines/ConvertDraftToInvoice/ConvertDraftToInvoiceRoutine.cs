@@ -75,8 +75,17 @@ public class ConvertDraftToInvoiceRoutine(
             TotalRounding = draft.TotalRounding,
 
             // Payment
+            MinToConsiderPaid = terms?.MinToConsiderPaid,
+
             Balance = draft.Total,
             LeftToPay = draft.Total,
+
+            // Interest
+            Interest = terms?.Interest ?? false,
+
+            // Fees
+            ReminderFee = terms?.ReminderFee,
+            DemandFee = terms?.DemandFee,
 
             // Customer identity
             Customer_Name = draft.Customer_Name,

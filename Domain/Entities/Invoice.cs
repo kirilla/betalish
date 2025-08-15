@@ -42,8 +42,17 @@ public class Invoice : IFormatOnSave, IValidateOnSave
     public required decimal TotalRounding { get; set; }
 
     // Payment
+    public required decimal? MinToConsiderPaid { get; set; }
+
     public required decimal Balance { get; set; }
     public required decimal LeftToPay { get; set; }
+
+    // Interest
+    public required bool Interest { get; set; }
+
+    // Fees
+    public required decimal? ReminderFee { get; set; }
+    public required decimal? DemandFee { get; set; }
 
     // Customer identity
     public required string Customer_Name { get; set; }
