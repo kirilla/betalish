@@ -26,6 +26,13 @@
         <input type="hidden" asp-for="CommandModel.InvoiceId" />
 
         <p>
+            <label asp-for="CommandModel.SendInvoiceEmail">
+                <input asp-for="CommandModel.SendInvoiceEmail" type="checkbox" />
+                Skicka epostfaktura/kreditering
+            </label>
+        </p>
+
+        <p>
             <label asp-for="CommandModel.UpdateInvoiceAccountingRows">
                 <input asp-for="CommandModel.UpdateInvoiceAccountingRows" type="checkbox" />
                 Skapa kontering

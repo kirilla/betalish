@@ -1,10 +1,12 @@
-﻿using Betalish.Application.Routines.UpdateInvoiceAccountingRows;
+﻿using Betalish.Application.Routines.SendInvoiceEmail;
+using Betalish.Application.Routines.UpdateInvoiceAccountingRows;
 using Betalish.Application.Routines.UpdateInvoicePaymentStatus;
 
 namespace Betalish.Application.Commands.Invoices.ExecuteInvoiceRoutine;
 
 public class ExecuteInvoiceRoutineCommand(
     IDatabaseService database,
+    ISendInvoiceEmailRoutine sendInvoiceEmail,
     IUpdateInvoiceAccountingRowsRoutine updateAccountingRows,
     IUpdateInvoicePaymentStatusRoutine updatePaymentStatus) : IExecuteInvoiceRoutineCommand
 {
@@ -21,6 +23,9 @@ public class ExecuteInvoiceRoutineCommand(
                 x.ClientId == userToken.ClientId!.Value)
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
+
+        if (model.SendInvoiceEmail)
+            await sendInvoiceEmail.Execute(userToken, invoice.Id);
 
         if (model.UpdateInvoiceAccountingRows)
             await updateAccountingRows.Execute(userToken, invoice.Id);
