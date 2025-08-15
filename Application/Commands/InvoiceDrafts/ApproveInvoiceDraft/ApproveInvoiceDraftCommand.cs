@@ -1,6 +1,7 @@
 ﻿using Betalish.Application.Queues.LogItems;
 using Betalish.Application.Routines.ConvertDraftToInvoice;
 using Betalish.Application.Routines.CreateInvoicePlan;
+using Betalish.Application.Routines.ScheduleInvoice;
 using Betalish.Application.Routines.SetBalanceRowCreditInvoiceNumber;
 using Betalish.Application.Routines.SetInvoiceNumber;
 using Betalish.Application.Routines.UpdateInvoiceAccountingRows;
@@ -16,6 +17,7 @@ public class ApproveInvoiceDraftCommand(
     IUpdateInvoiceAccountingRowsRoutine updateInvoiceAccounting,
     ISetBalanceRowCreditInvoiceNumberRoutine setBalanceRowCreditInvoiceNumber,
     ICreateInvoicePlanRoutine createInvoicePlan,
+    IScheduleInvoiceRoutine scheduleInvoice,
     IUpdateInvoicePaymentStatusRoutine updatePaymentStatus) : IApproveInvoiceDraftCommand
 {
     public async Task<int> Execute(
@@ -85,6 +87,8 @@ public class ApproveInvoiceDraftCommand(
         }
 
         await createInvoicePlan.Execute(userToken, invoiceId, paymentTerms?.Id);
+
+        await scheduleInvoice.Execute(userToken, invoiceId, paymentTerms?.Id);
 
         return invoiceId;
     }

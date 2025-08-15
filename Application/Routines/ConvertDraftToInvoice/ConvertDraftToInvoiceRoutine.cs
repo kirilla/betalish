@@ -52,6 +52,11 @@ public class ConvertDraftToInvoiceRoutine(
             // Dates
             InvoiceDate = invoiceDate,
             DueDate = null,
+            ReminderDate = null,
+            ReminderDueDate = null,
+            DemandDate = null,
+            DemandDueDate = null,
+            CollectDate = null,
 
             // Terms
             PaymentTermDays = null,

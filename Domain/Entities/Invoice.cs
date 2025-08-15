@@ -17,6 +17,14 @@ public class Invoice : IFormatOnSave, IValidateOnSave
     public required DateOnly InvoiceDate { get; set; }
     public required DateOnly? DueDate { get; set; }
 
+    public required DateOnly? ReminderDate { get; set; }
+    public required DateOnly? ReminderDueDate { get; set; }
+
+    public required DateOnly? DemandDate { get; set; }
+    public required DateOnly? DemandDueDate { get; set; }
+
+    public required DateOnly? CollectDate { get; set; }
+
     // Terms
     public required int? PaymentTermDays { get; set; }
     public required string? PaymentTerms { get; set; }
