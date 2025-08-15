@@ -49,6 +49,12 @@ public class ConvertDraftToInvoiceRoutine(
 
             About = draft.About,
 
+            // Distribution
+            Distribution = true,
+            Reminder = terms?.Reminder ?? false,
+            Demand = terms?.Demand ?? false,
+            Collect = terms?.Collect ?? false,
+
             // Dates
             InvoiceDate = invoiceDate,
             DueDate = null,

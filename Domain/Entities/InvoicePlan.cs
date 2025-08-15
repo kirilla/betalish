@@ -4,14 +4,6 @@ public class InvoicePlan
 {
     public int Id { get; set; }
 
-    // Stages
-    public bool Reminder { get; set; }
-    public bool Demand { get; set; }
-    public bool Collect { get; set; }
-
-    // Time frame
-    public int PaymentTermDays { get; set; }
-
     // Payment
     public decimal? MinToConsiderPaid { get; set; }
 

@@ -65,14 +65,6 @@ public class CreateDebitInvoicePlanRoutine(IDatabaseService database)
             SendByEmail = sendByEmail,
             SendPostal = sendPostal,
 
-            // Stages
-            Reminder = paymentTerms.Reminder,
-            Demand = paymentTerms.Demand,
-            Collect = paymentTerms.Collect,
-
-            // Time frame
-            PaymentTermDays = paymentTerms.PaymentTermDays,
-
             // Payment
             MinToConsiderPaid = paymentTerms.MinToConsiderPaid,
 

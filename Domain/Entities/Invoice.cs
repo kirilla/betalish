@@ -13,6 +13,12 @@ public class Invoice : IFormatOnSave, IValidateOnSave
 
     public required string About { get; set; }
 
+    // Distribution
+    public required bool Distribution { get; set; }
+    public required bool Reminder { get; set; }
+    public required bool Demand { get; set; }
+    public required bool Collect { get; set; }
+
     // Dates
     public required DateOnly InvoiceDate { get; set; }
     public required DateOnly? DueDate { get; set; }
