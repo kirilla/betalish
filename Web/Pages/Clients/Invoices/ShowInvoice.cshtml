@@ -332,20 +332,22 @@
 
 <script>
     function pageTabs() {
+        
+        const localStorageKey = 'show-invoice:tab';
+
         return {
             active: 'rows',
 
             init() {
-                const hash = window.location.hash.replace('#', '');
-                if (hash) this.active = hash;
-
-                this.$watch('active', value => {
-                    history.replaceState(null, '', `#${value}`);
-                });
+                const tab = localStorage.getItem(localStorageKey);
+                if (tab) {
+                    this.active = tab;
+                }
             },
 
             setActive(tab) {
                 this.active = tab;
+                localStorage.setItem(localStorageKey, tab);
             },
 
             isActive(tab) {
