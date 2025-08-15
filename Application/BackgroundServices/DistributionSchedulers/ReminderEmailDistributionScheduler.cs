@@ -38,7 +38,7 @@ public class ReminderEmailDistributionScheduler(
             .Where(x =>
                 x.SendByEmail == true &&
                 x.Reminder == true &&
-                x.ReminderDate <= today &&
+                x.Invoice.ReminderDate <= today &&
                 x.Invoice.InvoiceStatus == InvoiceStatus.Issued && 
                 !x.Invoice.DistributionTriggers.Any(y => 
                     y.DistributionTriggerKind == DistributionTriggerKind.ReminderEmail))

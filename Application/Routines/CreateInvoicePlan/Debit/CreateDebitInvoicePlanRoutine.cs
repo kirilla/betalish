@@ -83,43 +83,8 @@ public class CreateDebitInvoicePlanRoutine(IDatabaseService database)
             ReminderFee = paymentTerms.ReminderFee,
             DemandFee = paymentTerms.DemandFee,
 
-            // Dates
-            DistributionDate = invoice.InvoiceDate,
-
-            ReminderDate = invoice.InvoiceDate
-                .AddDays(paymentTerms.PaymentTermDays),
-
-            DemandDate = invoice.InvoiceDate
-                .AddDays(paymentTerms.PaymentTermDays)
-                .AddDays(paymentTerms.PaymentTermDays),
-
-            CollectDate = null,
-
             // TODO
         };
-
-        if (paymentTerms.Reminder)
-        {
-            plan.ReminderDate = invoice.DueDate!.Value
-                .AddDays(Defaults.Invoice.Reminder.ReminderDays);
-
-            plan.ReminderDueDate = plan.ReminderDate?
-                .AddDays(Defaults.Invoice.Reminder.ReminderDueDays);
-        }
-
-        if (paymentTerms.Demand)
-        {
-            plan.DemandDate = plan.ReminderDueDate?
-                .AddDays(Defaults.Invoice.Demand.DemandDays);
-
-            plan.DemandDueDate = plan.DemandDate?
-                .AddDays(Defaults.Invoice.Demand.DemandDueDays);
-        }
-
-        if (paymentTerms.Collect)
-        {
-            // TBD
-        }
 
         invoice.InvoicePlan = plan;
     }

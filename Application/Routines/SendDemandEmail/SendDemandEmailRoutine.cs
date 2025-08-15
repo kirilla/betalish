@@ -36,13 +36,13 @@ public class SendDemandEmailRoutine(
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (plan.DemandDate == null)
+        if (invoice.DemandDate == null)
             throw new Exception(
-                "InvoicePlan för fakturan saknar DemandDate.");
+                "Fakturan saknar DemandDate.");
 
-        if (plan.DemandDueDate == null)
+        if (invoice.DemandDueDate == null)
             throw new Exception(
-                "InvoicePlan för fakturan saknar DemandDueDate.");
+                "Fakturan saknar DemandDueDate.");
 
         var emailAccount = await database.EmailAccounts
             .AsNoTracking()

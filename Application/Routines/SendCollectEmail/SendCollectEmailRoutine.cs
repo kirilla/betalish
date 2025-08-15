@@ -36,9 +36,9 @@ public class SendCollectEmailRoutine(
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (plan.CollectDate == null)
+        if (invoice.CollectDate == null)
             throw new Exception(
-                "InvoicePlan för fakturan saknar CollectDate.");
+                "Fakturan saknar CollectDate.");
 
         var emailAccount = await database.EmailAccounts
             .AsNoTracking()

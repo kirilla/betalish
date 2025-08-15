@@ -42,9 +42,6 @@ public class CreateCreditInvoicePlanRoutine(IDatabaseService database)
         {
             SendByEmail = sendByEmail,
             SendPostal = sendPostal,
-
-            // Dates
-            DistributionDate = invoice.InvoiceDate,
         };
 
         invoice.InvoicePlan = plan;

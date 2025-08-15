@@ -43,7 +43,7 @@ public class ReminderEmailTemplate : IReminderEmailTemplate
                     Att betala: {invoice.LeftToPay.ToSwedish()} kr
                 </li>
                 <li>
-                    Senast: {invoicePlan.ReminderDueDate.ToIso8601()}
+                    Senast: {invoice.ReminderDueDate.ToIso8601()}
                 </li>
             </ul>
             <p>
@@ -65,7 +65,7 @@ public class ReminderEmailTemplate : IReminderEmailTemplate
 
             Att betala: {invoice.LeftToPay.ToSwedish()} kr
 
-            Senast: {invoicePlan.ReminderDueDate.ToIso8601()}
+            Senast: {invoice.ReminderDueDate.ToIso8601()}
             
             Mvh, Betalish.
             """;

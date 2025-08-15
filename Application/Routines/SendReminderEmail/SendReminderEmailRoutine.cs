@@ -36,13 +36,13 @@ public class SendReminderEmailRoutine(
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (plan.ReminderDate == null)
+        if (invoice.ReminderDate == null)
             throw new Exception(
-                "InvoicePlan för fakturan saknar ReminderDate.");
+                "Fakturan saknar ReminderDate.");
 
-        if (plan.ReminderDueDate == null)
+        if (invoice.ReminderDueDate == null)
             throw new Exception(
-                "InvoicePlan för fakturan saknar ReminderDueDate.");
+                "Fakturan saknar ReminderDueDate.");
 
         var emailAccount = await database.EmailAccounts
             .AsNoTracking()

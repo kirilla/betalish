@@ -43,7 +43,7 @@ public class DemandEmailTemplate : IDemandEmailTemplate
                     Att betala: {invoice.LeftToPay.ToSwedish()} kr
                 </li>
                 <li>
-                    Senast: {invoicePlan.DemandDueDate.ToIso8601()}
+                    Senast: {invoice.DemandDueDate.ToIso8601()}
                 </li>
             </ul>
             <p>
@@ -65,7 +65,7 @@ public class DemandEmailTemplate : IDemandEmailTemplate
 
             Att betala: {invoice.LeftToPay.ToSwedish()} kr
 
-            Senast: {invoicePlan.DemandDueDate.ToIso8601()}
+            Senast: {invoice.DemandDueDate.ToIso8601()}
             
             Mvh, Betalish.
             """;
