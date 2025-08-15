@@ -36,7 +36,7 @@ public class DemandEmailDistributionScheduler(
 
         var plans = await database.InvoicePlans
             .Where(x =>
-                x.SendByEmail == true &&
+                x.Invoice.Customer_Email != null &&
                 x.Invoice.Demand == true &&
                 x.Invoice.DemandDate <= today &&
                 x.Invoice.InvoiceStatus == InvoiceStatus.Issued && 

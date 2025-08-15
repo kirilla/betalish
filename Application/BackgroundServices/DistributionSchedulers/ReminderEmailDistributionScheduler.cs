@@ -36,7 +36,7 @@ public class ReminderEmailDistributionScheduler(
 
         var plans = await database.InvoicePlans
             .Where(x =>
-                x.SendByEmail == true &&
+                x.Invoice.Customer_Email != null &&
                 x.Invoice.Reminder == true &&
                 x.Invoice.ReminderDate <= today &&
                 x.Invoice.InvoiceStatus == InvoiceStatus.Issued && 

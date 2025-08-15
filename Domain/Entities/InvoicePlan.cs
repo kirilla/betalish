@@ -14,10 +14,6 @@ public class InvoicePlan
     public decimal? ReminderFee { get; set; }
     public decimal? DemandFee { get; set; }
 
-    // Customer reachability
-    public bool SendByEmail { get; set; }
-    public bool SendPostal { get; set; }
-
     // Relations
     public Invoice Invoice { get; set; } = null!;
 }

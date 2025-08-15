@@ -34,15 +34,7 @@ public class CreateCreditInvoicePlanRoutine(IDatabaseService database)
 
     private void CreateInvoicePlan(Invoice invoice)
     {
-        // Distribution
-        bool sendByEmail = invoice.Customer_Email.HasValue();
-        bool sendPostal = !sendByEmail;
-
-        var plan = new InvoicePlan()
-        {
-            SendByEmail = sendByEmail,
-            SendPostal = sendPostal,
-        };
+        var plan = new InvoicePlan();
 
         invoice.InvoicePlan = plan;
     }

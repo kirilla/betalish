@@ -55,16 +55,8 @@ public class CreateDebitInvoicePlanRoutine(IDatabaseService database)
 
     private void CreateInvoicePlan(Invoice invoice, PaymentTerms paymentTerms)
     {
-        // Distribution
-        bool sendByEmail = invoice.Customer_Email.HasValue();
-        bool sendPostal = !sendByEmail;
-
         var plan = new InvoicePlan()
         {
-            // Distribution
-            SendByEmail = sendByEmail,
-            SendPostal = sendPostal,
-
             // Payment
             MinToConsiderPaid = paymentTerms.MinToConsiderPaid,
 
