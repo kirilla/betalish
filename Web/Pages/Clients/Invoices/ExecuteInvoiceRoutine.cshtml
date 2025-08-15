@@ -26,13 +26,6 @@
         <input type="hidden" asp-for="CommandModel.InvoiceId" />
 
         <p>
-            <label asp-for="CommandModel.SendInvoiceEmail">
-                <input asp-for="CommandModel.SendInvoiceEmail" type="checkbox" />
-                Skicka epostfaktura/kreditering
-            </label>
-        </p>
-
-        <p>
             <label asp-for="CommandModel.UpdateInvoiceAccountingRows">
                 <input asp-for="CommandModel.UpdateInvoiceAccountingRows" type="checkbox" />
                 Skapa kontering
@@ -41,6 +34,28 @@
             <label asp-for="CommandModel.UpdateInvoicePaymentStatus">
                 <input asp-for="CommandModel.UpdateInvoicePaymentStatus" type="checkbox" />
                 Räkna om betalstatus
+            </label>
+        </p>
+
+        <p>
+            <label asp-for="CommandModel.SendInvoiceEmail">
+                <input asp-for="CommandModel.SendInvoiceEmail" type="checkbox" />
+                Skicka epostfaktura/kreditering
+            </label>
+
+            <label asp-for="CommandModel.SendReminderEmail">
+                <input asp-for="CommandModel.SendReminderEmail" type="checkbox" />
+                Skicka påminnelse
+            </label>
+
+            <label asp-for="CommandModel.SendDemandEmail">
+                <input asp-for="CommandModel.SendDemandEmail" type="checkbox" />
+                Skicka krav
+            </label>
+
+            <label asp-for="CommandModel.SendCollectEmail">
+                <input asp-for="CommandModel.SendCollectEmail" type="checkbox" />
+                Skicka varning om KFM-ärende
             </label>
         </p>
 

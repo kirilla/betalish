@@ -1,4 +1,7 @@
-﻿using Betalish.Application.Routines.SendInvoiceEmail;
+﻿using Betalish.Application.Routines.SendCollectEmail;
+using Betalish.Application.Routines.SendDemandEmail;
+using Betalish.Application.Routines.SendInvoiceEmail;
+using Betalish.Application.Routines.SendReminderEmail;
 using Betalish.Application.Routines.UpdateInvoiceAccountingRows;
 using Betalish.Application.Routines.UpdateInvoicePaymentStatus;
 
@@ -6,9 +9,12 @@ namespace Betalish.Application.Commands.Invoices.ExecuteInvoiceRoutine;
 
 public class ExecuteInvoiceRoutineCommand(
     IDatabaseService database,
-    ISendInvoiceEmailRoutine sendInvoiceEmail,
     IUpdateInvoiceAccountingRowsRoutine updateAccountingRows,
-    IUpdateInvoicePaymentStatusRoutine updatePaymentStatus) : IExecuteInvoiceRoutineCommand
+    IUpdateInvoicePaymentStatusRoutine updatePaymentStatus,
+    ISendInvoiceEmailRoutine sendInvoiceEmail,
+    ISendReminderEmailRoutine sendReminderEmail,
+    ISendDemandEmailRoutine sendDemandEmail,
+    ISendCollectEmailRoutine sendCollectEmail) : IExecuteInvoiceRoutineCommand
 {
     public async Task Execute(
         IUserToken userToken, ExecuteInvoiceRoutineCommandModel model)
@@ -24,14 +30,23 @@ public class ExecuteInvoiceRoutineCommand(
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (model.SendInvoiceEmail)
-            await sendInvoiceEmail.Execute(userToken, invoice.Id);
-
         if (model.UpdateInvoiceAccountingRows)
             await updateAccountingRows.Execute(userToken, invoice.Id);
 
         if (model.UpdateInvoicePaymentStatus)
             await updatePaymentStatus.Execute(userToken, invoice.Id);
+
+        if (model.SendInvoiceEmail)
+            await sendInvoiceEmail.Execute(userToken, invoice.Id);
+
+        if (model.SendReminderEmail)
+            await sendReminderEmail.Execute(userToken, invoice.Id);
+
+        if (model.SendDemandEmail)
+            await sendDemandEmail.Execute(userToken, invoice.Id);
+
+        if (model.SendCollectEmail)
+            await sendCollectEmail.Execute(userToken, invoice.Id);
     }
 
     public bool IsPermitted(IUserToken userToken)
