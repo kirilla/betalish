@@ -27,6 +27,8 @@ public class Program
         EnumValidator.EnsureUniqueValues<DistributionStatus>();
         EnumValidator.EnsureUniqueValues<EmailKind>();
         EnumValidator.EnsureUniqueValues<EmailStatus>();
+        EnumValidator.EnsureUniqueValues<InvoiceKind>();
+        EnumValidator.EnsureUniqueValues<InvoiceStatus>();
         EnumValidator.EnsureUniqueValues<LogItemKind>();
         EnumValidator.EnsureUniqueValues<PaymentKind>();
         EnumValidator.EnsureUniqueValues<PaymentMethod>();

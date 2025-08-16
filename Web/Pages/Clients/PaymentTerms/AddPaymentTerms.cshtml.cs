@@ -18,6 +18,7 @@ public class AddPaymentTermsModel(
 
             CommandModel = new AddPaymentTermsCommandModel()
             {
+                InvoiceKind = InvoiceKind.Debit,
                 Interest = false,
                 Reminder = true,
                 Demand = true,

@@ -21,11 +21,14 @@ public class AddPaymentTermsCommand(IDatabaseService database) : IAddPaymentTerm
         var reminderFee = model.ReminderFee?.TryParseDecimal();
         var demandFee = model.DemandFee?.TryParseDecimal();
 
+        Domain.Entities.PaymentTerms.AssertInvoiceKindAllowed(model.InvoiceKind!.Value);
+
         // TODO: Fee limits
 
         var terms = new Domain.Entities.PaymentTerms()
         {
             Name = model.Name!,
+            InvoiceKind = model.InvoiceKind!.Value,
             ClientId = userToken.ClientId!.Value,
             Interest = model.Interest,
             Reminder = model.Reminder,

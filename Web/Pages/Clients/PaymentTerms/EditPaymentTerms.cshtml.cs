@@ -30,6 +30,7 @@ public class EditPaymentTermsModel(
             {
                 Id = PaymentTerms.Id,
                 Name = PaymentTerms.Name,
+                InvoiceKind = PaymentTerms.InvoiceKind,
                 Interest = PaymentTerms.Interest,
                 Reminder = PaymentTerms.Reminder,
                 Demand = PaymentTerms.Demand,

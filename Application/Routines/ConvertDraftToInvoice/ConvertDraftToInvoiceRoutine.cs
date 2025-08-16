@@ -41,6 +41,7 @@ public class ConvertDraftToInvoiceRoutine(
 
         var invoice = new Invoice()
         {
+            InvoiceKind = terms.InvoiceKind,
             InvoiceStatus = InvoiceStatus.Draft,
 
             InvoiceNumber = null,

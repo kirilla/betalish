@@ -11,6 +11,9 @@ public class AddPaymentTermsCommandModel
         ErrorMessage = "Skriv kortare.")]
     public string? Name { get; set; }
 
+    [Required(ErrorMessage = "Ange typ av faktura/avi.")]
+    public InvoiceKind? InvoiceKind { get; set; }
+
     public bool Interest { get; set; }
     public bool Reminder { get; set; }
     public bool Demand { get; set; }

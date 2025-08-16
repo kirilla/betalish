@@ -4,7 +4,8 @@ public class Invoice : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
-    public InvoiceStatus InvoiceStatus { get; set; }
+    public required InvoiceKind InvoiceKind { get; set; }
+    public required InvoiceStatus InvoiceStatus { get; set; }
 
     public int? InvoiceNumber { get; set; }
 

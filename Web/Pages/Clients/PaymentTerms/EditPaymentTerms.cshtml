@@ -37,6 +37,19 @@
         </label>
         <input asp-for="CommandModel.Name" />
 
+        <select asp-for="CommandModel.InvoiceKind">
+            <option value="">–</option>
+            <option value="@(InvoiceKind.Debit)">
+                Vanlig faktura (debetfaktura)
+            </option>
+            <option value="@(InvoiceKind.Avi)">
+                Avi
+            </option>
+            <option value="@(InvoiceKind.Membership)">
+                Medlemskap
+            </option>
+        </select>
+
         <p>
             <label asp-for="CommandModel.Reminder">
                 <input asp-for="CommandModel.Reminder" type="checkbox" />

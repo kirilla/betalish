@@ -22,6 +22,8 @@ public class EditPaymentTermsCommand(IDatabaseService database) : IEditPaymentTe
         var reminderFee = model.ReminderFee?.TryParseDecimal();
         var demandFee = model.DemandFee?.TryParseDecimal();
 
+        Domain.Entities.PaymentTerms.AssertInvoiceKindAllowed(model.InvoiceKind!.Value);
+
         // TODO: Fee limits
 
         var terms = await database.PaymentTerms
@@ -32,6 +34,7 @@ public class EditPaymentTermsCommand(IDatabaseService database) : IEditPaymentTe
             throw new NotFoundException();
 
         terms.Name = model.Name!;
+        terms.InvoiceKind = model.InvoiceKind!.Value;
         terms.Interest = model.Interest;
         terms.Reminder = model.Reminder;
         terms.Demand = model.Demand;

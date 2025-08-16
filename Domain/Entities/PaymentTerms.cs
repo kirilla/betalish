@@ -8,6 +8,8 @@ public class PaymentTerms : IFormatOnSave, IValidateOnSave
 
     public required string Name { get; set; }
 
+    public required InvoiceKind InvoiceKind { get; set; }
+
     // Stages
     public required bool Reminder { get; set; }
     public required bool Demand { get; set; }
@@ -57,11 +59,30 @@ public class PaymentTerms : IFormatOnSave, IValidateOnSave
 
     public void ValidateOnSave()
     {
+        if (!Enum.IsDefined(InvoiceKind))
+            throw new InvalidEnumException(nameof(InvoiceKind));
+
+        AssertInvoiceKindAllowed(InvoiceKind);
+
         if (MinToConsiderPaid < 0)
             throw new ValidateOnSaveException("MinToConsiderPaid");
 
         if (PaymentTermDays < Defaults.Invoice.PaymentTermDays.Min ||
             PaymentTermDays > Defaults.Invoice.PaymentTermDays.Max)
             throw new ValidateOnSaveException("PaymentTermDays");
+    }
+
+    public static void AssertInvoiceKindAllowed(InvoiceKind kind)
+    {
+        var allowedKinds = new List<InvoiceKind>()
+        {
+            InvoiceKind.Avi,
+            InvoiceKind.Debit,
+            InvoiceKind.Membership
+        };
+
+        if (!allowedKinds.Contains(kind))
+            throw new Exception(
+                $"PaymentTerms kan inte skapas för typen {kind}.");
     }
 }
