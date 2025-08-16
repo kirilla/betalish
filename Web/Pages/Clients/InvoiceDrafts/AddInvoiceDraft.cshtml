@@ -23,6 +23,28 @@
 
     <form method="post">
 
+        <select asp-for="CommandModel.InvoiceKind">
+            <option value="">–</option>
+            <option value="@(InvoiceKind.Debit)">
+                Faktura
+            </option>
+            <option value="@(InvoiceKind.Credit)">
+                Kreditfaktura
+            </option>
+            <option value="@(InvoiceKind.Avi)">
+                Avi
+            </option>
+            <option value="@(InvoiceKind.Membership)">
+                Medlemskap
+            </option>
+            <option value="@(InvoiceKind.Rest)">
+                Restfaktura
+            </option>
+            <option value="@(InvoiceKind.InterestAndFees)">
+                Räntefaktura
+            </option>
+        </select>
+
         <label asp-for="CommandModel.CustomerId">
             Kund
         </label>

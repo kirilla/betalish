@@ -25,9 +25,9 @@
     <form method="post">
 
         <input type="hidden" asp-for="CommandModel.Id" />
-        <input type="hidden" asp-for="CommandModel.IsDebit" />
+        <input type="hidden" asp-for="CommandModel.IsDebitLike" />
 
-        @if (Model.CommandModel.IsDebit)
+        @if (Model.CommandModel.IsDebitLike)
         {
             <label asp-for="CommandModel.PaymentTermsId">
                 Betalvillkor

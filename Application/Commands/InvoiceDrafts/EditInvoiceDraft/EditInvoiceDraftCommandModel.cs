@@ -52,8 +52,8 @@ public class EditInvoiceDraftCommandModel
     public string? Customer_Email { get; set; }
 
     // PaymentTerms
-    public bool IsDebit { get; set; }
+    public bool IsDebitLike { get; set; }
 
-    [RequiredIfBoolean(nameof(IsDebit), true, "Ange betalvillkor.")]
+    [RequiredIfBoolean(nameof(IsDebitLike), true, "Ange betalvillkor.")]
     public int? PaymentTermsId { get; set; }
 }

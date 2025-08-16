@@ -15,6 +15,8 @@ public class AddInvoiceDraftCommand(
         model.TrimStringProperties();
         model.SetEmptyStringsToNull();
 
+        InvoiceDraft.AssertInvoiceKindAllowed(model.InvoiceKind!.Value);
+
         var customer = await database.Customers
             .AsNoTracking()
             .Where(x =>
@@ -33,7 +35,7 @@ public class AddInvoiceDraftCommand(
 
         var draft = new InvoiceDraft()
         {
-            IsCredit = false,
+            InvoiceKind = model.InvoiceKind!.Value,
 
             About = model.About!,
 

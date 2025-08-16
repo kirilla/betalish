@@ -56,7 +56,7 @@ public class CreditInvoiceDraftCommand(
 
         var draft = new InvoiceDraft()
         {
-            IsCredit = true,
+            InvoiceKind = InvoiceKind.Credit,
 
             About = "Kreditering",
 

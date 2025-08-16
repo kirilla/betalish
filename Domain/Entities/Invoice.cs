@@ -9,8 +9,9 @@ public class Invoice : IFormatOnSave, IValidateOnSave
 
     public int? InvoiceNumber { get; set; }
 
-    public bool IsCredit { get; set; }
-    public bool IsDebit => !IsCredit;
+    public bool IsCredit => InvoiceKind == InvoiceKind.Credit;
+    public bool IsDebit => InvoiceKind == InvoiceKind.Debit;
+    public bool IsDebitLike => InvoiceKind != InvoiceKind.Credit;
 
     public required string About { get; set; }
 
@@ -106,6 +107,9 @@ public class Invoice : IFormatOnSave, IValidateOnSave
     {
         if (!Enum.IsDefined(CustomerKind))
             throw new InvalidEnumException(nameof(CustomerKind));
+
+        if (!Enum.IsDefined(InvoiceKind))
+            throw new InvalidEnumException(nameof(InvoiceKind));
 
         if (!Enum.IsDefined(InvoiceStatus))
             throw new InvalidEnumException(nameof(InvoiceStatus));

@@ -36,6 +36,7 @@ public class EditInvoiceDraftModel(
             CommandModel = new EditInvoiceDraftCommandModel()
             {
                 Id = InvoiceDraft.Id,
+
                 About = InvoiceDraft.About,
 
                 // Dates
@@ -52,7 +53,7 @@ public class EditInvoiceDraftModel(
                 Customer_Email = InvoiceDraft.Customer_Email,
 
                 // PaymentTerms
-                IsDebit = InvoiceDraft.IsDebit,
+                IsDebitLike = InvoiceDraft.IsDebitLike,
                 PaymentTermsId = InvoiceDraft.PaymentTermsId,
             };
 

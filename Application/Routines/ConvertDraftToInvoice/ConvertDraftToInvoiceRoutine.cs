@@ -41,12 +41,10 @@ public class ConvertDraftToInvoiceRoutine(
 
         var invoice = new Invoice()
         {
-            InvoiceKind = terms.InvoiceKind,
+            InvoiceKind = draft.InvoiceKind,
             InvoiceStatus = InvoiceStatus.Draft,
 
             InvoiceNumber = null,
-
-            IsCredit = draft.IsCredit,
 
             About = draft.About,
 
@@ -112,7 +110,7 @@ public class ConvertDraftToInvoiceRoutine(
             ClientId = draft.ClientId,
         };
 
-        if (draft.IsDebit)
+        if (draft.IsDebitLike)
         {
             invoice.DueDate =
                 invoiceDate.AddDays(

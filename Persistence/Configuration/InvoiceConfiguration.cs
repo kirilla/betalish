@@ -128,6 +128,8 @@ class InvoiceConfiguration : IEntityTypeConfiguration<Invoice>
             .IsRequired(false);
 
         // Ignore
+        builder.Ignore(x => x.IsCredit);
         builder.Ignore(x => x.IsDebit);
+        builder.Ignore(x => x.IsDebitLike);
     }
 }

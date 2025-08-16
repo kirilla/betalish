@@ -24,7 +24,7 @@ public class EditInvoiceDraftCommand(IDatabaseService database) : IEditInvoiceDr
             .SingleOrDefaultAsync() ??
             throw new NotFoundException();
 
-        if (draft.IsDebit &&
+        if (draft.IsDebitLike &&
             draft.PaymentTermsId == null)
             throw new MissingPaymentTermsException();
 

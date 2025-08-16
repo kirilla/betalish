@@ -233,7 +233,7 @@ public class ApproveInvoiceDraftCommand(
     private static void AssertDebitInvoiceHasPaymentTerms(
         InvoiceDraft draft, Domain.Entities.PaymentTerms? terms)
     {
-        if (draft.IsDebit && terms == null)
+        if (draft.IsDebitLike && terms == null)
             throw new UserFeedbackException(
                 "Fakturan saknar betalvillkor.");
     }

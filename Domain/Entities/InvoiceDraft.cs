@@ -4,8 +4,11 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
 {
     public int Id { get; set; }
 
-    public bool IsCredit { get; set; }
-    public bool IsDebit => !IsCredit;
+    public required InvoiceKind InvoiceKind { get; set; }
+
+    public bool IsCredit => InvoiceKind == InvoiceKind.Credit;
+    public bool IsDebit => InvoiceKind == InvoiceKind.Debit;
+    public bool IsDebitLike => InvoiceKind != InvoiceKind.Credit;
 
     public required string About { get; set; }
 
@@ -73,12 +76,34 @@ public class InvoiceDraft : IFormatOnSave, IValidateOnSave
         if (!Enum.IsDefined(CustomerKind))
             throw new InvalidEnumException(nameof(CustomerKind));
 
-        if (IsDebit && PaymentTermsId == null)
+        if (!Enum.IsDefined(InvoiceKind))
+            throw new InvalidEnumException(nameof(InvoiceKind));
+
+        AssertInvoiceKindAllowed(InvoiceKind);
+
+        if (IsDebitLike && PaymentTermsId == null)
             throw new ValidateOnSaveException(
                 $"Debit draft {Id} should have PaymentTerms.");
 
         if (IsCredit && PaymentTermsId.HasValue)
             throw new ValidateOnSaveException(
                 $"Credit draft {Id} should not have a PaymentTerms.");
+    }
+
+    public static void AssertInvoiceKindAllowed(InvoiceKind kind)
+    {
+        var allowedKinds = new List<InvoiceKind>()
+        {
+            InvoiceKind.Avi,
+            InvoiceKind.Credit,
+            InvoiceKind.Debit,
+            InvoiceKind.InterestAndFees,
+            InvoiceKind.Membership,
+            InvoiceKind.Rest,
+        };
+
+        if (!allowedKinds.Contains(kind))
+            throw new Exception(
+                $"InvoiceDraft kan inte skapas för typen {kind}.");
     }
 }
