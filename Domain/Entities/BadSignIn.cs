@@ -23,8 +23,8 @@ public class BadSignIn :
 
     public void FormatOnSave()
     {
-        Name = Name?.Truncate(MaxLengths.Domain.BadSignIn.Name);
-        Password = Password?.Truncate(MaxLengths.Domain.BadSignIn.Password);
+        Name = Name?[..MaxLengths.Domain.BadSignIn.Name];
+        Password = Password?[..MaxLengths.Domain.BadSignIn.Password];
     }
 
     public void ValidateOnSave()

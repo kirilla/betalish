@@ -19,10 +19,7 @@ public class ClientEvent : ICreatedDateTime, IFormatOnSave
 
     public void FormatOnSave()
     {
-        Description = Description
-            .Truncate(MaxLengths.Domain.LogItem.Description);
-
-        IpAddress = IpAddress
-            .Truncate(MaxLengths.Common.Ip.Address.IPv6);
+        Description = Description?[..MaxLengths.Domain.LogItem.Description];
+        IpAddress = IpAddress?[..MaxLengths.Common.Ip.Address.IPv6];
     }
 }

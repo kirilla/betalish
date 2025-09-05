@@ -14,17 +14,6 @@ public static class StringExtensions
         return regex.Replace(value, "");
     }
 
-    public static string? Truncate(this string? value, int maxLength)
-    {
-        if (value == null)
-            return null;
-
-        if (value.Length <= maxLength)
-            return value;
-
-        return value.Substring(0, maxLength);
-    }
-
     public static bool HasValue(this string? s)
     {
         return !string.IsNullOrWhiteSpace(s);

@@ -48,7 +48,6 @@ public class NetworkRule :
 
     public void FormatOnSave()
     {
-        Description = Description?
-            .Truncate(MaxLengths.Domain.NetworkRule.Description);
+        Description = Description?[..MaxLengths.Domain.NetworkRule.Description];
     }
 }
