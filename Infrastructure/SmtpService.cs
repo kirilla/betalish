@@ -15,9 +15,11 @@ public class SmtpService() : ISmtpService
         List<EmailAttachment> attachments,
         List<EmailImage> images)
     {
-        var mail = new MailMessage();
-
-        mail.From = new MailAddress(smtpConf.FromAddress, smtpConf.FromName);
+        var mail = new MailMessage
+        {
+            From = new MailAddress(smtpConf.FromAddress, smtpConf.FromName),
+            Subject = email.Subject,
+        };
 
         //if (!string.IsNullOrWhiteSpace(smtpConf.ReplyToAddress))
         //{
@@ -25,10 +27,6 @@ public class SmtpService() : ISmtpService
         //}
 
         mail.To.Add(new MailAddress(email.ToAddress, email.ToName));
-
-        mail.Subject = email.Subject;
-        //mail.Body = email.HtmlBody;
-        //mail.IsBodyHtml = true;
 
         var textView = AlternateView.CreateAlternateViewFromString(
             email.TextBody, Encoding.UTF8, MediaTypeNames.Text.Plain);
@@ -83,9 +81,11 @@ public class SmtpService() : ISmtpService
         EmailAccount emailAccount,
         EmailMessage email)
     {
-        var mail = new MailMessage();
-
-        mail.From = new MailAddress(emailAccount.FromAddress, emailAccount.FromName);
+        var mail = new MailMessage
+        {
+            From = new MailAddress(emailAccount.FromAddress, emailAccount.FromName),
+            Subject = email.Subject,
+        };
 
         if (!string.IsNullOrWhiteSpace(emailAccount.ReplyToAddress))
         {
@@ -93,10 +93,6 @@ public class SmtpService() : ISmtpService
         }
 
         mail.To.Add(new MailAddress(email.ToAddress, email.ToName));
-
-        mail.Subject = email.Subject;
-        //mail.Body = email.HtmlBody;
-        //mail.IsBodyHtml = true;
 
         var textView = AlternateView.CreateAlternateViewFromString(
             email.TextBody, Encoding.UTF8, MediaTypeNames.Text.Plain);
