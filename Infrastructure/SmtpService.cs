@@ -73,8 +73,8 @@ public class SmtpService() : ISmtpService
         {
             Credentials = new NetworkCredential(smtpConf.FromAddress, smtpConf.Password),
             EnableSsl = true,
-            Host = smtpConf.SmtpHost,
-            Port = smtpConf.SmtpPort,
+            Host = smtpConf.Host,
+            Port = smtpConf.Port,
         };
 
         smtpClient.Send(mail);

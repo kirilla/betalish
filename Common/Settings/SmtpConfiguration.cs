@@ -12,7 +12,7 @@ public class SmtpConfiguration
     [JsonIgnore]
     public string Password { get; set; } = null!;
 
-    public required string SmtpHost { get; set; }
+    public required string Host { get; set; }
 
-    public int SmtpPort { get; set; }
+    public int Port { get; set; }
 }
