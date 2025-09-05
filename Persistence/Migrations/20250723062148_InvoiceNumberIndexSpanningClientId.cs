@@ -8,6 +8,7 @@ namespace Betalish.Persistence.Migrations
     public partial class InvoiceNumberIndexSpanningClientId : Migration
     {
         /// <inheritdoc />
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1861:Avoid constant arrays as arguments", Justification = "<Pending>")]
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropIndex(
