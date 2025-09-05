@@ -24,7 +24,7 @@ public class DebitInvoiceEmailTemplate : IDebitInvoiceEmailTemplate
         return email;
     }
 
-    private string CreateHtmlBody(
+    private static string CreateHtmlBody(
         EmailAccount account,
         Invoice invoice)
     {
@@ -49,7 +49,7 @@ public class DebitInvoiceEmailTemplate : IDebitInvoiceEmailTemplate
             """;
     }
 
-    private string CreateTextBody(
+    private static string CreateTextBody(
         EmailAccount account,
         Invoice invoice)
     {

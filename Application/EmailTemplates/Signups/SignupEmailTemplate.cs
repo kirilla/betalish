@@ -38,7 +38,7 @@ public class SignupEmailTemplate : ISignupEmailTemplate
         return email;
     }
 
-    private string CreateHtmlBody(Signup signup)
+    private static string CreateHtmlBody(Signup signup)
     {
         var guid = signup.Guid.ToString()!.ToLower();
 
@@ -63,7 +63,7 @@ public class SignupEmailTemplate : ISignupEmailTemplate
             """;
     }
 
-    private string CreateTextBody(Signup signup)
+    private static string CreateTextBody(Signup signup)
     {
         var guid = signup.Guid.ToString()!.ToLower();
 

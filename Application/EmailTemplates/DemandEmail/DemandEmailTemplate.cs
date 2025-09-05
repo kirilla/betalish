@@ -24,7 +24,7 @@ public class DemandEmailTemplate : IDemandEmailTemplate
         return email;
     }
 
-    private string CreateHtmlBody(EmailAccount account, Invoice invoice)
+    private static string CreateHtmlBody(EmailAccount account, Invoice invoice)
     {
         return $"""
             {Email.Html.Start}
@@ -47,7 +47,7 @@ public class DemandEmailTemplate : IDemandEmailTemplate
             """;
     }
 
-    private string CreateTextBody(EmailAccount account, Invoice invoice)
+    private static string CreateTextBody(EmailAccount account, Invoice invoice)
     {
         return $"""
             Krav från ???

@@ -24,7 +24,7 @@ public class CreditInvoiceEmailTemplate : ICreditInvoiceEmailTemplate
         return email;
     }
 
-    private string CreateHtmlBody(EmailAccount account, Invoice invoice)
+    private static string CreateHtmlBody(EmailAccount account, Invoice invoice)
     {
         return $"""
             {Email.Html.Start}
@@ -44,7 +44,7 @@ public class CreditInvoiceEmailTemplate : ICreditInvoiceEmailTemplate
             """;
     }
 
-    private string CreateTextBody(EmailAccount account, Invoice invoice)
+    private static string CreateTextBody(EmailAccount account, Invoice invoice)
     {
         return $"""
             En kreditfaktura från ???

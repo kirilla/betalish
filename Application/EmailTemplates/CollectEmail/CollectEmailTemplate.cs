@@ -24,7 +24,7 @@ public class CollectEmailTemplate : ICollectEmailTemplate
         return email;
     }
 
-    private string CreateHtmlBody(EmailAccount account, Invoice invoice)
+    private static string CreateHtmlBody(EmailAccount account, Invoice invoice)
     {
         return $"""
             {Email.Html.Start}
@@ -46,7 +46,7 @@ public class CollectEmailTemplate : ICollectEmailTemplate
             """;
     }
 
-    private string CreateTextBody(EmailAccount account, Invoice invoice)
+    private static string CreateTextBody(EmailAccount account, Invoice invoice)
     {
         return $"""
             Kronofogdeärende

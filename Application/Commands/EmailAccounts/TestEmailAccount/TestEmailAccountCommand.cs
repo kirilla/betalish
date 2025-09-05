@@ -32,7 +32,7 @@ public class TestEmailAccountCommand(
             userToken.IsAdmin;
     }
 
-    private EmailMessage CreateEmailMesasge(
+    private static EmailMessage CreateEmailMesasge(
         string toName,
         string toAddress,
         EmailAccount account)
@@ -60,7 +60,7 @@ public class TestEmailAccountCommand(
         return email;
     }
 
-    private string CreateHtmlBody(
+    private static string CreateHtmlBody(
         string toName,
         string toAddress,
         EmailAccount account)
@@ -83,7 +83,7 @@ public class TestEmailAccountCommand(
             """;
     }
 
-    private string CreateTextBody(
+    private static string CreateTextBody(
         string toName,
         string toAddress,
         EmailAccount account)

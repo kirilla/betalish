@@ -135,7 +135,7 @@ public class CreditInvoiceDraftCommand(
         return userToken.IsClient;
     }
 
-    private void Assert(
+    private static void Assert(
         IUserToken userToken,
         Invoice invoice,
         List<InvoiceRow> invoiceRows,
@@ -147,14 +147,14 @@ public class CreditInvoiceDraftCommand(
         AssertAmountLeftToCredit(invoice, balanceRows);
     }
 
-    private void AssertIsDebetInvoice(Invoice invoice)
+    private static void AssertIsDebetInvoice(Invoice invoice)
     {
         if (invoice.IsCredit)
             throw new UserFeedbackException(
                 "Kreditfakturor kan inte krediteras.");
     }
 
-    private void AssertHasNoOpenDrafts(
+    private static void AssertHasNoOpenDrafts(
         List<DraftBalanceRow> draftBalanceRows)
     {
         if (draftBalanceRows.Count > 0)
@@ -162,7 +162,7 @@ public class CreditInvoiceDraftCommand(
                 "Det finns redan ett utkast för kreditering.");
     }
 
-    private void AssertAmountLeftToCredit(
+    private static void AssertAmountLeftToCredit(
         Invoice invoice,
         List<BalanceRow> balanceRows)
     {

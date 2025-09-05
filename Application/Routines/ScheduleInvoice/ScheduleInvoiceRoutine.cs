@@ -35,7 +35,7 @@ public class ScheduleInvoiceRoutine(IDatabaseService database) : IScheduleInvoic
         await database.SaveAsync(userToken);
     }
 
-    private void ScheduleDebitInvoice(
+    private static void ScheduleDebitInvoice(
         Invoice invoice, PaymentTerms paymentTerms)
     {
         invoice.DueDate = invoice.InvoiceDate
@@ -67,7 +67,7 @@ public class ScheduleInvoiceRoutine(IDatabaseService database) : IScheduleInvoic
         }
     }
 
-    private void ScheduleCreditInvoice(Invoice invoice)
+    private static void ScheduleCreditInvoice(Invoice invoice)
     {
         invoice.DueDate = null;
 
