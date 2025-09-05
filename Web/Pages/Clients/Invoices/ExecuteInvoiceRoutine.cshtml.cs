@@ -64,7 +64,7 @@ public class ExecuteInvoiceRoutineModel(
 
             return Redirect($"/show-invoice/{id}");
         }
-        catch (Exception ex)
+        catch
         {
             return Redirect("/help/notpermitted");
         }
