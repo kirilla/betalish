@@ -14,14 +14,12 @@ public static class SsnLogic
             throw new ArgumentException("Unexpected ssn length: " + ssn.Length);
         }
 
-        int temp;
-
         var arr = ssn
             .Where(c => char.IsDigit(c))
             .Reverse()
             .Select(x =>
             {
-                if (int.TryParse(x.ToString(), out temp))
+                if (int.TryParse(x.ToString(), out int temp))
                 {
                     return temp;
                 }
