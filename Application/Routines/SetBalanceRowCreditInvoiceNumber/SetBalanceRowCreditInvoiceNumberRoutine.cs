@@ -1,10 +1,7 @@
-﻿using Betalish.Application.Queues.LogItems;
-
-namespace Betalish.Application.Routines.SetBalanceRowCreditInvoiceNumber;
+﻿namespace Betalish.Application.Routines.SetBalanceRowCreditInvoiceNumber;
 
 public class SetBalanceRowCreditInvoiceNumberRoutine(
-    IDatabaseService database,
-    ILogItemList logItemList) : ISetBalanceRowCreditInvoiceNumberRoutine
+    IDatabaseService database) : ISetBalanceRowCreditInvoiceNumberRoutine
 {
     public async Task Execute(
         IUserToken userToken, int creditInvoiceId)
