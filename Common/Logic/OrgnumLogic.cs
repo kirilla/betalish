@@ -14,14 +14,12 @@ public static class OrgnumLogic
             throw new ArgumentException("Unexpected orgnum length: " + orgnum.Length);
         }
 
-        int temp;
-
         var arr = orgnum
             .Where(c => char.IsDigit(c))
             .Reverse()
             .Select(x =>
             {
-                if (int.TryParse(x.ToString(), out temp))
+                if (int.TryParse(x.ToString(), out int temp))
                 {
                     return temp;
                 }
