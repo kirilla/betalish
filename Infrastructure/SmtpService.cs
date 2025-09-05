@@ -69,12 +69,15 @@ public class SmtpService() : ISmtpService
                 stream, attachment.Name, attachment.ContentType));
         }
 
-        SmtpClient smtp = new SmtpClient(smtpConf.SmtpHost);
-        smtp.Credentials = new NetworkCredential(smtpConf.FromAddress, smtpConf.Password);
-        smtp.EnableSsl = true;
-        smtp.Port = smtpConf.SmtpPort;
+        var smtpClient = new SmtpClient()
+        {
+            Credentials = new NetworkCredential(smtpConf.FromAddress, smtpConf.Password),
+            EnableSsl = true,
+            Host = smtpConf.SmtpHost,
+            Port = smtpConf.SmtpPort,
+        };
 
-        smtp.Send(mail);
+        smtpClient.Send(mail);
     }
 
     public void SendEmailMessage(
@@ -103,11 +106,14 @@ public class SmtpService() : ISmtpService
         mail.AlternateViews.Add(textView);
         mail.AlternateViews.Add(htmlView);
 
-        SmtpClient smtp = new SmtpClient(emailAccount.SmtpHost);
-        smtp.Credentials = new NetworkCredential(emailAccount.FromAddress, emailAccount.Password);
-        smtp.EnableSsl = true;
-        smtp.Port = emailAccount.SmtpPort;
+        var smtpClient = new SmtpClient()
+        {
+            Credentials = new NetworkCredential(emailAccount.FromAddress, emailAccount.Password),
+            EnableSsl = true,
+            Host = emailAccount.SmtpHost,
+            Port = emailAccount.SmtpPort,
+        };
 
-        smtp.Send(mail);
+        smtpClient.Send(mail);
     }
 }
