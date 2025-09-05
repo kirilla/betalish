@@ -7,7 +7,7 @@ public class SummedPaymentAccountingRow
     public required decimal Debit { get; set; }
     public required decimal Credit { get; set; }
 
-    public string Description { get; set; }
+    public string? Description { get; set; }
 
     public void Normalize()
     {
