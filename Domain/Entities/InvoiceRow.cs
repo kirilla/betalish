@@ -29,9 +29,9 @@ public class InvoiceRow : IFormatOnSave, IValidateOnSave
 
     public void FormatOnSave()
     {
-        NetAmount = _NetAmount;
-        VatAmount = _VatAmount;
-        TotalAmount = _TotalAmount;
+        NetAmount = GetNetAmount();
+        VatAmount = GetVatAmount();
+        TotalAmount = GetTotalAmount();
     }
 
     public void ValidateOnSave()
@@ -43,29 +43,20 @@ public class InvoiceRow : IFormatOnSave, IValidateOnSave
             throw new ValidateOnSaveException();
     }
 
-    private decimal _NetAmount
+    private decimal GetNetAmount()
     {
-        get
-        {
-            var amount = (Quantity * UnitPrice).RoundToEven();
+        var amount = (Quantity * UnitPrice).RoundToEven();
 
-            return IsCredit ? -amount : amount;
-        }
+        return IsCredit ? -amount : amount;
     }
 
-    private decimal _VatAmount
+    private decimal GetVatAmount()
     {
-        get
-        {
-            return (_NetAmount * (VatRate / 100)).RoundToEven();
-        }
+        return (GetNetAmount() * (VatRate / 100)).RoundToEven();
     }
 
-    private decimal _TotalAmount
+    private decimal GetTotalAmount()
     {
-        get
-        {
-            return _NetAmount + _VatAmount;
-        }
+        return GetNetAmount() + GetVatAmount();
     }
 }
