@@ -25,20 +25,20 @@ public class LogItem : ICreatedDateTime, IFormatOnSave
     
     public void FormatOnSave()
     {
-        Description = Description?
-            [..MaxLengths.Domain.LogItem.Description];
+        Description = Description
+            .Truncate(MaxLengths.Domain.LogItem.Description);
 
         Exception = Exception?
-            [..MaxLengths.Domain.LogItem.Exception];
+            .Truncate(MaxLengths.Domain.LogItem.Exception);
 
-        InnerException = InnerException?
-            [..MaxLengths.Domain.LogItem.InnerException];
+        InnerException = InnerException
+            .Truncate(MaxLengths.Domain.LogItem.InnerException);
 
-        IpAddress = IpAddress?
-            [..MaxLengths.Common.Ip.Address.IPv6];
+        IpAddress = IpAddress
+            .Truncate(MaxLengths.Common.Ip.Address.IPv6);
 
-        Source = Source?
-            [..MaxLengths.Domain.LogItem.Source];
+        Source = Source
+            .Truncate(MaxLengths.Domain.LogItem.Source);
     }
 
     public LogItem()

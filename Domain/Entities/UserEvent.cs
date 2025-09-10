@@ -16,7 +16,10 @@ public class UserEvent : ICreatedDateTime, IFormatOnSave
 
     public void FormatOnSave()
     {
-        Description = Description?[..MaxLengths.Domain.UserEvent.Description];
-        IpAddress = IpAddress?[..MaxLengths.Common.Ip.Address.IPv6];
+        Description = Description
+            .Truncate(MaxLengths.Domain.UserEvent.Description);
+
+        IpAddress = IpAddress
+            .Truncate(MaxLengths.Common.Ip.Address.IPv6);
     }
 }
